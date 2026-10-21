@@ -1,14 +1,422 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ambiente de Testes QA</title>
+  <title>Torre de Controle Operacional - QA</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-main: #0b0f19;
+      --card-bg: #151c2c;
+      --border-color: #232d42;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-green: #10b981;
+      --accent-yellow: #f59e0b;
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Cabeçalho da Torre de Controle */
+    header {
+      background: #0f172a;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      height: 60px;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-live {
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-live::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-green);
+    }
+
+    /* Grid da Video Wall (2x2) ajustado para o bezel das 4 TVs */
+    .video-wall {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 16px;
+      padding: 16px;
+      height: calc(100vh - 60px);
+    }
+
+    .tv-quadrant {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .tv-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .tv-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Grid Interno de KPIs */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+    }
+
+    .kpi-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .kpi-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .kpi-value {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .kpi-sub {
+      font-size: 0.7rem;
+      color: var(--accent-green);
+      margin-top: 2px;
+    }
+
+    /* Tabela de Monitoramento em Tempo Real */
+    .table-container {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      padding: 8px;
+      text-align: left;
+      position: sticky;
+      top: 0;
+    }
+
+    td {
+      padding: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .status-tag {
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-align: center;
+      display: inline-block;
+    }
+
+    .status-concluido { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+    .status-pendente { background: rgba(245, 158, 11, 0.2); color: var(--accent-yellow); }
+    .status-processo { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); }
+
+    /* Área de Gráficos */
+    .chart-container {
+      flex: 1;
+      position: relative;
+      min-height: 150px;
+    }
+
+    /* Estilização da Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+  </style>
 </head>
 <body>
 
-  <h1>qa-visual-layout-tests</h1>
-  <p>Ambiente de testes QA.</p>
+  <header>
+    <div class="logo-title">
+      🏢 TORRE DE CONTROLE OPERACIONAL - QA
+      <span class="badge-live">ONLINE • 4 TVs (2x2)</span>
+    </div>
+    <div id="clock" style="font-size: 1.1rem; font-weight: 600; color: var(--text-muted);">00:00:00</div>
+  </header>
 
+  <main class="video-wall">
+
+    <!-- TV 1: RECEBIMENTO & INBOUND -->
+    <section class="tv-quadrant">
+      <div class="tv-header">
+        <span class="tv-title" style="color: var(--accent-blue);">📥 TV 1: RECEBIMENTO & INBOUND</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">TMP Médio: <b>00:38:00</b></span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Vol. Outubro</div>
+          <div class="kpi-value" style="color: var(--accent-blue);">10.886</div>
+          <div class="kpi-sub">Média: 725/dia</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Planta Joinville</div>
+          <div class="kpi-value">6.579</div>
+          <div class="kpi-sub">60.4% total</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Planta Rio Claro</div>
+          <div class="kpi-value">4.307</div>
+          <div class="kpi-sub">39.6% total</div>
+        </div>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Transporte</th>
+              <th>Doca</th>
+              <th>SKU</th>
+              <th>Agenda</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>254388681</td><td>39</td><td>12</td><td>12:00</td><td><span class="status-tag status-concluido">CONCLUÍDO</span></td></tr>
+            <tr><td>254388379</td><td>35</td><td>9</td><td>13:00</td><td><span class="status-tag status-pendente">PENDENTE</span></td></tr>
+            <tr><td>254388650</td><td>40</td><td>2</td><td>14:00</td><td><span class="status-tag status-processo">RECEBENDO</span></td></tr>
+            <tr><td>254388378</td><td>36</td><td>6</td><td>15:00</td><td><span class="status-tag status-pendente">PENDENTE</span></td></tr>
+            <tr><td>254377688</td><td>40</td><td>1</td><td>17:00</td><td><span class="status-tag status-concluido">CONCLUÍDO</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TV 2: EXPEDIÇÃO & NEXT-DAY -->
+    <section class="tv-quadrant">
+      <div class="tv-header">
+        <span class="tv-title" style="color: var(--accent-green);">🚚 TV 2: EXPEDIÇÃO & NEXT-DAY</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Efic. 1ª Tentativa: <b>85.9%</b></span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Programadas</div>
+          <div class="kpi-value">915</div>
+          <div class="kpi-sub">Entregas</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Realizadas</div>
+          <div class="kpi-value" style="color: var(--accent-green);">786</div>
+          <div class="kpi-sub">1ª Tentativa</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Top 1 Motorista</div>
+          <div class="kpi-value" style="color: var(--accent-yellow);">4.89 ★</div>
+          <div class="kpi-sub">Cleiton (1º)</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartNextDay"></canvas>
+      </div>
+    </section>
+
+    <!-- TV 3: ESTOQUE & ARMAZÉM (PCO) -->
+    <section class="tv-quadrant">
+      <div class="tv-header">
+        <span class="tv-title" style="color: var(--accent-yellow);">📦 TV 3: OCUPAÇÃO DE ESTOQUE (PCO)</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Total Estocado: <b>12.297 un</b></span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">Ocupação Locações</div>
+          <div class="kpi-value" style="color: var(--accent-yellow);">76.4%</div>
+          <div class="kpi-sub">146 / 191 locações</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Ocupação Área (M²)</div>
+          <div class="kpi-value" style="color: var(--accent-yellow);">77.3%</div>
+          <div class="kpi-sub">2.762 m² de 3.574 m²</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartEstoque"></canvas>
+      </div>
+    </section>
+
+    <!-- TV 4: PRODUTIVIDADE & KPIS OPERACIONAIS -->
+    <section class="tv-quadrant">
+      <div class="tv-header">
+        <span class="tv-title" style="color: var(--accent-purple);">⚡ TV 4: PRODUTIVIDADE & KPIs</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">PPM Geral: <b>4</b></span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-label">TMP Expedição</div>
+          <div class="kpi-value">00:42:00</div>
+          <div class="kpi-sub">Média por Carga</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Nível de Entrega</div>
+          <div class="kpi-value" style="color: var(--accent-green);">98%</div>
+          <div class="kpi-sub">Meta Atingida</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Nível Informação</div>
+          <div class="kpi-value" style="color: var(--accent-green);">98%</div>
+          <div class="kpi-sub">Meta Atingida</div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas id="chartProdutividade"></canvas>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Relógio Digital da Torre de Controle
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clock').innerText = now.toLocaleTimeString('pt-BR');
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Gráfico TV 2: Desvio por Rota (Next Day)
+    new Chart(document.getElementById('chartNextDay'), {
+      type: 'bar',
+      data: {
+        labels: ['João Pessoa', 'Recife Norte', 'Recife Sul'],
+        datasets: [{
+          label: '% Desvio de Entrega',
+          data: [5, 10, 5],
+          backgroundColor: ['#3b82f6', '#ef4444', '#3b82f6'],
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { ticks: { color: '#94a3b8', callback: v => v + '%' }, grid: { color: '#232d42' } },
+          x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+        }
+      }
+    });
+
+    // Gráfico TV 3: Ocupação por Rua
+    new Chart(document.getElementById('chartEstoque'), {
+      type: 'bar',
+      data: {
+        labels: ['Rua 01', 'Rua 02', 'Rua 03', 'Rua 04', 'Rua 05', 'Rua 06'],
+        datasets: [
+          { label: 'Ocupados', data: [9, 24, 39, 35, 36, 3], backgroundColor: '#f59e0b', borderRadius: 4 },
+          { label: 'Total Locações', data: [9, 36, 41, 36, 36, 33], backgroundColor: '#232d42', borderRadius: 4 }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#94a3b8' } } },
+        scales: {
+          y: { ticks: { color: '#94a3b8' }, grid: { color: '#232d42' } },
+          x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+        }
+      }
+    });
+
+    // Gráfico TV 4: Volume Expedido em Outubro
+    new Chart(document.getElementById('chartProdutividade'), {
+      type: 'line',
+      data: {
+        labels: ['01/10', '05/10', '08/10', '13/10', '16/10', '19/10', '21/10'],
+        datasets: [{
+          label: 'Qtd. Expedida',
+          data: [288, 143, 1969, 1577, 744, 1202, 56],
+          borderColor: '#8b5cf6',
+          backgroundColor: 'rgba(139, 92, 246, 0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { ticks: { color: '#94a3b8' }, grid: { color: '#232d42' } },
+          x: { ticks: { color: '#94a3b8' }, grid: { display: false } }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
