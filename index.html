@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WMS Executive Control Tower - CD Alhandra PB</title>
+    <title>WMS Control Tower - CD Alhandra PB</title>
     
     <!-- Fontes Google Sans / Product Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,7 +43,7 @@
 
         /* Classe de Destaque Executivo para KPIs Principais */
         .kpi-big-value {
-            font-size: clamp(15px, 1.3vh + 0.7vw, 22px) !important;
+            font-size: clamp(14px, 1.1vh + 0.6vw, 20px) !important;
             line-height: 1 !important;
             font-weight: 900 !important;
             letter-spacing: -0.5px;
@@ -63,39 +63,38 @@
         .glow-red { border: 1px solid rgba(239, 68, 68, 0.3); box-shadow: 0 0 12px rgba(239, 68, 68, 0.1); }
 
         .ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0b1120; border-bottom: 1px solid #1e293b; padding: 3px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #0b1120; border-bottom: 1px solid #1e293b; padding: 2px 0; display: flex;
         }
         .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
-        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.7rem; font-weight: 700; }
+        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.65rem; font-weight: 700; }
 
         .feedback-ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #070c18; border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 0.375rem; padding: 3px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #070c18; border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 0.375rem; padding: 2px 0; display: flex;
         }
         .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 40s linear infinite; }
-        .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.7rem; font-weight: 600; }
+        .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.65rem; font-weight: 600; }
 
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
         @keyframes marqueeFeedback { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
-        /* Ajuste Físico para a Video Wall 2x2 */
         .video-wall-grid {
-            padding: 12px;
-            gap: 12px;
+            padding: 10px;
+            gap: 10px;
         }
         .tv-card {
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
         }
     </style>
 </head>
 <body class="flex flex-col h-screen w-screen overflow-hidden antialiased">
 
-    <!-- HEADER SUPERIOR EXECUTIVO -->
+    <!-- HEADER SUPERIOR -->
     <header class="bg-[#0b1120] border-b border-slate-800 text-white px-4 pt-1.5 pb-1 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-3">
-            <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">DIRETORIA</div>
+            <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
             <div>
-                <h1 class="text-xs font-bold text-slate-100 leading-tight">Control Tower WMS • Visão de Diretoria</h1>
+                <h1 class="text-xs font-bold text-slate-100 leading-tight">Control Tower WMS • Visão Consolidada</h1>
                 <p class="text-[9px] text-slate-400 leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
             </div>
         </div>
@@ -103,7 +102,7 @@
         <div class="flex items-center gap-3">
             <div class="badge-date-clean flex items-center gap-1.5 bg-[#1e293b] px-2.5 py-1 rounded border border-slate-700 text-slate-100 text-[10px] font-bold">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Status Operacional: Normal
+                Operação Ativa
             </div>
             <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-[10px] text-slate-300 hover:text-white px-2.5 py-1 rounded cursor-pointer font-bold">
                 📺 Modo TV
@@ -119,292 +118,174 @@
     <!-- MAIN GRID 2x2 -->
     <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#050811]">
 
-        <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
+        <!-- ==================== TV 01: CONSOLIDADO DE ESTOQUE & PCO ==================== -->
         <div class="tv-card bg-[#090e1a] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full gap-1">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[10px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> TV 01: Ocupação de Posições & Capacidade
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> TV 01: Gestão de Estoque, Posições & Ruas
                 </h2>
-                <span class="text-[8px] text-slate-500 font-mono">PCO Armazém</span>
+                <span class="text-[8px] text-slate-500 font-mono">PCO Geral</span>
             </div>
 
-            <!-- Cards de Capacidade -->
-            <div class="grid grid-cols-3 gap-1.5 shrink-0">
-                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-blue flex flex-col justify-center">
-                    <p class="text-[7.5px] font-bold text-slate-400 uppercase tracking-tight">Ocupação Locações</p>
-                    <h4 class="kpi-big-value text-white my-1">146 / 191</h4>
-                    <p class="text-[8px] text-blue-400 font-bold">76,4% Ocupado</p>
+            <!-- KPIs de Capacidade -->
+            <div class="grid grid-cols-3 gap-1 shrink-0">
+                <div class="bg-[#0f172a] p-1 rounded-lg text-center glow-blue flex flex-col justify-center">
+                    <p class="text-[7px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
+                    <h4 class="kpi-big-value text-white my-0.5">146 / 191</h4>
+                    <p class="text-[7.5px] text-blue-400 font-bold">76,4% Ocupado</p>
                 </div>
-                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-amber flex flex-col justify-center">
-                    <p class="text-[7.5px] font-bold text-amber-500 uppercase tracking-tight">Ocupação M²</p>
-                    <h4 class="kpi-big-value text-amber-400 my-1">2.762 m²</h4>
-                    <p class="text-[8px] text-amber-300 font-bold">77,3% de 3.574m²</p>
+                <div class="bg-[#0f172a] p-1 rounded-lg text-center glow-amber flex flex-col justify-center">
+                    <p class="text-[7px] font-bold text-amber-500 uppercase">Área Ocupada</p>
+                    <h4 class="kpi-big-value text-amber-400 my-0.5">2.762 m²</h4>
+                    <p class="text-[7.5px] text-amber-300 font-bold">77,3% de 3.574m²</p>
                 </div>
-                <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-emerald flex flex-col justify-center">
-                    <p class="text-[7.5px] font-bold text-emerald-500 uppercase tracking-tight">Saldo Estocado</p>
-                    <h4 class="kpi-big-value text-emerald-400 my-1">12.297</h4>
-                    <p class="text-[8px] text-emerald-300 font-bold">68,8% Cap. Nominal</p>
+                <div class="bg-[#0f172a] p-1 rounded-lg text-center glow-emerald flex flex-col justify-center">
+                    <p class="text-[7px] font-bold text-emerald-500 uppercase">Saldo Estocado</p>
+                    <h4 class="kpi-big-value text-emerald-400 my-0.5">12.297 un</h4>
+                    <p class="text-[7.5px] text-emerald-300 font-bold">68,8% Cap. Nominal</p>
                 </div>
             </div>
 
-            <!-- Tabela Saturação de Ruas -->
-            <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
-                <div class="flex justify-between items-center mb-1 shrink-0">
-                    <h3 class="font-bold text-[10px] text-slate-300 flex items-center gap-1">
-                        📍 Termômetro de Ocupação por Rua
-                    </h3>
-                    <span class="text-[8px] text-slate-500 font-mono">Gargalos de Pulmão</span>
+            <!-- Tabela Dividida: Ruas e Famílias lado a lado -->
+            <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden">
+                <!-- Ruas -->
+                <div class="bg-[#0f172a] p-1 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden">
+                    <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
+                        <span>📍 Ocupação por Rua</span>
+                        <span class="text-slate-500">Pulmão</span>
+                    </p>
+                    <div class="overflow-hidden flex-1 flex flex-col justify-between">
+                        <table class="w-full text-left text-[7.5px] text-slate-300 h-full flex flex-col justify-between">
+                            <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
+                                <tr class="flex justify-between w-full px-1 py-0.5">
+                                    <th>Rua</th>
+                                    <th>Loc.</th>
+                                    <th class="text-right">Est. (un)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ruasTableBody" class="font-medium flex-1 flex flex-col justify-between py-0.5"></tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="overflow-hidden flex-1 flex flex-col justify-between">
-                    <table class="w-full text-left text-[8.5px] text-slate-300 h-full flex flex-col justify-between">
-                        <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                            <tr class="flex justify-between w-full px-2 py-1">
-                                <th class="w-1/6">Rua</th>
-                                <th class="w-1/6 text-center">Locações</th>
-                                <th class="w-3/6 text-center">Saturação</th>
-                                <th class="w-1/6 text-right">Estoque (un)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ruasTableBody" class="font-medium flex-1 flex flex-col justify-between py-1"></tbody>
-                    </table>
+
+                <!-- Famílias -->
+                <div class="bg-[#0f172a] p-1 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden">
+                    <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
+                        <span>📦 Mix por Família</span>
+                        <span class="text-slate-500">Densidade</span>
+                    </p>
+                    <div class="overflow-hidden flex-1 flex flex-col justify-between">
+                        <table class="w-full text-left text-[7.5px] text-slate-300 h-full flex flex-col justify-between">
+                            <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
+                                <tr class="flex justify-between w-full px-1 py-0.5">
+                                    <th>Família</th>
+                                    <th class="text-right">Área</th>
+                                    <th class="text-right">Estoque</th>
+                                </tr>
+                            </thead>
+                            <tbody id="familyTableBody" class="font-medium flex-1 flex flex-col justify-between py-0.5"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
+        <!-- ==================== TV 02: CONSOLIDADO LOGÍSTICA, SLA & FLUXO ==================== -->
         <div class="tv-card bg-[#090e1a] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full gap-1">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
-                <h2 class="text-[10px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> TV 02: Mix de Estoque por Família & Densidade
+                <h2 class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: SLA de Entregas, Inbound & Outbound
                 </h2>
-                <span class="text-[8px] text-slate-500 font-mono">Perfil de Produto</span>
+                <span class="text-[8px] text-slate-500 font-mono">Performance & CQ</span>
             </div>
 
-            <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
-                <div class="overflow-hidden flex-1 flex flex-col justify-between">
-                    <table class="w-full text-left text-[8px] text-slate-300 h-full flex flex-col justify-between">
-                        <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                            <tr class="flex justify-between w-full px-2 py-1">
-                                <th class="w-2/7">Família</th>
-                                <th class="w-1/7 text-center">Loc.</th>
-                                <th class="w-1/7 text-right">Área (%)</th>
-                                <th class="w-1/7 text-right">Capacidade</th>
-                                <th class="w-1/7 text-right">Estoque</th>
-                                <th class="w-1/7 text-center">un/m²</th>
-                            </tr>
-                        </thead>
-                        <tbody id="familyTableBody" class="font-medium flex-1 flex flex-col justify-between py-1"></tbody>
-                    </table>
-                </div>
+            <!-- Feedback Marquee -->
+            <div class="feedback-ticker-wrap shrink-0">
+                <div class="feedback-ticker" id="feedbackMarquee"></div>
             </div>
-        </div>
 
-        <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
-        <div class="tv-card bg-[#090e1a] border border-slate-800/80 grid grid-cols-2 gap-2 overflow-hidden h-full">
-            
-            <!-- CQ - Controle de Qualidade -->
-            <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden h-full">
-                <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
-                    <div class="flex justify-between items-center shrink-0">
-                        <h3 class="font-bold text-[9.5px] text-red-400 flex items-center gap-1">
-                            🔒 CQ - Qualidade & Bloqueios
-                        </h3>
-                        <span class="text-[7.5px] text-red-400 font-bold bg-red-500/10 px-1 py-0.2 rounded">253 vol</span>
-                    </div>
-
-                    <table class="w-full text-left text-[8.5px] text-slate-300 shrink-0">
-                        <tbody id="bloqueadoTableBody" class="font-medium"></tbody>
-                    </table>
-
-                    <div class="bg-[#090e1a] p-1 rounded border border-slate-800 flex-1 min-h-[80px] flex flex-col justify-between">
-                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição do Bloqueio</p>
-                        <div class="relative flex-1 w-full overflow-hidden flex justify-center items-center">
-                            <canvas id="chartBloqueadoDonut"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#090e1a] p-1 rounded border border-red-500/20 text-center shrink-0">
-                        <p class="text-[7px] text-slate-400 uppercase">Impacto sobre Estoque Total</p>
-                        <p class="kpi-big-value text-emerald-400 my-0.5">2,1% <span class="text-[7px] text-slate-300 font-normal">(253 / 12.297)</span></p>
-                    </div>
+            <!-- Bloco Superior: Next Day & CQ -->
+            <div class="grid grid-cols-3 gap-1 shrink-0">
+                <div class="bg-[#0f172a] p-1 rounded border border-slate-800 text-center">
+                    <p class="text-[7px] text-slate-400 uppercase">Programadas (Next Day)</p>
+                    <p class="kpi-big-value text-white my-0.5">915 <span class="text-[7px] font-normal text-slate-400">rotas</span></p>
                 </div>
-
-                <div class="border-t border-slate-800 pt-1 mt-1 shrink-0">
-                    <div class="flex justify-between items-center bg-[#090e1a] p-1 rounded border border-cyan-500/20">
-                        <div>
-                            <p class="text-[7.5px] font-bold text-cyan-400 uppercase">Estoque Canal B2B</p>
-                            <p class="kpi-big-value text-white my-0.5">482 <span class="text-[7px] font-normal text-slate-400">vol</span></p>
-                        </div>
-                        <div class="text-right text-[7.5px]">
-                            <p class="text-slate-300">3 End. Ocup</p>
-                            <p class="text-cyan-300 font-mono font-bold">51.9 m²</p>
-                        </div>
-                    </div>
+                <div class="bg-[#0f172a] p-1 rounded border border-slate-800 text-center">
+                    <p class="text-[7px] text-slate-400 uppercase">1ª Tentativa Success</p>
+                    <p class="kpi-big-value text-emerald-400 my-0.5">786 <span class="text-[7px] font-normal text-slate-300">(85,9%)</span></p>
+                </div>
+                <div class="bg-[#0f172a] p-1 rounded border border-red-500/30 text-center glow-red">
+                    <p class="text-[7px] text-red-400 uppercase">CQ / Bloqueado</p>
+                    <p class="kpi-big-value text-red-400 my-0.5">253 <span class="text-[7px] font-normal text-slate-300">(2,1%)</span></p>
                 </div>
             </div>
 
-            <!-- Next Day -->
-            <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
-                <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
-                    
-                    <div class="feedback-ticker-wrap shrink-0">
-                        <div class="feedback-ticker" id="feedbackMarquee"></div>
-                    </div>
-
-                    <div class="flex justify-between items-center shrink-0 mt-0.5">
-                        <h3 class="font-bold text-[9.5px] text-amber-400 flex items-center gap-1">
-                            🚚 SLA de Entregas (Next Day)
-                        </h3>
-                        <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[8.5px] font-bold">
-                            4,75 ★ (CSAT)
-                        </span>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-1 text-[8px] font-mono shrink-0">
-                        <div class="bg-[#090e1a] p-1 rounded border border-slate-800">
-                            <p class="text-slate-400 text-[7px] uppercase">Programadas</p>
-                            <p class="kpi-big-value text-white my-0.5">915 <span class="text-[7px] font-normal text-slate-400">rotas</span></p>
-                        </div>
-                        <div class="bg-[#090e1a] p-1 rounded border border-slate-800">
-                            <p class="text-slate-400 text-[7px] uppercase">1ª Tentativa</p>
-                            <p class="kpi-big-value text-emerald-400 my-0.5">786 <span class="text-[7px] text-slate-300 font-normal">(85,9%)</span></p>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#090e1a] p-1 rounded border border-slate-800 flex-1 min-h-[60px] flex flex-col">
-                        <p class="text-[7px] font-bold text-cyan-400 uppercase mb-0.5">Volume Diário Expedido (Outubro)</p>
-                        <div class="relative flex-1 w-full overflow-hidden">
-                            <canvas id="chartNextDayDaily"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-1.5 shrink-0 pt-0.5 border-t border-slate-800/80">
-                        <div>
-                            <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Top Motoristas</p>
-                            <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
-                                <div class="flex justify-between text-slate-300"><span>1° Cleiton</span> <span class="text-amber-400 font-bold">4.89★</span></div>
-                                <div class="flex justify-between text-slate-300"><span>2° Ipenemery</span> <span class="text-amber-400 font-bold">4.77★</span></div>
-                                <div class="flex justify-between text-slate-300"><span>3° Fábio</span> <span class="text-amber-400 font-bold">4.73★</span></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <p class="text-[7.5px] font-bold text-amber-400 uppercase mb-0.2">Desvio / Rota</p>
-                            <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
-                                <div class="flex justify-between text-slate-300"><span>Recife N.</span> <span class="text-red-400 font-bold">10%</span></div>
-                                <div class="flex justify-between text-slate-300"><span>J. Pessoa</span> <span class="text-amber-400 font-bold">5%</span></div>
-                                <div class="flex justify-between text-slate-300"><span>Recife S.</span> <span class="text-amber-400 font-bold">5%</span></div>
-                            </div>
-                        </div>
+            <!-- Gráfico Comparativo de Fluxo Inbound x Outbound -->
+            <div class="bg-[#0f172a] p-1.5 rounded border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
+                <div class="flex justify-between items-center mb-0.5 shrink-0">
+                    <p class="text-[7px] font-bold text-slate-300 uppercase">Evolução Diária: Inbound vs Outbound</p>
+                    <div class="flex gap-2 text-[6.5px] font-mono">
+                        <span class="text-emerald-400 font-bold">● Inbound (10.886 un)</span>
+                        <span class="text-cyan-400 font-bold">● Outbound (9.779 un)</span>
                     </div>
                 </div>
-
-                <div class="bg-[#090e1a] p-0.5 rounded border border-amber-500/20 text-center shrink-0 mt-0.5">
-                    <p class="text-[7.5px] text-amber-400 font-bold">Total Avaliações: 125</p>
+                <div class="relative flex-1 w-full overflow-hidden">
+                    <canvas id="chartFluxoDiario"></canvas>
                 </div>
             </div>
 
-        </div>
-
-        <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
-        <div class="tv-card bg-[#090e1a] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full">
-            <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
-                <div class="flex justify-between items-center shrink-0">
-                    <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 04: Balanço de Entradas vs. Saídas
-                    </h3>
-                    <span class="text-[7.5px] text-slate-400 font-mono">Outubro / 2026</span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-1.5 shrink-0 my-0.5">
-                    <div class="bg-[#0f172a] p-1.5 rounded border border-emerald-500/30">
-                        <p class="text-[7.5px] font-bold text-emerald-400 uppercase">Inbound Outubro</p>
-                        <h4 class="kpi-big-value text-white my-1">10.886 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
-                        <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
-                            <p>Média: <strong class="text-emerald-400 font-bold">725,7 un/dia</strong></p>
-                            <p>• Joinville: 6.579 un</p>
-                            <p>• Rio Claro: 4.307 un</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-[#0f172a] p-1.5 rounded border border-blue-500/30">
-                        <p class="text-[7.5px] font-bold text-blue-400 uppercase">Outbound Outubro</p>
-                        <h4 class="kpi-big-value text-white my-1">9.779 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
-                        <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
-                            <p>Média: <strong class="text-blue-400 font-bold">611,2 un/dia</strong></p>
-                            <p>• Joinville: 5.658 un</p>
-                            <p>• Rio Claro: 3.709 un</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-[#0f172a] p-1.5 rounded border border-slate-800 flex-1 min-h-[75px] flex flex-col justify-between">
-                    <div class="flex justify-between items-center mb-0.5 shrink-0">
-                        <p class="text-[7px] font-bold text-slate-300 uppercase">Curva Diária: Entradas vs. Saídas</p>
-                        <div class="flex gap-2 text-[6.5px] font-mono">
-                            <span class="text-emerald-400 font-bold">● Inbound</span>
-                            <span class="text-cyan-400 font-bold">● Outbound</span>
-                        </div>
-                    </div>
-                    <div class="relative flex-1 w-full overflow-hidden">
-                        <canvas id="chartFluxoDiario"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-[#0f172a] p-1 rounded border border-slate-800 flex justify-between items-center shrink-0 mt-0.5">
-                <span class="text-[7.5px] text-slate-400">Acúmulo Operacional no Mês:</span>
+            <div class="bg-[#0f172a] p-1 rounded border border-slate-800 flex justify-between items-center shrink-0">
+                <span class="text-[7.5px] text-slate-400">Balanço do Mês:</span>
                 <span class="kpi-big-value text-emerald-400">+1.107 un <span class="text-[7px] text-slate-300 font-normal">(Saldo Positivo)</span></span>
             </div>
+        </div>
+
+        <!-- ==================== TV 03: PAINEL LIVRE / EXPANSÃO ==================== -->
+        <div class="tv-card bg-[#080d18] border border-dashed border-slate-800 flex flex-col justify-center items-center h-full text-center p-4">
+            <div class="w-10 h-10 rounded-full bg-slate-800/60 border border-slate-700 flex items-center justify-center mb-2">
+                <span class="text-slate-400 font-bold text-lg">+</span>
+            </div>
+            <h3 class="text-slate-300 font-bold text-xs uppercase tracking-wider">TV 03: Módulo de Expansão</h3>
+            <p class="text-slate-500 text-[9px] max-w-[250px] mt-1">Espaço reservado para novos indicadores (ex: Telemetria de Frota, Turnover, Produtividade por Operador).</p>
+        </div>
+
+        <!-- ==================== TV 04: PAINEL LIVRE / EXPANSÃO ==================== -->
+        <div class="tv-card bg-[#080d18] border border-dashed border-slate-800 flex flex-col justify-center items-center h-full text-center p-4">
+            <div class="w-10 h-10 rounded-full bg-slate-800/60 border border-slate-700 flex items-center justify-center mb-2">
+                <span class="text-slate-400 font-bold text-lg">+</span>
+            </div>
+            <h3 class="text-slate-300 font-bold text-xs uppercase tracking-wider">TV 04: Módulo de Expansão</h3>
+            <p class="text-slate-500 text-[9px] max-w-[250px] mt-1">Espaço reservado para novos indicadores (ex: Custo Logístico, OTIF por Cliente, Avarias).</p>
         </div>
 
     </main>
 
     <script>
-        let nextDayChartInstance = null;
         let fluxoChartInstance = null;
-        let bloqueadoChartInstance = null;
 
         const currentData = {
             ruas: [
-                { rua: "RUA 01", loc: "9/9", pct: 100, est: 1919 },
-                { rua: "RUA 02", loc: "24/36", pct: 67, est: 1497 },
-                { rua: "RUA 03", loc: "39/41", pct: 95, est: 2635 },
-                { rua: "RUA 04", loc: "35/36", pct: 97, est: 2850 },
-                { rua: "RUA 05", loc: "36/36", pct: 100, est: 2742 },
-                { rua: "RUA 06", loc: "3/33", pct: 9, est: 654 }
+                { rua: "RUA 01", loc: "9/9", est: 1919 },
+                { rua: "RUA 02", loc: "24/36", est: 1497 },
+                { rua: "RUA 03", loc: "39/41", est: 2635 },
+                { rua: "RUA 04", loc: "35/36", est: 2850 },
+                { rua: "RUA 05", loc: "36/36", est: 2742 },
+                { rua: "RUA 06", loc: "3/33", est: 654 }
             ],
             familias: [
-                { familia: "REFRIGERADOR", loc: 74, area: "1.459m²", pctArea: "40.8%", est: 6682, cap: 9445, densidade: "4.58" },
-                { familia: "LAVADORA", loc: 24, area: "440m²", pctArea: "12.3%", est: 1738, cap: 3850, densidade: "3.95" },
-                { familia: "FOGÃO", loc: 21, area: "375m²", pctArea: "10.5%", est: 909, cap: 2272, densidade: "2.42" },
-                { familia: "FORNO", loc: 5, area: "96m²", pctArea: "2.7%", est: 689, cap: 918, densidade: "7.21" },
-                { familia: "FREEZER", loc: 4, area: "88m²", pctArea: "2.5%", est: 213, cap: 496, densidade: "2.41" },
-                { familia: "FRIGOBAR", loc: 2, area: "34m²", pctArea: "1.0%", est: 390, cap: 372, densidade: "11.44" },
-                { familia: "SECADORA", loc: 2, area: "39m²", pctArea: "1.1%", est: 238, cap: 288, densidade: "6.16" },
-                { familia: "CERVEJEIRA", loc: 1, area: "20m²", pctArea: "0.5%", est: 91, cap: 222, densidade: "4.64" },
-                { familia: "MIX", loc: 13, area: "211,6m²", pctArea: "5.9%", est: 1347, cap: 1347, densidade: "6.37" }
-            ],
-            bloqueado: [
-                { cat: "Joinville", qtd: 99 },
-                { cat: "127v", qtd: 53 },
-                { cat: "Sucata", qtd: 40 },
-                { cat: "Reoperação", qtd: 31 },
-                { cat: "Rio Claro", qtd: 30 }
+                { familia: "REFRIGERADOR", area: "1.459m²", est: 6682 },
+                { familia: "LAVADORA", area: "440m²", est: 1738 },
+                { familia: "FOGÃO", area: "375m²", est: 909 },
+                { familia: "FORNO", area: "96m²", est: 689 },
+                { familia: "FREEZER", area: "88m²", est: 213 },
+                { familia: "MIX / OUTROS", area: "211m²", est: 1347 }
             ],
             feedbacksPositivos: [
                 "⭐ 5/5 'Entrega super rápida! O produto chegou bem antes do prazo estipulado. Excelente serviço.'",
                 "⭐ 5/5 'Impressionado com a velocidade. Comprei em um dia e chegou no outro. Nota 10!'",
-                "⭐ 5/5 'Agilidade nota mil. Entrega rápida e rastreamento atualizado em tempo real.'",
                 "⭐ 5/5 'Entregador super educado e cordial. Um excelente atendimento na hora da entrega.'",
-                "⭐ 5/5 'Entregou de forma educada e eficiente!'",
-                "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO 1 dia útil em perfeito estado os entregadores também muito simpáticos e prestativos !!'",
-                "⭐ 5/5 'Produto lindo e de excelente qualidade!. Entrega rápida e eficaz. Muita atenção em todo o processo.'"
+                "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO em perfeito estado !!'"
             ],
-            nextDayDiario: {
-                dias: ['01', '02', '05', '06', '07', '08', '09', '12', '13', '14', '15', '16', '19', '20', '21'],
-                qtd: [46, 41, 36, 29, 23, 35, 32, 38, 31, 29, 24, 40, 36, 63, 56]
-            },
             fluxoDiario: {
                 dias: ['01', '02', '05', '06', '07', '08', '09', '10', '13', '14', '15', '16', '17', '19', '20', '21'],
                 recebimento: [452, 664, 799, 173, 197, 0,    160, 598, 845,  840, 814, 839, 1318, 710,  1527, 950],
@@ -418,154 +299,44 @@
             ruasBody.innerHTML = '';
             currentData.ruas.forEach(r => {
                 const tr = document.createElement('tr');
-                tr.className = "flex justify-between items-center w-full px-2 py-0.5 border-b border-slate-800/40";
-                let barColor = "bg-emerald-500";
-                if (r.pct > 80) barColor = "bg-amber-500";
-                if (r.pct >= 95) barColor = "bg-red-500";
-
-                tr.innerHTML = `<td class="w-1/6 font-bold text-blue-400">${r.rua}</td>
-                                <td class="w-1/6 text-center text-slate-300 font-mono">${r.loc}</td>
-                                <td class="w-3/6 px-2">
-                                    <div class="flex items-center gap-1">
-                                        <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                                            <div class="${barColor} h-1.5 rounded-full" style="width: ${r.pct}%"></div>
-                                        </div>
-                                        <span class="text-[7.5px] font-bold text-slate-300 min-w-[22px] text-right">${r.pct}%</span>
-                                    </div>
-                                </td>
-                                <td class="w-1/6 text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
+                tr.className = "flex justify-between items-center w-full px-1 py-0.5 border-b border-slate-800/40";
+                tr.innerHTML = `<td class="font-bold text-blue-400">${r.rua}</td>
+                                <td class="text-slate-300 font-mono">${r.loc}</td>
+                                <td class="text-right font-bold text-emerald-400">${r.est.toLocaleString('pt-BR')}</td>`;
                 ruasBody.appendChild(tr);
             });
 
-            // Famílias (TV 02)
+            // Famílias (TV 01)
             const familyBody = document.getElementById('familyTableBody');
             const marquee = document.getElementById('tickerMarquee');
             familyBody.innerHTML = '';
             marquee.innerHTML = '';
 
-            const tickerData = [...currentData.familias, ...currentData.familias];
-            tickerData.forEach(item => {
+            currentData.familias.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "flex justify-between items-center w-full px-1 py-0.5 border-b border-slate-800/40";
+                tr.innerHTML = `<td class="font-bold text-slate-200">${item.familia}</td>
+                                <td class="text-right text-slate-300 font-mono">${item.area}</td>
+                                <td class="text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>`;
+                familyBody.appendChild(tr);
+
                 const div = document.createElement('div');
                 div.className = "ticker__item";
-                div.innerHTML = `<span class="text-white font-black">${item.familia}</span>
-                                 <span class="text-blue-400 ml-1 font-mono">${item.est.toLocaleString('pt-BR')} un</span>
-                                 <span class="text-slate-600 mx-1">|</span>
-                                 <span class="text-emerald-400 font-mono">${item.densidade} un/m²</span>`;
+                div.innerHTML = `<span class="text-white font-black">${item.familia}</span>: <span class="text-blue-400 ml-1 font-mono">${item.est.toLocaleString('pt-BR')} un</span>`;
                 marquee.appendChild(div);
             });
 
-            currentData.familias.forEach(item => {
-                const tr = document.createElement('tr');
-                tr.className = "flex justify-between items-center w-full px-2 py-0.5 border-b border-slate-800/40";
-                tr.innerHTML = `<td class="w-2/7 font-bold text-slate-200">${item.familia}</td>
-                                <td class="w-1/7 text-center text-slate-300 font-mono">${item.loc}</td>
-                                <td class="w-1/7 text-right text-slate-300 font-mono">${item.area} <span class="text-slate-500 text-[6.5px]">(${item.pctArea})</span></td>
-                                <td class="w-1/7 text-right text-purple-300 font-mono">${item.cap.toLocaleString('pt-BR')}</td>
-                                <td class="w-1/7 text-right font-bold text-blue-400 font-mono">${item.est.toLocaleString('pt-BR')}</td>
-                                <td class="w-1/7 text-center"><span class="bg-purple-500/10 text-purple-300 px-1 rounded font-bold font-mono">${item.densidade}</span></td>`;
-                familyBody.appendChild(tr);
-            });
-
-            // Feedbacks Exclusivamente Positivos (TV 03 - Next Day Ticker)
+            // Ticker Feedbacks (TV 02)
             const feedbackMarquee = document.getElementById('feedbackMarquee');
             feedbackMarquee.innerHTML = '';
-            const doubleFeedbacks = [...currentData.feedbacksPositivos, ...currentData.feedbacksPositivos];
-            doubleFeedbacks.forEach(txt => {
+            [...currentData.feedbacksPositivos, ...currentData.feedbacksPositivos].forEach(txt => {
                 const div = document.createElement('div');
                 div.className = "feedback-ticker__item";
                 div.innerHTML = `<span class="text-emerald-400">${txt}</span><span class="text-slate-700 mx-3">|</span>`;
                 feedbackMarquee.appendChild(div);
             });
 
-            // Bloqueados (TV 03)
-            const bloqueadoBody = document.getElementById('bloqueadoTableBody');
-            bloqueadoBody.innerHTML = '';
-            currentData.bloqueado.forEach(b => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td class="px-1 py-[1px] font-bold text-slate-200">${b.cat}</td>
-                                <td class="px-1 py-[1px] text-right text-red-400 font-bold font-mono">${b.qtd}</td>`;
-                bloqueadoBody.appendChild(tr);
-            });
-
-            renderizarGraficoBloqueadoDonut();
-            renderizarGraficoLinhaDiario();
             renderizarGraficoFluxoDiario();
-        }
-
-        function renderizarGraficoBloqueadoDonut() {
-            const canvas = document.getElementById('chartBloqueadoDonut');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            if (bloqueadoChartInstance) bloqueadoChartInstance.destroy();
-
-            bloqueadoChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: currentData.bloqueado.map(b => b.cat),
-                    datasets: [{
-                        data: currentData.bloqueado.map(b => b.qtd),
-                        backgroundColor: ['#ef4444', '#f97316', '#f59e0b', '#06b6d4', '#a855f7'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { 
-                            display: true,
-                            position: 'right',
-                            labels: { color: '#cbd5e1', font: { size: 7 }, boxWidth: 7, padding: 4 }
-                        },
-                        datalabels: { display: false }
-                    },
-                    cutout: '62%'
-                }
-            });
-        }
-
-        function renderizarGraficoLinhaDiario() {
-            const canvas = document.getElementById('chartNextDayDaily');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            if (nextDayChartInstance) nextDayChartInstance.destroy();
-
-            const gradient = ctx.createLinearGradient(0, 0, 0, 80);
-            gradient.addColorStop(0, 'rgba(6, 182, 212, 0.4)');
-            gradient.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
-
-            nextDayChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: currentData.nextDayDiario.dias,
-                    datasets: [{
-                        label: 'Entregas',
-                        data: currentData.nextDayDiario.qtd,
-                        borderColor: '#06b6d4',
-                        backgroundColor: gradient,
-                        borderWidth: 1.5,
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 1.5,
-                        pointBackgroundColor: '#38bdf8'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: { display: false }
-                    },
-                    scales: {
-                        x: { 
-                            ticks: { color: '#64748b', font: { size: 6 } }, 
-                            grid: { display: false } 
-                        },
-                        y: { display: false }
-                    }
-                }
-            });
         }
 
         function renderizarGraficoFluxoDiario() {
@@ -575,11 +346,11 @@
             if (fluxoChartInstance) fluxoChartInstance.destroy();
 
             const gradientRec = ctx.createLinearGradient(0, 0, 0, 80);
-            gradientRec.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+            gradientRec.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
             gradientRec.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
 
             const gradientExp = ctx.createLinearGradient(0, 0, 0, 80);
-            gradientExp.addColorStop(0, 'rgba(6, 182, 212, 0.3)');
+            gradientExp.addColorStop(0, 'rgba(6, 182, 212, 0.35)');
             gradientExp.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
 
             fluxoChartInstance = new Chart(ctx, {
@@ -594,9 +365,8 @@
                             backgroundColor: gradientRec,
                             borderWidth: 1.5,
                             fill: true,
-                            tension: 0.4,
-                            pointRadius: 1.5,
-                            pointBackgroundColor: '#34d399'
+                            tension: 0.35,
+                            pointRadius: 1.5
                         },
                         {
                             label: 'Outbound',
@@ -605,24 +375,17 @@
                             backgroundColor: gradientExp,
                             borderWidth: 1.5,
                             fill: true,
-                            tension: 0.4,
-                            pointRadius: 1.5,
-                            pointBackgroundColor: '#38bdf8'
+                            tension: 0.35,
+                            pointRadius: 1.5
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: { display: false }
-                    },
+                    plugins: { legend: { display: false }, datalabels: { display: false } },
                     scales: {
-                        x: { 
-                            ticks: { color: '#64748b', font: { size: 6 } }, 
-                            grid: { display: false } 
-                        },
+                        x: { ticks: { color: '#64748b', font: { size: 6 } }, grid: { display: false } },
                         y: { display: false }
                     }
                 }
