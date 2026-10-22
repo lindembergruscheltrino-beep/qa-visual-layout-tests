@@ -12,7 +12,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WMS Control Tower - CD Alhandra PB</title>
+    <title>WMS Executive Control Tower - CD Alhandra PB</title>
     
     <!-- Fontes Google Sans / Product Sans & JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
             max-height: 100vh;
             max-width: 100vw;
             overflow: hidden !important;
-            background-color: #070a13;
+            background-color: #050811;
             color: #f8fafc;
             font-family: 'JetBrains Mono', 'Product Sans Mono', monospace !important;
             -webkit-font-smoothing: antialiased;
@@ -41,9 +41,9 @@
             font-family: 'Product Sans', 'Google Sans', sans-serif !important;
         }
 
-        /* Classe de Destaque para Valores Principais (Ampliada e Responsiva) */
+        /* Classe de Destaque Executivo para KPIs Principais */
         .kpi-big-value {
-            font-size: clamp(14px, 1.2vh + 0.6vw, 20px) !important;
+            font-size: clamp(15px, 1.3vh + 0.7vw, 22px) !important;
             line-height: 1 !important;
             font-weight: 900 !important;
             letter-spacing: -0.5px;
@@ -56,32 +56,31 @@
             box-shadow: none !important;
         }
 
-        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.25); }
-        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.25); }
-        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.25); }
-        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.25); }
-        .glow-red { border: 1px solid rgba(239, 68, 68, 0.25); }
+        .glow-blue { border: 1px solid rgba(59, 130, 246, 0.3); box-shadow: 0 0 12px rgba(59, 130, 246, 0.1); }
+        .glow-amber { border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 12px rgba(245, 158, 11, 0.1); }
+        .glow-emerald { border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 0 12px rgba(16, 185, 129, 0.1); }
+        .glow-purple { border: 1px solid rgba(139, 92, 246, 0.3); box-shadow: 0 0 12px rgba(139, 92, 246, 0.1); }
+        .glow-red { border: 1px solid rgba(239, 68, 68, 0.3); box-shadow: 0 0 12px rgba(239, 68, 68, 0.1); }
 
         .ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0f172a; border-bottom: 1px solid #1e293b; padding: 2px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #0b1120; border-bottom: 1px solid #1e293b; padding: 3px 0; display: flex;
         }
         .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
-        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.65rem; font-weight: 700; }
+        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.7rem; font-weight: 700; }
 
-        /* Ticker exclusivo para Avaliações Positivas dos Clientes */
         .feedback-ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0b0f19; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 0.375rem; padding: 3px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #070c18; border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 0.375rem; padding: 3px 0; display: flex;
         }
-        .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 42s linear infinite; }
-        .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.68rem; font-weight: 600; }
+        .feedback-ticker { display: flex; white-space: nowrap; animation: marqueeFeedback 40s linear infinite; }
+        .feedback-ticker__item { display: flex; align-items: center; padding: 0 1rem; font-size: 0.7rem; font-weight: 600; }
 
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
         @keyframes marqueeFeedback { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
-        /* AJUSTE DE MOLDURA DE SEGURANÇA PARA A VIDEO WALL 2x2 (BEZEL COMPENSATION) */
+        /* Ajuste Físico para a Video Wall 2x2 */
         .video-wall-grid {
-            padding: 14px; /* Margem externa contra bordas das TVs */
-            gap: 14px;     /* Recuo central para compensar a junção da moldura das 4 TVs */
+            padding: 12px;
+            gap: 12px;
         }
         .tv-card {
             padding: 10px;
@@ -91,23 +90,23 @@
 </head>
 <body class="flex flex-col h-screen w-screen overflow-hidden antialiased">
 
-    <!-- HEADER SUPERIOR COM RECUO DE SEGURANÇA -->
-    <header class="bg-[#0f172a] border-b border-slate-800 text-white px-4 pt-1.5 pb-1 flex justify-between items-center shrink-0">
+    <!-- HEADER SUPERIOR EXECUTIVO -->
+    <header class="bg-[#0b1120] border-b border-slate-800 text-white px-4 pt-1.5 pb-1 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-3">
-            <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">PCO</div>
+            <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">DIRETORIA</div>
             <div>
-                <h1 class="text-xs font-bold text-slate-100 leading-tight">Control Tower WMS Alhandra</h1>
-                <p class="text-[9px] text-slate-400 leading-none">CD Alhandra PB • Whirlpool • Trino</p>
+                <h1 class="text-xs font-bold text-slate-100 leading-tight">Control Tower WMS • Visão de Diretoria</h1>
+                <p class="text-[9px] text-slate-400 leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
             </div>
         </div>
         
         <div class="flex items-center gap-3">
             <div class="badge-date-clean flex items-center gap-1.5 bg-[#1e293b] px-2.5 py-1 rounded border border-slate-700 text-slate-100 text-[10px] font-bold">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Atualizado em 21 Out 09:00
+                Status Operacional: Normal
             </div>
             <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 border border-slate-700 text-[10px] text-slate-300 hover:text-white px-2.5 py-1 rounded cursor-pointer font-bold">
-                📺 Modo TV (Fullscreen)
+                📺 Modo TV
             </button>
         </div>
     </header>
@@ -117,34 +116,34 @@
         <div class="ticker" id="tickerMarquee"></div>
     </div>
 
-    <!-- MAIN GRID 2x2 COM COMPENSAÇÃO DE BORDAS (VIDEO WALL) -->
-    <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#070a13]">
+    <!-- MAIN GRID 2x2 -->
+    <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#050811]">
 
         <!-- ==================== TV 01 (SUPERIOR ESQUERDA) ==================== -->
-        <div class="tv-card bg-[#0b0f19] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full gap-1">
+        <div class="tv-card bg-[#090e1a] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full gap-1">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[10px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> TV 01: Estoque Geral - Capacidade & Ruas
+                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> TV 01: Ocupação de Posições & Capacidade
                 </h2>
-                <span class="text-[8px] text-slate-500 font-mono">PCO Geral</span>
+                <span class="text-[8px] text-slate-500 font-mono">PCO Armazém</span>
             </div>
 
-            <!-- Cards de Capacidade com Fontes Ampliadas (kpi-big-value) -->
+            <!-- Cards de Capacidade -->
             <div class="grid grid-cols-3 gap-1.5 shrink-0">
                 <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-blue flex flex-col justify-center">
-                    <p class="text-[7.5px] font-bold text-slate-400 uppercase tracking-tight">Locações (Ocup/Total)</p>
+                    <p class="text-[7.5px] font-bold text-slate-400 uppercase tracking-tight">Ocupação Locações</p>
                     <h4 class="kpi-big-value text-white my-1">146 / 191</h4>
                     <p class="text-[8px] text-blue-400 font-bold">76,4% Ocupado</p>
                 </div>
                 <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-amber flex flex-col justify-center">
-                    <p class="text-[7.5px] font-bold text-amber-500 uppercase tracking-tight">Área Ocupada (m²)</p>
-                    <h4 class="kpi-big-value text-amber-400 my-1">2.762 / 3.574</h4>
-                    <p class="text-[8px] text-amber-300 font-bold">77,3% Área</p>
+                    <p class="text-[7.5px] font-bold text-amber-500 uppercase tracking-tight">Ocupação M²</p>
+                    <h4 class="kpi-big-value text-amber-400 my-1">2.762 m²</h4>
+                    <p class="text-[8px] text-amber-300 font-bold">77,3% de 3.574m²</p>
                 </div>
                 <div class="bg-[#0f172a] p-1.5 rounded-lg text-center glow-emerald flex flex-col justify-center">
-                    <p class="text-[7.5px] font-bold text-emerald-500 uppercase tracking-tight">Saldo Estocado (un)</p>
+                    <p class="text-[7.5px] font-bold text-emerald-500 uppercase tracking-tight">Saldo Estocado</p>
                     <h4 class="kpi-big-value text-emerald-400 my-1">12.297</h4>
-                    <p class="text-[8px] text-emerald-300 font-bold">68,8% Cap</p>
+                    <p class="text-[8px] text-emerald-300 font-bold">68,8% Cap. Nominal</p>
                 </div>
             </div>
 
@@ -152,17 +151,17 @@
             <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
                 <div class="flex justify-between items-center mb-1 shrink-0">
                     <h3 class="font-bold text-[10px] text-slate-300 flex items-center gap-1">
-                        📍 Ocupação Por Rua
+                        📍 Termômetro de Ocupação por Rua
                     </h3>
-                    <span class="text-[8px] text-slate-500 font-mono">Termômetro</span>
+                    <span class="text-[8px] text-slate-500 font-mono">Gargalos de Pulmão</span>
                 </div>
                 <div class="overflow-hidden flex-1 flex flex-col justify-between">
                     <table class="w-full text-left text-[8.5px] text-slate-300 h-full flex flex-col justify-between">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold shrink-0">
+                        <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
                             <tr class="flex justify-between w-full px-2 py-1">
                                 <th class="w-1/6">Rua</th>
                                 <th class="w-1/6 text-center">Locações</th>
-                                <th class="w-3/6 text-center">Ocupação</th>
+                                <th class="w-3/6 text-center">Saturação</th>
                                 <th class="w-1/6 text-right">Estoque (un)</th>
                             </tr>
                         </thead>
@@ -173,25 +172,24 @@
         </div>
 
         <!-- ==================== TV 02 (SUPERIOR DIREITA) ==================== -->
-        <div class="tv-card bg-[#0b0f19] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full gap-1">
+        <div class="tv-card bg-[#090e1a] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full gap-1">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[10px] font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> TV 02: Estoque Geral - Famílias & Densidade
+                    <span class="w-2 h-2 rounded-full bg-purple-500"></span> TV 02: Mix de Estoque por Família & Densidade
                 </h2>
-                <span class="text-[8px] text-slate-500 font-mono">Macro Giro</span>
+                <span class="text-[8px] text-slate-500 font-mono">Perfil de Produto</span>
             </div>
 
-            <!-- Tabela Famílias -->
             <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex-1 flex flex-col justify-between overflow-hidden">
                 <div class="overflow-hidden flex-1 flex flex-col justify-between">
                     <table class="w-full text-left text-[8px] text-slate-300 h-full flex flex-col justify-between">
-                        <thead class="bg-[#0b0f19] text-slate-400 uppercase font-bold shrink-0">
+                        <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
                             <tr class="flex justify-between w-full px-2 py-1">
                                 <th class="w-2/7">Família</th>
                                 <th class="w-1/7 text-center">Loc.</th>
-                                <th class="w-1/7 text-right">Área m² (%)</th>
+                                <th class="w-1/7 text-right">Área (%)</th>
                                 <th class="w-1/7 text-right">Capacidade</th>
-                                <th class="w-1/7 text-right">Estoque (un)</th>
+                                <th class="w-1/7 text-right">Estoque</th>
                                 <th class="w-1/7 text-center">un/m²</th>
                             </tr>
                         </thead>
@@ -202,43 +200,39 @@
         </div>
 
         <!-- ==================== TV 03 (INFERIOR ESQUERDA) ==================== -->
-        <div class="tv-card bg-[#0b0f19] border border-slate-800/80 grid grid-cols-2 gap-2 overflow-hidden h-full">
+        <div class="tv-card bg-[#090e1a] border border-slate-800/80 grid grid-cols-2 gap-2 overflow-hidden h-full">
             
             <!-- CQ - Controle de Qualidade -->
             <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 glow-red flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                     <div class="flex justify-between items-center shrink-0">
                         <h3 class="font-bold text-[9.5px] text-red-400 flex items-center gap-1">
-                            🔒 CQ - Controle Qualidade
+                            🔒 CQ - Qualidade & Bloqueios
                         </h3>
                         <span class="text-[7.5px] text-red-400 font-bold bg-red-500/10 px-1 py-0.2 rounded">253 vol</span>
                     </div>
 
-                    <!-- Tabela de Bloqueados -->
                     <table class="w-full text-left text-[8.5px] text-slate-300 shrink-0">
                         <tbody id="bloqueadoTableBody" class="font-medium"></tbody>
                     </table>
 
-                    <!-- GRÁFICO DONUT DE DISTRIBUIÇÃO DO BLOQUEIO -->
-                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[80px] flex flex-col justify-between">
-                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição Categoria</p>
+                    <div class="bg-[#090e1a] p-1 rounded border border-slate-800 flex-1 min-h-[80px] flex flex-col justify-between">
+                        <p class="text-[7px] font-bold text-red-400 uppercase text-center mb-0.5">Distribuição do Bloqueio</p>
                         <div class="relative flex-1 w-full overflow-hidden flex justify-center items-center">
                             <canvas id="chartBloqueadoDonut"></canvas>
                         </div>
                     </div>
 
-                    <!-- IMPACTO SOBRE O ESTOQUE TOTAL -->
-                    <div class="bg-[#0b0f19] p-1 rounded border border-red-500/20 text-center shrink-0">
-                        <p class="text-[7px] text-slate-400 uppercase">Impacto Estoque Total</p>
+                    <div class="bg-[#090e1a] p-1 rounded border border-red-500/20 text-center shrink-0">
+                        <p class="text-[7px] text-slate-400 uppercase">Impacto sobre Estoque Total</p>
                         <p class="kpi-big-value text-emerald-400 my-0.5">2,1% <span class="text-[7px] text-slate-300 font-normal">(253 / 12.297)</span></p>
                     </div>
                 </div>
 
-                <!-- Canal B2B -->
                 <div class="border-t border-slate-800 pt-1 mt-1 shrink-0">
-                    <div class="flex justify-between items-center bg-[#0b0f19] p-1 rounded border border-cyan-500/20">
+                    <div class="flex justify-between items-center bg-[#090e1a] p-1 rounded border border-cyan-500/20">
                         <div>
-                            <p class="text-[7.5px] font-bold text-cyan-400 uppercase">Estoque B2B</p>
+                            <p class="text-[7.5px] font-bold text-cyan-400 uppercase">Estoque Canal B2B</p>
                             <p class="kpi-big-value text-white my-0.5">482 <span class="text-[7px] font-normal text-slate-400">vol</span></p>
                         </div>
                         <div class="text-right text-[7.5px]">
@@ -253,33 +247,32 @@
             <div class="bg-[#0f172a] p-1.5 rounded-xl border border-slate-800 flex flex-col justify-between overflow-hidden h-full">
                 <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                     
-                    <!-- BANNER DE ROLAGEM AVALIAÇÕES POSITIVAS -->
                     <div class="feedback-ticker-wrap shrink-0">
                         <div class="feedback-ticker" id="feedbackMarquee"></div>
                     </div>
 
                     <div class="flex justify-between items-center shrink-0 mt-0.5">
                         <h3 class="font-bold text-[9.5px] text-amber-400 flex items-center gap-1">
-                            🚚 Next Day
+                            🚚 SLA de Entregas (Next Day)
                         </h3>
                         <span class="bg-amber-500/10 text-amber-300 px-1 py-0.2 rounded text-[8.5px] font-bold">
-                            4,75 ★
+                            4,75 ★ (CSAT)
                         </span>
                     </div>
 
                     <div class="grid grid-cols-2 gap-1 text-[8px] font-mono shrink-0">
-                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                        <div class="bg-[#090e1a] p-1 rounded border border-slate-800">
                             <p class="text-slate-400 text-[7px] uppercase">Programadas</p>
                             <p class="kpi-big-value text-white my-0.5">915 <span class="text-[7px] font-normal text-slate-400">rotas</span></p>
                         </div>
-                        <div class="bg-[#0b0f19] p-1 rounded border border-slate-800">
+                        <div class="bg-[#090e1a] p-1 rounded border border-slate-800">
                             <p class="text-slate-400 text-[7px] uppercase">1ª Tentativa</p>
                             <p class="kpi-big-value text-emerald-400 my-0.5">786 <span class="text-[7px] text-slate-300 font-normal">(85,9%)</span></p>
                         </div>
                     </div>
 
-                    <div class="bg-[#0b0f19] p-1 rounded border border-slate-800 flex-1 min-h-[60px] flex flex-col">
-                        <p class="text-[7px] font-bold text-cyan-400 uppercase mb-0.5">Evolução Diária (Outubro)</p>
+                    <div class="bg-[#090e1a] p-1 rounded border border-slate-800 flex-1 min-h-[60px] flex flex-col">
+                        <p class="text-[7px] font-bold text-cyan-400 uppercase mb-0.5">Volume Diário Expedido (Outubro)</p>
                         <div class="relative flex-1 w-full overflow-hidden">
                             <canvas id="chartNextDayDaily"></canvas>
                         </div>
@@ -287,7 +280,7 @@
 
                     <div class="grid grid-cols-2 gap-1.5 shrink-0 pt-0.5 border-t border-slate-800/80">
                         <div>
-                            <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Five-star</p>
+                            <p class="text-[7.5px] font-bold text-slate-400 uppercase mb-0.2">Top Motoristas</p>
                             <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
                                 <div class="flex justify-between text-slate-300"><span>1° Cleiton</span> <span class="text-amber-400 font-bold">4.89★</span></div>
                                 <div class="flex justify-between text-slate-300"><span>2° Ipenemery</span> <span class="text-amber-400 font-bold">4.77★</span></div>
@@ -296,7 +289,7 @@
                         </div>
 
                         <div>
-                            <p class="text-[7.5px] font-bold text-amber-400 uppercase mb-0.2">Desvio/Rota</p>
+                            <p class="text-[7.5px] font-bold text-amber-400 uppercase mb-0.2">Desvio / Rota</p>
                             <div class="space-y-0.2 text-[7.5px] font-mono leading-tight">
                                 <div class="flex justify-between text-slate-300"><span>Recife N.</span> <span class="text-red-400 font-bold">10%</span></div>
                                 <div class="flex justify-between text-slate-300"><span>J. Pessoa</span> <span class="text-amber-400 font-bold">5%</span></div>
@@ -306,54 +299,51 @@
                     </div>
                 </div>
 
-                <div class="bg-[#0b0f19] p-0.5 rounded border border-amber-500/20 text-center shrink-0 mt-0.5">
-                    <p class="text-[7.5px] text-amber-400 font-bold">Avaliações: 125</p>
+                <div class="bg-[#090e1a] p-0.5 rounded border border-amber-500/20 text-center shrink-0 mt-0.5">
+                    <p class="text-[7.5px] text-amber-400 font-bold">Total Avaliações: 125</p>
                 </div>
             </div>
 
         </div>
 
         <!-- ==================== TV 04 (INFERIOR DIREITA) ==================== -->
-        <div class="tv-card bg-[#0b0f19] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full">
+        <div class="tv-card bg-[#090e1a] border border-slate-800/80 flex flex-col justify-between overflow-hidden h-full">
             <div class="flex flex-col justify-between flex-1 overflow-hidden gap-1">
                 <div class="flex justify-between items-center shrink-0">
                     <h3 class="font-bold text-[9.5px] text-emerald-400 flex items-center gap-1">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 04: Outubro (In & Out)
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 04: Balanço de Entradas vs. Saídas
                     </h3>
-                    <span class="text-[7.5px] text-slate-400 font-mono">Consolidado Mês</span>
+                    <span class="text-[7.5px] text-slate-400 font-mono">Outubro / 2026</span>
                 </div>
 
                 <div class="grid grid-cols-2 gap-1.5 shrink-0 my-0.5">
-                    <!-- Recebimento Outubro com Fonte Ampliada -->
                     <div class="bg-[#0f172a] p-1.5 rounded border border-emerald-500/30">
-                        <p class="text-[7.5px] font-bold text-emerald-400 uppercase">Recebimento Outubro</p>
+                        <p class="text-[7.5px] font-bold text-emerald-400 uppercase">Inbound Outubro</p>
                         <h4 class="kpi-big-value text-white my-1">10.886 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
                         <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
-                            <p>Média Geral: <strong class="text-emerald-400 font-bold">725,7 un/dia</strong></p>
-                            <p>• Joinville: 6.579 un (438/dia)</p>
-                            <p>• Rio Claro: 4.307 un (287/dia)</p>
+                            <p>Média: <strong class="text-emerald-400 font-bold">725,7 un/dia</strong></p>
+                            <p>• Joinville: 6.579 un</p>
+                            <p>• Rio Claro: 4.307 un</p>
                         </div>
                     </div>
 
-                    <!-- Expedição Outubro com Fonte Ampliada -->
                     <div class="bg-[#0f172a] p-1.5 rounded border border-blue-500/30">
-                        <p class="text-[7.5px] font-bold text-blue-400 uppercase">Expedição Outubro</p>
+                        <p class="text-[7.5px] font-bold text-blue-400 uppercase">Outbound Outubro</p>
                         <h4 class="kpi-big-value text-white my-1">9.779 <span class="text-[7px] font-normal text-slate-400">un</span></h4>
                         <div class="text-[7px] text-slate-300 font-mono mt-0.5 space-y-0.2">
-                            <p>Média Geral: <strong class="text-blue-400 font-bold">611,2 un/dia</strong></p>
-                            <p>• Joinville: 5.658 un (353/dia)</p>
-                            <p>• Rio Claro: 3.709 un (231/dia)</p>
+                            <p>Média: <strong class="text-blue-400 font-bold">611,2 un/dia</strong></p>
+                            <p>• Joinville: 5.658 un</p>
+                            <p>• Rio Claro: 3.709 un</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- GRÁFICO COMPARATIVO DIÁRIO DE FLUXO -->
                 <div class="bg-[#0f172a] p-1.5 rounded border border-slate-800 flex-1 min-h-[75px] flex flex-col justify-between">
                     <div class="flex justify-between items-center mb-0.5 shrink-0">
-                        <p class="text-[7px] font-bold text-slate-300 uppercase">Evolução Diária: Recebimento x Expedição</p>
+                        <p class="text-[7px] font-bold text-slate-300 uppercase">Curva Diária: Entradas vs. Saídas</p>
                         <div class="flex gap-2 text-[6.5px] font-mono">
-                            <span class="text-emerald-400 font-bold">● Recebimento</span>
-                            <span class="text-cyan-400 font-bold">● Expedição</span>
+                            <span class="text-emerald-400 font-bold">● Inbound</span>
+                            <span class="text-cyan-400 font-bold">● Outbound</span>
                         </div>
                     </div>
                     <div class="relative flex-1 w-full overflow-hidden">
@@ -362,10 +352,9 @@
                 </div>
             </div>
 
-            <!-- Balanço -->
             <div class="bg-[#0f172a] p-1 rounded border border-slate-800 flex justify-between items-center shrink-0 mt-0.5">
-                <span class="text-[7.5px] text-slate-400">Balanço Líquido (Mês):</span>
-                <span class="kpi-big-value text-emerald-400">+1.107 un <span class="text-[7px] text-slate-300 font-normal">(Acúmulo)</span></span>
+                <span class="text-[7.5px] text-slate-400">Acúmulo Operacional no Mês:</span>
+                <span class="kpi-big-value text-emerald-400">+1.107 un <span class="text-[7px] text-slate-300 font-normal">(Saldo Positivo)</span></span>
             </div>
         </div>
 
@@ -599,7 +588,7 @@
                     labels: currentData.fluxoDiario.dias,
                     datasets: [
                         {
-                            label: 'Recebimento',
+                            label: 'Inbound',
                             data: currentData.fluxoDiario.recebimento,
                             borderColor: '#10b981',
                             backgroundColor: gradientRec,
@@ -610,7 +599,7 @@
                             pointBackgroundColor: '#34d399'
                         },
                         {
-                            label: 'Expedição',
+                            label: 'Outbound',
                             data: currentData.fluxoDiario.expedicao,
                             borderColor: '#06b6d4',
                             backgroundColor: gradientExp,
