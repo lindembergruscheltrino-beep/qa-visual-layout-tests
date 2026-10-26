@@ -39,14 +39,14 @@
         }
 
         .kpi-big-value {
-            font-size: clamp(14px, 1.1vh + 0.6vw, 20px) !important;
+            font-size: clamp(13px, 1.0vh + 0.5vw, 18px) !important;
             line-height: 1 !important;
             font-weight: 900 !important;
             letter-spacing: -0.5px;
         }
 
         .row-text-auto {
-            font-size: clamp(7px, 0.55vw + 0.4vh, 9px) !important;
+            font-size: clamp(7px, 0.55vw + 0.38vh, 8.5px) !important;
             line-height: 1.15 !important;
         }
 
@@ -187,31 +187,47 @@
                 <span class="text-[7.5px] text-emerald-400 font-mono font-bold">Base Expedição</span>
             </div>
 
-            <!-- KPIs de Expedição -->
-            <div class="grid grid-cols-4 gap-1 shrink-0">
+            <!-- CARDS DE STATUS DETALHADOS -->
+            <div class="grid grid-cols-6 gap-1 shrink-0">
+                <!-- Total Exp -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
-                    <p class="text-[7px] text-slate-400 uppercase">Cargas Hoje</p>
+                    <p class="text-[6.5px] text-slate-400 uppercase font-bold">Total Exp</p>
                     <p id="kpiTotalCargas" class="kpi-big-value text-white my-0.5">--</p>
-                    <p class="text-[6.5px] text-slate-400 font-mono">Agendadas</p>
+                    <p id="kpiTotalPecas" class="text-[6px] text-cyan-400 font-mono font-bold leading-tight">-- un</p>
                 </div>
+                <!-- Concluído -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
-                    <p class="text-[7px] text-slate-400 uppercase">Concluídas</p>
-                    <p id="kpiConcluidas" class="kpi-big-value text-emerald-400 my-0.5">--</p>
-                    <p class="text-[6.5px] text-emerald-300 font-mono">Finalizadas</p>
+                    <p class="text-[6.5px] text-emerald-400 uppercase font-bold">Concluído</p>
+                    <p id="kpiConcluidos" class="kpi-big-value text-emerald-400 my-0.5">--</p>
+                    <p class="text-[6px] text-emerald-300 font-mono">Finalizados</p>
                 </div>
+                <!-- Faturando (Verde Claro Destacado) -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
-                    <p class="text-[7px] text-slate-400 uppercase">Em Andamento</p>
-                    <p id="kpiAndamento" class="kpi-big-value text-amber-400 my-0.5">--</p>
-                    <p class="text-[6.5px] text-amber-300 font-mono">Docas</p>
+                    <p class="text-[6.5px] text-lime-400 uppercase font-bold">Faturando</p>
+                    <p id="kpiFaturando" class="kpi-big-value text-lime-300 my-0.5">--</p>
+                    <p class="text-[6px] text-lime-300 font-mono">Faturamento</p>
                 </div>
+                <!-- Carregando / Andamento -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
-                    <p class="text-[7px] text-slate-400 uppercase">Total Peças</p>
-                    <p id="kpiTotalPecas" class="kpi-big-value text-cyan-400 my-0.5">--</p>
-                    <p class="text-[6.5px] text-cyan-300 font-mono">Volume</p>
+                    <p class="text-[6.5px] text-amber-400 uppercase font-bold">Carregando</p>
+                    <p id="kpiCarregando" class="kpi-big-value text-amber-400 my-0.5">--</p>
+                    <p class="text-[6px] text-amber-300 font-mono">Doca</p>
+                </div>
+                <!-- Conferindo (Azul) -->
+                <div class="bg-[#0f172a] p-1 rounded text-center">
+                    <p class="text-[6.5px] text-blue-400 uppercase font-bold">Conferindo</p>
+                    <p id="kpiConferindo" class="kpi-big-value text-blue-400 my-0.5">--</p>
+                    <p class="text-[6px] text-blue-300 font-mono">Separação</p>
+                </div>
+                <!-- Pendente (Vermelho) -->
+                <div class="bg-[#0f172a] p-1 rounded text-center">
+                    <p class="text-[6.5px] text-rose-500 uppercase font-bold">Pendente</p>
+                    <p id="kpiPendente" class="kpi-big-value text-rose-500 my-0.5">--</p>
+                    <p class="text-[6px] text-rose-400 font-mono">Aguardando</p>
                 </div>
             </div>
 
-            <!-- Grade Operacional de Cargas (Sem o título anterior, aproveitando 100% da área) -->
+            <!-- Grade Operacional de Cargas -->
             <div class="bg-[#0f172a] p-1 rounded flex-1 flex flex-col overflow-hidden min-h-0">
                 <div class="flex justify-end items-center mb-0.5 shrink-0 px-1">
                     <span class="text-[6.5px] text-slate-400 font-mono">Auto-sync 15s</span>
@@ -282,9 +298,12 @@
             ],
             expedicaoResumo: {
                 totalCargas: 0,
+                totalPecas: 0,
                 concluidos: 0,
-                emAndamento: 0,
-                totalPecas: 0
+                faturando: 0,
+                carregando: 0,
+                conferindo: 0,
+                pendentes: 0
             },
             cargas: []
         };
@@ -292,14 +311,43 @@
         // Função chamada dinamicamente pelo retorno JSONP do Google Apps Script
         window.receberDadosExpedicao = function(data) {
             if (data && data.status === "success") {
-                if (data.resumo) {
-                    currentData.expedicaoResumo.totalCargas = data.resumo.totalCargas;
-                    currentData.expedicaoResumo.concluidos = data.resumo.concluidos;
-                    currentData.expedicaoResumo.emAndamento = data.resumo.emAndamento || 0;
-                    currentData.expedicaoResumo.totalPecas = data.resumo.totalPecas;
-                }
                 if (data.cargas) {
                     currentData.cargas = data.cargas;
+
+                    // Contagem detalhada por status
+                    let totalPecas = 0;
+                    let concluidos = 0;
+                    let faturando = 0;
+                    let carregando = 0;
+                    let conferindo = 0;
+                    let pendentes = 0;
+
+                    data.cargas.forEach(c => {
+                        totalPecas += (Number(c.pecas) || 0);
+                        const s = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                        if (s.includes("concluid") || s.includes("finaliz")) {
+                            concluidos++;
+                        } else if (s.includes("fatur")) {
+                            faturando++;
+                        } else if (s.includes("carreg") || s.includes("doca") || s.includes("apres")) {
+                            carregando++;
+                        } else if (s.includes("confer") || s.includes("separ")) {
+                            conferindo++;
+                        } else {
+                            pendentes++;
+                        }
+                    });
+
+                    currentData.expedicaoResumo = {
+                        totalCargas: data.cargas.length,
+                        totalPecas: totalPecas,
+                        concluidos: concluidos,
+                        faturando: faturando,
+                        carregando: carregando,
+                        conferindo: conferindo,
+                        pendentes: pendentes
+                    };
                 }
 
                 const badge = document.querySelector('.badge-date-clean');
@@ -326,15 +374,22 @@
         }
 
         function renderizarExpedicao() {
-            const elCargas = document.getElementById('kpiTotalCargas');
-            const elConcluidas = document.getElementById('kpiConcluidas');
-            const elAndamento = document.getElementById('kpiAndamento');
+            // Atualiza os 6 cards de status
+            const elTotal = document.getElementById('kpiTotalCargas');
             const elPecas = document.getElementById('kpiTotalPecas');
+            const elConcluidos = document.getElementById('kpiConcluidos');
+            const elFaturando = document.getElementById('kpiFaturando');
+            const elCarregando = document.getElementById('kpiCarregando');
+            const elConferindo = document.getElementById('kpiConferindo');
+            const elPendente = document.getElementById('kpiPendente');
 
-            if (elCargas) elCargas.innerText = currentData.expedicaoResumo.totalCargas;
-            if (elConcluidas) elConcluidas.innerText = currentData.expedicaoResumo.concluidos;
-            if (elAndamento) elAndamento.innerText = currentData.expedicaoResumo.emAndamento;
-            if (elPecas) elPecas.innerText = currentData.expedicaoResumo.totalPecas.toLocaleString('pt-BR');
+            if (elTotal) elTotal.innerText = currentData.expedicaoResumo.totalCargas;
+            if (elPecas) elPecas.innerText = currentData.expedicaoResumo.totalPecas.toLocaleString('pt-BR') + ' un';
+            if (elConcluidos) elConcluidos.innerText = currentData.expedicaoResumo.concluidos;
+            if (elFaturando) elFaturando.innerText = currentData.expedicaoResumo.faturando;
+            if (elCarregando) elCarregando.innerText = currentData.expedicaoResumo.carregando;
+            if (elConferindo) elConferindo.innerText = currentData.expedicaoResumo.conferindo;
+            if (elPendente) elPendente.innerText = currentData.expedicaoResumo.pendentes;
 
             const tbody = document.getElementById('expedicaoTableBody');
             if (tbody) {
@@ -354,12 +409,17 @@
 
                     let statusBadge = "text-slate-400 bg-slate-800/60";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
                     if (sNorm.includes("concluid") || sNorm.includes("finaliz")) {
-                        statusBadge = "text-emerald-400 bg-emerald-500/10";
-                    } else if (sNorm.includes("carreg") || sNorm.includes("separ") || sNorm.includes("confer") || sNorm.includes("apres") || sNorm.includes("fatur")) {
-                        statusBadge = "text-amber-400 bg-amber-500/10";
+                        statusBadge = "text-emerald-400 bg-emerald-500/15";
+                    } else if (sNorm.includes("fatur")) {
+                        statusBadge = "text-lime-300 bg-lime-400/20 font-black"; // Verde claro destacado
+                    } else if (sNorm.includes("confer") || sNorm.includes("separ")) {
+                        statusBadge = "text-blue-400 bg-blue-500/20"; // Azul
+                    } else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) {
+                        statusBadge = "text-amber-400 bg-amber-500/15"; // Âmbar
                     } else if (sNorm.includes("pendent")) {
-                        statusBadge = "text-cyan-400 bg-cyan-500/10";
+                        statusBadge = "text-rose-500 bg-rose-500/20 font-bold"; // Vermelho
                     }
 
                     tr.innerHTML = `
@@ -369,7 +429,7 @@
                         <td class="w-2/12 text-center text-slate-300 font-mono">${c.sku || '-'} / <span class="text-cyan-400 font-bold">${c.pecas || 0}</span></td>
                         <td class="w-2/12 text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
                         <td class="w-4/12 text-right">
-                            <span class="px-1.5 py-[1px] rounded font-bold ${statusBadge}">${c.status}</span>
+                            <span class="px-1.5 py-[1px] rounded ${statusBadge}">${c.status}</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -428,7 +488,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             carregarPainel();
             sincronizarExpedicao();
-            // Polling configurado para 15 segundos
+            // Polling a cada 15 segundos
             setInterval(sincronizarExpedicao, 15000);
         });
     </script>
