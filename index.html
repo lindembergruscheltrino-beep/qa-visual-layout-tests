@@ -46,7 +46,7 @@
         }
 
         .row-text-auto {
-            font-size: clamp(7px, 0.55vw + 0.38vh, 8.5px) !important;
+            font-size: clamp(6.8px, 0.52vw + 0.36vh, 8.2px) !important;
             line-height: 1.15 !important;
         }
 
@@ -221,7 +221,7 @@
                 </div>
             </div>
 
-            <!-- Grade Operacional de Cargas (Com Colunas SKU e PEÇAS Separadas) -->
+            <!-- Grade Operacional de Cargas (Com TMP e PPM) -->
             <div class="bg-[#0f172a] p-1 rounded flex-1 flex flex-col overflow-hidden min-h-0">
                 <div class="flex justify-end items-center mb-0.5 shrink-0 px-1">
                     <span class="text-[6.5px] text-slate-400 font-mono">Auto-sync 15s</span>
@@ -229,14 +229,16 @@
                 <div class="overflow-hidden flex-1 flex flex-col min-h-0">
                     <table class="w-full text-left row-text-auto text-slate-300 h-full flex flex-col justify-between">
                         <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                            <tr class="flex justify-between w-full px-1.5 py-0.5">
-                                <th class="w-[18%] text-left">Transporte</th>
-                                <th class="w-[8%] text-center">Perfil</th>
-                                <th class="w-[8%] text-center">Doca</th>
-                                <th class="w-[10%] text-center">SKU</th>
-                                <th class="w-[12%] text-center">Peças</th>
-                                <th class="w-[14%] text-center">Agenda</th>
-                                <th class="w-[30%] text-right">Status</th>
+                            <tr class="flex justify-between w-full px-1 py-0.5">
+                                <th class="w-[15%] text-left">Transporte</th>
+                                <th class="w-[7%] text-center">Perfil</th>
+                                <th class="w-[6%] text-center">Doca</th>
+                                <th class="w-[7%] text-center">SKU</th>
+                                <th class="w-[9%] text-center">Peças</th>
+                                <th class="w-[11%] text-center">Agenda</th>
+                                <th class="w-[11%] text-center text-amber-400">TMP</th>
+                                <th class="w-[11%] text-center text-teal-300">PPM</th>
+                                <th class="w-[23%] text-right">Status</th>
                             </tr>
                         </thead>
                         <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
@@ -398,7 +400,7 @@
 
                 currentData.cargas.forEach(c => {
                     const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1.5 py-[2px] border-b border-slate-800/40";
+                    tr.className = "flex justify-between items-center w-full px-1 py-[2px] border-b border-slate-800/40";
 
                     let statusBadge = "text-slate-400 bg-slate-800/60";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -416,13 +418,15 @@
                     }
 
                     tr.innerHTML = `
-                        <td class="w-[18%] font-bold text-slate-200 text-left font-mono">${c.transporte}</td>
-                        <td class="w-[8%] text-center text-slate-400">${c.perfil || '-'}</td>
-                        <td class="w-[8%] text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
-                        <td class="w-[10%] text-center text-slate-300 font-mono">${c.sku || '-'}</td>
-                        <td class="w-[12%] text-center font-bold text-cyan-400 font-mono">${c.pecas || 0}</td>
-                        <td class="w-[14%] text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
-                        <td class="w-[30%] text-right">
+                        <td class="w-[15%] font-bold text-slate-200 text-left font-mono">${c.transporte}</td>
+                        <td class="w-[7%] text-center text-slate-400">${c.perfil || '-'}</td>
+                        <td class="w-[6%] text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
+                        <td class="w-[7%] text-center text-slate-300 font-mono">${c.sku || '-'}</td>
+                        <td class="w-[9%] text-center font-bold text-cyan-400 font-mono">${c.pecas || 0}</td>
+                        <td class="w-[11%] text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
+                        <td class="w-[11%] text-center text-amber-300 font-mono font-medium">${c.tmp || '-'}</td>
+                        <td class="w-[11%] text-center text-teal-300 font-mono font-bold">${c.ppm || '-'}</td>
+                        <td class="w-[23%] text-right">
                             <span class="px-1.5 py-[1px] rounded ${statusBadge}">${c.status}</span>
                         </td>
                     `;
