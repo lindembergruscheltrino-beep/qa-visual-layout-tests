@@ -187,39 +187,33 @@
                 <span class="text-[7.5px] text-emerald-400 font-mono font-bold">Base Expedição</span>
             </div>
 
-            <!-- CARDS DE STATUS DETALHADOS -->
+            <!-- CARDS DE STATUS -->
             <div class="grid grid-cols-6 gap-1 shrink-0">
-                <!-- Total Exp -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[6.5px] text-slate-400 uppercase font-bold">Total Exp</p>
                     <p id="kpiTotalCargas" class="kpi-big-value text-white my-0.5">--</p>
                     <p id="kpiTotalPecas" class="text-[6px] text-cyan-400 font-mono font-bold leading-tight">-- un</p>
                 </div>
-                <!-- Concluído -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[6.5px] text-emerald-400 uppercase font-bold">Concluído</p>
                     <p id="kpiConcluidos" class="kpi-big-value text-emerald-400 my-0.5">--</p>
                     <p class="text-[6px] text-emerald-300 font-mono">Finalizados</p>
                 </div>
-                <!-- Faturando (Verde Claro Destacado) -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[6.5px] text-lime-400 uppercase font-bold">Faturando</p>
                     <p id="kpiFaturando" class="kpi-big-value text-lime-300 my-0.5">--</p>
                     <p class="text-[6px] text-lime-300 font-mono">Faturamento</p>
                 </div>
-                <!-- Carregando / Andamento -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[6.5px] text-amber-400 uppercase font-bold">Carregando</p>
                     <p id="kpiCarregando" class="kpi-big-value text-amber-400 my-0.5">--</p>
                     <p class="text-[6px] text-amber-300 font-mono">Doca</p>
                 </div>
-                <!-- Conferindo (Azul) -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[6.5px] text-blue-400 uppercase font-bold">Conferindo</p>
                     <p id="kpiConferindo" class="kpi-big-value text-blue-400 my-0.5">--</p>
                     <p class="text-[6px] text-blue-300 font-mono">Separação</p>
                 </div>
-                <!-- Pendente (Vermelho) -->
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[6.5px] text-rose-500 uppercase font-bold">Pendente</p>
                     <p id="kpiPendente" class="kpi-big-value text-rose-500 my-0.5">--</p>
@@ -227,7 +221,7 @@
                 </div>
             </div>
 
-            <!-- Grade Operacional de Cargas -->
+            <!-- Grade Operacional de Cargas (Com Colunas SKU e PEÇAS Separadas) -->
             <div class="bg-[#0f172a] p-1 rounded flex-1 flex flex-col overflow-hidden min-h-0">
                 <div class="flex justify-end items-center mb-0.5 shrink-0 px-1">
                     <span class="text-[6.5px] text-slate-400 font-mono">Auto-sync 15s</span>
@@ -236,12 +230,13 @@
                     <table class="w-full text-left row-text-auto text-slate-300 h-full flex flex-col justify-between">
                         <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
                             <tr class="flex justify-between w-full px-1.5 py-0.5">
-                                <th class="w-2/12 text-left">Transporte</th>
-                                <th class="w-1/12 text-center">Perfil</th>
-                                <th class="w-1/12 text-center">Doca</th>
-                                <th class="w-2/12 text-center">SKU / Peças</th>
-                                <th class="w-2/12 text-center">Agenda</th>
-                                <th class="w-4/12 text-right">Status</th>
+                                <th class="w-[18%] text-left">Transporte</th>
+                                <th class="w-[8%] text-center">Perfil</th>
+                                <th class="w-[8%] text-center">Doca</th>
+                                <th class="w-[10%] text-center">SKU</th>
+                                <th class="w-[12%] text-center">Peças</th>
+                                <th class="w-[14%] text-center">Agenda</th>
+                                <th class="w-[30%] text-right">Status</th>
                             </tr>
                         </thead>
                         <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
@@ -314,7 +309,6 @@
                 if (data.cargas) {
                     currentData.cargas = data.cargas;
 
-                    // Contagem detalhada por status
                     let totalPecas = 0;
                     let concluidos = 0;
                     let faturando = 0;
@@ -374,7 +368,6 @@
         }
 
         function renderizarExpedicao() {
-            // Atualiza os 6 cards de status
             const elTotal = document.getElementById('kpiTotalCargas');
             const elPecas = document.getElementById('kpiTotalPecas');
             const elConcluidos = document.getElementById('kpiConcluidos');
@@ -413,22 +406,23 @@
                     if (sNorm.includes("concluid") || sNorm.includes("finaliz")) {
                         statusBadge = "text-emerald-400 bg-emerald-500/15";
                     } else if (sNorm.includes("fatur")) {
-                        statusBadge = "text-lime-300 bg-lime-400/20 font-black"; // Verde claro destacado
+                        statusBadge = "text-lime-300 bg-lime-400/20 font-black";
                     } else if (sNorm.includes("confer") || sNorm.includes("separ")) {
-                        statusBadge = "text-blue-400 bg-blue-500/20"; // Azul
+                        statusBadge = "text-blue-400 bg-blue-500/20";
                     } else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) {
-                        statusBadge = "text-amber-400 bg-amber-500/15"; // Âmbar
+                        statusBadge = "text-amber-400 bg-amber-500/15";
                     } else if (sNorm.includes("pendent")) {
-                        statusBadge = "text-rose-500 bg-rose-500/20 font-bold"; // Vermelho
+                        statusBadge = "text-rose-500 bg-rose-500/20 font-bold";
                     }
 
                     tr.innerHTML = `
-                        <td class="w-2/12 font-bold text-slate-200 text-left font-mono">${c.transporte}</td>
-                        <td class="w-1/12 text-center text-slate-400">${c.perfil || '-'}</td>
-                        <td class="w-1/12 text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
-                        <td class="w-2/12 text-center text-slate-300 font-mono">${c.sku || '-'} / <span class="text-cyan-400 font-bold">${c.pecas || 0}</span></td>
-                        <td class="w-2/12 text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
-                        <td class="w-4/12 text-right">
+                        <td class="w-[18%] font-bold text-slate-200 text-left font-mono">${c.transporte}</td>
+                        <td class="w-[8%] text-center text-slate-400">${c.perfil || '-'}</td>
+                        <td class="w-[8%] text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
+                        <td class="w-[10%] text-center text-slate-300 font-mono">${c.sku || '-'}</td>
+                        <td class="w-[12%] text-center font-bold text-cyan-400 font-mono">${c.pecas || 0}</td>
+                        <td class="w-[14%] text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
+                        <td class="w-[30%] text-right">
                             <span class="px-1.5 py-[1px] rounded ${statusBadge}">${c.status}</span>
                         </td>
                     `;
@@ -488,7 +482,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             carregarPainel();
             sincronizarExpedicao();
-            // Polling a cada 15 segundos
+            // Polling configurado para 15 segundos
             setInterval(sincronizarExpedicao, 15000);
         });
     </script>
