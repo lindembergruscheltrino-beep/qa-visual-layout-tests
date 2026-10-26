@@ -21,9 +21,6 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Chart.js + Plugin DataLabels -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
     <style>
         html, body {
             height: 100vh;
@@ -117,7 +114,7 @@
     <!-- MAIN GRID 2x2 -->
     <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#050811]">
 
-        <!-- ==================== TV 01: CONSOLIDADO DE ESTOQUE & PCO ==================== -->
+        <!-- ==================== TV 01: ESTOQUE, POSIÇÕES & RUAS ==================== -->
         <div class="tv-card bg-[#090e1a] flex flex-col justify-between overflow-hidden h-full gap-1">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[10px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
@@ -145,9 +142,8 @@
                 </div>
             </div>
 
-            <!-- Tabela Dividida -->
+            <!-- Tabelas de Ruas e Famílias -->
             <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden">
-                <!-- Ruas -->
                 <div class="bg-[#0f172a] p-1 rounded-xl flex flex-col justify-between overflow-hidden">
                     <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
                         <span>📍 Ocupação por Rua</span>
@@ -167,7 +163,6 @@
                     </div>
                 </div>
 
-                <!-- Famílias -->
                 <div class="bg-[#0f172a] p-1 rounded-xl flex flex-col justify-between overflow-hidden">
                     <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
                         <span>📦 Mix por Família</span>
@@ -189,56 +184,69 @@
             </div>
         </div>
 
-        <!-- ==================== TV 02: CONSOLIDADO LOGÍSTICA, SLA & FLUXO ==================== -->
+        <!-- ==================== TV 02: BASE DE EXPEDIÇÃO EM TEMPO REAL ==================== -->
         <div class="tv-card bg-[#090e1a] flex flex-col justify-between overflow-hidden h-full gap-1">
             <div class="flex justify-between items-center shrink-0 mb-0.5">
                 <h2 class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: SLA de Entregas & Expedição (Tempo Real)
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Expedição Outubro 2026 (Tempo Real)
                 </h2>
-                <span class="text-[8px] text-slate-500 font-mono">Performance & CQ</span>
+                <span class="text-[8px] text-slate-500 font-mono">Docas & Cargas</span>
             </div>
 
-            <!-- Feedback Marquee -->
-            <div class="feedback-ticker-wrap shrink-0">
-                <div class="feedback-ticker" id="feedbackMarquee"></div>
-            </div>
-
-            <!-- Bloco Superior: Expedição em Tempo Real via API -->
-            <div class="grid grid-cols-3 gap-1 shrink-0">
+            <!-- KPIs de Expedição -->
+            <div class="grid grid-cols-4 gap-1 shrink-0">
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[7px] text-slate-400 uppercase">Cargas Hoje</p>
                     <p id="kpiTotalCargas" class="kpi-big-value text-white my-0.5">--</p>
-                    <p class="text-[7.5px] text-slate-400 font-mono">Total Agendado</p>
+                    <p class="text-[7px] text-slate-400 font-mono">Agendadas</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[7px] text-slate-400 uppercase">Concluídas</p>
                     <p id="kpiConcluidas" class="kpi-big-value text-emerald-400 my-0.5">--</p>
-                    <p class="text-[7.5px] text-emerald-300 font-mono">Finalizadas</p>
+                    <p class="text-[7px] text-emerald-300 font-mono">Finalizadas</p>
                 </div>
-                <div class="bg-[#0f172a] p-1 rounded text-center glow-red">
-                    <p class="text-[7px] text-red-400 uppercase">Peças Expedidas</p>
-                    <p id="kpiTotalPecas" class="kpi-big-value text-amber-400 my-0.5">--</p>
-                    <p class="text-[7.5px] text-amber-300 font-mono">Volume Total</p>
+                <div class="bg-[#0f172a] p-1 rounded text-center">
+                    <p class="text-[7px] text-slate-400 uppercase">Em Andamento</p>
+                    <p id="kpiAndamento" class="kpi-big-value text-amber-400 my-0.5">--</p>
+                    <p class="text-[7px] text-amber-300 font-mono">Docas</p>
+                </div>
+                <div class="bg-[#0f172a] p-1 rounded text-center">
+                    <p class="text-[7px] text-slate-400 uppercase">Total Peças</p>
+                    <p id="kpiTotalPecas" class="kpi-big-value text-cyan-400 my-0.5">--</p>
+                    <p class="text-[7px] text-cyan-300 font-mono">Volume</p>
                 </div>
             </div>
 
-            <!-- Gráfico Comparativo de Fluxo Inbound x Outbound -->
+            <!-- TABELA DETALHADA DA BASE DE EXPEDIÇÃO -->
             <div class="bg-[#0f172a] p-1.5 rounded flex-1 flex flex-col justify-between overflow-hidden">
                 <div class="flex justify-between items-center mb-0.5 shrink-0">
-                    <p class="text-[7px] font-bold text-slate-300 uppercase">Evolução Diária: Inbound vs Outbound</p>
-                    <div class="flex gap-2 text-[6.5px] font-mono">
-                        <span class="text-emerald-400 font-bold">● Inbound (10.886 un)</span>
-                        <span class="text-cyan-400 font-bold">● Outbound (9.779 un)</span>
-                    </div>
+                    <p class="text-[7.5px] font-bold text-slate-300 uppercase">📋 Grade de Carregamentos e Docas</p>
+                    <span class="text-[7px] text-slate-400 font-mono">Atualização Automática (30s)</span>
                 </div>
-                <div class="relative flex-1 w-full overflow-hidden">
-                    <canvas id="chartFluxoDiario"></canvas>
+                <div class="overflow-hidden flex-1 flex flex-col justify-between">
+                    <table class="w-full text-left text-[8px] text-slate-300 h-full flex flex-col justify-between">
+                        <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
+                            <tr class="flex justify-between w-full px-2 py-0.5">
+                                <th class="w-2/12 text-left">Transporte</th>
+                                <th class="w-1/12 text-center">Perfil</th>
+                                <th class="w-1/12 text-center">Doca</th>
+                                <th class="w-2/12 text-center">SKU / Peças</th>
+                                <th class="w-2/12 text-center">Agenda</th>
+                                <th class="w-4/12 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-between py-0.5">
+                            <tr class="flex justify-center items-center py-2 text-slate-500">
+                                <td>Aguardando dados da planilha...</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <div class="bg-[#0f172a] p-1 rounded flex justify-between items-center shrink-0">
-                <span class="text-[7.5px] text-slate-400">Balanço do Mês:</span>
-                <span class="kpi-big-value text-emerald-400">+1.107 un <span class="text-[7px] text-slate-300 font-normal">(Saldo Positivo)</span></span>
+                <span class="text-[7.5px] text-slate-400">Origem dos Dados:</span>
+                <span class="text-[7.5px] text-emerald-400 font-mono font-bold">Google Sheets: Base de Expedição - OUTUBRO 2026</span>
             </div>
         </div>
 
@@ -262,11 +270,8 @@
 
     </main>
 
-    <!-- SCRIPTS DE EXECUÇÃO -->
+    <!-- SCRIPTS -->
     <script>
-        let fluxoChartInstance = null;
-        
-        // Endpoint do Google Apps Script da Whirlpool
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbyYuFwrYVZqk_qESy1ZIQVeT5douMBynfPXEL_sR17LZobN_samKqeBHWIS77FjNw7Meg/exec";
 
         let currentData = {
@@ -286,22 +291,21 @@
                 { familia: "FREEZER", area: "88m²", est: 213 },
                 { familia: "MIX / OUTROS", area: "211m²", est: 1347 }
             ],
-            feedbacksPositivos: [
-                "⭐ 5/5 'Entrega super rápida! O produto chegou bem antes do prazo estipulado. Excelente serviço.'",
-                "⭐ 5/5 'Impressionado com a velocidade. Comprei em um dia e chegou no outro. Nota 10!'",
-                "⭐ 5/5 'Entregador super educado e cordial. Um excelente atendimento na hora da entrega.'",
-                "⭐ 5/5 'PERFEITA A ENTREGA !! MINHA GELADEIRA CHEGOU MUITO RÁPIDO em perfeito estado !!'"
-            ],
-            fluxoDiario: {
-                dias: ['01', '02', '05', '06', '07', '08', '09', '10', '13', '14', '15', '16', '17', '19', '20', '21'],
-                recebimento: [452, 664, 799, 173, 197, 0, 160, 598, 845, 840, 814, 839, 1318, 710, 1527, 950],
-                expedicao: [288, 32, 143, 63, 1, 1969, 994, 120, 1577, 878, 587, 744, 298, 1202, 827, 56]
-            },
             expedicaoResumo: {
                 totalCargas: 7,
                 concluidos: 3,
+                emAndamento: 3,
                 totalPecas: 721
-            }
+            },
+            cargas: [
+                { transporte: "254388681", perfil: "P2F", doca: "30", sku: "46", pecas: 100, agenda: "10:00", status: "Concluido" },
+                { transporte: "254388379", perfil: "P2F", doca: "31", sku: "47", pecas: 101, agenda: "11:00", status: "Pendente" },
+                { transporte: "254388650", perfil: "P2F", doca: "32", sku: "48", pecas: 102, agenda: "12:00", status: "Separando" },
+                { transporte: "254388378", perfil: "P2F", doca: "33", sku: "49", pecas: 103, agenda: "13:00", status: "Conferindo" },
+                { transporte: "254377690", perfil: "P2F", doca: "34", sku: "50", pecas: 104, agenda: "14:00", status: "Carregando" },
+                { transporte: "254377688", perfil: "P2F", doca: "35", sku: "51", pecas: 105, agenda: "15:00", status: "Concluido" },
+                { transporte: "254377698", perfil: "P2F", doca: "36", sku: "52", pecas: 106, agenda: "16:00", status: "Concluido" }
+            ]
         };
 
         async function sincronizarExpedicao() {
@@ -309,32 +313,71 @@
                 const response = await fetch(GOOGLE_SCRIPT_EXPEDICAO_URL);
                 const data = await response.json();
 
-                if (data.status === "success" && data.resumo) {
-                    currentData.expedicaoResumo.totalCargas = data.resumo.totalCargas;
-                    currentData.expedicaoResumo.concluidos = data.resumo.concluidos;
-                    currentData.expedicaoResumo.totalPecas = data.resumo.totalPecas;
+                if (data.status === "success") {
+                    if (data.resumo) {
+                        currentData.expedicaoResumo.totalCargas = data.resumo.totalCargas;
+                        currentData.expedicaoResumo.concluidos = data.resumo.concluidos;
+                        currentData.expedicaoResumo.emAndamento = data.resumo.emAndamento || 0;
+                        currentData.expedicaoResumo.totalPecas = data.resumo.totalPecas;
+                    }
+                    if (data.cargas && data.cargas.length > 0) {
+                        currentData.cargas = data.cargas;
+                    }
 
                     const badge = document.querySelector('.badge-date-clean');
                     if (badge && data.timestamp) {
                         badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Atualizado às ${data.timestamp}`;
                     }
 
-                    atualizarValoresExpedicao();
+                    renderizarExpedicao();
                 }
             } catch (error) {
-                console.warn("Utilizando valores predefinidos temporariamente:", error);
-                atualizarValoresExpedicao();
+                console.warn("Utilizando valores padrão da expedição:", error);
+                renderizarExpedicao();
             }
         }
 
-        function atualizarValoresExpedicao() {
+        function renderizarExpedicao() {
             const elCargas = document.getElementById('kpiTotalCargas');
             const elConcluidas = document.getElementById('kpiConcluidas');
+            const elAndamento = document.getElementById('kpiAndamento');
             const elPecas = document.getElementById('kpiTotalPecas');
 
             if (elCargas) elCargas.innerText = currentData.expedicaoResumo.totalCargas;
             if (elConcluidas) elConcluidas.innerText = currentData.expedicaoResumo.concluidos;
+            if (elAndamento) elAndamento.innerText = currentData.expedicaoResumo.emAndamento;
             if (elPecas) elPecas.innerText = currentData.expedicaoResumo.totalPecas.toLocaleString('pt-BR');
+
+            const tbody = document.getElementById('expedicaoTableBody');
+            if (tbody) {
+                tbody.innerHTML = '';
+                currentData.cargas.forEach(c => {
+                    const tr = document.createElement('tr');
+                    tr.className = "flex justify-between items-center w-full px-2 py-0.5 border-b border-slate-800/40 text-[7.5px]";
+
+                    let statusBadge = "text-slate-400 bg-slate-800/60";
+                    const sLower = (c.status || "").toLowerCase();
+                    if (sLower.includes("concluid") || sLower.includes("finaliz")) {
+                        statusBadge = "text-emerald-400 bg-emerald-500/10";
+                    } else if (sLower.includes("carreg") || sLower.includes("separ") || sLower.includes("confer")) {
+                        statusBadge = "text-amber-400 bg-amber-500/10";
+                    } else if (sLower.includes("pendent")) {
+                        statusBadge = "text-cyan-400 bg-cyan-500/10";
+                    }
+
+                    tr.innerHTML = `
+                        <td class="w-2/12 font-bold text-slate-200 text-left font-mono">${c.transporte}</td>
+                        <td class="w-1/12 text-center text-slate-400">${c.perfil || '-'}</td>
+                        <td class="w-1/12 text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
+                        <td class="w-2/12 text-center text-slate-300 font-mono">${c.sku || '-'} / <span class="text-cyan-400 font-bold">${c.pecas || 0}</span></td>
+                        <td class="w-2/12 text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
+                        <td class="w-4/12 text-right">
+                            <span class="px-1.5 py-0.5 rounded font-bold ${statusBadge}">${c.status}</span>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
         }
 
         function carregarPainel() {
@@ -374,73 +417,7 @@
                 });
             }
 
-            // Ticker Feedbacks (TV 02)
-            const feedbackMarquee = document.getElementById('feedbackMarquee');
-            if (feedbackMarquee) {
-                feedbackMarquee.innerHTML = '';
-                [...currentData.feedbacksPositivos, ...currentData.feedbacksPositivos].forEach(txt => {
-                    const div = document.createElement('div');
-                    div.className = "feedback-ticker__item";
-                    div.innerHTML = `<span class="text-emerald-400">${txt}</span><span class="text-slate-700 mx-3">|</span>`;
-                    feedbackMarquee.appendChild(div);
-                });
-            }
-
-            renderizarGraficoFluxoDiario();
-            atualizarValoresExpedicao();
-        }
-
-        function renderizarGraficoFluxoDiario() {
-            const canvas = document.getElementById('chartFluxoDiario');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            if (fluxoChartInstance) fluxoChartInstance.destroy();
-
-            const gradientRec = ctx.createLinearGradient(0, 0, 0, 80);
-            gradientRec.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
-            gradientRec.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
-
-            const gradientExp = ctx.createLinearGradient(0, 0, 0, 80);
-            gradientExp.addColorStop(0, 'rgba(6, 182, 212, 0.35)');
-            gradientExp.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
-
-            fluxoChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: currentData.fluxoDiario.dias,
-                    datasets: [
-                        {
-                            label: 'Inbound',
-                            data: currentData.fluxoDiario.recebimento,
-                            borderColor: '#10b981',
-                            backgroundColor: gradientRec,
-                            borderWidth: 1.5,
-                            fill: true,
-                            tension: 0.35,
-                            pointRadius: 1.5
-                        },
-                        {
-                            label: 'Outbound',
-                            data: currentData.fluxoDiario.expedicao,
-                            borderColor: '#06b6d4',
-                            backgroundColor: gradientExp,
-                            borderWidth: 1.5,
-                            fill: true,
-                            tension: 0.35,
-                            pointRadius: 1.5
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false }, datalabels: { display: false } },
-                    scales: {
-                        x: { ticks: { color: '#64748b', font: { size: 6 } }, grid: { display: false } },
-                        y: { display: false }
-                    }
-                }
-            });
+            renderizarExpedicao();
         }
 
         function toggleFullscreen() {
