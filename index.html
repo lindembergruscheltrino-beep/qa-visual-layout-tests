@@ -45,6 +45,11 @@
             letter-spacing: -0.5px;
         }
 
+        .row-text-auto {
+            font-size: clamp(7px, 0.55vw + 0.4vh, 9px) !important;
+            line-height: 1.15 !important;
+        }
+
         table, th, td, tr, thead, tbody, tfoot {
             border: none !important;
             outline: none !important;
@@ -64,8 +69,8 @@
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
         .video-wall-grid {
-            padding: 10px;
-            gap: 10px;
+            padding: 8px;
+            gap: 8px;
         }
         .tv-card {
             padding: 8px;
@@ -76,7 +81,7 @@
 </head>
 <body class="flex flex-col h-screen w-screen overflow-hidden antialiased">
 
-    <!-- CABEÇALHO -->
+    <!-- CABEÇALHO SUPERIOR -->
     <header class="bg-[#0b1120] text-white px-4 pt-1.5 pb-1 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-3">
             <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
@@ -132,8 +137,8 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden">
-                <div class="bg-[#0f172a] p-1 rounded-xl flex flex-col justify-between overflow-hidden">
+            <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden">
+                <div class="bg-[#0f172a] p-1 rounded-lg flex flex-col justify-between overflow-hidden">
                     <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
                         <span>📍 Ocupação por Rua</span>
                         <span class="text-slate-500">Pulmão</span>
@@ -152,7 +157,7 @@
                     </div>
                 </div>
 
-                <div class="bg-[#0f172a] p-1 rounded-xl flex flex-col justify-between overflow-hidden">
+                <div class="bg-[#0f172a] p-1 rounded-lg flex flex-col justify-between overflow-hidden">
                     <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
                         <span>📦 Mix por Família</span>
                         <span class="text-slate-500">Densidade</span>
@@ -174,47 +179,48 @@
         </div>
 
         <!-- ==================== TV 02: BASE OFICIAL DE EXPEDIÇÃO ==================== -->
-        <div class="tv-card bg-[#090e1a] flex flex-col justify-between overflow-hidden h-full gap-1">
-            <div class="flex justify-between items-center shrink-0 mb-0.5">
+        <div class="tv-card bg-[#090e1a] flex flex-col overflow-hidden h-full gap-1">
+            <div class="flex justify-between items-center shrink-0">
                 <h2 class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Expedição Outubro 2026 (Tempo Real)
                 </h2>
-                <span class="text-[8px] text-slate-500 font-mono">Docas & Cargas</span>
+                <span class="text-[7.5px] text-emerald-400 font-mono font-bold">Google Sheets: Base Expedição</span>
             </div>
 
+            <!-- KPIs de Expedição -->
             <div class="grid grid-cols-4 gap-1 shrink-0">
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[7px] text-slate-400 uppercase">Cargas Hoje</p>
                     <p id="kpiTotalCargas" class="kpi-big-value text-white my-0.5">--</p>
-                    <p class="text-[7px] text-slate-400 font-mono">Agendadas</p>
+                    <p class="text-[6.5px] text-slate-400 font-mono">Agendadas</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[7px] text-slate-400 uppercase">Concluídas</p>
                     <p id="kpiConcluidas" class="kpi-big-value text-emerald-400 my-0.5">--</p>
-                    <p class="text-[7px] text-emerald-300 font-mono">Finalizadas</p>
+                    <p class="text-[6.5px] text-emerald-300 font-mono">Finalizadas</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[7px] text-slate-400 uppercase">Em Andamento</p>
                     <p id="kpiAndamento" class="kpi-big-value text-amber-400 my-0.5">--</p>
-                    <p class="text-[7px] text-amber-300 font-mono">Docas</p>
+                    <p class="text-[6.5px] text-amber-300 font-mono">Docas</p>
                 </div>
                 <div class="bg-[#0f172a] p-1 rounded text-center">
                     <p class="text-[7px] text-slate-400 uppercase">Total Peças</p>
                     <p id="kpiTotalPecas" class="kpi-big-value text-cyan-400 my-0.5">--</p>
-                    <p class="text-[7px] text-cyan-300 font-mono">Volume</p>
+                    <p class="text-[6.5px] text-cyan-300 font-mono">Volume</p>
                 </div>
             </div>
 
-            <!-- Grade Operacional de Cargas -->
-            <div class="bg-[#0f172a] p-1.5 rounded flex-1 flex flex-col justify-between overflow-hidden">
-                <div class="flex justify-between items-center mb-0.5 shrink-0">
-                    <p class="text-[7.5px] font-bold text-slate-300 uppercase">📋 Grade de Carregamentos e Docas</p>
-                    <span class="text-[7px] text-slate-400 font-mono">Sincronização Contínua (15s)</span>
+            <!-- Grade Operacional de Cargas Otimizada -->
+            <div class="bg-[#0f172a] p-1 rounded flex-1 flex flex-col overflow-hidden min-h-0">
+                <div class="flex justify-between items-center mb-0.5 shrink-0 px-1">
+                    <p class="text-[7px] font-bold text-slate-300 uppercase">📋 Grade de Carregamentos e Docas</p>
+                    <span class="text-[6.5px] text-slate-400 font-mono">Auto-sync 15s</span>
                 </div>
-                <div class="overflow-hidden flex-1 flex flex-col justify-between">
-                    <table class="w-full text-left text-[8px] text-slate-300 h-full flex flex-col justify-between">
+                <div class="overflow-hidden flex-1 flex flex-col min-h-0">
+                    <table class="w-full text-left row-text-auto text-slate-300 h-full flex flex-col justify-between">
                         <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                            <tr class="flex justify-between w-full px-2 py-0.5">
+                            <tr class="flex justify-between w-full px-1.5 py-0.5">
                                 <th class="w-2/12 text-left">Transporte</th>
                                 <th class="w-1/12 text-center">Perfil</th>
                                 <th class="w-1/12 text-center">Doca</th>
@@ -223,18 +229,13 @@
                                 <th class="w-4/12 text-right">Status</th>
                             </tr>
                         </thead>
-                        <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-between py-0.5">
+                        <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
                             <tr class="flex justify-center items-center py-2 text-slate-500">
                                 <td>Aguardando dados da planilha...</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-
-            <div class="bg-[#0f172a] p-1 rounded flex justify-between items-center shrink-0">
-                <span class="text-[7.5px] text-slate-400">Origem dos Dados:</span>
-                <span class="text-[7.5px] text-emerald-400 font-mono font-bold">Google Sheets: Base de Expedição - OUTUBRO 2026</span>
             </div>
         </div>
 
@@ -350,13 +351,13 @@
 
                 currentData.cargas.forEach(c => {
                     const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-2 py-0.5 border-b border-slate-800/40 text-[7.5px]";
+                    tr.className = "flex justify-between items-center w-full px-1.5 py-[2px] border-b border-slate-800/40";
 
                     let statusBadge = "text-slate-400 bg-slate-800/60";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                     if (sNorm.includes("concluid") || sNorm.includes("finaliz")) {
                         statusBadge = "text-emerald-400 bg-emerald-500/10";
-                    } else if (sNorm.includes("carreg") || sNorm.includes("separ") || sNorm.includes("confer") || sNorm.includes("apres")) {
+                    } else if (sNorm.includes("carreg") || sNorm.includes("separ") || sNorm.includes("confer") || sNorm.includes("apres") || sNorm.includes("fatur")) {
                         statusBadge = "text-amber-400 bg-amber-500/10";
                     } else if (sNorm.includes("pendent")) {
                         statusBadge = "text-cyan-400 bg-cyan-500/10";
@@ -369,7 +370,7 @@
                         <td class="w-2/12 text-center text-slate-300 font-mono">${c.sku || '-'} / <span class="text-cyan-400 font-bold">${c.pecas || 0}</span></td>
                         <td class="w-2/12 text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
                         <td class="w-4/12 text-right">
-                            <span class="px-1.5 py-0.5 rounded font-bold ${statusBadge}">${c.status}</span>
+                            <span class="px-1.5 py-[1px] rounded font-bold ${statusBadge}">${c.status}</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
