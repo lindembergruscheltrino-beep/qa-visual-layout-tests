@@ -14,10 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Fontes Google Sans / Product Sans & JetBrains Mono -->
+    <!-- Fontes de Alta Legibilidade Operacional: Inter & Roboto Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800;900&family=Product+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Roboto+Mono:wght@500;700;800&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -28,26 +28,28 @@
             max-height: 100vh;
             max-width: 100vw;
             overflow: hidden !important;
-            background-color: #050811;
+            background-color: #030712;
             color: #f8fafc;
-            font-family: 'JetBrains Mono', 'Product Sans Mono', monospace !important;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
             -webkit-font-smoothing: antialiased;
         }
 
-        .badge-date-clean {
-            font-family: 'Product Sans', 'Google Sans', sans-serif !important;
+        /* Numerais com distinção nítida entre 0 e 8 */
+        .font-num {
+            font-family: 'Roboto Mono', monospace !important;
+            font-feature-settings: "zero" 0; /* Garante zero limpo e redondo sem traço de 8 */
+            letter-spacing: -0.2px;
         }
 
         .kpi-big-value {
-            font-size: clamp(10px, 0.8vh + 0.4vw, 15px) !important;
-            line-height: 1 !important;
+            font-size: clamp(14px, 1.2vh + 0.6vw, 22px) !important;
+            line-height: 1.1 !important;
             font-weight: 900 !important;
-            letter-spacing: -0.5px;
         }
 
         .row-text-split {
-            font-size: clamp(6.2px, 0.40vw + 0.30vh, 7.6px) !important;
-            line-height: 1.15 !important;
+            font-size: clamp(8px, 0.55vw + 0.4vh, 10.5px) !important;
+            line-height: 1.25 !important;
         }
 
         table, th, td, tr, thead, tbody, tfoot {
@@ -56,190 +58,136 @@
             box-shadow: none !important;
         }
 
-        .glow-blue { background-color: #0f172a; }
-        .glow-amber { background-color: #0f172a; }
-        .glow-emerald { background-color: #0f172a; }
-
         .ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0b1120; border-bottom: none; padding: 2px 0; display: flex;
+            width: 100%; overflow: hidden; background-color: #0a0f1d; border-bottom: 1px solid #1f293d; padding: 4px 0; display: flex;
         }
-        .ticker { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; }
-        .ticker__item { display: flex; align-items: center; padding: 0 1.5rem; font-size: 0.65rem; font-weight: 700; }
+        .ticker { display: flex; white-space: nowrap; animation: marquee 24s linear infinite; }
+        .ticker__item { display: flex; align-items: center; padding: 0 2rem; font-size: 0.75rem; font-weight: 700; }
 
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
         .video-wall-grid {
-            padding: 8px;
-            gap: 8px;
+            padding: 10px;
+            gap: 10px;
         }
         .tv-card {
-            padding: 8px;
-            border-radius: 8px;
-            border: none !important;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
 <body class="flex flex-col h-screen w-screen overflow-hidden antialiased">
 
     <!-- CABEÇALHO SUPERIOR -->
-    <header class="bg-[#0b1120] text-white px-4 pt-1.5 pb-1 flex justify-between items-center shrink-0">
+    <header class="bg-[#0b1329] border-b border-slate-800 text-white px-5 pt-2 pb-1.5 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-3">
-            <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
+            <div class="px-3 py-1 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
             <div>
-                <h1 class="text-xs font-bold text-slate-100 leading-tight">Control Tower WMS • Visão Consolidada</h1>
-                <p class="text-[9px] text-slate-400 leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
+                <h1 class="text-sm font-extrabold text-white leading-tight tracking-wide">Control Tower WMS • Visão Consolidada</h1>
+                <p class="text-[10px] text-slate-300 font-semibold leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
             </div>
         </div>
         
         <div class="flex items-center gap-3">
-            <div class="badge-date-clean flex items-center gap-1.5 bg-[#1e293b] px-2.5 py-1 rounded text-slate-100 text-[10px] font-bold">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <div id="badgeSync" class="flex items-center gap-2 bg-[#17223b] border border-slate-700 px-3 py-1.5 rounded-md text-slate-100 text-[11px] font-bold">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Sincronizando com as bases oficiais...
             </div>
-            <button onclick="toggleFullscreen()" class="badge-date-clean bg-[#1e293b] hover:bg-slate-700 text-[10px] text-slate-300 hover:text-white px-2.5 py-1 rounded cursor-pointer font-bold">
+            <button onclick="toggleFullscreen()" class="bg-[#17223b] hover:bg-slate-700 border border-slate-700 text-[11px] text-slate-200 hover:text-white px-3 py-1.5 rounded cursor-pointer font-bold transition">
                 📺 Modo TV
             </button>
         </div>
     </header>
 
-    <!-- TICKER DE MIX DE PRODUTOS -->
+    <!-- TICKER SUPERIOR -->
     <div class="ticker-wrap shrink-0">
-        <div class="ticker" id="tickerMarquee"></div>
+        <div class="ticker" id="tickerMarquee">
+            <div class="ticker__item text-slate-300">CD ALHANDRA PB • MONITORAMENTO EM TEMPO REAL DE EXPEDIÇÃO E RECEBIMENTO</div>
+            <div class="ticker__item text-emerald-400">EXPEDIÇÃO: AUTO-SYNC 15S</div>
+            <div class="ticker__item text-cyan-400">RECEBIMENTO: AUTO-SYNC 15S</div>
+        </div>
     </div>
 
     <!-- MATRIZ 2x2 VIDEO WALL -->
-    <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#050811]">
+    <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#030712]">
 
-        <!-- ==================== TV 01: GESTÃO DE ESTOQUE ==================== -->
-        <div class="tv-card bg-[#090e1a] flex flex-col justify-between overflow-hidden h-full gap-1">
-            <div class="flex justify-between items-center shrink-0 mb-0.5">
-                <h2 class="text-[10px] font-bold text-blue-400 uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-blue-500"></span> TV 01: Gestão de Estoque, Posições & Ruas
-                </h2>
-                <span class="text-[8px] text-slate-500 font-mono">PCO Geral</span>
+        <!-- ==================== TV 01: MÓDULO OTIMIZAÇÃO (LIMPA) ==================== -->
+        <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-3">
+                <span class="text-blue-400 font-black text-2xl">⚡</span>
             </div>
-
-            <div class="grid grid-cols-3 gap-1 shrink-0">
-                <div class="bg-[#0f172a] p-1 rounded-lg text-center glow-blue flex flex-col justify-center">
-                    <p class="text-[7px] font-bold text-slate-400 uppercase">Locações (Ocup/Total)</p>
-                    <h4 class="kpi-big-value text-white my-0.5">146 / 191</h4>
-                    <p class="text-[7.5px] text-blue-400 font-bold">76,4% Ocupado</p>
-                </div>
-                <div class="bg-[#0f172a] p-1 rounded-lg text-center glow-amber flex flex-col justify-center">
-                    <p class="text-[7px] font-bold text-amber-500 uppercase">Área Ocupada</p>
-                    <h4 class="kpi-big-value text-amber-400 my-0.5">2.762 m²</h4>
-                    <p class="text-[7.5px] text-amber-300 font-bold">77,3% de 3.574m²</p>
-                </div>
-                <div class="bg-[#0f172a] p-1 rounded-lg text-center glow-emerald flex flex-col justify-center">
-                    <p class="text-[7px] font-bold text-emerald-500 uppercase">Saldo Estocado</p>
-                    <h4 class="kpi-big-value text-emerald-400 my-0.5">12.297 un</h4>
-                    <p class="text-[7.5px] text-emerald-300 font-bold">68,8% Cap. Nominal</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden">
-                <div class="bg-[#0f172a] p-1 rounded-lg flex flex-col justify-between overflow-hidden">
-                    <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
-                        <span>📍 Ocupação por Rua</span>
-                        <span class="text-slate-500">Pulmão</span>
-                    </p>
-                    <div class="overflow-hidden flex-1 flex flex-col justify-between">
-                        <table class="w-full text-left text-[7.5px] text-slate-300 h-full flex flex-col justify-between">
-                            <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                                <tr class="flex justify-between w-full px-1 py-0.5">
-                                    <th class="w-1/3 text-left">Rua</th>
-                                    <th class="w-1/3 text-center">Loc.</th>
-                                    <th class="w-1/3 text-right">Est. (un)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="ruasTableBody" class="font-medium flex-1 flex flex-col justify-between py-0.5"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="bg-[#0f172a] p-1 rounded-lg flex flex-col justify-between overflow-hidden">
-                    <p class="text-[7.5px] font-bold text-slate-300 uppercase mb-0.5 flex justify-between">
-                        <span>📦 Mix por Família</span>
-                        <span class="text-slate-500">Densidade</span>
-                    </p>
-                    <div class="overflow-hidden flex-1 flex flex-col justify-between">
-                        <table class="w-full text-left text-[7.5px] text-slate-300 h-full flex flex-col justify-between">
-                            <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                                <tr class="flex justify-between w-full px-1 py-0.5">
-                                    <th class="w-1/3 text-left">Família</th>
-                                    <th class="w-1/3 text-center">Área</th>
-                                    <th class="w-1/3 text-right">Estoque</th>
-                                </tr>
-                            </thead>
-                            <tbody id="familyTableBody" class="font-medium flex-1 flex flex-col justify-between py-0.5"></tbody>
-                        </table>
-                    </div>
-                </div>
+            <h2 class="text-base font-extrabold text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
+            <p class="text-slate-400 text-xs max-w-[340px] mt-2 font-medium leading-relaxed">
+                Painel reservado. Aguardando a conexão oficial da base de Otimização de Estoque, Posições e Densidade.
+            </p>
+            <div class="mt-4 px-3 py-1 rounded bg-slate-800/80 text-[11px] font-mono text-slate-400 border border-slate-700">
+                Status: Pronto para Parametrização
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA DO DIA (SPLIT 50/50: EXPEDIÇÃO + RECEBIMENTO) ==================== -->
-        <div class="tv-card bg-[#090e1a] flex flex-col overflow-hidden h-full gap-1">
-            <div class="flex justify-between items-center shrink-0">
-                <h2 class="text-[10px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda do Dia
+        <!-- ==================== TV 02: AGENDA DO DIA (SPLIT 50/50 OTIMIZADO) ==================== -->
+        <div class="tv-card bg-[#091122] flex flex-col overflow-hidden h-full gap-1.5">
+            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-1">
+                <h2 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
-                <div class="flex items-center gap-3 text-[7.5px] font-mono font-bold">
-                    <span class="text-emerald-400">● Expedição</span>
-                    <span class="text-cyan-400">● Recebimento</span>
+                <div class="flex items-center gap-4 text-[10px] font-bold">
+                    <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Expedição</span>
+                    <span class="text-cyan-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Recebimento</span>
                 </div>
             </div>
 
             <!-- GRID SPLIT 50 / 50 -->
-            <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden min-h-0">
+            <div class="grid grid-cols-2 gap-2 flex-1 overflow-hidden min-h-0">
                 
                 <!-- METADE ESQUERDA: EXPEDIÇÃO -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0c1322] p-1 rounded">
-                    <div class="flex justify-between items-center mb-0.5 shrink-0 px-0.5">
-                        <span class="text-[7.5px] font-black text-emerald-400 uppercase tracking-wide">Base Expedição</span>
-                        <span id="expBadgeTotal" class="text-[6.5px] text-slate-400 font-mono">-- cargas</span>
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1.5 rounded-lg border border-slate-800/60">
+                    <div class="flex justify-between items-center mb-1 shrink-0 px-1">
+                        <span class="text-[9px] font-black text-emerald-400 uppercase tracking-wide">Base Expedição</span>
+                        <span id="expBadgeTotal" class="text-[8.5px] text-slate-300 font-num font-bold">-- cargas</span>
                     </div>
 
                     <!-- Cards de Status da Expedição -->
-                    <div class="grid grid-cols-5 gap-0.5 shrink-0 mb-1 text-center">
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-slate-400 font-bold uppercase">Total</p>
-                            <p id="kpiTotalCargas" class="kpi-big-value text-white">--</p>
+                    <div class="grid grid-cols-5 gap-1 shrink-0 mb-1.5 text-center">
+                        <div class="bg-[#14213d] p-1 rounded border border-slate-700/60">
+                            <p class="text-[7px] text-slate-400 font-bold uppercase">Total</p>
+                            <p id="kpiTotalCargas" class="kpi-big-value text-white font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-emerald-400 font-bold uppercase">Concl.</p>
-                            <p id="kpiConcluidos" class="kpi-big-value text-emerald-400">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-emerald-500/30">
+                            <p class="text-[7px] text-emerald-400 font-bold uppercase">Concl.</p>
+                            <p id="kpiConcluidos" class="kpi-big-value text-emerald-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-lime-400 font-bold uppercase">Fatur.</p>
-                            <p id="kpiFaturando" class="kpi-big-value text-lime-300">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-lime-500/30">
+                            <p class="text-[7px] text-lime-400 font-bold uppercase">Fatur.</p>
+                            <p id="kpiFaturando" class="kpi-big-value text-lime-300 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-amber-400 font-bold uppercase">Carreg.</p>
-                            <p id="kpiCarregando" class="kpi-big-value text-amber-400">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-amber-500/30">
+                            <p class="text-[7px] text-amber-400 font-bold uppercase">Carreg.</p>
+                            <p id="kpiCarregando" class="kpi-big-value text-amber-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-rose-500 font-bold uppercase">Pend.</p>
-                            <p id="kpiPendente" class="kpi-big-value text-rose-500">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-rose-500/30">
+                            <p class="text-[7px] text-rose-400 font-bold uppercase">Pend.</p>
+                            <p id="kpiPendente" class="kpi-big-value text-rose-500 font-num font-black">--</p>
                         </div>
                     </div>
 
                     <!-- Tabela Expedição -->
-                    <div class="overflow-hidden flex-1 flex flex-col min-h-0">
-                        <table class="w-full text-left row-text-split text-slate-300 h-full flex flex-col justify-between">
-                            <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                                <tr class="flex justify-between w-full px-1 py-0.5">
-                                    <th class="w-[20%] text-left">Transp</th>
-                                    <th class="w-[9%] text-center">Doca</th>
-                                    <th class="w-[12%] text-center">Peças</th>
-                                    <th class="w-[14%] text-center">Agenda</th>
-                                    <th class="w-[12%] text-center text-amber-400">TMP</th>
-                                    <th class="w-[12%] text-center text-teal-300">PPM</th>
-                                    <th class="w-[21%] text-right">Status</th>
+                    <div class="overflow-hidden flex-1 flex flex-col min-h-0 bg-[#080e1a] rounded p-0.5">
+                        <table class="w-full text-left row-text-split text-slate-200 h-full flex flex-col justify-between">
+                            <thead class="bg-[#111c33] text-slate-300 uppercase font-extrabold shrink-0 border-b border-slate-700/60">
+                                <tr class="flex justify-between w-full px-1.5 py-1">
+                                    <th class="w-[22%] text-left">Transp</th>
+                                    <th class="w-[10%] text-center">Doca</th>
+                                    <th class="w-[13%] text-center">Peças</th>
+                                    <th class="w-[15%] text-center">Agenda</th>
+                                    <th class="w-[11%] text-center text-amber-300">TMP</th>
+                                    <th class="w-[11%] text-center text-teal-300">PPM</th>
+                                    <th class="w-[18%] text-right">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
-                                <tr class="flex justify-center items-center py-2 text-slate-500">
+                                <tr class="flex justify-center items-center py-3 text-slate-400">
                                     <td>Aguardando dados...</td>
                                 </tr>
                             </tbody>
@@ -248,48 +196,48 @@
                 </div>
 
                 <!-- METADE DIREITA: RECEBIMENTO -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0c1322] p-1 rounded">
-                    <div class="flex justify-between items-center mb-0.5 shrink-0 px-0.5">
-                        <span class="text-[7.5px] font-black text-cyan-400 uppercase tracking-wide">Base Recebimento</span>
-                        <span id="recBadgeTotal" class="text-[6.5px] text-slate-400 font-mono">-- cargas</span>
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1.5 rounded-lg border border-slate-800/60">
+                    <div class="flex justify-between items-center mb-1 shrink-0 px-1">
+                        <span class="text-[9px] font-black text-cyan-400 uppercase tracking-wide">Base Recebimento</span>
+                        <span id="recBadgeTotal" class="text-[8.5px] text-slate-300 font-num font-bold">-- cargas</span>
                     </div>
 
                     <!-- Cards de Status do Recebimento -->
-                    <div class="grid grid-cols-4 gap-0.5 shrink-0 mb-1 text-center">
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-slate-400 font-bold uppercase">Total Rec</p>
-                            <p id="kpiRecTotal" class="kpi-big-value text-white">--</p>
+                    <div class="grid grid-cols-4 gap-1 shrink-0 mb-1.5 text-center">
+                        <div class="bg-[#14213d] p-1 rounded border border-slate-700/60">
+                            <p class="text-[7px] text-slate-400 font-bold uppercase">Total Rec</p>
+                            <p id="kpiRecTotal" class="kpi-big-value text-white font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-emerald-400 font-bold uppercase">Finalizado</p>
-                            <p id="kpiRecConcluidos" class="kpi-big-value text-emerald-400">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-emerald-500/30">
+                            <p class="text-[7px] text-emerald-400 font-bold uppercase">Finalizado</p>
+                            <p id="kpiRecConcluidos" class="kpi-big-value text-emerald-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-amber-400 font-bold uppercase">Descarreg.</p>
-                            <p id="kpiRecDescarregando" class="kpi-big-value text-amber-400">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-amber-500/30">
+                            <p class="text-[7px] text-amber-400 font-bold uppercase">Descarreg.</p>
+                            <p id="kpiRecDescarregando" class="kpi-big-value text-amber-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#0f172a] p-0.5 rounded">
-                            <p class="text-[5.5px] text-rose-500 font-bold uppercase">Pendente</p>
-                            <p id="kpiRecPendente" class="kpi-big-value text-rose-500">--</p>
+                        <div class="bg-[#14213d] p-1 rounded border border-rose-500/30">
+                            <p class="text-[7px] text-rose-400 font-bold uppercase">Pendente</p>
+                            <p id="kpiRecPendente" class="kpi-big-value text-rose-500 font-num font-black">--</p>
                         </div>
                     </div>
 
                     <!-- Tabela Recebimento -->
-                    <div class="overflow-hidden flex-1 flex flex-col min-h-0">
-                        <table class="w-full text-left row-text-split text-slate-300 h-full flex flex-col justify-between">
-                            <thead class="bg-[#090e1a] text-slate-400 uppercase font-bold shrink-0">
-                                <tr class="flex justify-between w-full px-1 py-0.5">
-                                    <th class="w-[20%] text-left">Transp</th>
-                                    <th class="w-[9%] text-center">Doca</th>
-                                    <th class="w-[12%] text-center">Peças</th>
-                                    <th class="w-[14%] text-center">Agenda</th>
-                                    <th class="w-[12%] text-center text-amber-400">TMP</th>
-                                    <th class="w-[12%] text-center text-teal-300">PPM</th>
-                                    <th class="w-[21%] text-right">Status</th>
+                    <div class="overflow-hidden flex-1 flex flex-col min-h-0 bg-[#080e1a] rounded p-0.5">
+                        <table class="w-full text-left row-text-split text-slate-200 h-full flex flex-col justify-between">
+                            <thead class="bg-[#111c33] text-slate-300 uppercase font-extrabold shrink-0 border-b border-slate-700/60">
+                                <tr class="flex justify-between w-full px-1.5 py-1">
+                                    <th class="w-[22%] text-left">Transp</th>
+                                    <th class="w-[10%] text-center">Doca</th>
+                                    <th class="w-[13%] text-center">Peças</th>
+                                    <th class="w-[15%] text-center">Agenda</th>
+                                    <th class="w-[11%] text-center text-amber-300">TMP</th>
+                                    <th class="w-[11%] text-center text-teal-300">PPM</th>
+                                    <th class="w-[18%] text-right">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="recebimentoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
-                                <tr class="flex justify-center items-center py-2 text-slate-500">
+                                <tr class="flex justify-center items-center py-3 text-slate-400">
                                     <td>Aguardando dados...</td>
                                 </tr>
                             </tbody>
@@ -301,55 +249,42 @@
         </div>
 
         <!-- ==================== TV 03: MÓDULO DE EXPANSÃO ==================== -->
-        <div class="tv-card bg-[#080d18] flex flex-col justify-center items-center h-full text-center p-4">
-            <div class="w-10 h-10 rounded-full bg-slate-800/60 flex items-center justify-center mb-2">
-                <span class="text-slate-400 font-bold text-lg">+</span>
+        <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-3">
+                <span class="text-slate-300 font-bold text-2xl">📊</span>
             </div>
-            <h3 class="text-slate-300 font-bold text-xs uppercase tracking-wider">TV 03: Módulo de Expansão</h3>
-            <p class="text-slate-500 text-[9px] max-w-[250px] mt-1">Disponível para novos indicadores ou gráficos complementares.</p>
+            <h3 class="text-base font-extrabold text-slate-200 uppercase tracking-wider">TV 03: Indicadores Operacionais</h3>
+            <p class="text-slate-400 text-xs max-w-[320px] mt-2 font-medium leading-relaxed">
+                Espaço livre para gráficos de produtividade, tempos médios de permanência e KPIs analíticos.
+            </p>
         </div>
 
         <!-- ==================== TV 04: MÓDULO DE EXPANSÃO ==================== -->
-        <div class="tv-card bg-[#080d18] flex flex-col justify-center items-center h-full text-center p-4">
-            <div class="w-10 h-10 rounded-full bg-slate-800/60 flex items-center justify-center mb-2">
-                <span class="text-slate-400 font-bold text-lg">+</span>
+        <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
+            <div class="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-3">
+                <span class="text-slate-300 font-bold text-2xl">📦</span>
             </div>
-            <h3 class="text-slate-300 font-bold text-xs uppercase tracking-wider">TV 04: Módulo de Expansão</h3>
-            <p class="text-slate-500 text-[9px] max-w-[250px] mt-1">Espaço reservado para a Base de Otimização e Ocupação.</p>
+            <h3 class="text-base font-extrabold text-slate-200 uppercase tracking-wider">TV 04: Módulo Estratégico</h3>
+            <p class="text-slate-400 text-xs max-w-[320px] mt-2 font-medium leading-relaxed">
+                Espaço reservado para visualização de ocupação do CD, layout de docas ou backlog consolidado.
+            </p>
         </div>
 
     </main>
 
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS DE INTEGRAÇÃO EM TEMPO REAL -->
     <script>
-        // URLs Oficiais de Produção da Whirlpool
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzENwdne1UBhEi54kwL-hq2WuAGvtwMiRFZ6Vc2LoF74MCl1aj_m64jgVvWDylB8g9O/exec";
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
 
         let currentData = {
-            ruas: [
-                { rua: "RUA 01", loc: "9/9", est: 1919 },
-                { rua: "RUA 02", loc: "24/36", est: 1497 },
-                { rua: "RUA 03", loc: "39/41", est: 2635 },
-                { rua: "RUA 04", loc: "35/36", est: 2850 },
-                { rua: "RUA 05", loc: "36/36", est: 2742 },
-                { rua: "RUA 06", loc: "3/33", est: 654 }
-            ],
-            familias: [
-                { familia: "REFRIGERADOR", area: "1.459m²", est: 6682 },
-                { familia: "LAVADORA", area: "440m²", est: 1738 },
-                { familia: "FOGÃO", area: "375m²", est: 909 },
-                { familia: "FORNO", area: "96m²", est: 689 },
-                { familia: "FREEZER", area: "88m²", est: 213 },
-                { familia: "MIX / OUTROS", area: "211m²", est: 1347 }
-            ],
             expedicaoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, faturando: 0, carregando: 0, pendentes: 0 },
             cargas: [],
             recebimentoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, descarregando: 0, pendentes: 0 },
             recebimentoCargas: []
         };
 
-        // --- EXPEDIÇÃO ---
+        // --- RETORNO EXPEDIÇÃO ---
         window.receberDadosExpedicao = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.cargas = data.cargas;
@@ -410,31 +345,31 @@
             if (tbody) {
                 tbody.innerHTML = '';
                 if (currentData.cargas.length === 0) {
-                    tbody.innerHTML = `<tr class="flex justify-center items-center py-2 text-slate-500"><td>Sem cargas hoje.</td></tr>`;
+                    tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem cargas hoje.</td></tr>`;
                     return;
                 }
 
                 currentData.cargas.forEach(c => {
                     const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1 py-[2px] border-b border-slate-800/40";
+                    tr.className = "flex justify-between items-center w-full px-1.5 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition";
 
-                    let statusBadge = "text-slate-400 bg-slate-800/60";
+                    let statusBadge = "text-slate-300 bg-slate-800";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-                    if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-400 bg-emerald-500/15";
-                    else if (sNorm.includes("fatur")) statusBadge = "text-lime-300 bg-lime-400/20 font-bold";
-                    else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) statusBadge = "text-amber-400 bg-amber-500/15";
-                    else if (sNorm.includes("pendent")) statusBadge = "text-rose-500 bg-rose-500/20 font-bold";
+                    if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
+                    else if (sNorm.includes("fatur")) statusBadge = "text-lime-200 bg-lime-500/25 border border-lime-400/40 font-bold";
+                    else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
+                    else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
 
                     tr.innerHTML = `
-                        <td class="w-[20%] font-bold text-slate-200 text-left font-mono truncate">${c.transporte}</td>
-                        <td class="w-[9%] text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
-                        <td class="w-[12%] text-center font-bold text-cyan-400 font-mono">${c.pecas || 0}</td>
-                        <td class="w-[14%] text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
-                        <td class="w-[12%] text-center text-amber-300 font-mono font-medium">${c.tmp || '-'}</td>
-                        <td class="w-[12%] text-center text-teal-300 font-mono font-bold">${c.ppm || '-'}</td>
-                        <td class="w-[21%] text-right truncate">
-                            <span class="px-1 py-[1px] rounded ${statusBadge}">${c.status}</span>
+                        <td class="w-[22%] font-bold text-white text-left font-num truncate">${c.transporte}</td>
+                        <td class="w-[10%] text-center font-bold text-blue-400 font-num">${c.doca || '-'}</td>
+                        <td class="w-[13%] text-center font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                        <td class="w-[15%] text-center text-slate-300 font-num">${c.agenda || '-'}</td>
+                        <td class="w-[11%] text-center text-amber-300 font-num font-semibold">${c.tmp || '-'}</td>
+                        <td class="w-[11%] text-center text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                        <td class="w-[18%] text-right truncate">
+                            <span class="px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -442,7 +377,7 @@
             }
         }
 
-        // --- RECEBIMENTO ---
+        // --- RETORNO RECEBIMENTO ---
         window.receberDadosRecebimento = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.recebimentoCargas = data.cargas;
@@ -499,30 +434,30 @@
             if (tbody) {
                 tbody.innerHTML = '';
                 if (currentData.recebimentoCargas.length === 0) {
-                    tbody.innerHTML = `<tr class="flex justify-center items-center py-2 text-slate-500"><td>Sem recebimento hoje.</td></tr>`;
+                    tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem recebimento hoje.</td></tr>`;
                     return;
                 }
 
                 currentData.recebimentoCargas.forEach(c => {
                     const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1 py-[2px] border-b border-slate-800/40";
+                    tr.className = "flex justify-between items-center w-full px-1.5 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition";
 
-                    let statusBadge = "text-slate-400 bg-slate-800/60";
+                    let statusBadge = "text-slate-300 bg-slate-800";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-                    if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-400 bg-emerald-500/15";
-                    else if (sNorm.includes("desc") || sNorm.includes("doca") || sNorm.includes("andamento")) statusBadge = "text-amber-400 bg-amber-500/15";
-                    else if (sNorm.includes("pendent")) statusBadge = "text-rose-500 bg-rose-500/20 font-bold";
+                    if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
+                    else if (sNorm.includes("desc") || sNorm.includes("doca") || sNorm.includes("andamento")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
+                    else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
 
                     tr.innerHTML = `
-                        <td class="w-[20%] font-bold text-slate-200 text-left font-mono truncate">${c.transporte}</td>
-                        <td class="w-[9%] text-center font-bold text-blue-400 font-mono">${c.doca || '-'}</td>
-                        <td class="w-[12%] text-center font-bold text-cyan-400 font-mono">${c.pecas || 0}</td>
-                        <td class="w-[14%] text-center text-slate-400 font-mono">${c.agenda || '-'}</td>
-                        <td class="w-[12%] text-center text-amber-300 font-mono font-medium">${c.tmp || '-'}</td>
-                        <td class="w-[12%] text-center text-teal-300 font-mono font-bold">${c.ppm || '-'}</td>
-                        <td class="w-[21%] text-right truncate">
-                            <span class="px-1 py-[1px] rounded ${statusBadge}">${c.status}</span>
+                        <td class="w-[22%] font-bold text-white text-left font-num truncate">${c.transporte}</td>
+                        <td class="w-[10%] text-center font-bold text-blue-400 font-num">${c.doca || '-'}</td>
+                        <td class="w-[13%] text-center font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                        <td class="w-[15%] text-center text-slate-300 font-num">${c.agenda || '-'}</td>
+                        <td class="w-[11%] text-center text-amber-300 font-num font-semibold">${c.tmp || '-'}</td>
+                        <td class="w-[11%] text-center text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                        <td class="w-[18%] text-right truncate">
+                            <span class="px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -531,51 +466,10 @@
         }
 
         function atualizarBadgeTimestamp(ts) {
-            const badge = document.querySelector('.badge-date-clean');
+            const badge = document.getElementById('badgeSync');
             if (badge && ts) {
-                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Atualizado às ${ts}`;
+                badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> Atualizado às ${ts}`;
             }
-        }
-
-        function carregarPainel() {
-            // Ruas (TV 01)
-            const ruasBody = document.getElementById('ruasTableBody');
-            if (ruasBody) {
-                ruasBody.innerHTML = '';
-                currentData.ruas.forEach(r => {
-                    const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1 py-0.5";
-                    tr.innerHTML = `<td class="font-bold text-blue-400 text-left w-1/3">${r.rua}</td>
-                                    <td class="text-slate-300 font-mono text-center w-1/3">${r.loc}</td>
-                                    <td class="text-right font-bold text-emerald-400 w-1/3">${r.est.toLocaleString('pt-BR')}</td>`;
-                    ruasBody.appendChild(tr);
-                });
-            }
-
-            // Famílias (TV 01)
-            const familyBody = document.getElementById('familyTableBody');
-            const marquee = document.getElementById('tickerMarquee');
-            if (familyBody && marquee) {
-                familyBody.innerHTML = '';
-                marquee.innerHTML = '';
-
-                currentData.familias.forEach(item => {
-                    const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1 py-0.5";
-                    tr.innerHTML = `<td class="font-bold text-slate-200 text-left w-1/3">${item.familia}</td>
-                                    <td class="text-slate-300 font-mono text-center w-1/3">${item.area}</td>
-                                    <td class="text-right font-bold text-blue-400 font-mono w-1/3">${item.est.toLocaleString('pt-BR')}</td>`;
-                    familyBody.appendChild(tr);
-
-                    const div = document.createElement('div');
-                    div.className = "ticker__item";
-                    div.innerHTML = `<span class="text-white font-black">${item.familia}</span>: <span class="text-blue-400 ml-1 font-mono">${item.est.toLocaleString('pt-BR')} un</span>`;
-                    marquee.appendChild(div);
-                });
-            }
-
-            renderizarExpedicao();
-            renderizarRecebimento();
         }
 
         function toggleFullscreen() {
@@ -587,10 +481,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            carregarPainel();
             sincronizarExpedicao();
             sincronizarRecebimento();
-            // Polling configurado para 15 segundos em ambas as bases
+            // Polling contínuo a cada 15 segundos
             setInterval(() => {
                 sincronizarExpedicao();
                 sincronizarRecebimento();
