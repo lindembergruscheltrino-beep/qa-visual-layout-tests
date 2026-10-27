@@ -14,10 +14,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Fontes de Alta Legibilidade Operacional: Inter & Roboto Mono -->
+    <!-- Fontes Operacionais de Alta Definição: Inter & Roboto Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Roboto+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Roboto+Mono:wght@500;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -37,19 +37,19 @@
         /* Numerais com distinção nítida entre 0 e 8 */
         .font-num {
             font-family: 'Roboto Mono', monospace !important;
-            font-feature-settings: "zero" 0; /* Garante zero limpo e redondo sem traço de 8 */
-            letter-spacing: -0.2px;
+            font-feature-settings: "zero" 0;
+            letter-spacing: -0.3px;
         }
 
         .kpi-big-value {
-            font-size: clamp(14px, 1.2vh + 0.6vw, 22px) !important;
+            font-size: clamp(13px, 1.1vh + 0.5vw, 20px) !important;
             line-height: 1.1 !important;
             font-weight: 900 !important;
         }
 
         .row-text-split {
-            font-size: clamp(8px, 0.55vw + 0.4vh, 10.5px) !important;
-            line-height: 1.25 !important;
+            font-size: clamp(7.5px, 0.48vw + 0.36vh, 9.8px) !important;
+            line-height: 1.2 !important;
         }
 
         table, th, td, tr, thead, tbody, tfoot {
@@ -126,7 +126,7 @@
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA DO DIA (SPLIT 50/50 OTIMIZADO) ==================== -->
+        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 SEM CORTES) ==================== -->
         <div class="tv-card bg-[#091122] flex flex-col overflow-hidden h-full gap-1.5">
             <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-1">
                 <h2 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
@@ -172,18 +172,18 @@
                         </div>
                     </div>
 
-                    <!-- Tabela Expedição -->
+                    <!-- Tabela Expedição Sem Cortes -->
                     <div class="overflow-hidden flex-1 flex flex-col min-h-0 bg-[#080e1a] rounded p-0.5">
                         <table class="w-full text-left row-text-split text-slate-200 h-full flex flex-col justify-between">
-                            <thead class="bg-[#111c33] text-slate-300 uppercase font-extrabold shrink-0 border-b border-slate-700/60">
-                                <tr class="flex justify-between w-full px-1.5 py-1">
-                                    <th class="w-[22%] text-left">Transp</th>
-                                    <th class="w-[10%] text-center">Doca</th>
-                                    <th class="w-[13%] text-center">Peças</th>
-                                    <th class="w-[15%] text-center">Agenda</th>
-                                    <th class="w-[11%] text-center text-amber-300">TMP</th>
-                                    <th class="w-[11%] text-center text-teal-300">PPM</th>
-                                    <th class="w-[18%] text-right">Status</th>
+                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black shrink-0 border-b border-slate-700/60">
+                                <tr class="flex justify-between w-full px-1 py-1 text-center">
+                                    <th class="w-[24%] text-left pl-1">TRANSP</th>
+                                    <th class="w-[8%]">DOCA</th>
+                                    <th class="w-[11%]">PEÇAS</th>
+                                    <th class="w-[13%]">AGENDA</th>
+                                    <th class="w-[10%] text-amber-300">TMP</th>
+                                    <th class="w-[9%] text-teal-300">PPM</th>
+                                    <th class="w-[25%] text-right pr-1">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
@@ -222,18 +222,18 @@
                         </div>
                     </div>
 
-                    <!-- Tabela Recebimento -->
+                    <!-- Tabela Recebimento Sem Cortes -->
                     <div class="overflow-hidden flex-1 flex flex-col min-h-0 bg-[#080e1a] rounded p-0.5">
                         <table class="w-full text-left row-text-split text-slate-200 h-full flex flex-col justify-between">
-                            <thead class="bg-[#111c33] text-slate-300 uppercase font-extrabold shrink-0 border-b border-slate-700/60">
-                                <tr class="flex justify-between w-full px-1.5 py-1">
-                                    <th class="w-[22%] text-left">Transp</th>
-                                    <th class="w-[10%] text-center">Doca</th>
-                                    <th class="w-[13%] text-center">Peças</th>
-                                    <th class="w-[15%] text-center">Agenda</th>
-                                    <th class="w-[11%] text-center text-amber-300">TMP</th>
-                                    <th class="w-[11%] text-center text-teal-300">PPM</th>
-                                    <th class="w-[18%] text-right">Status</th>
+                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black shrink-0 border-b border-slate-700/60">
+                                <tr class="flex justify-between w-full px-1 py-1 text-center">
+                                    <th class="w-[24%] text-left pl-1">TRANSP</th>
+                                    <th class="w-[8%]">DOCA</th>
+                                    <th class="w-[11%]">PEÇAS</th>
+                                    <th class="w-[13%]">AGENDA</th>
+                                    <th class="w-[10%] text-amber-300">TMP</th>
+                                    <th class="w-[9%] text-teal-300">PPM</th>
+                                    <th class="w-[25%] text-right pr-1">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="recebimentoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
@@ -283,6 +283,14 @@
             recebimentoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, descarregando: 0, pendentes: 0 },
             recebimentoCargas: []
         };
+
+        // Formata TMP limpando segundos para não espremer as colunas (ex: 00:14:00 -> 00:14)
+        function formatarTempoCurto(valor) {
+            if (!valor || valor === '-') return '-';
+            const str = String(valor).trim();
+            const match = str.match(/(\d{1,2}:\d{2})/);
+            return match ? match[1] : str;
+        }
 
         // --- RETORNO EXPEDIÇÃO ---
         window.receberDadosExpedicao = function(data) {
@@ -351,7 +359,7 @@
 
                 currentData.cargas.forEach(c => {
                     const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1.5 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition";
+                    tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
 
                     let statusBadge = "text-slate-300 bg-slate-800";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -362,14 +370,14 @@
                     else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
 
                     tr.innerHTML = `
-                        <td class="w-[22%] font-bold text-white text-left font-num truncate">${c.transporte}</td>
-                        <td class="w-[10%] text-center font-bold text-blue-400 font-num">${c.doca || '-'}</td>
-                        <td class="w-[13%] text-center font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                        <td class="w-[15%] text-center text-slate-300 font-num">${c.agenda || '-'}</td>
-                        <td class="w-[11%] text-center text-amber-300 font-num font-semibold">${c.tmp || '-'}</td>
-                        <td class="w-[11%] text-center text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                        <td class="w-[18%] text-right truncate">
-                            <span class="px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
+                        <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
+                        <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
+                        <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                        <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
+                        <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
+                        <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                        <td class="w-[25%] text-right pr-1">
+                            <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -440,7 +448,7 @@
 
                 currentData.recebimentoCargas.forEach(c => {
                     const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1.5 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition";
+                    tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
 
                     let statusBadge = "text-slate-300 bg-slate-800";
                     const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -450,14 +458,14 @@
                     else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
 
                     tr.innerHTML = `
-                        <td class="w-[22%] font-bold text-white text-left font-num truncate">${c.transporte}</td>
-                        <td class="w-[10%] text-center font-bold text-blue-400 font-num">${c.doca || '-'}</td>
-                        <td class="w-[13%] text-center font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                        <td class="w-[15%] text-center text-slate-300 font-num">${c.agenda || '-'}</td>
-                        <td class="w-[11%] text-center text-amber-300 font-num font-semibold">${c.tmp || '-'}</td>
-                        <td class="w-[11%] text-center text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                        <td class="w-[18%] text-right truncate">
-                            <span class="px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
+                        <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
+                        <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
+                        <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                        <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
+                        <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
+                        <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                        <td class="w-[25%] text-right pr-1">
+                            <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -483,7 +491,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             sincronizarExpedicao();
             sincronizarRecebimento();
-            // Polling contínuo a cada 15 segundos
+            // Polling sincronizado a cada 15 segundos
             setInterval(() => {
                 sincronizarExpedicao();
                 sincronizarRecebimento();
