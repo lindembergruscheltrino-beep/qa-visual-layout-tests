@@ -138,12 +138,11 @@
         <!-- ==================== TV 02: AGENDA OPERACIONAL ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
             
-            <!-- Barra Superior da TV 02 -->
-            <div class="flex justify-between items-center shrink-0 border-b border-slate-800 pb-0.5 px-1">
-                <h2 class="text-[10px] font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
+            <!-- Barra Superior Compacta da TV 02 (Sem 'CD ALHANDRA PB' e com margem/tamanho reduzidos) -->
+            <div class="flex items-center shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-0.5">
+                <h2 class="text-[8.5px] font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
-                <span class="text-[8px] text-slate-300 font-mono font-bold">CD ALHANDRA PB</span>
             </div>
 
             <!-- GRELHA SPLIT 50 / 50 -->
@@ -281,7 +280,6 @@
             return str;
         }
 
-        // Padroniza status para Title Case (primeira letra maiúscula e o resto minúsculo)
         function formatarStatusTexto(texto) {
             if (!texto) return '-';
             const str = String(texto).trim();
