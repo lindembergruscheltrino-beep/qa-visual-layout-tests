@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Fontes Operacionais de Alta Definição: Inter & Roboto Mono -->
+    <!-- Fontes Operacionais: Inter & Roboto Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Roboto+Mono:wght@500;700;800;900&display=swap" rel="stylesheet">
@@ -34,22 +34,21 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Numerais com distinção nítida entre 0 e 8 */
         .font-num {
             font-family: 'Roboto Mono', monospace !important;
             font-feature-settings: "zero" 0;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.2px;
         }
 
         .kpi-big-value {
-            font-size: clamp(13px, 1.1vh + 0.5vw, 20px) !important;
+            font-size: clamp(14px, 1.2vh + 0.5vw, 22px) !important;
             line-height: 1.1 !important;
             font-weight: 900 !important;
         }
 
         .row-text-split {
-            font-size: clamp(7.5px, 0.48vw + 0.36vh, 9.8px) !important;
-            line-height: 1.2 !important;
+            font-size: clamp(7.5px, 0.46vw + 0.35vh, 9.8px) !important;
+            line-height: 1.25 !important;
         }
 
         table, th, td, tr, thead, tbody, tfoot {
@@ -67,13 +66,17 @@
         @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
         .video-wall-grid {
-            padding: 10px;
-            gap: 10px;
+            padding: 8px;
+            gap: 8px;
         }
         .tv-card {
-            padding: 10px;
+            padding: 8px;
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .fade-transition {
+            transition: opacity 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -126,9 +129,9 @@
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 SEM CORTES) ==================== -->
-        <div class="tv-card bg-[#091122] flex flex-col overflow-hidden h-full gap-1.5">
-            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-1">
+        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 OTIMIZADO) ==================== -->
+        <div class="tv-card bg-[#091122] flex flex-col overflow-hidden h-full gap-1">
+            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-1 px-1">
                 <h2 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
                     <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
@@ -142,14 +145,10 @@
             <div class="grid grid-cols-2 gap-2 flex-1 overflow-hidden min-h-0">
                 
                 <!-- METADE ESQUERDA: EXPEDIÇÃO -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1.5 rounded-lg border border-slate-800/60">
-                    <div class="flex justify-between items-center mb-1 shrink-0 px-1">
-                        <span class="text-[9px] font-black text-emerald-400 uppercase tracking-wide">Base Expedição</span>
-                        <span id="expBadgeTotal" class="text-[8.5px] text-slate-300 font-num font-bold">-- cargas</span>
-                    </div>
-
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1 rounded-lg border border-slate-800/60">
+                    
                     <!-- Cards de Status da Expedição -->
-                    <div class="grid grid-cols-5 gap-1 shrink-0 mb-1.5 text-center">
+                    <div class="grid grid-cols-5 gap-1 shrink-0 mb-1 text-center">
                         <div class="bg-[#14213d] p-1 rounded border border-slate-700/60">
                             <p class="text-[7px] text-slate-400 font-bold uppercase">Total</p>
                             <p id="kpiTotalCargas" class="kpi-big-value text-white font-num font-black">--</p>
@@ -186,7 +185,7 @@
                                     <th class="w-[25%] text-right pr-1">STATUS</th>
                                 </tr>
                             </thead>
-                            <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
+                            <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0 fade-transition">
                                 <tr class="flex justify-center items-center py-3 text-slate-400">
                                     <td>Aguardando dados...</td>
                                 </tr>
@@ -196,14 +195,10 @@
                 </div>
 
                 <!-- METADE DIREITA: RECEBIMENTO -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1.5 rounded-lg border border-slate-800/60">
-                    <div class="flex justify-between items-center mb-1 shrink-0 px-1">
-                        <span class="text-[9px] font-black text-cyan-400 uppercase tracking-wide">Base Recebimento</span>
-                        <span id="recBadgeTotal" class="text-[8.5px] text-slate-300 font-num font-bold">-- cargas</span>
-                    </div>
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1 rounded-lg border border-slate-800/60">
 
                     <!-- Cards de Status do Recebimento -->
-                    <div class="grid grid-cols-4 gap-1 shrink-0 mb-1.5 text-center">
+                    <div class="grid grid-cols-4 gap-1 shrink-0 mb-1 text-center">
                         <div class="bg-[#14213d] p-1 rounded border border-slate-700/60">
                             <p class="text-[7px] text-slate-400 font-bold uppercase">Total Rec</p>
                             <p id="kpiRecTotal" class="kpi-big-value text-white font-num font-black">--</p>
@@ -236,7 +231,7 @@
                                     <th class="w-[25%] text-right pr-1">STATUS</th>
                                 </tr>
                             </thead>
-                            <tbody id="recebimentoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0">
+                            <tbody id="recebimentoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0 fade-transition">
                                 <tr class="flex justify-center items-center py-3 text-slate-400">
                                     <td>Aguardando dados...</td>
                                 </tr>
@@ -284,7 +279,11 @@
             recebimentoCargas: []
         };
 
-        // Formata TMP limpando segundos para não espremer as colunas (ex: 00:14:00 -> 00:14)
+        // Controle de paginação automática para listas longas
+        const ITENS_POR_PAGINA = 8;
+        let paginaExpedicao = 0;
+        let paginaRecebimento = 0;
+
         function formatarTempoCurto(valor) {
             if (!valor || valor === '-') return '-';
             const str = String(valor).trim();
@@ -336,53 +335,58 @@
 
         function renderizarExpedicao() {
             const elTotal = document.getElementById('kpiTotalCargas');
-            const elBadge = document.getElementById('expBadgeTotal');
             const elConcluidos = document.getElementById('kpiConcluidos');
             const elFaturando = document.getElementById('kpiFaturando');
             const elCarregando = document.getElementById('kpiCarregando');
             const elPendente = document.getElementById('kpiPendente');
 
             if (elTotal) elTotal.innerText = currentData.expedicaoResumo.totalCargas;
-            if (elBadge) elBadge.innerText = `${currentData.expedicaoResumo.totalCargas} cargas (${currentData.expedicaoResumo.totalPecas.toLocaleString('pt-BR')} un)`;
             if (elConcluidos) elConcluidos.innerText = currentData.expedicaoResumo.concluidos;
             if (elFaturando) elFaturando.innerText = currentData.expedicaoResumo.faturando;
             if (elCarregando) elCarregando.innerText = currentData.expedicaoResumo.carregando;
             if (elPendente) elPendente.innerText = currentData.expedicaoResumo.pendentes;
 
             const tbody = document.getElementById('expedicaoTableBody');
-            if (tbody) {
-                tbody.innerHTML = '';
-                if (currentData.cargas.length === 0) {
-                    tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem cargas hoje.</td></tr>`;
-                    return;
-                }
+            if (!tbody) return;
 
-                currentData.cargas.forEach(c => {
-                    const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
-
-                    let statusBadge = "text-slate-300 bg-slate-800";
-                    const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-                    if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
-                    else if (sNorm.includes("fatur")) statusBadge = "text-lime-200 bg-lime-500/25 border border-lime-400/40 font-bold";
-                    else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
-                    else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
-
-                    tr.innerHTML = `
-                        <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
-                        <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
-                        <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                        <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
-                        <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                        <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                        <td class="w-[25%] text-right pr-1">
-                            <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
+            tbody.innerHTML = '';
+            if (currentData.cargas.length === 0) {
+                tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem cargas hoje.</td></tr>`;
+                return;
             }
+
+            // Paginação automática
+            const totalPaginas = Math.ceil(currentData.cargas.length / ITENS_POR_PAGINA);
+            if (paginaExpedicao >= totalPaginas) paginaExpedicao = 0;
+            const inicio = paginaExpedicao * ITENS_POR_PAGINA;
+            const itensVisiveis = currentData.cargas.slice(inicio, inicio + ITENS_POR_PAGINA);
+
+            itensVisiveis.forEach(c => {
+                const tr = document.createElement('tr');
+                tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
+
+                let statusBadge = "text-slate-300 bg-slate-800";
+                const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
+                else if (sNorm.includes("fatur")) statusBadge = "text-lime-200 bg-lime-500/25 border border-lime-400/40 font-bold";
+                else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
+                else if (sNorm.includes("separ") || sNorm.includes("confer")) statusBadge = "text-cyan-300 bg-cyan-500/20 border border-cyan-500/40";
+                else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
+
+                tr.innerHTML = `
+                    <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
+                    <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
+                    <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                    <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
+                    <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
+                    <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                    <td class="w-[25%] text-right pr-1">
+                        <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
         // --- RETORNO RECEBIMENTO ---
@@ -427,50 +431,55 @@
 
         function renderizarRecebimento() {
             const elTotal = document.getElementById('kpiRecTotal');
-            const elBadge = document.getElementById('recBadgeTotal');
             const elConcluidos = document.getElementById('kpiRecConcluidos');
             const elDesc = document.getElementById('kpiRecDescarregando');
             const elPendente = document.getElementById('kpiRecPendente');
 
             if (elTotal) elTotal.innerText = currentData.recebimentoResumo.totalCargas;
-            if (elBadge) elBadge.innerText = `${currentData.recebimentoResumo.totalCargas} cargas (${currentData.recebimentoResumo.totalPecas.toLocaleString('pt-BR')} un)`;
             if (elConcluidos) elConcluidos.innerText = currentData.recebimentoResumo.concluidos;
             if (elDesc) elDesc.innerText = currentData.recebimentoResumo.descarregando;
             if (elPendente) elPendente.innerText = currentData.recebimentoResumo.pendentes;
 
             const tbody = document.getElementById('recebimentoTableBody');
-            if (tbody) {
-                tbody.innerHTML = '';
-                if (currentData.recebimentoCargas.length === 0) {
-                    tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem recebimento hoje.</td></tr>`;
-                    return;
-                }
+            if (!tbody) return;
 
-                currentData.recebimentoCargas.forEach(c => {
-                    const tr = document.createElement('tr');
-                    tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
-
-                    let statusBadge = "text-slate-300 bg-slate-800";
-                    const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-                    if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
-                    else if (sNorm.includes("desc") || sNorm.includes("doca") || sNorm.includes("andamento")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
-                    else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
-
-                    tr.innerHTML = `
-                        <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
-                        <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
-                        <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                        <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
-                        <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                        <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                        <td class="w-[25%] text-right pr-1">
-                            <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                });
+            tbody.innerHTML = '';
+            if (currentData.recebimentoCargas.length === 0) {
+                tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem recebimento hoje.</td></tr>`;
+                return;
             }
+
+            // Paginação automática
+            const totalPaginas = Math.ceil(currentData.recebimentoCargas.length / ITENS_POR_PAGINA);
+            if (paginaRecebimento >= totalPaginas) paginaRecebimento = 0;
+            const inicio = paginaRecebimento * ITENS_POR_PAGINA;
+            const itensVisiveis = currentData.recebimentoCargas.slice(inicio, inicio + ITENS_POR_PAGINA);
+
+            itensVisiveis.forEach(c => {
+                const tr = document.createElement('tr');
+                tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
+
+                let statusBadge = "text-slate-300 bg-slate-800";
+                const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
+                else if (sNorm.includes("doca") || sNorm.includes("desc") || sNorm.includes("andamento")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
+                else if (sNorm.includes("patio")) statusBadge = "text-blue-300 bg-blue-500/20 border border-blue-500/40";
+                else if (sNorm.includes("nao") || sNorm.includes("pendent")) statusBadge = "text-slate-400 bg-slate-800 border border-slate-700";
+
+                tr.innerHTML = `
+                    <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
+                    <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
+                    <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                    <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
+                    <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
+                    <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                    <td class="w-[25%] text-right pr-1">
+                        <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
         function atualizarBadgeTimestamp(ts) {
@@ -488,10 +497,21 @@
             }
         }
 
+        // Alterna páginas a cada 8 segundos para tabelas com mais de 8 registros
+        setInterval(() => {
+            if (currentData.cargas.length > ITENS_POR_PAGINA) {
+                paginaExpedicao++;
+                renderizarExpedicao();
+            }
+            if (currentData.recebimentoCargas.length > ITENS_POR_PAGINA) {
+                paginaRecebimento++;
+                renderizarRecebimento();
+            }
+        }, 8000);
+
         document.addEventListener('DOMContentLoaded', () => {
             sincronizarExpedicao();
             sincronizarRecebimento();
-            // Polling sincronizado a cada 15 segundos
             setInterval(() => {
                 sincronizarExpedicao();
                 sincronizarRecebimento();
