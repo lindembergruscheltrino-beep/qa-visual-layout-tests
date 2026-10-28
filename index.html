@@ -14,40 +14,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Fontes Operacionais de Alta Definição: Inter & Roboto Mono -->
+    <!-- Tipografia de Ultra Nitidez para Paineis Industriais -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Roboto+Mono:wght@500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo+Mono:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+        * {
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: geometricPrecision !important;
+        }
+
         html, body {
             height: 100vh;
             width: 100vw;
             max-height: 100vh;
             max-width: 100vw;
             overflow: hidden !important;
-            background-color: #030712;
-            color: #f8fafc;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
-            -webkit-font-smoothing: antialiased;
+            background-color: #02050e;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+            transform: translateZ(0); /* Força renderização nítida via GPU */
         }
 
-        /* Numerais com distinção nítida entre 0 e 8 (zero limpo, sem barra interna) */
+        /* Numerais com nitidez máxima e zero sem traço de 8 */
         .font-num {
-            font-family: 'Roboto Mono', monospace !important;
+            font-family: 'Chivo Mono', monospace !important;
             font-feature-settings: "zero" 0;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.4px;
+            font-weight: 800 !important;
         }
 
         .kpi-big-value {
-            font-size: clamp(13px, 1.0vh + 0.4vw, 18px) !important;
+            font-size: clamp(14px, 1.2vh + 0.4vw, 20px) !important;
             line-height: 1 !important;
             font-weight: 900 !important;
         }
 
-        /* Estrutura de tabela com colunas rígidas e cabeçalhos sem corte */
+        /* Grade 2x2 com Bezel Safe Area para as 4 TVs */
+        .video-wall-grid {
+            padding: 10px 14px 14px 14px;
+            gap: 12px;
+            height: calc(100vh - 46px);
+        }
+
+        .tv-card {
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tabela rígida anti-borrão e anti-sobreposição */
         .table-operational {
             table-layout: fixed !important;
             width: 100% !important;
@@ -58,133 +79,127 @@
             white-space: nowrap;
             overflow: visible;
             text-overflow: clip;
-            padding: 3px 1px !important;
-            font-size: clamp(7.5px, 0.40vw + 0.32vh, 9px) !important;
-            letter-spacing: -0.2px;
+            padding: 3px 2px !important;
+            font-size: clamp(7.5px, 0.44vw + 0.32vh, 9.5px) !important;
+            font-weight: 900 !important;
+            color: #cbd5e1;
+            letter-spacing: 0.2px;
         }
 
         .table-operational td {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding: 2px 1px !important;
+            padding: 1px 2px !important;
             vertical-align: middle;
-        }
-
-        .row-text-split {
-            font-size: clamp(7.5px, 0.42vw + 0.35vh, 9.5px) !important;
+            font-size: clamp(7.5px, 0.45vw + 0.34vh, 9.8px) !important;
             line-height: 1.15 !important;
         }
 
-        .video-wall-grid {
-            padding: 8px;
-            gap: 8px;
-        }
-        
-        .tv-card {
-            padding: 8px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        /* Altura proporcional para que até 14 linhas caibam sem tocar a borda */
+        .table-operational tbody tr {
+            height: calc((100% - 24px) / 14);
         }
     </style>
 </head>
-<body class="flex flex-col h-screen w-screen overflow-hidden antialiased">
+<body class="flex flex-col h-screen w-screen overflow-hidden">
 
-    <!-- CABEÇALHO SUPERIOR -->
-    <header class="bg-[#0b1329] border-b border-slate-800 text-white px-5 py-1.5 flex justify-between items-center shrink-0">
+    <!-- CABEÇALHO COMPACTO E INTEGRADO (SEM ESPAÇOS MORTOS) -->
+    <header class="bg-[#070d1e] border-b border-slate-800/80 text-white px-4 py-1.5 flex justify-between items-center shrink-0 h-[46px]">
         <div class="flex items-center gap-3">
-            <div class="px-3 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
-            <div>
-                <h1 class="text-xs font-extrabold text-white leading-tight tracking-wide">Control Tower WMS • Visão Consolidada</h1>
-                <p class="text-[9px] text-slate-300 font-semibold leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
+            <div class="px-2.5 py-0.5 bg-blue-600 rounded text-white font-black text-[11px] tracking-wider shadow">TORRE DE CONTROLE</div>
+            <div class="flex items-baseline gap-2">
+                <h1 class="text-xs font-black text-white leading-none tracking-wide">WMS Control Tower</h1>
+                <span class="text-[9.5px] text-slate-400 font-bold">• CD Alhandra PB • Whirlpool • Trino Logistics</span>
             </div>
         </div>
         
         <div class="flex items-center gap-3">
-            <div id="badgeSync" class="flex items-center gap-2 bg-[#17223b] border border-slate-700 px-3 py-1 rounded text-slate-100 text-[10px] font-bold">
+            <div id="badgeSync" class="flex items-center gap-2 bg-[#101b33] border border-slate-700/80 px-2.5 py-1 rounded text-slate-100 text-[10px] font-bold">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Sincronizando com as bases oficiais...
+                Bases Conectadas
             </div>
-            <button onclick="toggleFullscreen()" class="bg-[#17223b] hover:bg-slate-700 border border-slate-700 text-[10px] text-slate-200 hover:text-white px-2.5 py-1 rounded cursor-pointer font-bold transition">
-                📺 Modo TV
+            <button onclick="toggleFullscreen()" class="bg-[#101b33] hover:bg-slate-700 border border-slate-700/80 text-[10px] text-slate-200 hover:text-white px-2.5 py-1 rounded cursor-pointer font-bold transition">
+                📺 Tela Cheia
             </button>
         </div>
     </header>
 
-    <!-- MATRIZ 2x2 VIDEO WALL -->
-    <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#030712]">
+    <!-- MATRIZ 2x2 VIDEO WALL (AJUSTADA ÀS BORDAS FÍSICAS DAS 4 TVs) -->
+    <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#02050e]">
 
         <!-- ==================== TV 01: MÓDULO OTIMIZAÇÃO (LIMPA) ==================== -->
-        <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
+        <div class="tv-card bg-[#060c1c] flex flex-col justify-center items-center h-full text-center p-4">
             <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-2">
                 <span class="text-blue-400 font-black text-2xl">⚡</span>
             </div>
-            <h2 class="text-sm font-extrabold text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
-            <p class="text-slate-400 text-xs max-w-[320px] mt-1 font-medium leading-relaxed">
-                Painel reservado. Aguardando a conexão da base de Otimização de Armazém.
+            <h2 class="text-sm font-black text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
+            <p class="text-slate-400 text-[11px] max-w-[320px] mt-1 font-bold leading-relaxed">
+                Painel reservado. Aguardando conexão da base de Otimização.
             </p>
-            <div class="mt-3 px-3 py-0.5 rounded bg-slate-800/80 text-[10px] font-mono text-slate-400 border border-slate-700">
+            <div class="mt-2.5 px-3 py-0.5 rounded bg-slate-800/80 text-[9.5px] font-mono text-slate-400 border border-slate-700 font-bold">
                 Status: Aguardando Base
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 ESTÁTICO) ==================== -->
-        <div class="tv-card bg-[#091122] flex flex-col overflow-hidden h-full gap-1">
-            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-0.5 px-1">
-                <h2 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 NITIDEZ MÁXIMA) ==================== -->
+        <div class="tv-card bg-[#060c1c] flex flex-col overflow-hidden h-full p-2 gap-1">
+            <!-- Barra Superior da TV 02 -->
+            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-1 px-1">
+                <h2 class="text-[11px] font-black text-white uppercase tracking-wider flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
-                <div class="flex items-center gap-4 text-[9px] font-bold">
-                    <span class="text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição</span>
-                    <span class="text-cyan-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento</span>
+                <div class="flex items-center gap-4 text-[9.5px] font-black">
+                    <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Expedição</span>
+                    <span class="text-cyan-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Recebimento</span>
                 </div>
             </div>
 
             <!-- GRID SPLIT 50 / 50 -->
-            <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden min-h-0">
+            <div class="grid grid-cols-2 gap-2 flex-1 overflow-hidden min-h-0">
                 
                 <!-- METADE ESQUERDA: EXPEDIÇÃO -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1 rounded-lg border border-slate-800/60">
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0a1124] p-1.5 rounded-lg border border-slate-800/70">
                     
                     <!-- Cards de Status da Expedição -->
-                    <div class="grid grid-cols-5 gap-0.5 shrink-0 mb-1 text-center">
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-slate-700/60">
-                            <p class="text-[6.5px] text-slate-400 font-bold uppercase">Total</p>
-                            <p id="kpiTotalCargas" class="kpi-big-value text-white font-num font-black">--</p>
+                    <div class="grid grid-cols-5 gap-1 shrink-0 mb-1 text-center">
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-slate-700/70">
+                            <p class="text-[6.5px] text-slate-300 font-black uppercase">Total</p>
+                            <p id="kpiTotalCargas" class="kpi-big-value text-white font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-emerald-500/30">
-                            <p class="text-[6.5px] text-emerald-400 font-bold uppercase">Concl.</p>
-                            <p id="kpiConcluidos" class="kpi-big-value text-emerald-400 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-emerald-500/40">
+                            <p class="text-[6.5px] text-emerald-400 font-black uppercase">Concl.</p>
+                            <p id="kpiConcluidos" class="kpi-big-value text-emerald-400 font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-lime-500/30">
-                            <p class="text-[6.5px] text-lime-400 font-bold uppercase">Fatur.</p>
-                            <p id="kpiFaturando" class="kpi-big-value text-lime-300 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-lime-500/40">
+                            <p class="text-[6.5px] text-lime-400 font-black uppercase">Fatur.</p>
+                            <p id="kpiFaturando" class="kpi-big-value text-lime-300 font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-amber-500/30">
-                            <p class="text-[6.5px] text-amber-400 font-bold uppercase">Carreg.</p>
-                            <p id="kpiCarregando" class="kpi-big-value text-amber-400 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-amber-500/40">
+                            <p class="text-[6.5px] text-amber-400 font-black uppercase">Carreg.</p>
+                            <p id="kpiCarregando" class="kpi-big-value text-amber-400 font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-rose-500/30">
-                            <p class="text-[6.5px] text-rose-400 font-bold uppercase">Pend.</p>
-                            <p id="kpiPendente" class="kpi-big-value text-rose-500 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-rose-500/40">
+                            <p class="text-[6.5px] text-rose-400 font-black uppercase">Pend.</p>
+                            <p id="kpiPendente" class="kpi-big-value text-rose-500 font-num">--</p>
                         </div>
                     </div>
 
-                    <!-- Tabela Expedição Rígida com Títulos 100% Visíveis -->
-                    <div class="overflow-hidden flex-1 min-h-0 bg-[#080e1a] rounded">
-                        <table class="table-operational row-text-split text-slate-200 h-full">
-                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black border-b border-slate-700/60">
+                    <!-- Tabela Expedição Rígida com Nitidez Extrema -->
+                    <div class="overflow-hidden flex-1 min-h-0 bg-[#040814] rounded border border-slate-800/60 pb-1">
+                        <table class="table-operational text-slate-100 h-full">
+                            <thead class="bg-[#0e172e] text-slate-200 uppercase font-black border-b border-slate-700/80">
                                 <tr>
-                                    <th style="width: 22%; text-align: left; padding-left: 3px;">TRANSP</th>
+                                    <th style="width: 22%; text-align: left; padding-left: 4px;">TRANSP</th>
                                     <th style="width: 11%; text-align: center;">DOCA</th>
                                     <th style="width: 12%; text-align: center;">PEÇAS</th>
                                     <th style="width: 13%; text-align: center;">AGENDA</th>
                                     <th style="width: 10%; text-align: center;" class="text-amber-300">TMP</th>
                                     <th style="width: 9%; text-align: center;" class="text-teal-300">PPM</th>
-                                    <th style="width: 23%; text-align: right; padding-right: 3px;">STATUS</th>
+                                    <th style="width: 23%; text-align: right; padding-right: 4px;">STATUS</th>
                                 </tr>
                             </thead>
-                            <tbody id="expedicaoTableBody" class="font-medium">
+                            <tbody id="expedicaoTableBody" class="font-bold">
                                 <tr><td colspan="7" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
                             </tbody>
                         </table>
@@ -192,43 +207,43 @@
                 </div>
 
                 <!-- METADE DIREITA: RECEBIMENTO -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1 rounded-lg border border-slate-800/60">
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#0a1124] p-1.5 rounded-lg border border-slate-800/70">
 
                     <!-- Cards de Status do Recebimento -->
-                    <div class="grid grid-cols-4 gap-0.5 shrink-0 mb-1 text-center">
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-slate-700/60">
-                            <p class="text-[6.5px] text-slate-400 font-bold uppercase">Total Rec</p>
-                            <p id="kpiRecTotal" class="kpi-big-value text-white font-num font-black">--</p>
+                    <div class="grid grid-cols-4 gap-1 shrink-0 mb-1 text-center">
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-slate-700/70">
+                            <p class="text-[6.5px] text-slate-300 font-black uppercase">Total Rec</p>
+                            <p id="kpiRecTotal" class="kpi-big-value text-white font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-emerald-500/30">
-                            <p class="text-[6.5px] text-emerald-400 font-bold uppercase">Finalizado</p>
-                            <p id="kpiRecConcluidos" class="kpi-big-value text-emerald-400 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-emerald-500/40">
+                            <p class="text-[6.5px] text-emerald-400 font-black uppercase">Finalizado</p>
+                            <p id="kpiRecConcluidos" class="kpi-big-value text-emerald-400 font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-amber-500/30">
-                            <p class="text-[6.5px] text-amber-400 font-bold uppercase">Descarreg.</p>
-                            <p id="kpiRecDescarregando" class="kpi-big-value text-amber-400 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-amber-500/40">
+                            <p class="text-[6.5px] text-amber-400 font-black uppercase">Descarreg.</p>
+                            <p id="kpiRecDescarregando" class="kpi-big-value text-amber-400 font-num">--</p>
                         </div>
-                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-rose-500/30">
-                            <p class="text-[6.5px] text-rose-400 font-bold uppercase">Pendente</p>
-                            <p id="kpiRecPendente" class="kpi-big-value text-rose-500 font-num font-black">--</p>
+                        <div class="bg-[#101b35] py-0.5 px-0.5 rounded border border-rose-500/40">
+                            <p class="text-[6.5px] text-rose-400 font-black uppercase">Pendente</p>
+                            <p id="kpiRecPendente" class="kpi-big-value text-rose-500 font-num">--</p>
                         </div>
                     </div>
 
-                    <!-- Tabela Recebimento Rígida com Títulos 100% Visíveis -->
-                    <div class="overflow-hidden flex-1 min-h-0 bg-[#080e1a] rounded">
-                        <table class="table-operational row-text-split text-slate-200 h-full">
-                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black border-b border-slate-700/60">
+                    <!-- Tabela Recebimento Rígida com Margem Inferior Salva -->
+                    <div class="overflow-hidden flex-1 min-h-0 bg-[#040814] rounded border border-slate-800/60 pb-1">
+                        <table class="table-operational text-slate-100 h-full">
+                            <thead class="bg-[#0e172e] text-slate-200 uppercase font-black border-b border-slate-700/80">
                                 <tr>
-                                    <th style="width: 22%; text-align: left; padding-left: 3px;">TRANSP</th>
+                                    <th style="width: 22%; text-align: left; padding-left: 4px;">TRANSP</th>
                                     <th style="width: 11%; text-align: center;">DOCA</th>
                                     <th style="width: 12%; text-align: center;">PEÇAS</th>
                                     <th style="width: 13%; text-align: center;">AGENDA</th>
                                     <th style="width: 10%; text-align: center;" class="text-amber-300">TMP</th>
                                     <th style="width: 9%; text-align: center;" class="text-teal-300">PPM</th>
-                                    <th style="width: 23%; text-align: right; padding-right: 3px;">STATUS</th>
+                                    <th style="width: 23%; text-align: right; padding-right: 4px;">STATUS</th>
                                 </tr>
                             </thead>
-                            <tbody id="recebimentoTableBody" class="font-medium">
+                            <tbody id="recebimentoTableBody" class="font-bold">
                                 <tr><td colspan="7" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
                             </tbody>
                         </table>
@@ -239,30 +254,30 @@
         </div>
 
         <!-- ==================== TV 03: MÓDULO DE EXPANSÃO ==================== -->
-        <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
+        <div class="tv-card bg-[#060c1c] flex flex-col justify-center items-center h-full text-center p-4">
             <div class="w-12 h-12 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-2">
                 <span class="text-slate-300 font-bold text-2xl">📊</span>
             </div>
-            <h3 class="text-sm font-extrabold text-slate-200 uppercase tracking-wider">TV 03: Indicadores Operacionais</h3>
-            <p class="text-slate-400 text-xs max-w-[320px] mt-1 font-medium leading-relaxed">
+            <h3 class="text-sm font-black text-slate-200 uppercase tracking-wider">TV 03: Indicadores Operacionais</h3>
+            <p class="text-slate-400 text-[11px] max-w-[320px] mt-1 font-bold leading-relaxed">
                 Espaço livre para gráficos de produtividade, tempos médios e backlog.
             </p>
         </div>
 
         <!-- ==================== TV 04: MÓDULO DE EXPANSÃO ==================== -->
-        <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
+        <div class="tv-card bg-[#060c1c] flex flex-col justify-center items-center h-full text-center p-4">
             <div class="w-12 h-12 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-2">
                 <span class="text-slate-300 font-bold text-2xl">📦</span>
             </div>
-            <h3 class="text-sm font-extrabold text-slate-200 uppercase tracking-wider">TV 04: Módulo Estratégico</h3>
-            <p class="text-slate-400 text-xs max-w-[320px] mt-1 font-medium leading-relaxed">
+            <h3 class="text-sm font-black text-slate-200 uppercase tracking-wider">TV 04: Módulo Estratégico</h3>
+            <p class="text-slate-400 text-[11px] max-w-[320px] mt-1 font-bold leading-relaxed">
                 Espaço reservado para visualização de layout de docas ou backlog consolidado.
             </p>
         </div>
 
     </main>
 
-    <!-- SCRIPTS DE INTEGRAÇÃO EM TEMPO REAL -->
+    <!-- SCRIPTS DE SINCRONIZAÇÃO EM TEMPO REAL -->
     <script>
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzENwdne1UBhEi54kwL-hq2WuAGvtwMiRFZ6Vc2LoF74MCl1aj_m64jgVvWDylB8g9O/exec";
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
@@ -274,7 +289,6 @@
             recebimentoCargas: []
         };
 
-        // Formatação limpa de tempo (HH:mm)
         function formatarTempoCurto(valor) {
             if (!valor || valor === '-' || valor === '0' || valor === 0) return '-';
             const str = String(valor).trim();
@@ -282,7 +296,6 @@
             return match ? match[1] : str;
         }
 
-        // Limpeza de erros em PPM (trata #DIV/0!)
         function formatarPPM(valor) {
             if (!valor || valor === '-') return '-';
             const str = String(valor).trim();
@@ -358,26 +371,26 @@
 
             currentData.cargas.forEach(c => {
                 const tr = document.createElement('tr');
-                tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
+                tr.className = "border-b border-slate-800/80 hover:bg-slate-800/30 text-center";
 
-                let statusBadge = "text-slate-300 bg-slate-800";
+                let statusBadge = "text-slate-200 bg-slate-800";
                 const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-                if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
-                else if (sNorm.includes("fatur")) statusBadge = "text-lime-200 bg-lime-500/25 border border-lime-400/40 font-bold";
-                else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
-                else if (sNorm.includes("separ") || sNorm.includes("confer")) statusBadge = "text-cyan-300 bg-cyan-500/20 border border-cyan-500/40";
-                else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
+                if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-[#34d399] bg-[#064e3b]/50 border border-[#059669]";
+                else if (sNorm.includes("fatur")) statusBadge = "text-[#a3e635] bg-[#365314]/50 border border-[#65a30d]";
+                else if (sNorm.includes("carreg") || sNorm.includes("doca") || sNorm.includes("apres")) statusBadge = "text-[#fbbf24] bg-[#78350f]/50 border border-[#d97706]";
+                else if (sNorm.includes("separ") || sNorm.includes("confer")) statusBadge = "text-[#38bdf8] bg-[#0c4a6e]/50 border border-[#0284c7]";
+                else if (sNorm.includes("pendent")) statusBadge = "text-[#f87171] bg-[#7f1d1d]/50 border border-[#dc2626]";
 
                 tr.innerHTML = `
-                    <td style="text-align: left; padding-left: 3px;" class="font-bold text-white font-num">${c.transporte}</td>
-                    <td class="font-bold text-blue-400 font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
-                    <td class="font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                    <td class="text-slate-300 font-num">${c.agenda || '-'}</td>
-                    <td class="text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                    <td class="text-teal-300 font-num font-bold">${formatarPPM(c.ppm)}</td>
-                    <td style="text-align: right; padding-right: 3px;">
-                        <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
+                    <td style="text-align: left; padding-left: 4px;" class="font-black text-white font-num">${c.transporte}</td>
+                    <td class="font-black text-[#60a5fa] font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
+                    <td class="font-black text-[#38bdf8] font-num">${c.pecas || 0}</td>
+                    <td class="text-white font-num">${c.agenda || '-'}</td>
+                    <td class="text-[#fbbf24] font-num">${formatarTempoCurto(c.tmp)}</td>
+                    <td class="text-[#2dd4bf] font-num">${formatarPPM(c.ppm)}</td>
+                    <td style="text-align: right; padding-right: 4px;">
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${c.status}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -446,25 +459,25 @@
 
             currentData.recebimentoCargas.forEach(c => {
                 const tr = document.createElement('tr');
-                tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
+                tr.className = "border-b border-slate-800/80 hover:bg-slate-800/30 text-center";
 
-                let statusBadge = "text-slate-300 bg-slate-800";
+                let statusBadge = "text-slate-200 bg-slate-800";
                 const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-                if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-emerald-300 bg-emerald-500/20 border border-emerald-500/40";
-                else if (sNorm.includes("doca") || sNorm.includes("desc") || sNorm.includes("andamento")) statusBadge = "text-amber-300 bg-amber-500/20 border border-amber-500/40";
-                else if (sNorm.includes("patio")) statusBadge = "text-blue-300 bg-blue-500/20 border border-blue-500/40";
-                else if (sNorm.includes("nao") || sNorm.includes("pendent")) statusBadge = "text-slate-400 bg-slate-800 border border-slate-700";
+                if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-[#34d399] bg-[#064e3b]/50 border border-[#059669]";
+                else if (sNorm.includes("doca") || sNorm.includes("desc") || sNorm.includes("andamento")) statusBadge = "text-[#fbbf24] bg-[#78350f]/50 border border-[#d97706]";
+                else if (sNorm.includes("patio")) statusBadge = "text-[#60a5fa] bg-[#1e3a8a]/50 border border-[#2563eb]";
+                else if (sNorm.includes("nao") || sNorm.includes("pendent")) statusBadge = "text-[#f87171] bg-[#7f1d1d]/50 border border-[#dc2626]";
 
                 tr.innerHTML = `
-                    <td style="text-align: left; padding-left: 3px;" class="font-bold text-white font-num">${c.transporte}</td>
-                    <td class="font-bold text-blue-400 font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
-                    <td class="font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                    <td class="text-slate-300 font-num">${c.agenda || '-'}</td>
-                    <td class="text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                    <td class="text-teal-300 font-num font-bold">${formatarPPM(c.ppm)}</td>
-                    <td style="text-align: right; padding-right: 3px;">
-                        <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
+                    <td style="text-align: left; padding-left: 4px;" class="font-black text-white font-num">${c.transporte}</td>
+                    <td class="font-black text-[#60a5fa] font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
+                    <td class="font-black text-[#38bdf8] font-num">${c.pecas || 0}</td>
+                    <td class="text-white font-num">${c.agenda || '-'}</td>
+                    <td class="text-[#fbbf24] font-num">${formatarTempoCurto(c.tmp)}</td>
+                    <td class="text-[#2dd4bf] font-num">${formatarPPM(c.ppm)}</td>
+                    <td style="text-align: right; padding-right: 4px;">
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${c.status}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
