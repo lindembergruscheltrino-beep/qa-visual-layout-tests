@@ -19,7 +19,6 @@
     <style>
         * {
             box-sizing: border-box;
-            /* Desativa antialiasing borrado e força renderização nítida direta */
             text-rendering: optimizeSpeed !important;
             -webkit-font-smoothing: subpixel-antialiased !important;
         }
@@ -32,7 +31,6 @@
             overflow: hidden !important;
             background-color: #000000;
             color: #ffffff;
-            /* Fontes de sistema nativas do Windows com renderização perfeita em hardware */
             font-family: 'Segoe UI', -apple-system, system-ui, Arial, sans-serif !important;
         }
 
@@ -130,7 +128,7 @@
             </div>
             <h2 class="text-xs font-black text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
             <p class="text-slate-300 text-[10px] max-w-[300px] mt-0.5 font-bold leading-relaxed">
-                Painel reservado. A aguardar conexão da base de Otimização.
+                Painel reservado. Aguardando conexão da base de Otimização.
             </p>
             <div class="mt-2 px-2.5 py-0.5 rounded bg-slate-800 text-[9px] font-mono text-slate-300 border border-slate-700 font-bold">
                 Status: Aguardando Base
@@ -180,11 +178,11 @@
                                     <th style="width: 13%; text-align: center;">AGENDA</th>
                                     <th style="width: 10%; text-align: center;" class="text-amber-400">TMP</th>
                                     <th style="width: 9%; text-align: center;" class="text-cyan-400">PPM</th>
-                                    <th style="width: 23%; text-align: right; padding-right: 3px;">STATUS</th>
+                                    <th style="width: 23%; text-align: center;">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="expedicaoTableBody" class="font-bold">
-                                <tr><td colspan="7" class="text-center py-2 text-slate-400">A aguardar dados...</td></tr>
+                                <tr><td colspan="7" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -218,11 +216,11 @@
                                     <th style="width: 13%; text-align: center;">AGENDA</th>
                                     <th style="width: 10%; text-align: center;" class="text-amber-400">TMP</th>
                                     <th style="width: 9%; text-align: center;" class="text-cyan-400">PPM</th>
-                                    <th style="width: 23%; text-align: right; padding-right: 3px;">STATUS</th>
+                                    <th style="width: 23%; text-align: center;">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="recebimentoTableBody" class="font-bold">
-                                <tr><td colspan="7" class="text-center py-2 text-slate-400">A aguardar dados...</td></tr>
+                                <tr><td colspan="7" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -281,6 +279,13 @@
                 return '-';
             }
             return str;
+        }
+
+        // Padroniza status para Title Case (primeira letra maiúscula e o resto minúsculo)
+        function formatarStatusTexto(texto) {
+            if (!texto) return '-';
+            const str = String(texto).trim();
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         }
 
         // --- RETORNO EXPEDIÇÃO ---
@@ -367,8 +372,8 @@
                     <td class="text-white font-num">${c.agenda || '-'}</td>
                     <td class="text-[#fbbf24] font-num">${formatarTempoCurto(c.tmp)}</td>
                     <td class="text-[#2dd4bf] font-num">${formatarPPM(c.ppm)}</td>
-                    <td style="text-align: right; padding-right: 3px;">
-                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${c.status}</span>
+                    <td style="text-align: center;">
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${formatarStatusTexto(c.status)}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -454,8 +459,8 @@
                     <td class="text-white font-num">${c.agenda || '-'}</td>
                     <td class="text-[#fbbf24] font-num">${formatarTempoCurto(c.tmp)}</td>
                     <td class="text-[#2dd4bf] font-num">${formatarPPM(c.ppm)}</td>
-                    <td style="text-align: right; padding-right: 3px;">
-                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${c.status}</span>
+                    <td style="text-align: center;">
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${formatarStatusTexto(c.status)}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
