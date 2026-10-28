@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WMS Control Tower - CD Alhandra PB</title>
     
-    <!-- Fontes Operacionais: Inter & Roboto Mono -->
+    <!-- Fontes Operacionais de Alta Definição: Inter & Roboto Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Roboto+Mono:wght@500;700;800;900&display=swap" rel="stylesheet">
@@ -34,161 +34,150 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Numerais com distinção nítida entre 0 e 8 (zero limpo, sem barra interna) */
         .font-num {
             font-family: 'Roboto Mono', monospace !important;
             font-feature-settings: "zero" 0;
-            letter-spacing: -0.2px;
+            letter-spacing: -0.3px;
         }
 
         .kpi-big-value {
-            font-size: clamp(14px, 1.2vh + 0.5vw, 22px) !important;
-            line-height: 1.1 !important;
+            font-size: clamp(13px, 1.0vh + 0.4vw, 18px) !important;
+            line-height: 1 !important;
             font-weight: 900 !important;
         }
 
+        /* Estrutura de tabela com colunas rígidas para nunca grudar */
+        .table-operational {
+            table-layout: fixed !important;
+            width: 100% !important;
+            border-collapse: collapse !important;
+        }
+
+        .table-operational th, 
+        .table-operational td {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: 2px 2px !important;
+            vertical-align: middle;
+        }
+
         .row-text-split {
-            font-size: clamp(7.5px, 0.46vw + 0.35vh, 9.8px) !important;
-            line-height: 1.25 !important;
+            font-size: clamp(7.5px, 0.42vw + 0.35vh, 9.5px) !important;
+            line-height: 1.15 !important;
         }
-
-        table, th, td, tr, thead, tbody, tfoot {
-            border: none !important;
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
-        .ticker-wrap {
-            width: 100%; overflow: hidden; background-color: #0a0f1d; border-bottom: 1px solid #1f293d; padding: 4px 0; display: flex;
-        }
-        .ticker { display: flex; white-space: nowrap; animation: marquee 24s linear infinite; }
-        .ticker__item { display: flex; align-items: center; padding: 0 2rem; font-size: 0.75rem; font-weight: 700; }
-
-        @keyframes marquee { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
 
         .video-wall-grid {
             padding: 8px;
             gap: 8px;
         }
+        
         .tv-card {
             padding: 8px;
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .fade-transition {
-            transition: opacity 0.3s ease-in-out;
         }
     </style>
 </head>
 <body class="flex flex-col h-screen w-screen overflow-hidden antialiased">
 
     <!-- CABEÇALHO SUPERIOR -->
-    <header class="bg-[#0b1329] border-b border-slate-800 text-white px-5 pt-2 pb-1.5 flex justify-between items-center shrink-0">
+    <header class="bg-[#0b1329] border-b border-slate-800 text-white px-5 py-1.5 flex justify-between items-center shrink-0">
         <div class="flex items-center gap-3">
-            <div class="px-3 py-1 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
+            <div class="px-3 py-0.5 bg-blue-600 rounded text-white font-black text-xs tracking-wider shadow">TORRE DE CONTROLE</div>
             <div>
-                <h1 class="text-sm font-extrabold text-white leading-tight tracking-wide">Control Tower WMS • Visão Consolidada</h1>
-                <p class="text-[10px] text-slate-300 font-semibold leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
+                <h1 class="text-xs font-extrabold text-white leading-tight tracking-wide">Control Tower WMS • Visão Consolidada</h1>
+                <p class="text-[9px] text-slate-300 font-semibold leading-none">CD Alhandra PB • Whirlpool • Trino Logistics</p>
             </div>
         </div>
         
         <div class="flex items-center gap-3">
-            <div id="badgeSync" class="flex items-center gap-2 bg-[#17223b] border border-slate-700 px-3 py-1.5 rounded-md text-slate-100 text-[11px] font-bold">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <div id="badgeSync" class="flex items-center gap-2 bg-[#17223b] border border-slate-700 px-3 py-1 rounded text-slate-100 text-[10px] font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                 Sincronizando com as bases oficiais...
             </div>
-            <button onclick="toggleFullscreen()" class="bg-[#17223b] hover:bg-slate-700 border border-slate-700 text-[11px] text-slate-200 hover:text-white px-3 py-1.5 rounded cursor-pointer font-bold transition">
+            <button onclick="toggleFullscreen()" class="bg-[#17223b] hover:bg-slate-700 border border-slate-700 text-[10px] text-slate-200 hover:text-white px-2.5 py-1 rounded cursor-pointer font-bold transition">
                 📺 Modo TV
             </button>
         </div>
     </header>
-
-    <!-- TICKER SUPERIOR -->
-    <div class="ticker-wrap shrink-0">
-        <div class="ticker" id="tickerMarquee">
-            <div class="ticker__item text-slate-300">CD ALHANDRA PB • MONITORAMENTO EM TEMPO REAL DE EXPEDIÇÃO E RECEBIMENTO</div>
-            <div class="ticker__item text-emerald-400">EXPEDIÇÃO: AUTO-SYNC 15S</div>
-            <div class="ticker__item text-cyan-400">RECEBIMENTO: AUTO-SYNC 15S</div>
-        </div>
-    </div>
 
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid flex-1 grid grid-cols-2 grid-rows-2 overflow-hidden bg-[#030712]">
 
         <!-- ==================== TV 01: MÓDULO OTIMIZAÇÃO (LIMPA) ==================== -->
         <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
-            <div class="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center mb-2">
                 <span class="text-blue-400 font-black text-2xl">⚡</span>
             </div>
-            <h2 class="text-base font-extrabold text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
-            <p class="text-slate-400 text-xs max-w-[340px] mt-2 font-medium leading-relaxed">
-                Painel reservado. Aguardando a conexão oficial da base de Otimização de Estoque, Posições e Densidade.
+            <h2 class="text-sm font-extrabold text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
+            <p class="text-slate-400 text-xs max-w-[320px] mt-1 font-medium leading-relaxed">
+                Painel reservado. Aguardando a conexão da base de Otimização de Armazém.
             </p>
-            <div class="mt-4 px-3 py-1 rounded bg-slate-800/80 text-[11px] font-mono text-slate-400 border border-slate-700">
-                Status: Pronto para Parametrização
+            <div class="mt-3 px-3 py-0.5 rounded bg-slate-800/80 text-[10px] font-mono text-slate-400 border border-slate-700">
+                Status: Aguardando Base
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 OTIMIZADO) ==================== -->
+        <!-- ==================== TV 02: AGENDA OPERACIONAL (SPLIT 50/50 ESTÁTICO) ==================== -->
         <div class="tv-card bg-[#091122] flex flex-col overflow-hidden h-full gap-1">
-            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-1 px-1">
-                <h2 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
+            <div class="flex justify-between items-center shrink-0 border-b border-slate-800/80 pb-0.5 px-1">
+                <h2 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
-                <div class="flex items-center gap-4 text-[10px] font-bold">
-                    <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Expedição</span>
-                    <span class="text-cyan-400 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Recebimento</span>
+                <div class="flex items-center gap-4 text-[9px] font-bold">
+                    <span class="text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição</span>
+                    <span class="text-cyan-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento</span>
                 </div>
             </div>
 
             <!-- GRID SPLIT 50 / 50 -->
-            <div class="grid grid-cols-2 gap-2 flex-1 overflow-hidden min-h-0">
+            <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden min-h-0">
                 
                 <!-- METADE ESQUERDA: EXPEDIÇÃO -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1 rounded-lg border border-slate-800/60">
                     
                     <!-- Cards de Status da Expedição -->
-                    <div class="grid grid-cols-5 gap-1 shrink-0 mb-1 text-center">
-                        <div class="bg-[#14213d] p-1 rounded border border-slate-700/60">
-                            <p class="text-[7px] text-slate-400 font-bold uppercase">Total</p>
+                    <div class="grid grid-cols-5 gap-0.5 shrink-0 mb-1 text-center">
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-slate-700/60">
+                            <p class="text-[6.5px] text-slate-400 font-bold uppercase">Total</p>
                             <p id="kpiTotalCargas" class="kpi-big-value text-white font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-emerald-500/30">
-                            <p class="text-[7px] text-emerald-400 font-bold uppercase">Concl.</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-emerald-500/30">
+                            <p class="text-[6.5px] text-emerald-400 font-bold uppercase">Concl.</p>
                             <p id="kpiConcluidos" class="kpi-big-value text-emerald-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-lime-500/30">
-                            <p class="text-[7px] text-lime-400 font-bold uppercase">Fatur.</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-lime-500/30">
+                            <p class="text-[6.5px] text-lime-400 font-bold uppercase">Fatur.</p>
                             <p id="kpiFaturando" class="kpi-big-value text-lime-300 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-amber-500/30">
-                            <p class="text-[7px] text-amber-400 font-bold uppercase">Carreg.</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-amber-500/30">
+                            <p class="text-[6.5px] text-amber-400 font-bold uppercase">Carreg.</p>
                             <p id="kpiCarregando" class="kpi-big-value text-amber-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-rose-500/30">
-                            <p class="text-[7px] text-rose-400 font-bold uppercase">Pend.</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-rose-500/30">
+                            <p class="text-[6.5px] text-rose-400 font-bold uppercase">Pend.</p>
                             <p id="kpiPendente" class="kpi-big-value text-rose-500 font-num font-black">--</p>
                         </div>
                     </div>
 
-                    <!-- Tabela Expedição Sem Cortes -->
-                    <div class="overflow-hidden flex-1 flex flex-col min-h-0 bg-[#080e1a] rounded p-0.5">
-                        <table class="w-full text-left row-text-split text-slate-200 h-full flex flex-col justify-between">
-                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black shrink-0 border-b border-slate-700/60">
-                                <tr class="flex justify-between w-full px-1 py-1 text-center">
-                                    <th class="w-[24%] text-left pl-1">TRANSP</th>
-                                    <th class="w-[8%]">DOCA</th>
-                                    <th class="w-[11%]">PEÇAS</th>
-                                    <th class="w-[13%]">AGENDA</th>
-                                    <th class="w-[10%] text-amber-300">TMP</th>
-                                    <th class="w-[9%] text-teal-300">PPM</th>
-                                    <th class="w-[25%] text-right pr-1">STATUS</th>
+                    <!-- Tabela Expedição Rígida -->
+                    <div class="overflow-hidden flex-1 min-h-0 bg-[#080e1a] rounded">
+                        <table class="table-operational row-text-split text-slate-200 h-full">
+                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black border-b border-slate-700/60">
+                                <tr>
+                                    <th style="width: 25%; text-align: left; padding-left: 4px;">TRANSP</th>
+                                    <th style="width: 9%; text-align: center;">DOCA</th>
+                                    <th style="width: 10%; text-align: center;">PEÇAS</th>
+                                    <th style="width: 13%; text-align: center;">AGENDA</th>
+                                    <th style="width: 10%; text-align: center;" class="text-amber-300">TMP</th>
+                                    <th style="width: 9%; text-align: center;" class="text-teal-300">PPM</th>
+                                    <th style="width: 24%; text-align: right; padding-right: 4px;">STATUS</th>
                                 </tr>
                             </thead>
-                            <tbody id="expedicaoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0 fade-transition">
-                                <tr class="flex justify-center items-center py-3 text-slate-400">
-                                    <td>Aguardando dados...</td>
-                                </tr>
+                            <tbody id="expedicaoTableBody" class="font-medium">
+                                <tr><td colspan="7" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -198,43 +187,41 @@
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#0d172c] p-1 rounded-lg border border-slate-800/60">
 
                     <!-- Cards de Status do Recebimento -->
-                    <div class="grid grid-cols-4 gap-1 shrink-0 mb-1 text-center">
-                        <div class="bg-[#14213d] p-1 rounded border border-slate-700/60">
-                            <p class="text-[7px] text-slate-400 font-bold uppercase">Total Rec</p>
+                    <div class="grid grid-cols-4 gap-0.5 shrink-0 mb-1 text-center">
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-slate-700/60">
+                            <p class="text-[6.5px] text-slate-400 font-bold uppercase">Total Rec</p>
                             <p id="kpiRecTotal" class="kpi-big-value text-white font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-emerald-500/30">
-                            <p class="text-[7px] text-emerald-400 font-bold uppercase">Finalizado</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-emerald-500/30">
+                            <p class="text-[6.5px] text-emerald-400 font-bold uppercase">Finalizado</p>
                             <p id="kpiRecConcluidos" class="kpi-big-value text-emerald-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-amber-500/30">
-                            <p class="text-[7px] text-amber-400 font-bold uppercase">Descarreg.</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-amber-500/30">
+                            <p class="text-[6.5px] text-amber-400 font-bold uppercase">Descarreg.</p>
                             <p id="kpiRecDescarregando" class="kpi-big-value text-amber-400 font-num font-black">--</p>
                         </div>
-                        <div class="bg-[#14213d] p-1 rounded border border-rose-500/30">
-                            <p class="text-[7px] text-rose-400 font-bold uppercase">Pendente</p>
+                        <div class="bg-[#14213d] py-0.5 px-1 rounded border border-rose-500/30">
+                            <p class="text-[6.5px] text-rose-400 font-bold uppercase">Pendente</p>
                             <p id="kpiRecPendente" class="kpi-big-value text-rose-500 font-num font-black">--</p>
                         </div>
                     </div>
 
-                    <!-- Tabela Recebimento Sem Cortes -->
-                    <div class="overflow-hidden flex-1 flex flex-col min-h-0 bg-[#080e1a] rounded p-0.5">
-                        <table class="w-full text-left row-text-split text-slate-200 h-full flex flex-col justify-between">
-                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black shrink-0 border-b border-slate-700/60">
-                                <tr class="flex justify-between w-full px-1 py-1 text-center">
-                                    <th class="w-[24%] text-left pl-1">TRANSP</th>
-                                    <th class="w-[8%]">DOCA</th>
-                                    <th class="w-[11%]">PEÇAS</th>
-                                    <th class="w-[13%]">AGENDA</th>
-                                    <th class="w-[10%] text-amber-300">TMP</th>
-                                    <th class="w-[9%] text-teal-300">PPM</th>
-                                    <th class="w-[25%] text-right pr-1">STATUS</th>
+                    <!-- Tabela Recebimento Rígida -->
+                    <div class="overflow-hidden flex-1 min-h-0 bg-[#080e1a] rounded">
+                        <table class="table-operational row-text-split text-slate-200 h-full">
+                            <thead class="bg-[#111c33] text-slate-300 uppercase font-black border-b border-slate-700/60">
+                                <tr>
+                                    <th style="width: 25%; text-align: left; padding-left: 4px;">TRANSP</th>
+                                    <th style="width: 9%; text-align: center;">DOCA</th>
+                                    <th style="width: 10%; text-align: center;">PEÇAS</th>
+                                    <th style="width: 13%; text-align: center;">AGENDA</th>
+                                    <th style="width: 10%; text-align: center;" class="text-amber-300">TMP</th>
+                                    <th style="width: 9%; text-align: center;" class="text-teal-300">PPM</th>
+                                    <th style="width: 24%; text-align: right; padding-right: 4px;">STATUS</th>
                                 </tr>
                             </thead>
-                            <tbody id="recebimentoTableBody" class="font-medium flex-1 flex flex-col justify-around min-h-0 fade-transition">
-                                <tr class="flex justify-center items-center py-3 text-slate-400">
-                                    <td>Aguardando dados...</td>
-                                </tr>
+                            <tbody id="recebimentoTableBody" class="font-medium">
+                                <tr><td colspan="7" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -245,23 +232,23 @@
 
         <!-- ==================== TV 03: MÓDULO DE EXPANSÃO ==================== -->
         <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
-            <div class="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-2">
                 <span class="text-slate-300 font-bold text-2xl">📊</span>
             </div>
-            <h3 class="text-base font-extrabold text-slate-200 uppercase tracking-wider">TV 03: Indicadores Operacionais</h3>
-            <p class="text-slate-400 text-xs max-w-[320px] mt-2 font-medium leading-relaxed">
-                Espaço livre para gráficos de produtividade, tempos médios de permanência e KPIs analíticos.
+            <h3 class="text-sm font-extrabold text-slate-200 uppercase tracking-wider">TV 03: Indicadores Operacionais</h3>
+            <p class="text-slate-400 text-xs max-w-[320px] mt-1 font-medium leading-relaxed">
+                Espaço livre para gráficos de produtividade, tempos médios e backlog.
             </p>
         </div>
 
         <!-- ==================== TV 04: MÓDULO DE EXPANSÃO ==================== -->
         <div class="tv-card bg-[#091122] flex flex-col justify-center items-center h-full text-center p-6">
-            <div class="w-14 h-14 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-3">
+            <div class="w-12 h-12 rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center mb-2">
                 <span class="text-slate-300 font-bold text-2xl">📦</span>
             </div>
-            <h3 class="text-base font-extrabold text-slate-200 uppercase tracking-wider">TV 04: Módulo Estratégico</h3>
-            <p class="text-slate-400 text-xs max-w-[320px] mt-2 font-medium leading-relaxed">
-                Espaço reservado para visualização de ocupação do CD, layout de docas ou backlog consolidado.
+            <h3 class="text-sm font-extrabold text-slate-200 uppercase tracking-wider">TV 04: Módulo Estratégico</h3>
+            <p class="text-slate-400 text-xs max-w-[320px] mt-1 font-medium leading-relaxed">
+                Espaço reservado para visualização de layout de docas ou backlog consolidado.
             </p>
         </div>
 
@@ -279,13 +266,9 @@
             recebimentoCargas: []
         };
 
-        // Controle de paginação automática para listas longas
-        const ITENS_POR_PAGINA = 8;
-        let paginaExpedicao = 0;
-        let paginaRecebimento = 0;
-
+        // Formatação limpa de tempo (HH:mm)
         function formatarTempoCurto(valor) {
-            if (!valor || valor === '-') return '-';
+            if (!valor || valor === '-' || valor === '0' || valor === 0) return '-';
             const str = String(valor).trim();
             const match = str.match(/(\d{1,2}:\d{2})/);
             return match ? match[1] : str;
@@ -351,19 +334,14 @@
 
             tbody.innerHTML = '';
             if (currentData.cargas.length === 0) {
-                tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem cargas hoje.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-2 text-slate-400">Sem cargas hoje.</td></tr>`;
                 return;
             }
 
-            // Paginação automática
-            const totalPaginas = Math.ceil(currentData.cargas.length / ITENS_POR_PAGINA);
-            if (paginaExpedicao >= totalPaginas) paginaExpedicao = 0;
-            const inicio = paginaExpedicao * ITENS_POR_PAGINA;
-            const itensVisiveis = currentData.cargas.slice(inicio, inicio + ITENS_POR_PAGINA);
-
-            itensVisiveis.forEach(c => {
+            // Exibição de todos os registros sem rolagem
+            currentData.cargas.forEach(c => {
                 const tr = document.createElement('tr');
-                tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
+                tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
 
                 let statusBadge = "text-slate-300 bg-slate-800";
                 const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -375,14 +353,14 @@
                 else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
 
                 tr.innerHTML = `
-                    <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
-                    <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
-                    <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                    <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
-                    <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                    <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                    <td class="w-[25%] text-right pr-1">
-                        <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
+                    <td style="text-align: left; padding-left: 4px;" class="font-bold text-white font-num">${c.transporte}</td>
+                    <td class="font-bold text-blue-400 font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
+                    <td class="font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                    <td class="text-slate-300 font-num">${c.agenda || '-'}</td>
+                    <td class="text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
+                    <td class="text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                    <td style="text-align: right; padding-right: 4px;">
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -445,19 +423,14 @@
 
             tbody.innerHTML = '';
             if (currentData.recebimentoCargas.length === 0) {
-                tbody.innerHTML = `<tr class="flex justify-center items-center py-3 text-slate-400"><td>Sem recebimento hoje.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" class="text-center py-2 text-slate-400">Sem recebimento hoje.</td></tr>`;
                 return;
             }
 
-            // Paginação automática
-            const totalPaginas = Math.ceil(currentData.recebimentoCargas.length / ITENS_POR_PAGINA);
-            if (paginaRecebimento >= totalPaginas) paginaRecebimento = 0;
-            const inicio = paginaRecebimento * ITENS_POR_PAGINA;
-            const itensVisiveis = currentData.recebimentoCargas.slice(inicio, inicio + ITENS_POR_PAGINA);
-
-            itensVisiveis.forEach(c => {
+            // Exibição de todos os registros sem rolagem
+            currentData.recebimentoCargas.forEach(c => {
                 const tr = document.createElement('tr');
-                tr.className = "flex justify-between items-center w-full px-1 py-[3px] border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
+                tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
 
                 let statusBadge = "text-slate-300 bg-slate-800";
                 const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -468,14 +441,14 @@
                 else if (sNorm.includes("nao") || sNorm.includes("pendent")) statusBadge = "text-slate-400 bg-slate-800 border border-slate-700";
 
                 tr.innerHTML = `
-                    <td class="w-[24%] font-bold text-white text-left pl-1 font-num whitespace-nowrap">${c.transporte}</td>
-                    <td class="w-[8%] font-bold text-blue-400 font-num">${c.doca || '-'}</td>
-                    <td class="w-[11%] font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
-                    <td class="w-[13%] text-slate-300 font-num">${c.agenda || '-'}</td>
-                    <td class="w-[10%] text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                    <td class="w-[9%] text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                    <td class="w-[25%] text-right pr-1">
-                        <span class="inline-block px-1.5 py-[2px] rounded text-[8px] font-bold ${statusBadge} whitespace-nowrap">${c.status}</span>
+                    <td style="text-align: left; padding-left: 4px;" class="font-bold text-white font-num">${c.transporte}</td>
+                    <td class="font-bold text-blue-400 font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
+                    <td class="font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
+                    <td class="text-slate-300 font-num">${c.agenda || '-'}</td>
+                    <td class="text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
+                    <td class="text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
+                    <td style="text-align: right; padding-right: 4px;">
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -485,7 +458,7 @@
         function atualizarBadgeTimestamp(ts) {
             const badge = document.getElementById('badgeSync');
             if (badge && ts) {
-                badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span> Atualizado às ${ts}`;
+                badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Atualizado às ${ts}`;
             }
         }
 
@@ -497,21 +470,10 @@
             }
         }
 
-        // Alterna páginas a cada 8 segundos para tabelas com mais de 8 registros
-        setInterval(() => {
-            if (currentData.cargas.length > ITENS_POR_PAGINA) {
-                paginaExpedicao++;
-                renderizarExpedicao();
-            }
-            if (currentData.recebimentoCargas.length > ITENS_POR_PAGINA) {
-                paginaRecebimento++;
-                renderizarRecebimento();
-            }
-        }, 8000);
-
         document.addEventListener('DOMContentLoaded', () => {
             sincronizarExpedicao();
             sincronizarRecebimento();
+            // Atualização contínua a cada 15 segundos sem alternância de tela
             setInterval(() => {
                 sincronizarExpedicao();
                 sincronizarRecebimento();
