@@ -47,19 +47,27 @@
             font-weight: 900 !important;
         }
 
-        /* Estrutura de tabela com colunas rígidas para nunca grudar */
+        /* Estrutura de tabela com colunas rígidas e cabeçalhos sem corte */
         .table-operational {
             table-layout: fixed !important;
             width: 100% !important;
             border-collapse: collapse !important;
         }
 
-        .table-operational th, 
+        .table-operational th {
+            white-space: nowrap;
+            overflow: visible;
+            text-overflow: clip;
+            padding: 3px 1px !important;
+            font-size: clamp(7.5px, 0.40vw + 0.32vh, 9px) !important;
+            letter-spacing: -0.2px;
+        }
+
         .table-operational td {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            padding: 2px 2px !important;
+            padding: 2px 1px !important;
             vertical-align: middle;
         }
 
@@ -162,18 +170,18 @@
                         </div>
                     </div>
 
-                    <!-- Tabela Expedição Rígida -->
+                    <!-- Tabela Expedição Rígida com Títulos 100% Visíveis -->
                     <div class="overflow-hidden flex-1 min-h-0 bg-[#080e1a] rounded">
                         <table class="table-operational row-text-split text-slate-200 h-full">
                             <thead class="bg-[#111c33] text-slate-300 uppercase font-black border-b border-slate-700/60">
                                 <tr>
-                                    <th style="width: 25%; text-align: left; padding-left: 4px;">TRANSP</th>
-                                    <th style="width: 9%; text-align: center;">DOCA</th>
-                                    <th style="width: 10%; text-align: center;">PEÇAS</th>
+                                    <th style="width: 22%; text-align: left; padding-left: 3px;">TRANSP</th>
+                                    <th style="width: 11%; text-align: center;">DOCA</th>
+                                    <th style="width: 12%; text-align: center;">PEÇAS</th>
                                     <th style="width: 13%; text-align: center;">AGENDA</th>
                                     <th style="width: 10%; text-align: center;" class="text-amber-300">TMP</th>
                                     <th style="width: 9%; text-align: center;" class="text-teal-300">PPM</th>
-                                    <th style="width: 24%; text-align: right; padding-right: 4px;">STATUS</th>
+                                    <th style="width: 23%; text-align: right; padding-right: 3px;">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="expedicaoTableBody" class="font-medium">
@@ -206,18 +214,18 @@
                         </div>
                     </div>
 
-                    <!-- Tabela Recebimento Rígida -->
+                    <!-- Tabela Recebimento Rígida com Títulos 100% Visíveis -->
                     <div class="overflow-hidden flex-1 min-h-0 bg-[#080e1a] rounded">
                         <table class="table-operational row-text-split text-slate-200 h-full">
                             <thead class="bg-[#111c33] text-slate-300 uppercase font-black border-b border-slate-700/60">
                                 <tr>
-                                    <th style="width: 25%; text-align: left; padding-left: 4px;">TRANSP</th>
-                                    <th style="width: 9%; text-align: center;">DOCA</th>
-                                    <th style="width: 10%; text-align: center;">PEÇAS</th>
+                                    <th style="width: 22%; text-align: left; padding-left: 3px;">TRANSP</th>
+                                    <th style="width: 11%; text-align: center;">DOCA</th>
+                                    <th style="width: 12%; text-align: center;">PEÇAS</th>
                                     <th style="width: 13%; text-align: center;">AGENDA</th>
                                     <th style="width: 10%; text-align: center;" class="text-amber-300">TMP</th>
                                     <th style="width: 9%; text-align: center;" class="text-teal-300">PPM</th>
-                                    <th style="width: 24%; text-align: right; padding-right: 4px;">STATUS</th>
+                                    <th style="width: 23%; text-align: right; padding-right: 3px;">STATUS</th>
                                 </tr>
                             </thead>
                             <tbody id="recebimentoTableBody" class="font-medium">
@@ -272,6 +280,16 @@
             const str = String(valor).trim();
             const match = str.match(/(\d{1,2}:\d{2})/);
             return match ? match[1] : str;
+        }
+
+        // Limpeza de erros em PPM (trata #DIV/0!)
+        function formatarPPM(valor) {
+            if (!valor || valor === '-') return '-';
+            const str = String(valor).trim();
+            if (str.toUpperCase().includes('DIV') || str.includes('#') || str === 'NaN') {
+                return '-';
+            }
+            return str;
         }
 
         // --- RETORNO EXPEDIÇÃO ---
@@ -338,7 +356,6 @@
                 return;
             }
 
-            // Exibição de todos os registros sem rolagem
             currentData.cargas.forEach(c => {
                 const tr = document.createElement('tr');
                 tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
@@ -353,13 +370,13 @@
                 else if (sNorm.includes("pendent")) statusBadge = "text-rose-300 bg-rose-500/25 border border-rose-500/40 font-bold";
 
                 tr.innerHTML = `
-                    <td style="text-align: left; padding-left: 4px;" class="font-bold text-white font-num">${c.transporte}</td>
+                    <td style="text-align: left; padding-left: 3px;" class="font-bold text-white font-num">${c.transporte}</td>
                     <td class="font-bold text-blue-400 font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
                     <td class="font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
                     <td class="text-slate-300 font-num">${c.agenda || '-'}</td>
                     <td class="text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                    <td class="text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                    <td style="text-align: right; padding-right: 4px;">
+                    <td class="text-teal-300 font-num font-bold">${formatarPPM(c.ppm)}</td>
+                    <td style="text-align: right; padding-right: 3px;">
                         <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
                     </td>
                 `;
@@ -427,7 +444,6 @@
                 return;
             }
 
-            // Exibição de todos os registros sem rolagem
             currentData.recebimentoCargas.forEach(c => {
                 const tr = document.createElement('tr');
                 tr.className = "border-b border-slate-800/60 hover:bg-slate-800/30 transition text-center";
@@ -441,13 +457,13 @@
                 else if (sNorm.includes("nao") || sNorm.includes("pendent")) statusBadge = "text-slate-400 bg-slate-800 border border-slate-700";
 
                 tr.innerHTML = `
-                    <td style="text-align: left; padding-left: 4px;" class="font-bold text-white font-num">${c.transporte}</td>
+                    <td style="text-align: left; padding-left: 3px;" class="font-bold text-white font-num">${c.transporte}</td>
                     <td class="font-bold text-blue-400 font-num">${c.doca && c.doca !== '-' ? c.doca : '-'}</td>
                     <td class="font-bold text-cyan-300 font-num">${c.pecas || 0}</td>
                     <td class="text-slate-300 font-num">${c.agenda || '-'}</td>
                     <td class="text-amber-300 font-num font-semibold">${formatarTempoCurto(c.tmp)}</td>
-                    <td class="text-teal-300 font-num font-bold">${c.ppm || '-'}</td>
-                    <td style="text-align: right; padding-right: 4px;">
+                    <td class="text-teal-300 font-num font-bold">${formatarPPM(c.ppm)}</td>
+                    <td style="text-align: right; padding-right: 3px;">
                         <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-bold ${statusBadge}">${c.status}</span>
                     </td>
                 `;
@@ -473,7 +489,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             sincronizarExpedicao();
             sincronizarRecebimento();
-            // Atualização contínua a cada 15 segundos sem alternância de tela
             setInterval(() => {
                 sincronizarExpedicao();
                 sincronizarRecebimento();
