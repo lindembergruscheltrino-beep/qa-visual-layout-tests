@@ -17,6 +17,15 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
+        :root {
+            --pad-top: 4px;
+            --pad-bottom: 8px;
+            --pad-sides: 8px;
+            --grid-gap: 8px;
+            --row-height-factor: 14;
+            --font-scale-factor: 1.0;
+        }
+
         * {
             box-sizing: border-box;
             text-rendering: optimizeSpeed !important;
@@ -34,7 +43,6 @@
             font-family: 'Segoe UI', -apple-system, system-ui, Arial, sans-serif !important;
         }
 
-        /* Numerais com definição cristalina e zero limpo */
         .font-num {
             font-family: 'Consolas', 'Lucida Console', monospace !important;
             letter-spacing: -0.2px;
@@ -42,15 +50,18 @@
         }
 
         .kpi-big-value {
-            font-size: clamp(12px, 1.0vh + 0.35vw, 17px) !important;
+            font-size: calc(clamp(11px, 0.9vh + 0.3vw, 16px) * var(--font-scale-factor)) !important;
             line-height: 1 !important;
             font-weight: 900 !important;
         }
 
-        /* Grelha 2x2 com margens calibradas */
+        /* Grelha Dinâmica Controlada pelas Variáveis CSS */
         .video-wall-grid {
-            padding: 4px 8px 8px 8px;
-            gap: 8px;
+            padding-top: var(--pad-top);
+            padding-bottom: var(--pad-bottom);
+            padding-left: var(--pad-sides);
+            padding-right: var(--pad-sides);
+            gap: var(--grid-gap);
             height: calc(100vh - 30px);
         }
 
@@ -60,7 +71,6 @@
             background-color: #050914;
         }
 
-        /* Tabela rígida de contraste elevado */
         .table-operational {
             table-layout: fixed !important;
             width: 100% !important;
@@ -72,7 +82,7 @@
             overflow: visible;
             text-overflow: clip;
             padding: 2px 1px !important;
-            font-size: clamp(7.5px, 0.40vw + 0.30vh, 9.2px) !important;
+            font-size: calc(clamp(7px, 0.38vw + 0.28vh, 8.8px) * var(--font-scale-factor)) !important;
             font-weight: 900 !important;
             color: #e2e8f0;
             background-color: #0a1124;
@@ -85,13 +95,29 @@
             white-space: nowrap;
             padding: 1px 1px !important;
             vertical-align: middle;
-            font-size: clamp(7.5px, 0.42vw + 0.32vh, 9.5px) !important;
+            font-size: calc(clamp(7.2px, 0.40vw + 0.30vh, 9.2px) * var(--font-scale-factor)) !important;
             line-height: 1.15 !important;
             border-bottom: 1px solid #0f172a;
         }
 
         .table-operational tbody tr {
-            height: calc((100% - 16px) / 14);
+            height: calc((100% - 16px) / var(--row-height-factor));
+        }
+
+        /* Painel Flutuante de Calibração */
+        #painelCalibracao {
+            position: fixed;
+            top: 36px;
+            right: 12px;
+            width: 320px;
+            background: rgba(10, 16, 32, 0.96);
+            backdrop-filter: blur(8px);
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            z-index: 9999;
+            display: none;
         }
     </style>
 </head>
@@ -107,16 +133,89 @@
             </div>
         </div>
         
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2">
             <div id="badgeSync" class="flex items-center gap-1.5 bg-[#0f172a] border border-slate-700 px-2 py-0.5 rounded text-slate-100 text-[9px] font-bold">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Bases Conectadas
             </div>
+            <!-- BOTÃO DE CALIBRAÇÃO EM TEMPO REAL -->
+            <button onclick="togglePainelCalibracao()" class="bg-blue-600/80 hover:bg-blue-600 border border-blue-400 text-[9px] text-white px-2 py-0.5 rounded cursor-pointer font-bold transition flex items-center gap-1">
+                ⚙️ Ajustar Bordas
+            </button>
             <button onclick="toggleFullscreen()" class="bg-[#0f172a] hover:bg-slate-700 border border-slate-700 text-[9px] text-slate-200 hover:text-white px-2 py-0.5 rounded cursor-pointer font-bold transition">
                 📺 Tela Cheia
             </button>
         </div>
     </header>
+
+    <!-- PAINEL FLUTUANTE DE AJUSTE DE BORDAS E LINHAS -->
+    <div id="painelCalibracao">
+        <div class="flex justify-between items-center border-b border-slate-700 pb-1 mb-2">
+            <h3 class="text-xs font-black text-white flex items-center gap-1.5">
+                <span>📐</span> Ajuste de Margens e Bordas
+            </h3>
+            <button onclick="togglePainelCalibracao()" class="text-slate-400 hover:text-white text-xs font-bold">✕</button>
+        </div>
+
+        <div class="space-y-2 text-[10px]">
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Margem Superior (Topo)</span>
+                    <span id="lblTop" class="font-mono text-cyan-400">4px</span>
+                </div>
+                <input id="rngTop" type="range" min="0" max="30" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('top', this.value)">
+            </div>
+
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Margem Inferior (Fundo)</span>
+                    <span id="lblBottom" class="font-mono text-cyan-400">8px</span>
+                </div>
+                <input id="rngBottom" type="range" min="0" max="30" value="8" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('bottom', this.value)">
+            </div>
+
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Margens Laterais</span>
+                    <span id="lblSides" class="font-mono text-cyan-400">8px</span>
+                </div>
+                <input id="rngSides" type="range" min="0" max="30" value="8" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('sides', this.value)">
+            </div>
+
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Espaçamento entre TVs (Moldura)</span>
+                    <span id="lblGap" class="font-mono text-cyan-400">8px</span>
+                </div>
+                <input id="rngGap" type="range" min="0" max="25" value="8" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('gap', this.value)">
+            </div>
+
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Divisão de Linhas da Tabela</span>
+                    <span id="lblRows" class="font-mono text-amber-400">14 linhas</span>
+                </div>
+                <input id="rngRows" type="range" min="11" max="17" value="14" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('rows', this.value)">
+            </div>
+
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Tamanho da Fonte (Zoom)</span>
+                    <span id="lblFont" class="font-mono text-emerald-400">100%</span>
+                </div>
+                <input id="rngFont" type="range" min="80" max="125" value="100" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('font', this.value)">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 mt-3 pt-2 border-t border-slate-700">
+            <button onclick="salvarConfiguracao()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1 px-2 rounded text-[9.5px]">
+                💾 Salvar na TV
+            </button>
+            <button onclick="resetarConfiguracao()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-1 px-2 rounded text-[9.5px]">
+                ↺ Redefinir
+            </button>
+        </div>
+    </div>
 
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#000000]">
@@ -138,7 +237,7 @@
         <!-- ==================== TV 02: AGENDA OPERACIONAL ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
             
-            <!-- Barra Superior Compacta da TV 02 (Sem 'CD ALHANDRA PB' e com margem/tamanho reduzidos) -->
+            <!-- Barra Superior Compacta da TV 02 -->
             <div class="flex items-center shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-0.5">
                 <h2 class="text-[8.5px] font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5 leading-none">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
@@ -252,7 +351,7 @@
 
     </main>
 
-    <!-- SCRIPTS DE SINCRONIZAÇÃO EM TEMPO REAL -->
+    <!-- SCRIPTS DE CALIBRAÇÃO E SINCRONIZAÇÃO -->
     <script>
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzENwdne1UBhEi54kwL-hq2WuAGvtwMiRFZ6Vc2LoF74MCl1aj_m64jgVvWDylB8g9O/exec";
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
@@ -264,6 +363,82 @@
             recebimentoCargas: []
         };
 
+        // --- SISTEMA DE CALIBRAÇÃO VISUAL EM TEMPO REAL ---
+        function togglePainelCalibracao() {
+            const p = document.getElementById('painelCalibracao');
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // Atalho de teclado: apertar 'C' abre ou fecha a calibração
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'c' || e.key === 'C') togglePainelCalibracao();
+        });
+
+        function ajustarMargem(tipo, valor) {
+            const root = document.documentElement;
+            if (tipo === 'top') {
+                root.style.setProperty('--pad-top', valor + 'px');
+                document.getElementById('lblTop').innerText = valor + 'px';
+            } else if (tipo === 'bottom') {
+                root.style.setProperty('--pad-bottom', valor + 'px');
+                document.getElementById('lblBottom').innerText = valor + 'px';
+            } else if (tipo === 'sides') {
+                root.style.setProperty('--pad-sides', valor + 'px');
+                document.getElementById('lblSides').innerText = valor + 'px';
+            } else if (tipo === 'gap') {
+                root.style.setProperty('--grid-gap', valor + 'px');
+                document.getElementById('lblGap').innerText = valor + 'px';
+            } else if (tipo === 'rows') {
+                root.style.setProperty('--row-height-factor', valor);
+                document.getElementById('lblRows').innerText = valor + ' linhas';
+            } else if (tipo === 'font') {
+                const fator = (valor / 100).toFixed(2);
+                root.style.setProperty('--font-scale-factor', fator);
+                document.getElementById('lblFont').innerText = valor + '%';
+            }
+        }
+
+        function salvarConfiguracao() {
+            const cfg = {
+                top: document.getElementById('rngTop').value,
+                bottom: document.getElementById('rngBottom').value,
+                sides: document.getElementById('rngSides').value,
+                gap: document.getElementById('rngGap').value,
+                rows: document.getElementById('rngRows').value,
+                font: document.getElementById('rngFont').value
+            };
+            localStorage.setItem('cfg_videowall_margens', JSON.stringify(cfg));
+            alert('Configuração de bordas e margens gravada com sucesso nesta TV!');
+            togglePainelCalibracao();
+        }
+
+        function carregarConfiguracaoSalva() {
+            const salva = localStorage.getItem('cfg_videowall_margens');
+            if (salva) {
+                try {
+                    const cfg = JSON.parse(salva);
+                    if (cfg.top) { document.getElementById('rngTop').value = cfg.top; ajustarMargem('top', cfg.top); }
+                    if (cfg.bottom) { document.getElementById('rngBottom').value = cfg.bottom; ajustarMargem('bottom', cfg.bottom); }
+                    if (cfg.sides) { document.getElementById('rngSides').value = cfg.sides; ajustarMargem('sides', cfg.sides); }
+                    if (cfg.gap) { document.getElementById('rngGap').value = cfg.gap; ajustarMargem('gap', cfg.gap); }
+                    if (cfg.rows) { document.getElementById('rngRows').value = cfg.rows; ajustarMargem('rows', cfg.rows); }
+                    if (cfg.font) { document.getElementById('rngFont').value = cfg.font; ajustarMargem('font', cfg.font); }
+                } catch(e) {}
+            }
+        }
+
+        function resetarConfiguracao() {
+            localStorage.removeItem('cfg_videowall_margens');
+            document.getElementById('rngTop').value = 4; ajustarMargem('top', 4);
+            document.getElementById('rngBottom').value = 8; ajustarMargem('bottom', 8);
+            document.getElementById('rngSides').value = 8; ajustarMargem('sides', 8);
+            document.getElementById('rngGap').value = 8; ajustarMargem('gap', 8);
+            document.getElementById('rngRows').value = 14; ajustarMargem('rows', 14);
+            document.getElementById('rngFont').value = 100; ajustarMargem('font', 100);
+            alert('Margens redefinidas para o padrão de fábrica.');
+        }
+
+        // --- FORMATAÇÕES E RENDERIZAÇÃO ---
         function formatarTempoCurto(valor) {
             if (!valor || valor === '-' || valor === '0' || valor === 0) return '-';
             const str = String(valor).trim();
@@ -371,7 +546,7 @@
                     <td class="text-[#fbbf24] font-num">${formatarTempoCurto(c.tmp)}</td>
                     <td class="text-[#2dd4bf] font-num">${formatarPPM(c.ppm)}</td>
                     <td style="text-align: center;">
-                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${formatarStatusTexto(c.status)}</span>
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-black ${statusBadge}">${formatarStatusTexto(c.status)}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -481,6 +656,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            carregarConfiguracaoSalva();
             sincronizarExpedicao();
             sincronizarRecebimento();
             setInterval(() => {
