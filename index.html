@@ -55,7 +55,6 @@
             font-weight: 900 !important;
         }
 
-        /* Grelha Dinâmica Controlada pelas Variáveis CSS */
         .video-wall-grid {
             padding-top: var(--pad-top);
             padding-bottom: var(--pad-bottom);
@@ -104,7 +103,32 @@
             height: calc((100% - 16px) / var(--row-height-factor));
         }
 
-        /* Painel Flutuante de Calibração */
+        /* Ticker Dinâmico de Resumo Operacional */
+        .summary-ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+        }
+
+        .summary-ticker-track {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: tickerSlide 26s linear infinite;
+        }
+
+        .summary-ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes tickerSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
         #painelCalibracao {
             position: fixed;
             top: 36px;
@@ -138,7 +162,6 @@
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 Bases Conectadas
             </div>
-            <!-- BOTÃO DE CALIBRAÇÃO EM TEMPO REAL -->
             <button onclick="togglePainelCalibracao()" class="bg-blue-600/80 hover:bg-blue-600 border border-blue-400 text-[9px] text-white px-2 py-0.5 rounded cursor-pointer font-bold transition flex items-center gap-1">
                 ⚙️ Ajustar Bordas
             </button>
@@ -148,7 +171,7 @@
         </div>
     </header>
 
-    <!-- PAINEL FLUTUANTE DE AJUSTE DE BORDAS E LINHAS -->
+    <!-- PAINEL FLUTUANTE DE AJUSTE -->
     <div id="painelCalibracao">
         <div class="flex justify-between items-center border-b border-slate-700 pb-1 mb-2">
             <h3 class="text-xs font-black text-white flex items-center gap-1.5">
@@ -234,14 +257,21 @@
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA OPERACIONAL ==================== -->
+        <!-- ==================== TV 02: AGENDA OPERACIONAL COM TICKER DE STATUS ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
             
-            <!-- Barra Superior Compacta da TV 02 -->
-            <div class="flex items-center shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-0.5">
-                <h2 class="text-[8.5px] font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+            <!-- Barra Superior com Título + Ticker Dinâmico de Resumo Geral -->
+            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-1 gap-3 overflow-hidden">
+                <h2 class="text-[8.5px] font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5 leading-none shrink-0">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
+
+                <!-- BARRA DE ROLAGEM COM LEGENDA GERAL DOS STATUS -->
+                <div class="summary-ticker-wrap flex-1 h-[18px]">
+                    <div id="tickerSummaryTrack" class="summary-ticker-track text-[8px] font-bold font-num flex items-center gap-6">
+                        <span class="text-slate-400">A sincronizar dados da operação...</span>
+                    </div>
+                </div>
             </div>
 
             <!-- GRELHA SPLIT 50 / 50 -->
@@ -357,19 +387,18 @@
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
 
         let currentData = {
-            expedicaoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, faturando: 0, carregando: 0, pendentes: 0 },
+            expedicaoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, faturando: 0, carregando: 0, separando: 0, pendentes: 0 },
             cargas: [],
-            recebimentoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, descarregando: 0, pendentes: 0 },
+            recebimentoResumo: { totalCargas: 0, totalPecas: 0, finalizados: 0, descarregando: 0, recebendo: 0, emDoca: 0, patio: 0, naoChegou: 0, pendentes: 0 },
             recebimentoCargas: []
         };
 
-        // --- SISTEMA DE CALIBRAÇÃO VISUAL EM TEMPO REAL ---
+        // --- SISTEMA DE CALIBRAÇÃO VISUAL ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
         }
 
-        // Atalho de teclado: apertar 'C' abre ou fecha a calibração
         window.addEventListener('keydown', (e) => {
             if (e.key === 'c' || e.key === 'C') togglePainelCalibracao();
         });
@@ -408,7 +437,7 @@
                 font: document.getElementById('rngFont').value
             };
             localStorage.setItem('cfg_videowall_margens', JSON.stringify(cfg));
-            alert('Configuração de bordas e margens gravada com sucesso nesta TV!');
+            alert('Configuração salva com sucesso nesta TV!');
             togglePainelCalibracao();
         }
 
@@ -435,10 +464,10 @@
             document.getElementById('rngGap').value = 8; ajustarMargem('gap', 8);
             document.getElementById('rngRows').value = 14; ajustarMargem('rows', 14);
             document.getElementById('rngFont').value = 100; ajustarMargem('font', 100);
-            alert('Margens redefinidas para o padrão de fábrica.');
+            alert('Margens redefinidas para o padrão.');
         }
 
-        // --- FORMATAÇÕES E RENDERIZAÇÃO ---
+        // --- FORMATAÇÕES ---
         function formatarTempoCurto(valor) {
             if (!valor || valor === '-' || valor === '0' || valor === 0) return '-';
             const str = String(valor).trim();
@@ -461,11 +490,49 @@
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         }
 
+        // --- ATUALIZAÇÃO DO TICKER DE RESUMO OPERACIONAL ---
+        function atualizarTickerResumo() {
+            const track = document.getElementById('tickerSummaryTrack');
+            if (!track) return;
+
+            const exp = currentData.expedicaoResumo;
+            const rec = currentData.recebimentoResumo;
+
+            const blocoExpedicao = `
+                <span class="inline-flex items-center gap-1 text-emerald-400 font-black">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> EXPEDIÇÃO (${exp.totalCargas}):
+                </span>
+                <span class="text-slate-300">Concluído: <strong class="text-[#34d399] font-black">${exp.concluidos}</strong></span>
+                <span class="text-slate-300">Faturando: <strong class="text-[#a3e635] font-black">${exp.faturando}</strong></span>
+                <span class="text-slate-300">Carregando: <strong class="text-[#fbbf24] font-black">${exp.carregando}</strong></span>
+                <span class="text-slate-300">Separando: <strong class="text-[#38bdf8] font-black">${exp.separando}</strong></span>
+                <span class="text-slate-300">Pendente: <strong class="text-[#f87171] font-black">${exp.pendentes}</strong></span>
+            `;
+
+            const blocoRecebimento = `
+                <span class="inline-flex items-center gap-1 text-cyan-400 font-black">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> RECEBIMENTO (${rec.totalCargas}):
+                </span>
+                <span class="text-slate-300">Finalizado: <strong class="text-[#34d399] font-black">${rec.finalizados}</strong></span>
+                <span class="text-slate-300">Descarregando: <strong class="text-[#fbbf24] font-black">${rec.descarregando}</strong></span>
+                <span class="text-slate-300">Recebendo: <strong class="text-[#38bdf8] font-black">${rec.recebendo}</strong></span>
+                <span class="text-slate-300">Em Doca: <strong class="text-[#f59e0b] font-black">${rec.emDoca}</strong></span>
+                <span class="text-slate-300">Pátio Externo: <strong class="text-[#60a5fa] font-black">${rec.patio}</strong></span>
+                <span class="text-slate-300">Não Chegou: <strong class="text-[#ef4444] font-black">${rec.naoChegou}</strong></span>
+                <span class="text-slate-300">Pendente: <strong class="text-[#f87171] font-black">${rec.pendentes}</strong></span>
+            `;
+
+            const conteudo = `<span class="inline-flex items-center gap-4 px-3">${blocoExpedicao} <span class="text-slate-600">|</span> ${blocoRecebimento}</span>`;
+
+            // Duplicado para rotação contínua e infinita suave (-50%)
+            track.innerHTML = conteudo + conteudo;
+        }
+
         // --- RETORNO EXPEDIÇÃO ---
         window.receberDadosExpedicao = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.cargas = data.cargas;
-                let totalPecas = 0, concluidos = 0, faturando = 0, carregando = 0, pendentes = 0;
+                let totalPecas = 0, concluidos = 0, faturando = 0, carregando = 0, separando = 0, pendentes = 0;
 
                 data.cargas.forEach(c => {
                     totalPecas += (Number(c.pecas) || 0);
@@ -474,6 +541,7 @@
                     if (s.includes("concluid") || s.includes("finaliz")) concluidos++;
                     else if (s.includes("fatur")) faturando++;
                     else if (s.includes("carreg") || s.includes("doca") || s.includes("apres")) carregando++;
+                    else if (s.includes("separ") || s.includes("confer")) separando++;
                     else pendentes++;
                 });
 
@@ -483,11 +551,13 @@
                     concluidos: concluidos,
                     faturando: faturando,
                     carregando: carregando,
+                    separando: separando,
                     pendentes: pendentes
                 };
 
                 atualizarBadgeTimestamp(data.timestamp);
                 renderizarExpedicao();
+                atualizarTickerResumo();
             }
         };
 
@@ -546,7 +616,7 @@
                     <td class="text-[#fbbf24] font-num">${formatarTempoCurto(c.tmp)}</td>
                     <td class="text-[#2dd4bf] font-num">${formatarPPM(c.ppm)}</td>
                     <td style="text-align: center;">
-                        <span class="inline-block px-1.5 py-[1px] rounded text-[8px] font-black ${statusBadge}">${formatarStatusTexto(c.status)}</span>
+                        <span class="inline-block px-1.5 py-[1px] rounded text-[8.5px] font-black ${statusBadge}">${formatarStatusTexto(c.status)}</span>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -557,27 +627,36 @@
         window.receberDadosRecebimento = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.recebimentoCargas = data.cargas;
-                let totalPecas = 0, concluidos = 0, descarregando = 0, pendentes = 0;
+                let totalPecas = 0, finalizados = 0, descarregando = 0, recebendo = 0, emDoca = 0, patio = 0, naoChegou = 0, pendentes = 0;
 
                 data.cargas.forEach(c => {
                     totalPecas += (Number(c.pecas) || 0);
                     const s = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-                    if (s.includes("concluid") || s.includes("finaliz")) concluidos++;
-                    else if (s.includes("desc") || s.includes("doca") || s.includes("andamento")) descarregando++;
+                    if (s.includes("concluid") || s.includes("finaliz")) finalizados++;
+                    else if (s.includes("desc") && !s.includes("nao")) descarregando++;
+                    else if (s.includes("receb")) recebendo++;
+                    else if (s.includes("doca")) emDoca++;
+                    else if (s.includes("patio")) patio++;
+                    else if (s.includes("nao") || s.includes("chegou")) naoChegou++;
                     else pendentes++;
                 });
 
                 currentData.recebimentoResumo = {
                     totalCargas: data.cargas.length,
                     totalPecas: totalPecas,
-                    concluidos: concluidos,
+                    finalizados: finalizados,
                     descarregando: descarregando,
+                    recebendo: recebendo,
+                    emDoca: emDoca,
+                    patio: patio,
+                    naoChegou: naoChegou,
                     pendentes: pendentes
                 };
 
                 atualizarBadgeTimestamp(data.timestamp);
                 renderizarRecebimento();
+                atualizarTickerResumo();
             }
         };
 
@@ -600,7 +679,7 @@
             const elPendente = document.getElementById('kpiRecPendente');
 
             if (elTotal) elTotal.innerText = currentData.recebimentoResumo.totalCargas;
-            if (elConcluidos) elConcluidos.innerText = currentData.recebimentoResumo.concluidos;
+            if (elConcluidos) elConcluidos.innerText = currentData.recebimentoResumo.finalizados;
             if (elDesc) elDesc.innerText = currentData.recebimentoResumo.descarregando;
             if (elPendente) elPendente.innerText = currentData.recebimentoResumo.pendentes;
 
@@ -621,9 +700,12 @@
                 const sNorm = (c.status || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
                 if (sNorm.includes("concluid") || sNorm.includes("finaliz")) statusBadge = "text-[#34d399] bg-[#064e3b]/70 border border-[#059669]";
-                else if (sNorm.includes("doca") || sNorm.includes("desc") || sNorm.includes("andamento")) statusBadge = "text-[#fbbf24] bg-[#78350f]/70 border border-[#d97706]";
+                else if (sNorm.includes("desc") && !sNorm.includes("nao")) statusBadge = "text-[#fbbf24] bg-[#78350f]/70 border border-[#d97706]";
+                else if (sNorm.includes("receb")) statusBadge = "text-[#38bdf8] bg-[#0c4a6e]/70 border border-[#0284c7]";
+                else if (sNorm.includes("doca")) statusBadge = "text-[#f59e0b] bg-[#78350f]/70 border border-[#b45309]";
                 else if (sNorm.includes("patio")) statusBadge = "text-[#60a5fa] bg-[#1e3a8a]/70 border border-[#2563eb]";
-                else if (sNorm.includes("nao") || sNorm.includes("pendent")) statusBadge = "text-[#f87171] bg-[#7f1d1d]/70 border border-[#dc2626]";
+                else if (sNorm.includes("nao") || sNorm.includes("chegou")) statusBadge = "text-[#ef4444] bg-[#7f1d1d]/70 border border-[#b91c1c]";
+                else statusBadge = "text-[#f87171] bg-[#7f1d1d]/70 border border-[#dc2626]";
 
                 tr.innerHTML = `
                     <td style="text-align: left; padding-left: 4px;" class="font-black text-white font-num">${c.transporte}</td>
