@@ -103,7 +103,6 @@
             height: calc((100% - 16px) / var(--row-height-factor));
         }
 
-        /* Ticker Dinâmico de Resumo Operacional */
         .summary-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -243,30 +242,89 @@
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#000000]">
 
-        <!-- ==================== TV 01: MÓDULO OTIMIZAÇÃO (RESERVADA) ==================== -->
-        <div class="tv-card flex flex-col justify-center items-center h-full text-center p-4">
-            <div class="w-11 h-11 rounded-2xl bg-blue-500/10 border border-blue-500/40 flex items-center justify-center mb-1.5">
-                <span class="text-blue-400 font-black text-xl">⚡</span>
+        <!-- ==================== TV 01: GESTÃO DE ESTOQUE E OCUPAÇÃO (PCO OFICIAL) ==================== -->
+        <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
+            
+            <!-- Barra Superior da TV 01 -->
+            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-1">
+                <h2 class="text-[8.5px] font-black text-blue-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> TV 01: Ocupação e Capacidade do CD (PCO)
+                </h2>
+                <div class="flex items-center gap-3 text-[8px] font-num font-bold">
+                    <span class="text-slate-300">Locações: <strong id="pcoTotalLoc" class="text-white">--</strong> (<strong id="pcoPercLoc" class="text-blue-400">--%</strong>)</span>
+                    <span class="text-slate-300">Área: <strong id="pcoAreaOcup" class="text-amber-400">--</strong> m² (<strong id="pcoPercArea" class="text-amber-300">--%</strong>)</span>
+                    <span class="text-slate-300">Saldo: <strong id="pcoSaldoEstoque" class="text-emerald-400">--</strong> un</span>
+                </div>
             </div>
-            <h2 class="text-xs font-black text-blue-400 uppercase tracking-widest">TV 01: Otimização de Armazém</h2>
-            <p class="text-slate-300 text-[10px] max-w-[300px] mt-0.5 font-bold leading-relaxed">
-                Painel reservado. Aguardando conexão da base de Otimização.
-            </p>
-            <div class="mt-2 px-2.5 py-0.5 rounded bg-slate-800 text-[9px] font-mono text-slate-300 border border-slate-700 font-bold">
-                Status: Aguardando Base
+
+            <!-- GRELHA SPLIT 50 / 50 DA TV 01 -->
+            <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
+                
+                <!-- METADE ESQUERDA: OCUPAÇÃO POR RUA -->
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
+                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
+                        <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
+                            <span>📍</span> Ocupação por Rua
+                        </span>
+                        <span id="pcoBadgeVazias" class="text-[7.5px] text-slate-400 font-num">-- locações livres</span>
+                    </div>
+
+                    <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
+                        <table class="table-operational text-white h-full">
+                            <thead>
+                                <tr>
+                                    <th style="width: 25%; text-align: left; padding-left: 3px;">RUA</th>
+                                    <th style="width: 18%; text-align: center;">LOC.</th>
+                                    <th style="width: 18%; text-align: center;">OCUP%</th>
+                                    <th style="width: 19%; text-align: right;" class="text-amber-400">ÁREA (M²)</th>
+                                    <th style="width: 20%; text-align: right; padding-right: 3px;" class="text-emerald-400">ESTOQUE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pcoRuasTableBody" class="font-bold">
+                                <tr><td colspan="5" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- METADE DIREITA: MIX POR FAMÍLIA -->
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
+                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
+                        <span class="text-amber-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
+                            <span>📦</span> Mix por Família
+                        </span>
+                        <span id="pcoBadgeMiniBin" class="text-[7.5px] text-slate-400 font-num">Mini Bin: --</span>
+                    </div>
+
+                    <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
+                        <table class="table-operational text-white h-full">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30%; text-align: left; padding-left: 3px;">FAMÍLIA</th>
+                                    <th style="width: 14%; text-align: center;">LOC.</th>
+                                    <th style="width: 18%; text-align: right;" class="text-amber-300">ÁREA M²</th>
+                                    <th style="width: 20%; text-align: right;" class="text-cyan-400">ESTOQUE</th>
+                                    <th style="width: 18%; text-align: right; padding-right: 3px;" class="text-teal-300">DENSIDADE</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pcoFamiliasTableBody" class="font-bold">
+                                <tr><td colspan="5" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
 
         <!-- ==================== TV 02: AGENDA OPERACIONAL COM TICKER DE STATUS ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
             
-            <!-- Barra Superior com Título + Ticker Dinâmico de Resumo Geral -->
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-1 gap-3 overflow-hidden">
                 <h2 class="text-[8.5px] font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5 leading-none shrink-0">
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> TV 02: Agenda Operacional do Dia
                 </h2>
 
-                <!-- BARRA DE ROLAGEM COM LEGENDA GERAL DOS STATUS -->
                 <div class="summary-ticker-wrap flex-1 h-[18px]">
                     <div id="tickerSummaryTrack" class="summary-ticker-track text-[8px] font-bold font-num flex items-center gap-6">
                         <span class="text-slate-400">A sincronizar dados da operação...</span>
@@ -279,8 +337,6 @@
                 
                 <!-- METADE ESQUERDA: EXPEDIÇÃO -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
-                    
-                    <!-- Cabeçalho Integrado com KPIs -->
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                         <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
                             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição
@@ -295,7 +351,6 @@
                         </div>
                     </div>
 
-                    <!-- Tabela de Expedição -->
                     <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
                         <table class="table-operational text-white h-full">
                             <thead>
@@ -318,8 +373,6 @@
 
                 <!-- METADE DIREITA: RECEBIMENTO -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
-
-                    <!-- Cabeçalho Integrado com KPIs -->
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                         <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
                             <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento
@@ -333,7 +386,6 @@
                         </div>
                     </div>
 
-                    <!-- Tabela de Recebimento -->
                     <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
                         <table class="table-operational text-white h-full">
                             <thead>
@@ -385,12 +437,14 @@
     <script>
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzENwdne1UBhEi54kwL-hq2WuAGvtwMiRFZ6Vc2LoF74MCl1aj_m64jgVvWDylB8g9O/exec";
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
+        const GOOGLE_SCRIPT_OTIMIZACAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbwHgSfPWOjk7exO6SybV0UVvU-Tiv2Of30m3WNL_jS1I3jmlwgaH3HMKNuNBh0mYnhQ/exec";
 
         let currentData = {
             expedicaoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, faturando: 0, carregando: 0, separando: 0, pendentes: 0 },
             cargas: [],
             recebimentoResumo: { totalCargas: 0, totalPecas: 0, finalizados: 0, descarregando: 0, recebendo: 0, emDoca: 0, patio: 0, naoChegou: 0, pendentes: 0 },
-            recebimentoCargas: []
+            recebimentoCargas: [],
+            pco: { kpis: null, ruas: [], familias: [] }
         };
 
         // --- SISTEMA DE CALIBRAÇÃO VISUAL ---
@@ -523,9 +577,82 @@
             `;
 
             const conteudo = `<span class="inline-flex items-center gap-4 px-3">${blocoExpedicao} <span class="text-slate-600">|</span> ${blocoRecebimento}</span>`;
-
-            // Duplicado para rotação contínua e infinita suave (-50%)
             track.innerHTML = conteudo + conteudo;
+        }
+
+        // --- RETORNO TV 01: OTIMIZAÇÃO (PCO) ---
+        window.receberDadosOtimizacao = function(data) {
+            if (data && data.status === "success") {
+                currentData.pco = data;
+
+                if (data.kpis) {
+                    const elLoc = document.getElementById('pcoTotalLoc');
+                    const elPercLoc = document.getElementById('pcoPercLoc');
+                    const elArea = document.getElementById('pcoAreaOcup');
+                    const elPercArea = document.getElementById('pcoPercArea');
+                    const elSaldo = document.getElementById('pcoSaldoEstoque');
+                    const elBadgeVazias = document.getElementById('pcoBadgeVazias');
+                    const elBadgeMiniBin = document.getElementById('pcoBadgeMiniBin');
+
+                    if (elLoc) elLoc.innerText = `${data.kpis.locacoesOcupadas}/${data.kpis.totalLocacoes}`;
+                    if (elPercLoc) elPercLoc.innerText = data.kpis.taxaOcupacaoLocacao;
+                    if (elArea) elArea.innerText = data.kpis.areaOcupadaM2;
+                    if (elPercArea) elPercArea.innerText = data.kpis.taxaOcupacaoArea;
+                    if (elSaldo) elSaldo.innerText = Number(data.kpis.saldoEstocadoUn).toLocaleString('pt-BR');
+                    if (elBadgeVazias) elBadgeVazias.innerText = `${data.kpis.locacoesVazias} locações livres (${data.kpis.areaLivreM2} m²)`;
+                    if (elBadgeMiniBin) elBadgeMiniBin.innerText = `Mini Bin: ${data.kpis.locacaoMiniBin} loc.`;
+                }
+
+                // Renderiza Ruas
+                const ruasBody = document.getElementById('pcoRuasTableBody');
+                if (ruasBody && data.ruas) {
+                    ruasBody.innerHTML = '';
+                    data.ruas.forEach(r => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-slate-900 text-center";
+                        tr.innerHTML = `
+                            <td style="text-align: left; padding-left: 3px;" class="font-black text-blue-400 font-num">${r.rua}</td>
+                            <td class="font-num text-slate-200">${r.locacoesOcupadas}/${r.totalLocacoes}</td>
+                            <td class="font-num text-[#38bdf8]">${r.percOcupacao}</td>
+                            <td style="text-align: right;" class="font-num text-amber-300">${r.areaOcupada}</td>
+                            <td style="text-align: right; padding-right: 3px;" class="font-num text-emerald-400">${r.estoqueUn.toLocaleString('pt-BR')}</td>
+                        `;
+                        ruasBody.appendChild(tr);
+                    });
+                }
+
+                // Renderiza Famílias
+                const famBody = document.getElementById('pcoFamiliasTableBody');
+                if (famBody && data.familias) {
+                    famBody.innerHTML = '';
+                    data.familias.forEach(f => {
+                        const tr = document.createElement('tr');
+                        tr.className = "hover:bg-slate-900 text-center";
+                        tr.innerHTML = `
+                            <td style="text-align: left; padding-left: 3px;" class="font-black text-slate-100">${f.familia}</td>
+                            <td class="font-num text-slate-300">${f.locacoesOcupadas}</td>
+                            <td style="text-align: right;" class="font-num text-amber-300">${f.areaOcupadaM2}</td>
+                            <td style="text-align: right;" class="font-num text-cyan-300">${f.estoqueUn.toLocaleString('pt-BR')}</td>
+                            <td style="text-align: right; padding-right: 3px;" class="font-num text-teal-300">${f.densidade}</td>
+                        `;
+                        famBody.appendChild(tr);
+                    });
+                }
+
+                atualizarBadgeTimestamp(data.timestamp);
+            }
+        };
+
+        function sincronizarOtimizacao() {
+            if (!GOOGLE_SCRIPT_OTIMIZACAO_URL) return;
+            const antigo = document.getElementById('script-jsonp-otimizacao');
+            if (antigo) antigo.remove();
+
+            const scriptTag = document.createElement('script');
+            scriptTag.id = 'script-jsonp-otimizacao';
+            const divisor = GOOGLE_SCRIPT_OTIMIZACAO_URL.includes('?') ? '&' : '?';
+            scriptTag.src = GOOGLE_SCRIPT_OTIMIZACAO_URL + divisor + 'callback=receberDadosOtimizacao&_t=' + Date.now();
+            document.body.appendChild(scriptTag);
         }
 
         // --- RETORNO EXPEDIÇÃO ---
@@ -739,9 +866,11 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             carregarConfiguracaoSalva();
+            sincronizarOtimizacao();
             sincronizarExpedicao();
             sincronizarRecebimento();
             setInterval(() => {
+                sincronizarOtimizacao();
                 sincronizarExpedicao();
                 sincronizarRecebimento();
             }, 15000);
