@@ -242,18 +242,17 @@
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#000000]">
 
-        <!-- ==================== TV 01: PCO CONSOLIDADO COM TODAS AS MÉTRICAS PRINCIPAIS ==================== -->
+        <!-- ==================== TV 01: PCO CONSOLIDADO COM TODAS AS MÉTRICAS ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             
-            <!-- Barra Superior da TV 01 -->
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <h2 class="text-[8.5px] font-black text-blue-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> TV 01: PAINEL GERENCIAL DE OCUPAÇÃO E CAPACIDADE DO CD (PCO)
                 </h2>
-                <span class="text-[7.5px] text-slate-400 font-mono font-bold">BASE OFICIAL</span>
+                <span id="pcoStatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">A LIGAR...</span>
             </div>
 
-            <!-- GRADE CONSOLIDADA DOS 11 KPIS PRINCIPAIS (C4 A L4) -->
+            <!-- GRADE DOS 11 KPIS PRINCIPAIS (B4:L4) -->
             <div class="grid grid-cols-11 gap-0.5 shrink-0 px-0.5 py-1 bg-[#091124] rounded border border-slate-800 text-center">
                 <!-- 1. Total Locações -->
                 <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
@@ -312,14 +311,14 @@
                 </div>
             </div>
 
-            <!-- BLOCO CONSOLIDADO: TABELA DE RUAS -->
+            <!-- TABELA DE RUAS -->
             <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
                 <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                     <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
                         <span>📍</span> Ocupação e Capacidade por Rua (Pulmão)
                     </span>
                     <span id="pcoSubtotaisInfo" class="text-[8px] text-slate-300 font-num">
-                        Subtotais: Carregando...
+                        Subtotais: A sincronizar...
                     </span>
                 </div>
 
@@ -337,7 +336,7 @@
                             </tr>
                         </thead>
                         <tbody id="pcoRuasTableBody" class="font-bold">
-                            <tr><td colspan="7" class="text-center py-4 text-slate-400">Aguardando dados oficiais...</td></tr>
+                            <tr><td colspan="7" class="text-center py-4 text-slate-400">A sincronizar dados da folha de Otimização...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -345,7 +344,7 @@
 
         </div>
 
-        <!-- ==================== TV 02: AGENDA OPERACIONAL COM TICKER DE STATUS ==================== -->
+        <!-- ==================== TV 02: AGENDA OPERACIONAL ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
             
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-1 gap-3 overflow-hidden">
@@ -465,7 +464,8 @@
     <script>
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzENwdne1UBhEi54kwL-hq2WuAGvtwMiRFZ6Vc2LoF74MCl1aj_m64jgVvWDylB8g9O/exec";
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
-        const GOOGLE_SCRIPT_OTIMIZACAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbwHgSfPWOjk7exO6SybV0UVvU-Tiv2Of30m3WNL_jS1I3jmlwgaH3HMKNuNBh0mYnhQ/exec";
+        // URL da Versão 5 da API de Otimização (PCO)
+        const GOOGLE_SCRIPT_OTIMIZACAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzhnJtM1tJP2sWfZP72rPsnc8SSweWcWbC8aci7MpPMCG2gsT2SBfm_lrtK9G6O7pU0/exec";
 
         let currentData = {
             expedicaoResumo: { totalCargas: 0, totalPecas: 0, concluidos: 0, faturando: 0, carregando: 0, separando: 0, pendentes: 0 },
@@ -572,6 +572,20 @@
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         }
 
+        function formatarMilhar(val) {
+            if (val === null || val === undefined || val === '') return '--';
+            const num = Number(val);
+            if (isNaN(num)) return String(val);
+            return num.toLocaleString('pt-BR');
+        }
+
+        function formatarDecimal(val) {
+            if (val === null || val === undefined || val === '') return '--';
+            const num = Number(val);
+            if (isNaN(num)) return String(val);
+            return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
         // --- TICKER DE RESUMO OPERACIONAL (TV 02) ---
         function atualizarTickerResumo() {
             const track = document.getElementById('tickerSummaryTrack');
@@ -610,10 +624,28 @@
 
         // --- RETORNO TV 01: OTIMIZAÇÃO (PCO OFICIAL) ---
         window.receberDadosOtimizacao = function(data) {
-            if (data && data.status === "success") {
+            const statusTop = document.getElementById('pcoStatusTop');
+            const tbodyRuas = document.getElementById('pcoRuasTableBody');
+
+            if (!data) {
+                if (statusTop) statusTop.innerText = "SEM RESPOSTA";
+                return;
+            }
+
+            if (data.status === "erro" || data.status === "error" || data.erro) {
+                const msg = data.mensagem || data.erro || data.message || "Erro desconhecido";
+                if (statusTop) statusTop.innerHTML = `<span class="text-rose-500 font-bold">ERRO NA FOLHA: ${msg}</span>`;
+                if (tbodyRuas) tbodyRuas.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-rose-400 font-bold">Aviso do Google: ${msg}</td></tr>`;
+                return;
+            }
+
+            if (data.status === "sucesso" || data.status === "success" || data.kpis) {
                 currentData.pco = data;
+                const horaTs = data.atualizadoEm ? data.atualizadoEm.split(' ')[1] || data.atualizadoEm : (data.timestamp || '');
+                if (statusTop) statusTop.innerText = "ONLINE (" + horaTs + ")";
 
                 if (data.kpis) {
+                    const k = data.kpis;
                     const elTotalLoc = document.getElementById('kpiPcoTotalLoc');
                     const elOcup = document.getElementById('kpiPcoOcupadas');
                     const elVazias = document.getElementById('kpiPcoVazias');
@@ -627,44 +659,52 @@
                     const elMiniBin = document.getElementById('kpiPcoMiniBin');
                     const elSubtotais = document.getElementById('pcoSubtotaisInfo');
 
-                    if (elTotalLoc) elTotalLoc.innerText = data.kpis.totalLocacoes;
-                    if (elOcup) elOcup.innerText = data.kpis.locacoesOcupadas;
-                    if (elVazias) elVazias.innerText = data.kpis.locacoesVazias;
-                    if (elPercLoc) elPercLoc.innerText = data.kpis.taxaOcupacaoLocacao;
-                    if (elAreaTotal) elAreaTotal.innerText = data.kpis.areaTotalM2;
-                    if (elAreaOcup) elAreaOcup.innerText = data.kpis.areaOcupadaM2;
-                    if (elAreaLivre) elAreaLivre.innerText = data.kpis.areaLivreM2;
-                    if (elPercArea) elPercArea.innerText = data.kpis.taxaOcupacaoArea;
-                    if (elCapNominal) elCapNominal.innerText = Number(data.kpis.capacidadeNominalUn).toLocaleString('pt-BR');
-                    if (elSaldoEstoque) elSaldoEstoque.innerText = Number(data.kpis.saldoEstocadoUn).toLocaleString('pt-BR');
-                    if (elMiniBin) elMiniBin.innerText = data.kpis.locacaoMiniBin;
+                    if (elTotalLoc) elTotalLoc.innerText = formatarMilhar(k.totalLocacoes);
+                    if (elOcup) elOcup.innerText = formatarMilhar(k.locacoesOcupadas);
+                    if (elVazias) elVazias.innerText = formatarMilhar(k.locacoesVazias);
+                    if (elPercLoc) elPercLoc.innerText = k.taxaOcupacaoLocacao || '--%';
+                    if (elAreaTotal) elAreaTotal.innerText = formatarDecimal(k.areaTotalM2);
+                    if (elAreaOcup) elAreaOcup.innerText = formatarDecimal(k.areaOcupadaM2);
+                    if (elAreaLivre) elAreaLivre.innerText = formatarDecimal(k.areaLivreM2);
+                    if (elPercArea) elPercArea.innerText = k.taxaOcupacaoArea || '--%';
+                    if (elCapNominal) elCapNominal.innerText = formatarMilhar(k.capacidadeNominalUn);
+                    if (elSaldoEstoque) elSaldoEstoque.innerText = formatarMilhar(k.saldoEstocadoUn);
+                    if (elMiniBin) elMiniBin.innerText = formatarMilhar(k.locacaoMiniBin);
 
                     if (elSubtotais) {
-                        elSubtotais.innerHTML = `Mono: <strong>143</strong> | MB: <strong>15</strong> | Livre: <strong>${data.kpis.locacoesVazias}</strong> | % Global Ocupação: <strong class="text-cyan-400">${data.kpis.taxaOcupacaoLocacao}</strong>`;
+                        elSubtotais.innerHTML = `Mono: <strong>143</strong> | MB: <strong>15</strong> | Livres: <strong>${k.locacoesVazias || 0}</strong> | % Ocupação: <strong class="text-cyan-400">${k.taxaOcupacaoLocacao || '0%'}</strong>`;
                     }
                 }
 
-                // Renderiza Tabela Consolidada de Ruas
-                const ruasBody = document.getElementById('pcoRuasTableBody');
-                if (ruasBody && data.ruas) {
-                    ruasBody.innerHTML = '';
+                if (tbodyRuas && data.ruas) {
+                    tbodyRuas.innerHTML = '';
+                    if (data.ruas.length === 0) {
+                        tbodyRuas.innerHTML = `<tr><td colspan="7" class="text-center py-4 text-slate-400">Nenhuma rua encontrada na folha de cálculo.</td></tr>`;
+                        return;
+                    }
+
                     data.ruas.forEach(r => {
                         const tr = document.createElement('tr');
                         tr.className = "hover:bg-slate-900 text-center";
+                        
+                        const perc = r.ocupacaoPecas || r.percOcupacao || (r.capacidadeUn > 0 ? ((r.estoqueUn / r.capacidadeUn) * 100).toFixed(1) + "%" : "0%");
+                        const aTotal = r.areaTotalM2 !== undefined ? formatarDecimal(r.areaTotalM2) : (r.areaTotal || '--');
+                        const aOcup = r.areaOcupadaM2 !== undefined ? formatarDecimal(r.areaOcupadaM2) : (r.areaOcupada || '--');
+
                         tr.innerHTML = `
                             <td style="text-align: left; padding-left: 6px;" class="font-black text-blue-400 font-num">${r.rua}</td>
-                            <td class="font-num text-slate-200">${r.totalLocacoes}</td>
-                            <td class="font-num text-[#38bdf8]">${r.locacoesOcupadas} (${r.percOcupacao})</td>
-                            <td style="text-align: right;" class="font-num text-amber-300">${r.areaTotal}</td>
-                            <td style="text-align: right;" class="font-num text-amber-400">${r.areaOcupada}</td>
-                            <td style="text-align: right;" class="font-num text-cyan-300">${r.capacidadeUn.toLocaleString('pt-BR')}</td>
-                            <td style="text-align: right; padding-right: 6px;" class="font-num text-emerald-400">${r.estoqueUn.toLocaleString('pt-BR')}</td>
+                            <td class="font-num text-slate-200">${formatarMilhar(r.totalLocacoes)}</td>
+                            <td class="font-num text-[#38bdf8]">${formatarMilhar(r.locacoesOcupadas)} (${perc})</td>
+                            <td style="text-align: right;" class="font-num text-amber-300">${aTotal}</td>
+                            <td style="text-align: right;" class="font-num text-amber-400">${aOcup}</td>
+                            <td style="text-align: right;" class="font-num text-cyan-300">${formatarMilhar(r.capacidadeUn)}</td>
+                            <td style="text-align: right; padding-right: 6px;" class="font-num text-emerald-400">${formatarMilhar(r.estoqueUn)}</td>
                         `;
-                        ruasBody.appendChild(tr);
+                        tbodyRuas.appendChild(tr);
                     });
                 }
 
-                atualizarBadgeTimestamp(data.timestamp);
+                atualizarBadgeTimestamp(horaTs);
             }
         };
 
