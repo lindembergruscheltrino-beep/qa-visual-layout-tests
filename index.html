@@ -242,79 +242,107 @@
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#000000]">
 
-        <!-- ==================== TV 01: GESTÃO DE ESTOQUE E OCUPAÇÃO (PCO OFICIAL) ==================== -->
-        <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
+        <!-- ==================== TV 01: PCO CONSOLIDADO COM TODAS AS MÉTRICAS PRINCIPAIS ==================== -->
+        <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             
             <!-- Barra Superior da TV 01 -->
-            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-1">
+            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <h2 class="text-[8.5px] font-black text-blue-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> TV 01: Ocupação e Capacidade do CD (PCO)
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> TV 01: PAINEL GERENCIAL DE OCUPAÇÃO E CAPACIDADE DO CD (PCO)
                 </h2>
-                <div class="flex items-center gap-3 text-[8px] font-num font-bold">
-                    <span class="text-slate-300">Locações: <strong id="pcoTotalLoc" class="text-white">--</strong> (<strong id="pcoPercLoc" class="text-blue-400">--%</strong>)</span>
-                    <span class="text-slate-300">Área: <strong id="pcoAreaOcup" class="text-amber-400">--</strong> m² (<strong id="pcoPercArea" class="text-amber-300">--%</strong>)</span>
-                    <span class="text-slate-300">Saldo: <strong id="pcoSaldoEstoque" class="text-emerald-400">--</strong> un</span>
+                <span class="text-[7.5px] text-slate-400 font-mono font-bold">BASE OFICIAL</span>
+            </div>
+
+            <!-- GRADE CONSOLIDADA DOS 11 KPIS PRINCIPAIS (LINHAS 3 A 5 DA PLANILHA) -->
+            <div class="grid grid-cols-11 gap-0.5 shrink-0 px-0.5 py-1 bg-[#091124] rounded border border-slate-800 text-center">
+                <!-- 1. Total Locações -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
+                    <p class="text-[5.8px] text-slate-300 font-bold uppercase truncate">Total Loc.</p>
+                    <p id="kpiPcoTotalLoc" class="kpi-big-value text-white font-num">--</p>
+                </div>
+                <!-- 2. Locações Ocupadas -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-blue-500/40">
+                    <p class="text-[5.8px] text-blue-300 font-bold uppercase truncate">Ocupadas</p>
+                    <p id="kpiPcoOcupadas" class="kpi-big-value text-blue-400 font-num">--</p>
+                </div>
+                <!-- 3. Locações Vazias -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-emerald-500/40">
+                    <p class="text-[5.8px] text-emerald-300 font-bold uppercase truncate">Vazias</p>
+                    <p id="kpiPcoVazias" class="kpi-big-value text-emerald-400 font-num">--</p>
+                </div>
+                <!-- 4. % Ocupação Locação -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-cyan-500/40">
+                    <p class="text-[5.8px] text-cyan-300 font-bold uppercase truncate">% Ocup. Loc.</p>
+                    <p id="kpiPcoPercLoc" class="kpi-big-value text-cyan-400 font-num">--</p>
+                </div>
+                <!-- 5. Área Total -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
+                    <p class="text-[5.8px] text-slate-300 font-bold uppercase truncate">Área Total</p>
+                    <p id="kpiPcoAreaTotal" class="kpi-big-value text-white font-num text-[10px] leading-tight mt-0.5">--</p>
+                </div>
+                <!-- 6. Área Ocupada -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-amber-500/40">
+                    <p class="text-[5.8px] text-amber-300 font-bold uppercase truncate">Área Ocup.</p>
+                    <p id="kpiPcoAreaOcup" class="kpi-big-value text-amber-400 font-num text-[10px] leading-tight mt-0.5">--</p>
+                </div>
+                <!-- 7. Área Livre -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-lime-500/40">
+                    <p class="text-[5.8px] text-lime-300 font-bold uppercase truncate">Área Livre</p>
+                    <p id="kpiPcoAreaLivre" class="kpi-big-value text-lime-400 font-num text-[10px] leading-tight mt-0.5">--</p>
+                </div>
+                <!-- 8. % Ocupação Área -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-amber-500/40">
+                    <p class="text-[5.8px] text-amber-300 font-bold uppercase truncate">% Ocup. Área</p>
+                    <p id="kpiPcoPercArea" class="kpi-big-value text-amber-300 font-num">--</p>
+                </div>
+                <!-- 9. Capacidade Nominal -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
+                    <p class="text-[5.8px] text-slate-300 font-bold uppercase truncate">Cap. Nominal</p>
+                    <p id="kpiPcoCapNominal" class="kpi-big-value text-white font-num">--</p>
+                </div>
+                <!-- 10. Saldo Estocado -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-emerald-500/40">
+                    <p class="text-[5.8px] text-emerald-300 font-bold uppercase truncate">Saldo Estocado</p>
+                    <p id="kpiPcoSaldoEstoque" class="kpi-big-value text-emerald-400 font-num">--</p>
+                </div>
+                <!-- 11. Locação Mini Bin -->
+                <div class="bg-[#0f172a] p-0.5 rounded border border-purple-500/40">
+                    <p class="text-[5.8px] text-purple-300 font-bold uppercase truncate">Mini Bin</p>
+                    <p id="kpiPcoMiniBin" class="kpi-big-value text-purple-400 font-num">--</p>
                 </div>
             </div>
 
-            <!-- GRELHA SPLIT 50 / 50 DA TV 01 -->
-            <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
-                
-                <!-- METADE ESQUERDA: OCUPAÇÃO POR RUA -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
-                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
-                        <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
-                            <span>📍</span> Ocupação por Rua
-                        </span>
-                        <span id="pcoBadgeVazias" class="text-[7.5px] text-slate-400 font-num">-- locações livres</span>
-                    </div>
-
-                    <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
-                        <table class="table-operational text-white h-full">
-                            <thead>
-                                <tr>
-                                    <th style="width: 25%; text-align: left; padding-left: 3px;">RUA</th>
-                                    <th style="width: 18%; text-align: center;">LOC.</th>
-                                    <th style="width: 18%; text-align: center;">OCUP%</th>
-                                    <th style="width: 19%; text-align: right;" class="text-amber-400">ÁREA (M²)</th>
-                                    <th style="width: 20%; text-align: right; padding-right: 3px;" class="text-emerald-400">ESTOQUE</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pcoRuasTableBody" class="font-bold">
-                                <tr><td colspan="5" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+            <!-- BLOCO ÚNICO CONSOLIDADO: TABELA COMPLETA DE OCUPAÇÃO POR RUA -->
+            <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
+                <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
+                    <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                        <span>📍</span> Ocupação e Capacidade por Rua (Pulmão)
+                    </span>
+                    <span id="pcoSubtotaisInfo" class="text-[8px] text-slate-300 font-num">
+                        Subtotais: Carregando...
+                    </span>
                 </div>
 
-                <!-- METADE DIREITA: MIX POR FAMÍLIA -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
-                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
-                        <span class="text-amber-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
-                            <span>📦</span> Mix por Família
-                        </span>
-                        <span id="pcoBadgeMiniBin" class="text-[7.5px] text-slate-400 font-num">Mini Bin: --</span>
-                    </div>
-
-                    <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
-                        <table class="table-operational text-white h-full">
-                            <thead>
-                                <tr>
-                                    <th style="width: 30%; text-align: left; padding-left: 3px;">FAMÍLIA</th>
-                                    <th style="width: 14%; text-align: center;">LOC.</th>
-                                    <th style="width: 18%; text-align: right;" class="text-amber-300">ÁREA M²</th>
-                                    <th style="width: 20%; text-align: right;" class="text-cyan-400">ESTOQUE</th>
-                                    <th style="width: 18%; text-align: right; padding-right: 3px;" class="text-teal-300">DENSIDADE</th>
-                                </tr>
-                            </thead>
-                            <tbody id="pcoFamiliasTableBody" class="font-bold">
-                                <tr><td colspan="5" class="text-center py-2 text-slate-400">Aguardando dados...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="overflow-hidden flex-1 min-h-0 bg-[#000000] rounded border border-slate-800 pb-0.5">
+                    <table class="table-operational text-white h-full">
+                        <thead>
+                            <tr>
+                                <th style="width: 16%; text-align: left; padding-left: 6px;">LOCAÇÕES (RUA)</th>
+                                <th style="width: 14%; text-align: center;">TOTAL LOCAÇÕES</th>
+                                <th style="width: 14%; text-align: center;">LOCAÇÕES OCUPADAS</th>
+                                <th style="width: 14%; text-align: right;" class="text-amber-400">ÁREA TOTAL (M²)</th>
+                                <th style="width: 14%; text-align: right;" class="text-amber-300">ÁREA OCUPADA (M²)</th>
+                                <th style="width: 14%; text-align: right;" class="text-cyan-400">CAPACIDADE (UN)</th>
+                                <th style="width: 14%; text-align: right; padding-right: 6px;" class="text-emerald-400">ESTOQUE (UN)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pcoRuasTableBody" class="font-bold">
+                            <tr><td colspan="7" class="text-center py-4 text-slate-400">Aguardando dados oficiais...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
+
         </div>
 
         <!-- ==================== TV 02: AGENDA OPERACIONAL COM TICKER DE STATUS ==================== -->
@@ -544,7 +572,7 @@
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         }
 
-        // --- ATUALIZAÇÃO DO TICKER DE RESUMO OPERACIONAL ---
+        // --- TICKER DE RESUMO OPERACIONAL (TV 02) ---
         function atualizarTickerResumo() {
             const track = document.getElementById('tickerSummaryTrack');
             if (!track) return;
@@ -580,30 +608,43 @@
             track.innerHTML = conteudo + conteudo;
         }
 
-        // --- RETORNO TV 01: OTIMIZAÇÃO (PCO) ---
+        // --- RETORNO TV 01: OTIMIZAÇÃO (PCO OFICIAL) ---
         window.receberDadosOtimizacao = function(data) {
             if (data && data.status === "success") {
                 currentData.pco = data;
 
                 if (data.kpis) {
-                    const elLoc = document.getElementById('pcoTotalLoc');
-                    const elPercLoc = document.getElementById('pcoPercLoc');
-                    const elArea = document.getElementById('pcoAreaOcup');
-                    const elPercArea = document.getElementById('pcoPercArea');
-                    const elSaldo = document.getElementById('pcoSaldoEstoque');
-                    const elBadgeVazias = document.getElementById('pcoBadgeVazias');
-                    const elBadgeMiniBin = document.getElementById('pcoBadgeMiniBin');
+                    const elTotalLoc = document.getElementById('kpiPcoTotalLoc');
+                    const elOcup = document.getElementById('kpiPcoOcupadas');
+                    const elVazias = document.getElementById('kpiPcoVazias');
+                    const elPercLoc = document.getElementById('kpiPcoPercLoc');
+                    const elAreaTotal = document.getElementById('kpiPcoAreaTotal');
+                    const elAreaOcup = document.getElementById('kpiPcoAreaOcup');
+                    const elAreaLivre = document.getElementById('kpiPcoAreaLivre');
+                    const elPercArea = document.getElementById('kpiPcoPercArea');
+                    const elCapNominal = document.getElementById('kpiPcoCapNominal');
+                    const elSaldoEstoque = document.getElementById('kpiPcoSaldoEstoque');
+                    const elMiniBin = document.getElementById('kpiPcoMiniBin');
+                    const elSubtotais = document.getElementById('pcoSubtotaisInfo');
 
-                    if (elLoc) elLoc.innerText = `${data.kpis.locacoesOcupadas}/${data.kpis.totalLocacoes}`;
+                    if (elTotalLoc) elTotalLoc.innerText = data.kpis.totalLocacoes;
+                    if (elOcup) elOcup.innerText = data.kpis.locacoesOcupadas;
+                    if (elVazias) elVazias.innerText = data.kpis.locacoesVazias;
                     if (elPercLoc) elPercLoc.innerText = data.kpis.taxaOcupacaoLocacao;
-                    if (elArea) elArea.innerText = data.kpis.areaOcupadaM2;
+                    if (elAreaTotal) elAreaTotal.innerText = data.kpis.areaTotalM2;
+                    if (elAreaOcup) elAreaOcup.innerText = data.kpis.areaOcupadaM2;
+                    if (elAreaLivre) elAreaLivre.innerText = data.kpis.areaLivreM2;
                     if (elPercArea) elPercArea.innerText = data.kpis.taxaOcupacaoArea;
-                    if (elSaldo) elSaldo.innerText = Number(data.kpis.saldoEstocadoUn).toLocaleString('pt-BR');
-                    if (elBadgeVazias) elBadgeVazias.innerText = `${data.kpis.locacoesVazias} locações livres (${data.kpis.areaLivreM2} m²)`;
-                    if (elBadgeMiniBin) elBadgeMiniBin.innerText = `Mini Bin: ${data.kpis.locacaoMiniBin} loc.`;
+                    if (elCapNominal) elCapNominal.innerText = Number(data.kpis.capacidadeNominalUn).toLocaleString('pt-BR');
+                    if (elSaldoEstoque) elSaldoEstoque.innerText = Number(data.kpis.saldoEstocadoUn).toLocaleString('pt-BR');
+                    if (elMiniBin) elMiniBin.innerText = data.kpis.locacaoMiniBin;
+
+                    if (elSubtotais) {
+                        elSubtotais.innerHTML = `Mono: <strong>143</strong> | MB: <strong>15</strong> | Livre: <strong>${data.kpis.locacoesVazias}</strong> | % Global Ocupação: <strong class="text-cyan-400">${data.kpis.taxaOcupacaoLocacao}</strong>`;
+                    }
                 }
 
-                // Renderiza Ruas
+                // Renderiza Tabela Consolidada de Ruas
                 const ruasBody = document.getElementById('pcoRuasTableBody');
                 if (ruasBody && data.ruas) {
                     ruasBody.innerHTML = '';
@@ -611,31 +652,15 @@
                         const tr = document.createElement('tr');
                         tr.className = "hover:bg-slate-900 text-center";
                         tr.innerHTML = `
-                            <td style="text-align: left; padding-left: 3px;" class="font-black text-blue-400 font-num">${r.rua}</td>
-                            <td class="font-num text-slate-200">${r.locacoesOcupadas}/${r.totalLocacoes}</td>
-                            <td class="font-num text-[#38bdf8]">${r.percOcupacao}</td>
-                            <td style="text-align: right;" class="font-num text-amber-300">${r.areaOcupada}</td>
-                            <td style="text-align: right; padding-right: 3px;" class="font-num text-emerald-400">${r.estoqueUn.toLocaleString('pt-BR')}</td>
+                            <td style="text-align: left; padding-left: 6px;" class="font-black text-blue-400 font-num">${r.rua}</td>
+                            <td class="font-num text-slate-200">${r.totalLocacoes}</td>
+                            <td class="font-num text-[#38bdf8]">${r.locacoesOcupadas} (${r.percOcupacao})</td>
+                            <td style="text-align: right;" class="font-num text-amber-300">${r.areaTotal}</td>
+                            <td style="text-align: right;" class="font-num text-amber-400">${r.areaOcupada}</td>
+                            <td style="text-align: right;" class="font-num text-cyan-300">${r.capacidadeUn.toLocaleString('pt-BR')}</td>
+                            <td style="text-align: right; padding-right: 6px;" class="font-num text-emerald-400">${r.estoqueUn.toLocaleString('pt-BR')}</td>
                         `;
                         ruasBody.appendChild(tr);
-                    });
-                }
-
-                // Renderiza Famílias
-                const famBody = document.getElementById('pcoFamiliasTableBody');
-                if (famBody && data.familias) {
-                    famBody.innerHTML = '';
-                    data.familias.forEach(f => {
-                        const tr = document.createElement('tr');
-                        tr.className = "hover:bg-slate-900 text-center";
-                        tr.innerHTML = `
-                            <td style="text-align: left; padding-left: 3px;" class="font-black text-slate-100">${f.familia}</td>
-                            <td class="font-num text-slate-300">${f.locacoesOcupadas}</td>
-                            <td style="text-align: right;" class="font-num text-amber-300">${f.areaOcupadaM2}</td>
-                            <td style="text-align: right;" class="font-num text-cyan-300">${f.estoqueUn.toLocaleString('pt-BR')}</td>
-                            <td style="text-align: right; padding-right: 3px;" class="font-num text-teal-300">${f.densidade}</td>
-                        `;
-                        famBody.appendChild(tr);
                     });
                 }
 
