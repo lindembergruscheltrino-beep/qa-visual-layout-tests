@@ -130,14 +130,14 @@
             display: flex;
             align-items: center;
             position: relative;
-            mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 20px, black calc(100% - 20px), transparent);
+            mask-image: linear-gradient(to right, transparent, black 25px, black calc(100% - 25px), transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 25px, black calc(100% - 25px), transparent);
         }
 
         .top-family-ticker-track {
             display: inline-flex;
             white-space: nowrap;
-            animation: topFamilySlide 32s linear infinite;
+            animation: topFamilySlide 34s linear infinite;
         }
 
         .top-family-ticker-track:hover {
@@ -172,7 +172,7 @@
 </head>
 <body class="flex flex-col h-screen w-screen overflow-hidden">
 
-    <!-- CABEÇALHO COM TICKER SUPERIOR DE FAMÍLIAS (AREA DEMARCADA) -->
+    <!-- CABEÇALHO COM TICKER SUPERIOR DE FAMÍLIAS -->
     <header class="bg-[#050a17] border-b border-slate-800 text-white px-3 py-0.5 flex items-center justify-between shrink-0 h-[30px] gap-3">
         <!-- Logo e Identificação CD -->
         <div class="flex items-center gap-2 shrink-0">
@@ -183,9 +183,9 @@
             </div>
         </div>
 
-        <!-- BARRA HORIZONTAL DEMARCADA: ESTOQUE POR FAMÍLIA (ATRAVESSA AS DUAS TVS) -->
-        <div class="top-family-ticker-wrap flex-1 h-[22px] bg-[#030712]/90 border border-slate-800/80 rounded px-2">
-            <div id="topFamilyTickerTrack" class="top-family-ticker-track text-[8.5px] font-bold font-num flex items-center gap-6 text-slate-300">
+        <!-- BARRA HORIZONTAL DEMARCADA: FAMÍLIA + ESTOQUE UN + DENSIDADE UN/M² -->
+        <div class="top-family-ticker-wrap flex-1 h-[24px] bg-[#020611] border border-slate-800/90 rounded px-2">
+            <div id="topFamilyTickerTrack" class="top-family-ticker-track text-[8.5px] font-bold font-num flex items-center gap-8">
                 <span class="text-slate-400">Carregando estoque por família...</span>
             </div>
         </div>
@@ -629,40 +629,51 @@
             return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        // --- BARRA SUPERIOR: TICKER DINÂMICO DE ESTOQUE POR FAMÍLIA (ÁREA DEMARCADA) ---
+        // --- BARRA SUPERIOR: TICKER COM ESTILO EXATO DA IMAGEM ---
+        // Padrão: REFRIGERADOR 7.723 un | 4.85 un/m²
         function atualizarTickerSuperiorFamilias(familias) {
             const track = document.getElementById('topFamilyTickerTrack');
             if (!track) return;
 
-            // Dados oficiais com fallback
             const dados = (familias && familias.length > 0) ? familias : [
-                { familia: "REFRIGERADOR", estoqueUn: 7602 },
-                { familia: "LAVADORA", estoqueUn: 1982 },
-                { familia: "FOGÃO", estoqueUn: 1178 },
-                { familia: "FORNO", estoqueUn: 655 },
-                { familia: "FRIGOBAR", estoqueUn: 360 },
-                { familia: "COOKTOP", estoqueUn: 205 },
-                { familia: "M.ONDAS", estoqueUn: 200 },
-                { familia: "L.LOUÇA", estoqueUn: 150 },
-                { familia: "FREEZER", estoqueUn: 97 },
-                { familia: "CERVEJEIRA", estoqueUn: 75 }
+                { familia: "REFRIGERADOR", estoqueUn: 7723, densidadeUnM2: 4.85 },
+                { familia: "LAVADORA", estoqueUn: 2091, densidadeUnM2: 5.23 },
+                { familia: "FOGÃO", estoqueUn: 893, densidadeUnM2: 2.68 },
+                { familia: "FORNO", estoqueUn: 655, densidadeUnM2: 5.83 },
+                { familia: "FREEZER", estoqueUn: 97, densidadeUnM2: 1.88 },
+                { familia: "FRIGOBAR", estoqueUn: 360, densidadeUnM2: 10.56 },
+                { familia: "SECADORA", estoqueUn: 80, densidadeUnM2: 2.07 },
+                { familia: "CERVEJEIRA", estoqueUn: 75, densidadeUnM2: 3.83 },
+                { familia: "COOKTOP", estoqueUn: 205, densidadeUnM2: 4.50 },
+                { familia: "M.ONDAS", estoqueUn: 200, densidadeUnM2: 3.20 }
             ];
 
             let itensHtml = '';
             dados.filter(d => d.familia && !d.familia.toLowerCase().includes("vazio") && !d.familia.toLowerCase().includes("total")).forEach(d => {
                 const estoqueFormatado = formatarMilhar(d.estoqueUn || d.estoque || 0);
+
+                // Normaliza o cálculo ou texto da densidade (un/m²)
+                let densidade = d.densidadeUnM2 !== undefined ? d.densidadeUnM2 : d.densidade;
+                if (!densidade || densidade === 0) {
+                    const est = parseFloat(String(d.estoqueUn || d.estoque || 0).replace(/\./g, '').replace(',', '.')) || 0;
+                    const area = parseFloat(String(d.areaOcupadaM2 || d.areaOcupada || 0).replace(/\./g, '').replace(',', '.')) || 0;
+                    densidade = area > 0 ? (est / area).toFixed(2) : "0.00";
+                } else {
+                    const numD = Number(String(densidade).replace(',', '.'));
+                    densidade = !isNaN(numD) ? numD.toFixed(2) : String(densidade);
+                }
+
                 itensHtml += `
-                    <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-900/90 border border-slate-800">
-                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                        <span class="text-slate-200 font-black tracking-wide">${d.familia}</span>
-                        <span class="text-cyan-300 font-black">${estoqueFormatado}</span>
-                        <span class="text-[7px] text-slate-400 font-bold uppercase">(un)</span>
+                    <div class="inline-flex items-center gap-1.5 shrink-0">
+                        <span class="font-black text-white uppercase tracking-wider">${d.familia}</span>
+                        <span class="font-black text-[#60a5fa] font-num">${estoqueFormatado} un</span>
+                        <span class="text-slate-500 font-bold px-0.5">|</span>
+                        <span class="font-black text-[#10b981] font-num">${densidade} un/m²</span>
                     </div>
                 `;
             });
 
-            const bloco = `<div class="inline-flex items-center gap-4 px-2">${itensHtml}</div>`;
-            // Duplicamos o conteúdo para permitir o loop contínuo infinito perfeito
+            const bloco = `<div class="inline-flex items-center gap-8 px-4">${itensHtml}</div>`;
             track.innerHTML = bloco + bloco;
         }
 
