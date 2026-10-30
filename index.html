@@ -242,7 +242,7 @@
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#000000]">
 
-        <!-- ==================== TV 01: PCO VISUAL GRÁFICO (RUAS & MIX FAMÍLIA) ==================== -->
+        <!-- ==================== TV 01: PCO VISUAL GRÁFICO (RUAS & OCUPAÇÃO POR FAMÍLIA) ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             
             <!-- Barra Superior TV 01 -->
@@ -301,41 +301,41 @@
                 </div>
             </div>
 
-            <!-- CORPO VISUAL DA TV 01: GRÁFICO DE RUAS (ESQ) & GRÁFICO DE FAMÍLIAS (DIR) -->
+            <!-- CORPO VISUAL DA TV 01: OCUPAÇÃO POR RUA (ESQ) & OCUPAÇÃO POR FAMÍLIA (DIR) -->
             <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
                 
-                <!-- QUADRADO 1 (ESQUERDA): GRÁFICO + TABELA DE OCUPAÇÃO POR RUA -->
+                <!-- QUADRADO 1 (ESQUERDA): OCUPAÇÃO POR RUA -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
-                        <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                            <span>📍</span> Ocupação por Rua (Locações & Progresso)
+                        <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider">
+                            Ocupação por Rua
                         </span>
                         <span id="pcoSubtotaisInfo" class="text-[8px] text-slate-300 font-num">
                             Mono: 143 | MB: 15
                         </span>
                     </div>
 
-                    <!-- Container com barras de progresso visuais por rua -->
                     <div id="pcoRuasGraficoContainer" class="flex-1 flex flex-col justify-around px-2 py-1 bg-[#02050e] rounded border border-slate-800/80 overflow-hidden">
                         <p class="text-center text-slate-500 text-[9px] py-4">Carregando ocupação das ruas...</p>
                     </div>
                 </div>
 
-                <!-- QUADRADO 2 (DIREITA): GRÁFICO MIX POR FAMÍLIA (BARRAS DUPLAS) -->
+                <!-- QUADRADO 2 (DIREITA): OCUPAÇÃO POR FAMÍLIA -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
-                        <span class="text-cyan-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                            <span>📦</span> Mix por Família (Capacidade vs Estoque)
+                        <span class="text-cyan-400 text-[8.5px] font-black uppercase tracking-wider">
+                            Ocupação por Família
                         </span>
                         <div class="flex items-center gap-3 text-[7.5px] font-bold">
-                            <span class="flex items-center gap-1 text-cyan-400"><span class="w-2 h-2 rounded-sm bg-cyan-400"></span> Capacidade</span>
-                            <span class="flex items-center gap-1 text-purple-400"><span class="w-2 h-2 rounded-sm bg-purple-500"></span> Estoque</span>
+                            <span class="flex items-center gap-1 text-blue-300"><span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Loc. Ocupadas</span>
+                            <span class="flex items-center gap-1 text-amber-300"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Área Ocupada (m²)</span>
+                            <span class="flex items-center gap-1 text-cyan-300"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> % Armazém</span>
                         </div>
                     </div>
 
-                    <!-- Container do gráfico horizontal de barras por família -->
+                    <!-- Gráfico com as 4 métricas oficiais de Família -->
                     <div id="pcoFamiliasGraficoContainer" class="flex-1 flex flex-col justify-between px-2 py-1 bg-[#02050e] rounded border border-slate-800/80 overflow-hidden">
-                        <p class="text-center text-slate-500 text-[9px] py-4">Carregando gráfico de famílias...</p>
+                        <p class="text-center text-slate-500 text-[9px] py-4">Carregando ocupação por família...</p>
                     </div>
                 </div>
 
@@ -570,7 +570,6 @@
             return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
         }
 
-        // Formata quantidades inteiras garantindo o separador de milhar com ponto
         function formatarMilhar(val) {
             if (val === null || val === undefined || val === '') return '--';
             const str = String(val).trim();
@@ -582,7 +581,6 @@
             return num.toLocaleString('pt-BR');
         }
 
-        // Formata áreas decimais preservando o padrão brasileiro com vírgula nas casas decimais
         function formatarDecimal(val) {
             if (val === null || val === undefined || val === '') return '--';
             const str = String(val).trim();
@@ -633,7 +631,7 @@
             track.innerHTML = conteudo + conteudo;
         }
 
-        // --- RENDERIZADOR: GRÁFICO DE OCUPAÇÃO POR RUA (QUADRO 1) ---
+        // --- RENDERIZADOR: OCUPAÇÃO POR RUA (QUADRADO 1) ---
         function renderizarGraficoRuas(ruas) {
             const container = document.getElementById('pcoRuasGraficoContainer');
             if (!container) return;
@@ -650,14 +648,13 @@
                 let percNum = Math.round((ocupLoc / totalLoc) * 100);
                 if (isNaN(percNum)) percNum = 0;
 
-                // Cor da barra baseada na saturação
-                let corBarra = "#10b981"; // Verde (< 85%)
+                let corBarra = "#10b981";
                 let corTexto = "text-emerald-400";
                 if (percNum >= 95) {
-                    corBarra = "#ef4444"; // Vermelho crítico (>= 95%)
+                    corBarra = "#ef4444";
                     corTexto = "text-rose-400";
                 } else if (percNum >= 80) {
-                    corBarra = "#f59e0b"; // Amarelo/Laranja (80-94%)
+                    corBarra = "#f59e0b";
                     corTexto = "text-amber-400";
                 }
 
@@ -679,65 +676,68 @@
             });
         }
 
-        // --- RENDERIZADOR: GRÁFICO DE MIX POR FAMÍLIA (QUADRO 2) ---
+        // --- RENDERIZADOR: OCUPAÇÃO POR FAMÍLIA (QUADRADO 2) ---
+        // Exibe: Família | Locações Ocupadas | Área Ocupada (m²) | % Área Armazém
         function renderizarGraficoFamilias(familias) {
             const container = document.getElementById('pcoFamiliasGraficoContainer');
             if (!container) return;
 
-            // Dados oficiais de fallback caso a aba Famílias demore a responder
+            // Dados oficiais da folha de cálculo como fallback
             const dados = (familias && familias.length > 0) ? familias : [
-                { familia: "Refrigerador", capacidadeUn: 8625, estoqueUn: 7846 },
-                { familia: "Lavadora", capacidadeUn: 3535, estoqueUn: 2809 },
-                { familia: "Fogão", capacidadeUn: 1995, estoqueUn: 1457 },
-                { familia: "Freezer", capacidadeUn: 994, estoqueUn: 1364 },
-                { familia: "Forno", capacidadeUn: 303, estoqueUn: 350 },
-                { familia: "Cooktop", capacidadeUn: 332, estoqueUn: 205 },
-                { familia: "M.Ondas", capacidadeUn: 248, estoqueUn: 200 },
-                { familia: "Frigobar", capacidadeUn: 238, estoqueUn: 55 },
-                { familia: "L.Louça", capacidadeUn: 168, estoqueUn: 150 },
-                { familia: "Cervejeira", capacidadeUn: 99, estoqueUn: 75 }
+                { familia: "REFRIGERADOR", locacoesOcupados: 81, areaOcupadaM2: 1595.24, percentualAreaArmazem: "44,6%" },
+                { familia: "LAVADORA", locacoesOcupados: 25, areaOcupadaM2: 451.77, percentualAreaArmazem: "12,6%" },
+                { familia: "FOGÃO", locacoesOcupados: 24, areaOcupadaM2: 423.65, percentualAreaArmazem: "11,9%" },
+                { familia: "FORNO", locacoesOcupados: 6, areaOcupadaM2: 112.37, percentualAreaArmazem: "3,1%" },
+                { familia: "FREEZER", locacoesOcupados: 2, areaOcupadaM2: 51.50, percentualAreaArmazem: "1,4%" },
+                { familia: "FRIGOBAR", locacoesOcupados: 2, areaOcupadaM2: 34.10, percentualAreaArmazem: "1,0%" },
+                { familia: "SECADORA", locacoesOcupados: 2, areaOcupadaM2: 38.64, percentualAreaArmazem: "1,1%" },
+                { familia: "CERVEJEIRA", locacoesOcupados: 1, areaOcupadaM2: 19.60, percentualAreaArmazem: "0,5%" },
+                { familia: "Mini Bin", locacoesOcupados: 15, areaOcupadaM2: 237.32, percentualAreaArmazem: "6,6%" },
+                { familia: "Disponível (Vazio)", locacoesOcupados: 33, areaOcupadaM2: 610.31, percentualAreaArmazem: "17,1%" }
             ];
 
-            // Acha o valor máximo para a escala relativa das barras (base Refrigerador: ~8.625)
-            let maxVal = 1;
+            // Define o teto de área para a escala relativa da barra (base Refrigerador: 1.595,24 m²)
+            let maxArea = 1;
             dados.forEach(d => {
-                const c = parseInt(String(d.capacidadeUn).replace(/\./g, ''), 10) || 0;
-                const e = parseInt(String(d.estoqueUn).replace(/\./g, ''), 10) || 0;
-                if (c > maxVal) maxVal = c;
-                if (e > maxVal) maxVal = e;
+                const area = parseFloat(String(d.areaOcupadaM2 || d.areaOcupada || 0).replace(/\./g, '').replace(',', '.')) || 0;
+                if (area > maxArea) maxArea = area;
             });
 
             container.innerHTML = '';
-            // Exibe até as 10 principais famílias
             dados.slice(0, 10).forEach(d => {
-                const cap = parseInt(String(d.capacidadeUn).replace(/\./g, ''), 10) || 0;
-                const est = parseInt(String(d.estoqueUn).replace(/\./g, ''), 10) || 0;
+                const locs = d.locacoesOcupados || d.locacoesOcupadas || 0;
+                const areaVal = parseFloat(String(d.areaOcupadaM2 || d.areaOcupada || 0).replace(/\./g, '').replace(',', '.')) || 0;
+                const pctArea = d.percentualAreaArmazem || d.percArea || "0%";
 
-                const pctCap = Math.max(Math.round((cap / maxVal) * 100), 2);
-                const pctEst = Math.max(Math.round((est / maxVal) * 100), 2);
+                const barraLargura = Math.max(Math.min(Math.round((areaVal / maxArea) * 100), 100), 3);
 
                 const item = document.createElement('div');
                 item.className = "flex items-center gap-2 py-0.5 border-b border-slate-900/50 last:border-0";
                 item.innerHTML = `
-                    <span class="w-[74px] text-[8px] font-black text-slate-200 truncate shrink-0 text-left" title="${d.familia}">
+                    <!-- 1. Família -->
+                    <span class="w-[84px] text-[8px] font-black text-slate-200 truncate shrink-0 text-left" title="${d.familia}">
                         ${d.familia}
                     </span>
-                    <div class="flex-1 flex flex-col justify-center gap-0.5">
-                        <!-- Barra Ciano: Capacidade -->
-                        <div class="flex items-center gap-1.5">
-                            <div class="bg-slate-900/90 rounded-full h-1.5 flex-1 overflow-hidden flex items-center">
-                                <div class="h-full bg-cyan-400 rounded-full" style="width: ${pctCap}%;"></div>
-                            </div>
-                            <span class="w-[38px] text-[7px] font-black text-cyan-300 font-num text-right">${cap.toLocaleString('pt-BR')}</span>
+
+                    <!-- 2. Locações Ocupadas -->
+                    <span class="w-[30px] text-[8px] font-bold text-blue-300 font-num text-center shrink-0">
+                        ${locs} loc
+                    </span>
+
+                    <!-- 3. Barra Proporcional de Área Ocupada (m²) -->
+                    <div class="flex-1 flex items-center gap-1.5 min-w-0">
+                        <div class="bg-slate-900 rounded-full h-2 flex-1 overflow-hidden flex items-center p-0.5 border border-slate-800">
+                            <div class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: ${barraLargura}%;"></div>
                         </div>
-                        <!-- Barra Roxa: Estoque -->
-                        <div class="flex items-center gap-1.5">
-                            <div class="bg-slate-900/90 rounded-full h-1.5 flex-1 overflow-hidden flex items-center">
-                                <div class="h-full bg-purple-500 rounded-full" style="width: ${pctEst}%;"></div>
-                            </div>
-                            <span class="w-[38px] text-[7px] font-black text-purple-300 font-num text-right">${est.toLocaleString('pt-BR')}</span>
-                        </div>
+                        <span class="w-[52px] text-[7.5px] font-black text-amber-300 font-num text-right shrink-0">
+                            ${areaVal.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })} m²
+                        </span>
                     </div>
+
+                    <!-- 4. % Área Armazém -->
+                    <span class="w-[36px] text-right font-black text-[8px] text-cyan-300 font-num shrink-0 px-1 py-[1px] bg-cyan-950/60 rounded border border-cyan-800/40">
+                        ${pctArea}
+                    </span>
                 `;
                 container.appendChild(item);
             });
@@ -763,7 +763,6 @@
                 const horaTs = data.atualizadoEm ? data.atualizadoEm.split(' ')[1] || data.atualizadoEm : (data.timestamp || '');
                 if (statusTop) statusTop.innerText = "ONLINE (" + horaTs + ")";
 
-                // 1. Atualiza os 11 KPIs principais
                 if (data.kpis) {
                     const k = data.kpis;
                     const elTotalLoc = document.getElementById('kpiPcoTotalLoc');
@@ -796,7 +795,6 @@
                     }
                 }
 
-                // 2. Renderiza os gráficos da TV 01
                 renderizarGraficoRuas(data.ruas);
                 renderizarGraficoFamilias(data.familias);
 
