@@ -174,7 +174,6 @@
 
     <!-- CABEÇALHO COM TICKER SUPERIOR DE FAMÍLIAS -->
     <header class="bg-[#050a17] border-b border-slate-800 text-white px-3 py-0.5 flex items-center justify-between shrink-0 h-[30px] gap-3">
-        <!-- Logo e Identificação CD -->
         <div class="flex items-center gap-2 shrink-0">
             <div class="px-2 py-0.5 bg-blue-600 rounded text-white font-black text-[9.5px] tracking-wider shrink-0">TORRE DE CONTROLE</div>
             <div class="flex items-baseline gap-1.5 shrink-0">
@@ -190,7 +189,6 @@
             </div>
         </div>
         
-        <!-- Controles e Sincronização -->
         <div class="flex items-center gap-2 shrink-0">
             <div id="badgeSync" class="flex items-center gap-1.5 bg-[#0f172a] border border-slate-700 px-2 py-0.5 rounded text-slate-100 text-[9px] font-bold">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -280,7 +278,6 @@
         <!-- ==================== TV 01: PCO VISUAL GRÁFICO (RUAS & OCUPAÇÃO POR FAMÍLIA) ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             
-            <!-- Barra Superior TV 01 -->
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <h2 class="text-[8.5px] font-black text-blue-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span> TV 01: PAINEL GERENCIAL DE OCUPAÇÃO E CAPACIDADE DO CD (PCO)
@@ -338,8 +335,6 @@
 
             <!-- CORPO VISUAL DA TV 01: OCUPAÇÃO POR RUA (ESQ) & OCUPAÇÃO POR FAMÍLIA (DIR) -->
             <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
-                
-                <!-- QUADRADO 1 (ESQUERDA): OCUPAÇÃO POR RUA -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                         <span class="text-blue-400 text-[8.5px] font-black uppercase tracking-wider">
@@ -355,7 +350,6 @@
                     </div>
                 </div>
 
-                <!-- QUADRADO 2 (DIREITA): OCUPAÇÃO POR FAMÍLIA -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                         <span class="text-cyan-400 text-[8.5px] font-black uppercase tracking-wider">
@@ -372,7 +366,6 @@
                         <p class="text-center text-slate-500 text-[9px] py-4">Carregando ocupação por família...</p>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -469,15 +462,90 @@
             </div>
         </div>
 
-        <!-- ==================== TV 03: MÓDULO DE EXPANSÃO ==================== -->
-        <div class="tv-card flex flex-col justify-center items-center h-full text-center p-4">
-            <div class="w-11 h-11 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-1.5">
-                <span class="text-slate-300 font-bold text-xl">📊</span>
+        <!-- ==================== TV 03: INDICADORES MENSAIS & NEXT DAY ==================== -->
+        <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
+            
+            <!-- Barra Superior TV 03 -->
+            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
+                <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Next Day
+                </h2>
+                <div class="flex items-center gap-2">
+                    <span id="tv03MesRef" class="text-[8px] text-slate-300 font-bold font-num bg-slate-900 border border-slate-800 px-1.5 py-[1px] rounded">OUTUBRO/2026</span>
+                    <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE</span>
+                </div>
             </div>
-            <h3 class="text-xs font-black text-slate-200 uppercase tracking-wider">TV 03: Indicadores Operacionais</h3>
-            <p class="text-slate-400 text-[10px] max-w-[300px] mt-0.5 font-bold leading-relaxed">
-                Espaço livre para gráficos de produtividade, tempos médios e backlog.
-            </p>
+
+            <!-- GRADE COM OS 5 KPIS CONSOLIDADOS DO MÊS (EXPEDIÇÃO) -->
+            <div class="grid grid-cols-5 gap-1 shrink-0 px-1 py-1 bg-[#091124] rounded border border-slate-800 text-center">
+                <!-- 1. QTD PEÇAS -->
+                <div class="bg-[#0f172a] p-1 rounded border border-blue-500/40">
+                    <p class="text-[6.2px] text-blue-300 font-bold uppercase truncate">QTD PEÇAS (MÊS)</p>
+                    <p id="kpiTv03TotalPecas" class="kpi-big-value text-blue-400 font-num">--</p>
+                </div>
+                <!-- 2. TMP MÉDIO -->
+                <div class="bg-[#0f172a] p-1 rounded border border-amber-500/40">
+                    <p class="text-[6.2px] text-amber-300 font-bold uppercase truncate">TMP MÉDIO</p>
+                    <p id="kpiTv03MediaTMP" class="kpi-big-value text-amber-400 font-num">--</p>
+                </div>
+                <!-- 3. PPM MÉDIO -->
+                <div class="bg-[#0f172a] p-1 rounded border border-cyan-500/40">
+                    <p class="text-[6.2px] text-cyan-300 font-bold uppercase truncate">PPM MÉDIO</p>
+                    <p id="kpiTv03MediaPPM" class="kpi-big-value text-cyan-400 font-num">--</p>
+                </div>
+                <!-- 4. SOMA DESEM. -->
+                <div class="bg-[#0f172a] p-1 rounded border border-emerald-500/40">
+                    <p class="text-[6.2px] text-emerald-300 font-bold uppercase truncate">SOMA QTD. DESEM.</p>
+                    <p id="kpiTv03SomaDesem" class="kpi-big-value text-emerald-400 font-num">--</p>
+                </div>
+                <!-- 5. MINUTOS CARREG. -->
+                <div class="bg-[#0f172a] p-1 rounded border border-purple-500/40">
+                    <p class="text-[6.2px] text-purple-300 font-bold uppercase truncate">MÉD. MIN. CARREG.</p>
+                    <p id="kpiTv03MinCarreg" class="kpi-big-value text-purple-400 font-num">--</p>
+                </div>
+            </div>
+
+            <!-- CORPO VISUAL DA TV 03: GRÁFICO POR PERFIL (ESQ) & NEXT DAY (DIR) -->
+            <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
+                
+                <!-- QUADRANTE ESQUERDO: DISTRIBUIÇÃO POR PERFIL DE VEÍCULO -->
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
+                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
+                        <span class="text-amber-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                            <span>🚛</span> Transportes por Perfil de Veículo
+                        </span>
+                        <span id="tv03TotalTranspInfo" class="text-[8px] text-slate-300 font-num font-bold">
+                            Total: -- cargas
+                        </span>
+                    </div>
+
+                    <div id="tv03PerfisContainer" class="flex-1 flex flex-col justify-around px-2 py-1 bg-[#02050e] rounded border border-slate-800/80 overflow-hidden">
+                        <p class="text-center text-slate-500 text-[9px] py-4">A sincronizar perfis da expedição...</p>
+                    </div>
+                </div>
+
+                <!-- QUADRANTE DIREITO: MÓDULO NEXT DAY (PRONTO PARA INTEGRAÇÃO) -->
+                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
+                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
+                        <span class="text-cyan-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                            <span>📅</span> Programação Next Day
+                        </span>
+                        <span class="text-[8px] text-slate-400 font-num font-bold">Aguardando Base</span>
+                    </div>
+
+                    <div id="tv03NextDayContainer" class="flex-1 flex flex-col items-center justify-center p-3 bg-[#02050e] rounded border border-slate-800/80 text-center">
+                        <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-1 text-slate-300 text-lg">
+                            📦
+                        </div>
+                        <h4 class="text-[10px] font-black text-slate-300 uppercase tracking-wide">Módulo Next Day</h4>
+                        <p class="text-[8px] text-slate-400 font-bold max-w-[220px] mt-0.5 leading-relaxed">
+                            Pronto para integrar a nova folha. Envie os prints para exibirmos as cargas e previsões do dia seguinte.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
 
         <!-- ==================== TV 04: MÓDULO DE EXPANSÃO ==================== -->
@@ -504,7 +572,8 @@
             cargas: [],
             recebimentoResumo: { totalCargas: 0, totalPecas: 0, finalizados: 0, descarregando: 0, recebendo: 0, emDoca: 0, patio: 0, naoChegou: 0, pendentes: 0 },
             recebimentoCargas: [],
-            pco: { kpis: null, ruas: [], familias: [] }
+            pco: { kpis: null, ruas: [], familias: [] },
+            tv03Kpis: null
         };
 
         // --- SISTEMA DE CALIBRAÇÃO VISUAL ---
@@ -629,8 +698,7 @@
             return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        // --- BARRA SUPERIOR: TICKER COM ESTILO EXATO DA IMAGEM ---
-        // Padrão: REFRIGERADOR 7.723 un | 4.85 un/m²
+        // --- BARRA SUPERIOR: TICKER COM ESTILO EXATO ---
         function atualizarTickerSuperiorFamilias(familias) {
             const track = document.getElementById('topFamilyTickerTrack');
             if (!track) return;
@@ -652,7 +720,6 @@
             dados.filter(d => d.familia && !d.familia.toLowerCase().includes("vazio") && !d.familia.toLowerCase().includes("total")).forEach(d => {
                 const estoqueFormatado = formatarMilhar(d.estoqueUn || d.estoque || 0);
 
-                // Normaliza o cálculo ou texto da densidade (un/m²)
                 let densidade = d.densidadeUnM2 !== undefined ? d.densidadeUnM2 : d.densidade;
                 if (!densidade || densidade === 0) {
                     const est = parseFloat(String(d.estoqueUn || d.estoque || 0).replace(/\./g, '').replace(',', '.')) || 0;
@@ -713,7 +780,7 @@
             track.innerHTML = conteudo + conteudo;
         }
 
-        // --- RENDERIZADOR: OCUPAÇÃO POR RUA (QUADRADO 1) ---
+        // --- RENDERIZADOR: OCUPAÇÃO POR RUA (TV 01 - QUADRO 1) ---
         function renderizarGraficoRuas(ruas) {
             const container = document.getElementById('pcoRuasGraficoContainer');
             if (!container) return;
@@ -758,7 +825,7 @@
             });
         }
 
-        // --- RENDERIZADOR: OCUPAÇÃO POR FAMÍLIA (QUADRADO 2) ---
+        // --- RENDERIZADOR: OCUPAÇÃO POR FAMÍLIA (TV 01 - QUADRO 2) ---
         function renderizarGraficoFamilias(familias) {
             const container = document.getElementById('pcoFamiliasGraficoContainer');
             if (!container) return;
@@ -890,7 +957,7 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- RETORNO EXPEDIÇÃO ---
+        // --- RETORNO EXPEDIÇÃO (TV 02) ---
         window.receberDadosExpedicao = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.cargas = data.cargas;
@@ -985,7 +1052,7 @@
             });
         }
 
-        // --- RETORNO RECEBIMENTO ---
+        // --- RETORNO RECEBIMENTO (TV 02) ---
         window.receberDadosRecebimento = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.recebimentoCargas = data.cargas;
@@ -1084,6 +1151,97 @@
             });
         }
 
+        // =====================================================================
+        // --- SINCRONIZAÇÃO E RENDERIZAÇÃO DA TV 03 (INDICADORES MENSAIS) ---
+        // =====================================================================
+        window.receberDadosTV03 = function(data) {
+            const statusTop = document.getElementById('tv03StatusTop');
+            const mesRefEl = document.getElementById('tv03MesRef');
+
+            if (!data) {
+                if (statusTop) statusTop.innerText = "SEM RESPOSTA";
+                return;
+            }
+
+            if (data.status === "erro" || data.status === "error" || data.erro) {
+                const msg = data.mensagem || data.erro || data.message || "Erro";
+                if (statusTop) statusTop.innerHTML = `<span class="text-rose-500 font-bold">ERRO: ${msg}</span>`;
+                return;
+            }
+
+            if (data.status === "success" || data.kpisMes) {
+                currentData.tv03Kpis = data;
+                const horaTs = data.timestamp || '';
+                if (statusTop) statusTop.innerText = "ONLINE (" + horaTs + ")";
+                if (mesRefEl && data.mesReferencia) mesRefEl.innerText = data.mesReferencia;
+
+                // 1. Preenche os 5 cartões de KPIs consolidados
+                if (data.kpisMes) {
+                    const km = data.kpisMes;
+                    const elPecas = document.getElementById('kpiTv03TotalPecas');
+                    const elTMP = document.getElementById('kpiTv03MediaTMP');
+                    const elPPM = document.getElementById('kpiTv03MediaPPM');
+                    const elDesem = document.getElementById('kpiTv03SomaDesem');
+                    const elMinCarreg = document.getElementById('kpiTv03MinCarreg');
+
+                    if (elPecas) elPecas.innerText = formatarMilhar(km.totalPecas);
+                    if (elTMP) elTMP.innerText = km.mediaTMP || '--:--';
+                    if (elPPM) elPPM.innerText = km.mediaPPM || '--';
+                    if (elDesem) elDesem.innerText = formatarMilhar(km.somaDesem);
+                    if (elMinCarreg) elMinCarreg.innerText = (km.mediaMinutosCarreg ? km.mediaMinutosCarreg + " min" : '--');
+
+                    const elTotalTransp = document.getElementById('tv03TotalTranspInfo');
+                    if (elTotalTransp) elTotalTransp.innerText = `Total: ${km.totalTransportes || 0} cargas`;
+                }
+
+                // 2. Renderiza a distribuição por perfil
+                renderizarPerfisTV03(data.perfis);
+            }
+        };
+
+        function renderizarPerfisTV03(perfis) {
+            const container = document.getElementById('tv03PerfisContainer');
+            if (!container) return;
+
+            if (!perfis || perfis.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-500 text-[9px] py-4">Sem transportes registados no mês.</p>`;
+                return;
+            }
+
+            // Calcula o maior valor para a escala proporcional da barra
+            let maxQtd = 1;
+            perfis.forEach(p => { if (p.quantidade > maxQtd) maxQtd = p.quantidade; });
+
+            container.innerHTML = '';
+            perfis.slice(0, 6).forEach(p => {
+                const pct = Math.max(Math.round((p.quantidade / maxQtd) * 100), 4);
+
+                const item = document.createElement('div');
+                item.className = "flex items-center gap-2 py-0.5 border-b border-slate-900/60 last:border-0";
+                item.innerHTML = `
+                    <span class="w-[50px] font-black text-[9px] text-amber-400 font-num shrink-0">${p.perfil}</span>
+                    <div class="flex-1 bg-slate-900 rounded-full h-2.5 overflow-hidden flex items-center p-0.5 border border-slate-800">
+                        <div class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: ${pct}%;"></div>
+                    </div>
+                    <span class="w-[42px] text-right font-black text-[8.5px] text-white font-num shrink-0">${formatarMilhar(p.quantidade)}</span>
+                    <span class="w-[38px] text-right font-bold text-[8px] text-cyan-400 font-num shrink-0">${p.percentual}</span>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function sincronizarTV03() {
+            if (!GOOGLE_SCRIPT_EXPEDICAO_URL) return;
+            const antigo = document.getElementById('script-jsonp-tv03');
+            if (antigo) antigo.remove();
+
+            const scriptTag = document.createElement('script');
+            scriptTag.id = 'script-jsonp-tv03';
+            const divisor = GOOGLE_SCRIPT_EXPEDICAO_URL.includes('?') ? '&' : '?';
+            scriptTag.src = GOOGLE_SCRIPT_EXPEDICAO_URL + divisor + 'tipo=kpi_mes&callback=receberDadosTV03&_t=' + Date.now();
+            document.body.appendChild(scriptTag);
+        }
+
         function atualizarBadgeTimestamp(ts) {
             const badge = document.getElementById('badgeSync');
             if (badge && ts) {
@@ -1104,10 +1262,12 @@
             sincronizarOtimizacao();
             sincronizarExpedicao();
             sincronizarRecebimento();
+            sincronizarTV03();
             setInterval(() => {
                 sincronizarOtimizacao();
                 sincronizarExpedicao();
                 sincronizarRecebimento();
+                sincronizarTV03();
             }, 15000);
         });
     </script>
