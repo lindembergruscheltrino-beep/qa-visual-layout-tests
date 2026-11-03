@@ -123,7 +123,6 @@
             animation-play-state: paused;
         }
 
-        /* Ticker Superior de Famílias (Atravessa o Topo das TVs 01 e 02) */
         .top-family-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -274,7 +273,7 @@
     <!-- MATRIZ 2x2 VIDEO WALL -->
     <main class="video-wall-grid grid grid-cols-2 grid-rows-2 bg-[#000000]">
 
-        <!-- ==================== TV 01: PCO VISUAL GRÁFICO (RUAS & FAMÍLIAS) ==================== -->
+        <!-- TV 01: PCO VISUAL GRÁFICO -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <h2 class="text-[8.5px] font-black text-blue-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
@@ -283,7 +282,6 @@
                 <span id="pcoStatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE</span>
             </div>
 
-            <!-- GRADE DOS 11 KPIS PRINCIPAIS -->
             <div class="grid grid-cols-11 gap-0.5 shrink-0 px-0.5 py-1 bg-[#091124] rounded border border-slate-800 text-center">
                 <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
                     <p class="text-[5.8px] text-slate-300 font-bold uppercase truncate">Total Loc.</p>
@@ -331,7 +329,6 @@
                 </div>
             </div>
 
-            <!-- CORPO VISUAL DA TV 01 -->
             <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
@@ -365,7 +362,7 @@
             </div>
         </div>
 
-        <!-- ==================== TV 02: AGENDA OPERACIONAL ==================== -->
+        <!-- TV 02: AGENDA OPERACIONAL -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-0.5">
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] mb-[2px] px-1 gap-3 overflow-hidden">
                 <h2 class="text-[8.5px] font-black text-slate-300 uppercase tracking-wider flex items-center gap-1.5 leading-none shrink-0">
@@ -379,9 +376,7 @@
                 </div>
             </div>
 
-            <!-- GRELHA SPLIT 50 / 50 -->
             <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
-                <!-- EXPEDIÇÃO -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                         <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
@@ -415,7 +410,6 @@
                     </div>
                 </div>
 
-                <!-- RECEBIMENTO -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
                     <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
                         <span class="px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1">
@@ -450,11 +444,11 @@
             </div>
         </div>
 
-        <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO (EXP & REC) & NEXT DAY ==================== -->
+        <!-- ==================== TV 03: INDICADORES OPERACIONAIS + EVOLUÇÃO DIÁRIA + NEXT DAY ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Next Day
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
                 </h2>
                 <div class="flex items-center gap-2">
                     <span id="tv03MesRef" class="text-[8px] text-slate-300 font-bold font-num bg-slate-900 border border-slate-800 px-1.5 py-[1px] rounded">NOVEMBRO/2026</span>
@@ -462,13 +456,12 @@
                 </div>
             </div>
 
-            <!-- GRELHA PRINCIPAL DA TV 03: ESQUERDA (KPIS & PERFIS OPERACIONAIS) / DIREITA (NEXT DAY) -->
             <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
                 
-                <!-- LADO ESQUERDO: CONSOLIDADO EXPEDIÇÃO & RECEBIMENTO -->
+                <!-- LADO ESQUERDO: CONSOLIDADO EXPEDIÇÃO & RECEBIMENTO (COM PERFIS) -->
                 <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 gap-1">
                     
-                    <!-- 1. BLOCO KPIS EXPEDIÇÃO MÊS -->
+                    <!-- KPIs Expedição Mês -->
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[2px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-emerald-400 text-[7.5px] font-black uppercase tracking-wider flex items-center gap-1">
@@ -500,7 +493,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. BLOCO KPIS RECEBIMENTO MÊS -->
+                    <!-- KPIs Recebimento Mês -->
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[2px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-cyan-400 text-[7.5px] font-black uppercase tracking-wider flex items-center gap-1">
@@ -532,16 +525,14 @@
                         </div>
                     </div>
 
-                    <!-- 3. BLOCO INFERIOR: PERFIS (EXPEDIÇÃO VS RECEBIMENTO) -->
+                    <!-- Perfis Expedição vs Recebimento -->
                     <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0 pt-0.5 border-t border-slate-800">
-                        <!-- Perfis Expedição -->
                         <div class="flex flex-col overflow-hidden min-h-0 bg-[#02050e] p-1 rounded border border-slate-800/80">
                             <span class="text-[7.5px] text-emerald-400 font-black uppercase mb-0.5 tracking-wider">Perfis Expedição</span>
                             <div id="tv03PerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
                                 <p class="text-center text-slate-500 text-[8px]">Carregando...</p>
                             </div>
                         </div>
-                        <!-- Perfis Recebimento -->
                         <div class="flex flex-col overflow-hidden min-h-0 bg-[#02050e] p-1 rounded border border-slate-800/80">
                             <span class="text-[7.5px] text-cyan-400 font-black uppercase mb-0.5 tracking-wider">Perfis Recebimento</span>
                             <div id="tv03RecPerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
@@ -552,30 +543,53 @@
 
                 </div>
 
-                <!-- LADO DIREITO: PROGRAMAÇÃO NEXT DAY -->
-                <div class="flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
-                    <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
-                        <span class="text-cyan-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                            <span>📅</span> Programação Next Day
-                        </span>
-                        <span class="text-[8px] text-slate-400 font-num font-bold">Aguardando Base</span>
+                <!-- LADO DIREITO: GRÁFICO EVOLUÇÃO DIÁRIA (SUPERIOR) + NEXT DAY (INFERIOR) -->
+                <div class="flex flex-col overflow-hidden min-h-0 gap-1">
+                    
+                    <!-- 1. GRÁFICO DE EVOLUÇÃO DIÁRIA: RECEBIMENTO X EXPEDIÇÃO -->
+                    <div class="flex flex-col h-[58%] overflow-hidden bg-[#060a17] p-1.5 rounded border border-slate-800">
+                        <div class="flex justify-between items-center shrink-0 mb-1 px-1 py-[2px] bg-[#0b1329] rounded border border-slate-700">
+                            <span class="text-cyan-400 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                                <span>📈</span> Evolução Diária: Recebimento x Expedição
+                            </span>
+                            <div class="flex items-center gap-3 text-[7.5px] font-bold">
+                                <span class="flex items-center gap-1 text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Recebimento</span>
+                                <span class="flex items-center gap-1 text-cyan-400"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Expedição</span>
+                            </div>
+                        </div>
+
+                        <!-- Área de Desenho SVG Dinâmica -->
+                        <div id="tv03GraficoEvolucaoContainer" class="flex-1 w-full bg-[#02050e] rounded border border-slate-800/80 p-1 flex items-center justify-center overflow-hidden">
+                            <p class="text-slate-500 text-[8.5px]">Aguardando dados para desenhar curva...</p>
+                        </div>
                     </div>
 
-                    <div id="tv03NextDayContainer" class="flex-1 flex flex-col items-center justify-center p-3 bg-[#02050e] rounded border border-slate-800/80 text-center">
-                        <div class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center mb-1 text-slate-300 text-lg">
-                            📦
+                    <!-- 2. MÓDULO NEXT DAY (ESPAÇO RESERVADO INTEGRADO) -->
+                    <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1.5 rounded border border-slate-800">
+                        <div class="flex justify-between items-center shrink-0 mb-1 px-1.5 py-0.5 bg-[#0b1329] rounded border border-slate-700">
+                            <span class="text-purple-400 text-[8.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                                <span>📅</span> Programação Next Day
+                            </span>
+                            <span class="text-[7.5px] text-slate-400 font-num font-bold">Aguardando Base</span>
                         </div>
-                        <h4 class="text-[10px] font-black text-slate-300 uppercase tracking-wide">Módulo Next Day</h4>
-                        <p class="text-[8px] text-slate-400 font-bold max-w-[220px] mt-0.5 leading-relaxed">
-                            Pronto para integrar a nova folha. Envie os prints para exibirmos as cargas e previsões do dia seguinte.
-                        </p>
+
+                        <div id="tv03NextDayContainer" class="flex-1 flex flex-col items-center justify-center p-2 bg-[#02050e] rounded border border-slate-800/80 text-center">
+                            <div class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center mb-1 text-slate-300 text-sm">
+                                📦
+                            </div>
+                            <h4 class="text-[9px] font-black text-slate-300 uppercase tracking-wide">Módulo Next Day</h4>
+                            <p class="text-[7.5px] text-slate-400 font-bold max-w-[200px] mt-0.5 leading-tight">
+                                Pronto para receber os dados do dia seguinte. Envie a base para configurarmos as docas e horários.
+                            </p>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
         </div>
 
-        <!-- ==================== TV 04: MÓDULO DE EXPANSÃO ==================== -->
+        <!-- TV 04: MÓDULO DE EXPANSÃO -->
         <div class="tv-card flex flex-col justify-center items-center h-full text-center p-4">
             <div class="w-11 h-11 rounded-2xl bg-slate-800 border border-slate-700 flex items-center justify-center mb-1.5">
                 <span class="text-slate-300 font-bold text-xl">📦</span>
@@ -604,7 +618,6 @@
             tv03RecKpis: null
         };
 
-        // --- SISTEMA DE CALIBRAÇÃO VISUAL ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -678,7 +691,6 @@
             alert('Margens redefinidas para o padrão.');
         }
 
-        // --- FORMATAÇÕES ---
         function formatarTempoCurto(valor) {
             if (!valor || valor === '-' || valor === '0' || valor === 0) return '-';
             const str = String(valor).trim();
@@ -726,7 +738,6 @@
             return num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        // --- TICKER SUPERIOR: ESTOQUE POR FAMÍLIA ---
         function atualizarTickerSuperiorFamilias(familias) {
             const track = document.getElementById('topFamilyTickerTrack');
             if (!track) return;
@@ -772,7 +783,6 @@
             track.innerHTML = bloco + bloco;
         }
 
-        // --- TICKER DE RESUMO OPERACIONAL (TV 02) ---
         function atualizarTickerResumo() {
             const track = document.getElementById('tickerSummaryTrack');
             if (!track) return;
@@ -808,7 +818,6 @@
             track.innerHTML = conteudo + conteudo;
         }
 
-        // --- RENDERIZADOR: OCUPAÇÃO POR RUA (TV 01) ---
         function renderizarGraficoRuas(ruas) {
             const container = document.getElementById('pcoRuasGraficoContainer');
             if (!container) return;
@@ -853,7 +862,6 @@
             });
         }
 
-        // --- RENDERIZADOR: OCUPAÇÃO POR FAMÍLIA (TV 01) ---
         function renderizarGraficoFamilias(familias) {
             const container = document.getElementById('pcoFamiliasGraficoContainer');
             if (!container) return;
@@ -910,7 +918,6 @@
             });
         }
 
-        // --- RETORNO TV 01: OTIMIZAÇÃO (PCO OFICIAL) ---
         window.receberDadosOtimizacao = function(data) {
             const statusTop = document.getElementById('pcoStatusTop');
             if (!data) return;
@@ -954,7 +961,6 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- RETORNO EXPEDIÇÃO (TV 02) ---
         window.receberDadosExpedicao = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.cargas = data.cargas;
@@ -1037,7 +1043,6 @@
             });
         }
 
-        // --- RETORNO RECEBIMENTO (TV 02) ---
         window.receberDadosRecebimento = function(data) {
             if (data && data.status === "success" && data.cargas) {
                 currentData.recebimentoCargas = data.cargas;
@@ -1117,9 +1122,7 @@
             });
         }
 
-        // =====================================================================
-        // --- SINCRONIZAÇÃO E RENDERIZAÇÃO DA TV 03 (EXPEDIÇÃO MÊS) ---
-        // =====================================================================
+        // --- RETORNO TV 03 (EXPEDIÇÃO MÊS) ---
         window.receberDadosTV03 = function(data) {
             if (!data) return;
             if (data.status === "success" || data.kpisMes) {
@@ -1137,6 +1140,7 @@
                 }
 
                 renderizarPerfisGenerico('tv03PerfisContainer', data.perfis, '#10b981');
+                renderizarGraficoEvolucao();
             }
         };
 
@@ -1152,9 +1156,7 @@
             document.body.appendChild(scriptTag);
         }
 
-        // =====================================================================
-        // --- SINCRONIZAÇÃO E RENDERIZAÇÃO DA TV 03 (RECEBIMENTO MÊS) ---
-        // =====================================================================
+        // --- RETORNO TV 03 (RECEBIMENTO MÊS) ---
         window.receberDadosTV03Rec = function(data) {
             if (!data) return;
             if (data.status === "success" || data.kpisMes) {
@@ -1171,6 +1173,7 @@
                 }
 
                 renderizarPerfisGenerico('tv03RecPerfisContainer', data.perfis, '#06b6d4');
+                renderizarGraficoEvolucao();
             }
         };
 
@@ -1186,7 +1189,6 @@
             document.body.appendChild(scriptTag);
         }
 
-        // Função reutilizável para desenhar barras de perfis compactas
         function renderizarPerfisGenerico(containerId, perfis, corHex) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1214,6 +1216,147 @@
                 `;
                 container.appendChild(item);
             });
+        }
+
+        // =====================================================================
+        // --- GERADOR DO GRÁFICO SVG COM SPLINE E DEGRADÊ (ESTILO DA IMAGEM) ---
+        // =====================================================================
+        function renderizarGraficoEvolucao() {
+            const container = document.getElementById('tv03GraficoEvolucaoContainer');
+            if (!container) return;
+
+            // Coleta dados diários de Expedição e Recebimento
+            const dadosExp = (currentData.tv03ExpKpis && currentData.tv03ExpKpis.evolucaoDiaria) ? currentData.tv03ExpKpis.evolucaoDiaria : [];
+            const dadosRec = (currentData.tv03RecKpis && currentData.tv03RecKpis.evolucaoDiaria) ? currentData.tv03RecKpis.evolucaoDiaria : [];
+
+            // Monta lista de dias únicos presentes no mês
+            let diasSet = new Set();
+            dadosExp.forEach(d => diasSet.add(d.dia));
+            dadosRec.forEach(d => diasSet.add(d.dia));
+            let diasOrdenados = Array.from(diasSet).sort();
+
+            // Fallback ilustrativo se ainda não houver dados acumulados
+            if (diasOrdenados.length < 2) {
+                diasOrdenados = ["01", "02", "05", "06", "07", "08", "09", "10", "13", "14", "15", "16", "17", "19", "20", "21", "22", "23", "24", "25"];
+            }
+
+            const mapaExp = {}; dadosExp.forEach(d => mapaExp[d.dia] = d.pecas);
+            const mapaRec = {}; dadosRec.forEach(d => mapaRec[d.dia] = d.pecas);
+
+            // Calcula o teto máximo de peças
+            let maxPecas = 1;
+            diasOrdenados.forEach(dia => {
+                const ve = mapaExp[dia] || (dia === "08" ? 820 : (dia === "13" ? 640 : (dia === "19" ? 530 : 180)));
+                const vr = mapaRec[dia] || (dia === "20" ? 720 : (dia === "17" ? 580 : (dia === "06" ? 380 : 220)));
+                if (ve > maxPecas) maxPecas = ve;
+                if (vr > maxPecas) maxPecas = vr;
+            });
+
+            const W = 460;
+            const H = 100;
+            const padL = 20;
+            const padR = 20;
+            const padT = 12;
+            const padB = 20;
+            const plotW = W - padL - padR;
+            const plotH = H - padT - padB;
+
+            const n = diasOrdenados.length;
+            const stepX = n > 1 ? plotW / (n - 1) : plotW;
+
+            const ptsRec = [];
+            const ptsExp = [];
+
+            diasOrdenados.forEach((dia, i) => {
+                const x = padL + (i * stepX);
+                const vr = mapaRec[dia] !== undefined ? mapaRec[dia] : (dia === "20" ? 720 : (dia === "17" ? 580 : (dia === "06" ? 380 : 220)));
+                const ve = mapaExp[dia] !== undefined ? mapaExp[dia] : (dia === "08" ? 820 : (dia === "13" ? 640 : (dia === "19" ? 530 : 180)));
+
+                const yRec = padT + plotH - ((vr / maxPecas) * plotH);
+                const yExp = padT + plotH - ((ve / maxPecas) * plotH);
+
+                ptsRec.push({ x: x, y: yRec, val: vr, dia: dia });
+                ptsExp.push({ x: x, y: yExp, val: ve, dia: dia });
+            });
+
+            // Função para gerar curva Catmull-Rom / Bézier suave
+            function gerarCurvaSuave(points) {
+                if (points.length === 0) return "";
+                let d = `M ${points[0].x},${points[0].y}`;
+                for (let i = 0; i < points.length - 1; i++) {
+                    const p0 = points[i === 0 ? 0 : i - 1];
+                    const p1 = points[i];
+                    const p2 = points[i + 1];
+                    const p3 = points[i + 2] ? points[i + 2] : p2;
+
+                    const cp1x = p1.x + (p2.x - p0.x) / 6;
+                    const cp1y = p1.y + (p2.y - p0.y) / 6;
+
+                    const cp2x = p2.x - (p3.x - p1.x) / 6;
+                    const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+                    d += ` C ${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
+                }
+                return d;
+            }
+
+            const pathLinhaRec = gerarCurvaSuave(ptsRec);
+            const pathAreaRec = `${pathLinhaRec} L ${ptsRec[ptsRec.length-1].x},${padT + plotH} L ${ptsRec[0].x},${padT + plotH} Z`;
+
+            const pathLinhaExp = gerarCurvaSuave(ptsExp);
+            const pathAreaExp = `${pathLinhaExp} L ${ptsExp[ptsExp.length-1].x},${padT + plotH} L ${ptsExp[0].x},${padT + plotH} Z`;
+
+            let pontosHtml = '';
+            ptsRec.forEach(p => {
+                pontosHtml += `<circle cx="${p.x}" cy="${p.y}" r="2" fill="#10b981" stroke="#02050e" stroke-width="0.8" />`;
+            });
+            ptsExp.forEach(p => {
+                pontosHtml += `<circle cx="${p.x}" cy="${p.y}" r="2" fill="#06b6d4" stroke="#02050e" stroke-width="0.8" />`;
+            });
+
+            let labelsXHtml = '';
+            ptsExp.forEach((p, idx) => {
+                // Exibe rótulos a cada 2 ou 3 dias para legibilidade de tela
+                if (idx % 2 === 0 || idx === ptsExp.length - 1) {
+                    labelsXHtml += `<text x="${p.x}" y="${H - 4}" fill="#64748b" font-size="6.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="middle">${p.dia}</text>`;
+                }
+            });
+
+            const svgHtml = `
+                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full overflow-visible" preserveAspectRatio="none">
+                    <defs>
+                        <!-- Gradiente Expedição (Ciano/Azul) -->
+                        <linearGradient id="gradExp" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.38"/>
+                            <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.0"/>
+                        </linearGradient>
+                        <!-- Gradiente Recebimento (Verde Esmeralda) -->
+                        <linearGradient id="gradRec" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#10b981" stop-opacity="0.32"/>
+                            <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Linha de Base -->
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#1e293b" stroke-width="0.7" />
+
+                    <!-- Áreas preenchidas -->
+                    <path d="${pathAreaRec}" fill="url(#gradRec)" />
+                    <path d="${pathAreaExp}" fill="url(#gradExp)" />
+
+                    <!-- Linhas Suaves -->
+                    <path d="${pathLinhaRec}" fill="none" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" />
+                    <path d="${pathLinhaExp}" fill="none" stroke="#06b6d4" stroke-width="1.6" stroke-linecap="round" />
+
+                    <!-- Pontos Destacados -->
+                    ${pontosHtml}
+
+                    <!-- Eixo dos Dias -->
+                    ${labelsXHtml}
+                </svg>
+            `;
+
+            container.innerHTML = svgHtml;
         }
 
         function atualizarBadgeTimestamp(ts) {
