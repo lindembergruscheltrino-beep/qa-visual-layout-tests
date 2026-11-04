@@ -86,8 +86,6 @@
             padding-left: var(--tv03-pad-sides);
             padding-right: var(--tv03-pad-sides);
             gap: var(--tv03-gap);
-            
-            /* Permite à TV 03 ultrapassar a grade e encostar na moldura física */
             margin-top: calc(-1 * var(--tv03-expand-top));
             margin-bottom: calc(-1 * var(--tv03-expand-bottom));
             margin-left: calc(-1 * var(--tv03-expand-sides));
@@ -319,7 +317,6 @@
         </div>
 
         <div class="space-y-2 text-[10px]">
-            <!-- Expansões Externas (Esticar até a carcaça física da TV) -->
             <div>
                 <div class="flex justify-between text-slate-200 font-bold mb-0.5">
                     <span>⬆️ Esticar Topo da TV 03</span>
@@ -535,7 +532,7 @@
             </div>
         </div>
 
-        <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL (TOTALMENTE EXPANDIDA) ==================== -->
+        <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL ==================== -->
         <div id="tv03CardRoot" class="tv-card flex flex-col overflow-hidden">
             
             <!-- Barra Superior da TV 03 -->
@@ -550,7 +547,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <span id="tv03MesRef" class="text-[8px] text-slate-300 font-bold font-num bg-slate-900 border border-slate-800 px-1.5 py-[1px] rounded">NOVEMBRO/2026</span>
-                    <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE[cite: 33]</span>
+                    <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE</span>
                 </div>
             </div>
 
@@ -564,7 +561,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada[cite: 33]
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada
                             </span>
                             <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -581,7 +578,6 @@
                                 <p class="text-[5.2px] text-cyan-300 font-bold uppercase truncate">PPM</p>
                                 <p id="kpiTv03MediaPPM" class="kpi-big-value text-cyan-400 font-num">--</p>
                             </div>
-                            <!-- Card DESEM em Vermelho -->
                             <div class="bg-rose-950/50 p-0.5 rounded border border-rose-500/60">
                                 <p class="text-[5.2px] text-rose-300 font-bold uppercase truncate">DESEM.</p>
                                 <p id="kpiTv03SomaDesem" class="kpi-big-value text-rose-400 font-num">--</p>
@@ -597,7 +593,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-cyan-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado[cite: 33]
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado
                             </span>
                             <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -657,11 +653,11 @@
                     <div class="flex flex-col h-[74%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-cyan-300 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📈</span> Evolução Diária: Recebimento x Expedição[cite: 33]
+                                <span>📈</span> Evolução Diária: Recebimento x Expedição
                             </span>
                             <div class="flex items-center gap-3 text-[7.5px] font-bold">
-                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento[cite: 33]</span>
-                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição[cite: 33]</span>
+                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento</span>
+                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição</span>
                             </div>
                         </div>
 
@@ -684,7 +680,7 @@
                                 📦
                             </div>
                             <div class="overflow-hidden">
-                                <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto[cite: 33]</h4>
+                                <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto</h4>
                                 <p class="text-[7.2px] text-slate-400 font-bold mt-0.5 leading-tight truncate">
                                     Envie os prints da base para configurarmos as docas e horários.
                                 </p>
