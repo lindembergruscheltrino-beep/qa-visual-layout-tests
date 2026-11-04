@@ -25,11 +25,14 @@
             --row-height-factor: 14;
             --font-scale-factor: 1.0;
 
-            /* Variáveis Exclusivas para Calibração da TV 03 */
-            --tv03-pad-top: 4px;
-            --tv03-pad-bottom: 4px;
-            --tv03-pad-sides: 4px;
-            --tv03-gap: 4px;
+            /* Variáveis Exclusivas para Calibração e Expansão da TV 03 */
+            --tv03-pad-top: 2px;
+            --tv03-pad-bottom: 2px;
+            --tv03-pad-sides: 3px;
+            --tv03-gap: 3px;
+            --tv03-expand-top: 6px;
+            --tv03-expand-bottom: 12px;
+            --tv03-expand-sides: 4px;
         }
 
         * {
@@ -76,13 +79,22 @@
             background-color: #050914;
         }
 
-        /* Estilo Isolado da TV 03 */
+        /* Estilo Isolado de Expansão da TV 03 */
         #tv03CardRoot {
             padding-top: var(--tv03-pad-top);
             padding-bottom: var(--tv03-pad-bottom);
             padding-left: var(--tv03-pad-sides);
             padding-right: var(--tv03-pad-sides);
             gap: var(--tv03-gap);
+            
+            /* Permite à TV 03 ultrapassar a grade e encostar na moldura física */
+            margin-top: calc(-1 * var(--tv03-expand-top));
+            margin-bottom: calc(-1 * var(--tv03-expand-bottom));
+            margin-left: calc(-1 * var(--tv03-expand-sides));
+            margin-right: calc(-1 * var(--tv03-expand-sides));
+            height: calc(100% + var(--tv03-expand-top) + var(--tv03-expand-bottom)) !important;
+            width: calc(100% + (2 * var(--tv03-expand-sides))) !important;
+            z-index: 10;
         }
 
         .table-operational {
@@ -189,7 +201,7 @@
             position: fixed;
             bottom: 30px;
             left: 20px;
-            width: 290px;
+            width: 310px;
             background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(8px);
             border: 1px solid #f59e0b;
@@ -233,7 +245,7 @@
         </div>
     </header>
 
-    <!-- PAINEL GERAL DE AJUSTE (VIDEOWALL COMPLETO) -->
+    <!-- PAINEL GERAL DE AJUSTE -->
     <div id="painelCalibracao">
         <div class="flex justify-between items-center border-b border-slate-700 pb-1 mb-2">
             <h3 class="text-xs font-black text-white flex items-center gap-1.5">
@@ -297,43 +309,45 @@
         </div>
     </div>
 
-    <!-- PAINEL EXCLUSIVO: CALIBRAÇÃO APENAS DA TV 03 -->
+    <!-- PAINEL EXCLUSIVO: CALIBRAÇÃO E EXPANSÃO DAS BORDAS DA TV 03 -->
     <div id="painelCalibracaoTV03">
         <div class="flex justify-between items-center border-b border-amber-500/40 pb-1 mb-2">
             <h3 class="text-xs font-black text-amber-400 flex items-center gap-1.5">
-                <span>🎛️</span> Calibração Exclusiva TV 03
+                <span>🎛️</span> Expansão das Bordas da TV 03
             </h3>
             <button onclick="togglePainelCalibracaoTV03()" class="text-slate-400 hover:text-white text-xs font-bold">✕</button>
         </div>
 
         <div class="space-y-2 text-[10px]">
+            <!-- Expansões Externas (Esticar até a carcaça física da TV) -->
             <div>
-                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
-                    <span>Espaçamento Interno Topo</span>
-                    <span id="lblTV03Top" class="font-mono text-amber-400">4px</span>
+                <div class="flex justify-between text-slate-200 font-bold mb-0.5">
+                    <span>⬆️ Esticar Topo da TV 03</span>
+                    <span id="lblTV03ExpTop" class="font-mono text-amber-300">6px</span>
                 </div>
-                <input id="rngTV03Top" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('top', this.value)">
+                <input id="rngTV03ExpTop" type="range" min="0" max="30" value="6" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('expTop', this.value)">
             </div>
             <div>
-                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
-                    <span>Espaçamento Interno Fundo</span>
-                    <span id="lblTV03Bottom" class="font-mono text-amber-400">4px</span>
+                <div class="flex justify-between text-slate-200 font-bold mb-0.5">
+                    <span>⬇️ Esticar Fundo da TV 03</span>
+                    <span id="lblTV03ExpBottom" class="font-mono text-amber-300">12px</span>
                 </div>
-                <input id="rngTV03Bottom" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('bottom', this.value)">
+                <input id="rngTV03ExpBottom" type="range" min="0" max="40" value="12" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('expBottom', this.value)">
             </div>
             <div>
-                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
-                    <span>Espaçamento Lateral (Esq/Dir)</span>
-                    <span id="lblTV03Sides" class="font-mono text-amber-400">4px</span>
+                <div class="flex justify-between text-slate-200 font-bold mb-0.5">
+                    <span>↔️ Esticar Laterais da TV 03</span>
+                    <span id="lblTV03ExpSides" class="font-mono text-amber-300">4px</span>
                 </div>
-                <input id="rngTV03Sides" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('sides', this.value)">
+                <input id="rngTV03ExpSides" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('expSides', this.value)">
             </div>
-            <div>
-                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
-                    <span>Separação entre Blocos da TV 03</span>
-                    <span id="lblTV03Gap" class="font-mono text-amber-400">4px</span>
+
+            <div class="border-t border-slate-700/60 pt-1 mt-1">
+                <div class="flex justify-between text-slate-400 font-bold mb-0.5">
+                    <span>Espaçamento Interno (Geral)</span>
+                    <span id="lblTV03Sides" class="font-mono text-cyan-400">3px</span>
                 </div>
-                <input id="rngTV03Gap" type="range" min="0" max="20" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('gap', this.value)">
+                <input id="rngTV03Sides" type="range" min="1" max="15" value="3" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('sides', this.value)">
             </div>
         </div>
 
@@ -521,35 +535,36 @@
             </div>
         </div>
 
-        <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL ==================== -->
-        <div id="tv03CardRoot" class="tv-card flex flex-col overflow-hidden h-full">
+        <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL (TOTALMENTE EXPANDIDA) ==================== -->
+        <div id="tv03CardRoot" class="tv-card flex flex-col overflow-hidden">
+            
+            <!-- Barra Superior da TV 03 -->
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <div class="flex items-center gap-1.5">
                     <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
                         <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
                     </h2>
-                    <!-- BOTÃO EXCLUSIVO PARA AJUSTAR BORDAS DA TV 03 -->
                     <button onclick="togglePainelCalibracaoTV03()" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 px-1.5 py-[1px] rounded text-[7.2px] font-black cursor-pointer transition">
                         ⚙️ Bordas TV 03
                     </button>
                 </div>
                 <div class="flex items-center gap-2">
                     <span id="tv03MesRef" class="text-[8px] text-slate-300 font-bold font-num bg-slate-900 border border-slate-800 px-1.5 py-[1px] rounded">NOVEMBRO/2026</span>
-                    <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE</span>
+                    <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE[cite: 33]</span>
                 </div>
             </div>
 
-            <!-- GRELHA DIVIDIDA: ESQUERDA (KPIS + PERFIS) / DIREITA (GRÁFICO TEMPO REAL + NEXT DAY) -->
+            <!-- GRELHA DIVIDIDA: 5 COLUNAS (KPIS + PERFIS) / 7 COLUNAS (GRÁFICO TEMPO REAL + NEXT DAY) -->
             <div class="grid grid-cols-12 gap-1 flex-1 overflow-hidden min-h-0">
                 
-                <!-- LADO ESQUERDO: 5 COLUNAS (KPIS CONSOLIDADOS + PERFIS) -->
-                <div class="col-span-5 flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 gap-1">
+                <!-- LADO ESQUERDO: 5 COLUNAS -->
+                <div class="col-span-5 flex flex-col justify-between overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 gap-1 h-full">
                     
                     <!-- KPIs Expedição Mês -->
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada[cite: 33]
                             </span>
                             <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -566,8 +581,8 @@
                                 <p class="text-[5.2px] text-cyan-300 font-bold uppercase truncate">PPM</p>
                                 <p id="kpiTv03MediaPPM" class="kpi-big-value text-cyan-400 font-num">--</p>
                             </div>
-                            <!-- CARD SOMA DESEMPENHO EM VERMELHO -->
-                            <div class="bg-rose-950/40 p-0.5 rounded border border-rose-500/50">
+                            <!-- Card DESEM em Vermelho -->
+                            <div class="bg-rose-950/50 p-0.5 rounded border border-rose-500/60">
                                 <p class="text-[5.2px] text-rose-300 font-bold uppercase truncate">DESEM.</p>
                                 <p id="kpiTv03SomaDesem" class="kpi-big-value text-rose-400 font-num">--</p>
                             </div>
@@ -582,7 +597,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-cyan-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado[cite: 33]
                             </span>
                             <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -610,21 +625,21 @@
                         </div>
                     </div>
 
-                    <!-- Perfis Compactados -->
-                    <div class="flex-1 flex flex-col overflow-hidden min-h-0 bg-[#02050e] p-1 rounded border border-slate-800/80 gap-1">
-                        <div class="flex justify-between items-center px-1">
+                    <!-- Perfis Compactados (Ocupando toda a altura restante) -->
+                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1 rounded border border-slate-800/80">
+                        <div class="flex justify-between items-center px-1 mb-0.5">
                             <span class="text-[7px] text-slate-300 font-black uppercase tracking-wider">Distribuição por Perfil</span>
                             <span class="text-[6.8px] text-slate-500 font-bold">Mês Vigente</span>
                         </div>
 
                         <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden">
-                            <div class="flex flex-col overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
+                            <div class="flex flex-col justify-around overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
                                 <span class="text-[6.8px] font-black text-emerald-400 mb-0.5">Expedição</span>
                                 <div id="tv03PerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
                                     <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
                                 </div>
                             </div>
-                            <div class="flex flex-col overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
+                            <div class="flex flex-col justify-around overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
                                 <span class="text-[6.8px] font-black text-cyan-400 mb-0.5">Recebimento</span>
                                 <div id="tv03RecPerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
                                     <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
@@ -635,18 +650,18 @@
 
                 </div>
 
-                <!-- LADO DIREITO: 7 COLUNAS (GRÁFICO TEMPO REAL + NEXT DAY) -->
-                <div class="col-span-7 flex flex-col overflow-hidden min-h-0 gap-1">
+                <!-- LADO DIREITO: 7 COLUNAS (GRÁFICO AMPLIADO + NEXT DAY) -->
+                <div class="col-span-7 flex flex-col justify-between overflow-hidden min-h-0 gap-1 h-full">
                     
                     <!-- GRÁFICO EVOLUÇÃO DIÁRIA PURO TEMPO REAL -->
-                    <div class="flex flex-col h-[70%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
+                    <div class="flex flex-col h-[74%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-cyan-300 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📈</span> Evolução Diária: Recebimento x Expedição
+                                <span>📈</span> Evolução Diária: Recebimento x Expedição[cite: 33]
                             </span>
                             <div class="flex items-center gap-3 text-[7.5px] font-bold">
-                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento</span>
-                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição</span>
+                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento[cite: 33]</span>
+                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição[cite: 33]</span>
                             </div>
                         </div>
 
@@ -656,7 +671,7 @@
                     </div>
 
                     <!-- MÓDULO NEXT DAY -->
-                    <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
+                    <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 justify-center">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-purple-400 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
                                 <span>📅</span> Programação Next Day
@@ -664,12 +679,12 @@
                             <span class="text-[7.2px] text-slate-400 font-num font-bold">Aguardando Base</span>
                         </div>
 
-                        <div id="tv03NextDayContainer" class="flex-1 flex flex-row items-center justify-center gap-2 p-1 bg-[#02050e] rounded border border-slate-800/80 text-left">
+                        <div id="tv03NextDayContainer" class="flex-1 flex flex-row items-center justify-center gap-2 px-2 py-0.5 bg-[#02050e] rounded border border-slate-800/80 text-left">
                             <div class="w-6 h-6 rounded bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 text-xs shrink-0">
                                 📦
                             </div>
                             <div class="overflow-hidden">
-                                <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto</h4>
+                                <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto[cite: 33]</h4>
                                 <p class="text-[7.2px] text-slate-400 font-bold mt-0.5 leading-tight truncate">
                                     Envie os prints da base para configurarmos as docas e horários.
                                 </p>
@@ -785,7 +800,7 @@
             alert('Margens gerais redefinidas.');
         }
 
-        // --- CALIBRAÇÃO EXCLUSIVA TV 03 ---
+        // --- CALIBRAÇÃO E EXPANSÃO EXCLUSIVA DA TV 03 ---
         function togglePainelCalibracaoTV03() {
             const p = document.getElementById('painelCalibracaoTV03');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -793,53 +808,55 @@
 
         function ajustarBordaTV03(tipo, valor) {
             const root = document.documentElement;
-            if (tipo === 'top') {
-                root.style.setProperty('--tv03-pad-top', valor + 'px');
-                document.getElementById('lblTV03Top').innerText = valor + 'px';
-            } else if (tipo === 'bottom') {
-                root.style.setProperty('--tv03-pad-bottom', valor + 'px');
-                document.getElementById('lblTV03Bottom').innerText = valor + 'px';
+            if (tipo === 'expTop') {
+                root.style.setProperty('--tv03-expand-top', valor + 'px');
+                document.getElementById('lblTV03ExpTop').innerText = valor + 'px';
+            } else if (tipo === 'expBottom') {
+                root.style.setProperty('--tv03-expand-bottom', valor + 'px');
+                document.getElementById('lblTV03ExpBottom').innerText = valor + 'px';
+            } else if (tipo === 'expSides') {
+                root.style.setProperty('--tv03-expand-sides', valor + 'px');
+                document.getElementById('lblTV03ExpSides').innerText = valor + 'px';
             } else if (tipo === 'sides') {
                 root.style.setProperty('--tv03-pad-sides', valor + 'px');
+                root.style.setProperty('--tv03-pad-top', valor + 'px');
+                root.style.setProperty('--tv03-pad-bottom', valor + 'px');
                 document.getElementById('lblTV03Sides').innerText = valor + 'px';
-            } else if (tipo === 'gap') {
-                root.style.setProperty('--tv03-gap', valor + 'px');
-                document.getElementById('lblTV03Gap').innerText = valor + 'px';
             }
         }
 
         function salvarConfiguracaoTV03() {
             const cfgTV03 = {
-                top: document.getElementById('rngTV03Top').value,
-                bottom: document.getElementById('rngTV03Bottom').value,
-                sides: document.getElementById('rngTV03Sides').value,
-                gap: document.getElementById('rngTV03Gap').value
+                expTop: document.getElementById('rngTV03ExpTop').value,
+                expBottom: document.getElementById('rngTV03ExpBottom').value,
+                expSides: document.getElementById('rngTV03ExpSides').value,
+                sides: document.getElementById('rngTV03Sides').value
             };
-            localStorage.setItem('cfg_tv03_margens', JSON.stringify(cfgTV03));
-            alert('Bordas da TV 03 salvas com sucesso!');
+            localStorage.setItem('cfg_tv03_margens_v2', JSON.stringify(cfgTV03));
+            alert('Bordas expandidas da TV 03 salvas com sucesso!');
             togglePainelCalibracaoTV03();
         }
 
         function carregarConfiguracaoTV03() {
-            const salva = localStorage.getItem('cfg_tv03_margens');
+            const salva = localStorage.getItem('cfg_tv03_margens_v2');
             if (salva) {
                 try {
                     const cfg = JSON.parse(salva);
-                    if (cfg.top) { document.getElementById('rngTV03Top').value = cfg.top; ajustarBordaTV03('top', cfg.top); }
-                    if (cfg.bottom) { document.getElementById('rngTV03Bottom').value = cfg.bottom; ajustarBordaTV03('bottom', cfg.bottom); }
+                    if (cfg.expTop) { document.getElementById('rngTV03ExpTop').value = cfg.expTop; ajustarBordaTV03('expTop', cfg.expTop); }
+                    if (cfg.expBottom) { document.getElementById('rngTV03ExpBottom').value = cfg.expBottom; ajustarBordaTV03('expBottom', cfg.expBottom); }
+                    if (cfg.expSides) { document.getElementById('rngTV03ExpSides').value = cfg.expSides; ajustarBordaTV03('expSides', cfg.expSides); }
                     if (cfg.sides) { document.getElementById('rngTV03Sides').value = cfg.sides; ajustarBordaTV03('sides', cfg.sides); }
-                    if (cfg.gap) { document.getElementById('rngTV03Gap').value = cfg.gap; ajustarBordaTV03('gap', cfg.gap); }
                 } catch(e) {}
             }
         }
 
         function resetarConfiguracaoTV03() {
-            localStorage.removeItem('cfg_tv03_margens');
-            document.getElementById('rngTV03Top').value = 4; ajustarBordaTV03('top', 4);
-            document.getElementById('rngTV03Bottom').value = 4; ajustarBordaTV03('bottom', 4);
-            document.getElementById('rngTV03Sides').value = 4; ajustarBordaTV03('sides', 4);
-            document.getElementById('rngTV03Gap').value = 4; ajustarBordaTV03('gap', 4);
-            alert('Bordas da TV 03 redefinidas para o padrão.');
+            localStorage.removeItem('cfg_tv03_margens_v2');
+            document.getElementById('rngTV03ExpTop').value = 6; ajustarBordaTV03('expTop', 6);
+            document.getElementById('rngTV03ExpBottom').value = 12; ajustarBordaTV03('expBottom', 12);
+            document.getElementById('rngTV03ExpSides').value = 4; ajustarBordaTV03('expSides', 4);
+            document.getElementById('rngTV03Sides').value = 3; ajustarBordaTV03('sides', 3);
+            alert('Bordas da TV 03 redefinidas para o padrão expandido.');
         }
 
         function formatarTempoCurto(valor) {
@@ -1352,7 +1369,7 @@
             perfis.slice(0, 4).forEach(p => {
                 const pct = Math.max(Math.round((p.quantidade / maxQtd) * 100), 5);
                 const item = document.createElement('div');
-                item.className = "flex items-center gap-1 py-[1.5px] border-b border-slate-900/60 last:border-0";
+                item.className = "flex items-center gap-1 py-[2px] border-b border-slate-900/60 last:border-0";
                 item.innerHTML = `
                     <span class="w-[30px] font-black text-[7.5px] text-slate-200 font-num shrink-0 truncate">${p.perfil}</span>
                     <div class="flex-1 bg-slate-900 rounded-full h-1.5 overflow-hidden flex items-center p-[0.5px] border border-slate-800">
@@ -1365,9 +1382,7 @@
             });
         }
 
-        // =====================================================================
-        // --- GERADOR DO GRÁFICO SVG: PURO TEMPO REAL (SEM DADOS FICTÍCIOS) ---
-        // =====================================================================
+        // --- GERADOR DO GRÁFICO SVG COM EVOLUÇÃO DIÁRIA ---
         function renderizarGraficoEvolucao() {
             const container = document.getElementById('tv03GraficoEvolucaoContainer');
             if (!container) return;
@@ -1375,7 +1390,6 @@
             const dadosExp = (currentData.tv03ExpKpis && currentData.tv03ExpKpis.evolucaoDiaria) ? currentData.tv03ExpKpis.evolucaoDiaria : [];
             const dadosRec = (currentData.tv03RecKpis && currentData.tv03RecKpis.evolucaoDiaria) ? currentData.tv03RecKpis.evolucaoDiaria : [];
 
-            // Identifica exclusivamente os dias presentes nas planilhas
             let diasSet = new Set();
             dadosExp.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
             dadosRec.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
@@ -1389,7 +1403,6 @@
             const mapaExp = {}; dadosExp.forEach(d => { mapaExp[String(d.dia).padStart(2, '0')] = d.pecas; });
             const mapaRec = {}; dadosRec.forEach(d => { mapaRec[String(d.dia).padStart(2, '0')] = d.pecas; });
 
-            // Se tiver apenas 1 ou 2 dias no início do mês, inclui suavemente a âncora '01' do zero
             let listaDiasPlot = [...diasOrdenados];
             let incluiInicio = false;
             if (listaDiasPlot.length <= 2 && !listaDiasPlot.includes("01")) {
@@ -1409,8 +1422,8 @@
             const H = 140;
             const padL = 22;
             const padR = 22;
-            const padT = 16;
-            const padB = 24;
+            const padT = 14;
+            const padB = 22;
             const plotW = W - padL - padR;
             const plotH = H - padT - padB;
 
