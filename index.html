@@ -539,10 +539,10 @@
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <div class="flex items-center gap-1.5">
                     <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária[cite: 31]
                     </h2>
                     <button onclick="togglePainelCalibracaoTV03()" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 px-1.5 py-[1px] rounded text-[7.2px] font-black cursor-pointer transition">
-                        ⚙️ Bordas TV 03
+                        ⚙️ Bordas TV 03[cite: 31]
                     </button>
                 </div>
                 <div class="flex items-center gap-2">
@@ -551,17 +551,17 @@
                 </div>
             </div>
 
-            <!-- GRELHA DIVIDIDA: 5 COLUNAS (KPIS + PERFIS) / 7 COLUNAS (GRÁFICO TEMPO REAL + NEXT DAY) -->
+            <!-- GRELHA DIVIDIDA: ESQUERDA (KPIS + NEXT DAY) / DIREITA (GRÁFICO + PERFIS) -->
             <div class="grid grid-cols-12 gap-1 flex-1 overflow-hidden min-h-0">
                 
-                <!-- LADO ESQUERDO: 5 COLUNAS -->
+                <!-- LADO ESQUERDO: 5 COLUNAS (KPIS CONSOLIDADOS + PROGRAMAÇÃO NEXT DAY) -->
                 <div class="col-span-5 flex flex-col justify-between overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 gap-1 h-full">
                     
                     <!-- KPIs Expedição Mês -->
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada[cite: 31]
                             </span>
                             <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -578,6 +578,7 @@
                                 <p class="text-[5.2px] text-cyan-300 font-bold uppercase truncate">PPM</p>
                                 <p id="kpiTv03MediaPPM" class="kpi-big-value text-cyan-400 font-num">--</p>
                             </div>
+                            <!-- Card DESEM em Vermelho -->
                             <div class="bg-rose-950/50 p-0.5 rounded border border-rose-500/60">
                                 <p class="text-[5.2px] text-rose-300 font-bold uppercase truncate">DESEM.</p>
                                 <p id="kpiTv03SomaDesem" class="kpi-big-value text-rose-400 font-num">--</p>
@@ -593,7 +594,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-cyan-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado[cite: 31]
                             </span>
                             <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -621,43 +622,40 @@
                         </div>
                     </div>
 
-                    <!-- Perfis Compactados (Ocupando toda a altura restante) -->
-                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1 rounded border border-slate-800/80">
-                        <div class="flex justify-between items-center px-1 mb-0.5">
-                            <span class="text-[7px] text-slate-300 font-black uppercase tracking-wider">Distribuição por Perfil</span>
-                            <span class="text-[6.8px] text-slate-500 font-bold">Mês Vigente</span>
+                    <!-- PROGRAMAÇÃO NEXT DAY (AGORA POSICIONADA NO LADO ESQUERDO) -->
+                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded border border-slate-800/80">
+                        <div class="flex justify-between items-center shrink-0 mb-1 px-1 py-[2px] bg-[#0b1329] rounded border border-slate-700">
+                            <span class="text-purple-400 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                                <span>📅</span> Programação Next Day
+                            </span>
+                            <span class="text-[7.2px] text-slate-400 font-num font-bold">Aguardando Base</span>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden">
-                            <div class="flex flex-col justify-around overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
-                                <span class="text-[6.8px] font-black text-emerald-400 mb-0.5">Expedição</span>
-                                <div id="tv03PerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
-                                    <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
-                                </div>
+                        <div id="tv03NextDayContainer" class="flex-1 flex flex-col items-center justify-center p-2 text-center">
+                            <div class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 text-sm mb-1">
+                                📦
                             </div>
-                            <div class="flex flex-col justify-around overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
-                                <span class="text-[6.8px] font-black text-cyan-400 mb-0.5">Recebimento</span>
-                                <div id="tv03RecPerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
-                                    <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
-                                </div>
-                            </div>
+                            <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto[cite: 31]</h4>
+                            <p class="text-[7.2px] text-slate-400 font-bold mt-1 leading-tight max-w-[210px]">
+                                Envie os prints da base para configurarmos as docas e horários.
+                            </p>
                         </div>
                     </div>
 
                 </div>
 
-                <!-- LADO DIREITO: 7 COLUNAS (GRÁFICO AMPLIADO + NEXT DAY) -->
+                <!-- LADO DIREITO: 7 COLUNAS (GRÁFICO TEMPO REAL + DISTRIBUIÇÃO POR PERFIL) -->
                 <div class="col-span-7 flex flex-col justify-between overflow-hidden min-h-0 gap-1 h-full">
                     
                     <!-- GRÁFICO EVOLUÇÃO DIÁRIA PURO TEMPO REAL -->
-                    <div class="flex flex-col h-[74%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
+                    <div class="flex flex-col h-[65%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-cyan-300 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📈</span> Evolução Diária: Recebimento x Expedição
+                                <span>📈</span> Evolução Diária: Recebimento x Expedição[cite: 31]
                             </span>
                             <div class="flex items-center gap-3 text-[7.5px] font-bold">
-                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento</span>
-                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição</span>
+                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento[cite: 31]</span>
+                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição[cite: 31]</span>
                             </div>
                         </div>
 
@@ -666,24 +664,25 @@
                         </div>
                     </div>
 
-                    <!-- MÓDULO NEXT DAY -->
-                    <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 justify-center">
-                        <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
-                            <span class="text-purple-400 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📅</span> Programação Next Day
-                            </span>
-                            <span class="text-[7.2px] text-slate-400 font-num font-bold">Aguardando Base</span>
+                    <!-- DISTRIBUIÇÃO POR PERFIL (AGORA POSICIONADA NO LADO DIREITO INFERIOR) -->
+                    <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 justify-between">
+                        <div class="flex justify-between items-center px-1 mb-0.5">
+                            <span class="text-[7.2px] text-slate-300 font-black uppercase tracking-wider">Distribuição por Perfil de Veículo</span>
+                            <span class="text-[6.8px] text-slate-500 font-bold">Mês Vigente</span>
                         </div>
 
-                        <div id="tv03NextDayContainer" class="flex-1 flex flex-row items-center justify-center gap-2 px-2 py-0.5 bg-[#02050e] rounded border border-slate-800/80 text-left">
-                            <div class="w-6 h-6 rounded bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 text-xs shrink-0">
-                                📦
+                        <div class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden">
+                            <div class="flex flex-col justify-around overflow-hidden bg-[#02050e] p-1 rounded border border-slate-800/80">
+                                <span class="text-[6.8px] font-black text-emerald-400 mb-0.5">Perfis Expedição</span>
+                                <div id="tv03PerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
+                                    <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
+                                </div>
                             </div>
-                            <div class="overflow-hidden">
-                                <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto</h4>
-                                <p class="text-[7.2px] text-slate-400 font-bold mt-0.5 leading-tight truncate">
-                                    Envie os prints da base para configurarmos as docas e horários.
-                                </p>
+                            <div class="flex flex-col justify-around overflow-hidden bg-[#02050e] p-1 rounded border border-slate-800/80">
+                                <span class="text-[6.8px] font-black text-cyan-400 mb-0.5">Perfis Recebimento</span>
+                                <div id="tv03RecPerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
+                                    <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
+                                </div>
                             </div>
                         </div>
                     </div>
