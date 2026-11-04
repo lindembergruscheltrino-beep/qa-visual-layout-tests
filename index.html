@@ -148,6 +148,33 @@
             animation-play-state: paused;
         }
 
+        /* Ticker Topo da TV 03 (Dia) */
+        .tv03-top-ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+        }
+
+        .tv03-top-ticker-track {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: tv03TickerSlide 24s linear infinite;
+        }
+
+        .tv03-top-ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes tv03TickerSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Ticker Superior de Famílias */
         .top-family-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -535,17 +562,25 @@
         <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL ==================== -->
         <div id="tv03CardRoot" class="tv-card flex flex-col overflow-hidden">
             
-            <!-- Barra Superior da TV 03 -->
-            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
-                <div class="flex items-center gap-1.5">
+            <!-- Barra Superior da TV 03 com Novo Ticker Operacional do Dia -->
+            <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1 gap-2">
+                <div class="flex items-center gap-1.5 shrink-0">
                     <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária[cite: 31]
                     </h2>
                     <button onclick="togglePainelCalibracaoTV03()" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 px-1.5 py-[1px] rounded text-[7.2px] font-black cursor-pointer transition">
-                        ⚙️ Bordas TV 03
+                        ⚙️ Bordas TV 03[cite: 31]
                     </button>
                 </div>
-                <div class="flex items-center gap-2">
+
+                <!-- BARRA TICKER HORIZONTAL: QUANTIDADES E PERCENTUAIS DO DIA (EXPEDIÇÃO X RECEBIMENTO) -->
+                <div class="tv03-top-ticker-wrap flex-1 h-[20px] bg-[#02050e] border border-slate-800 rounded px-2">
+                    <div id="tv03TopTickerTrack" class="tv03-top-ticker-track text-[8px] font-bold font-num flex items-center gap-6">
+                        <span class="text-slate-400">Calculando movimentação do dia...</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 shrink-0">
                     <span id="tv03MesRef" class="text-[8px] text-slate-300 font-bold font-num bg-slate-900 border border-slate-800 px-1.5 py-[1px] rounded">NOVEMBRO/2026</span>
                     <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE</span>
                 </div>
@@ -561,7 +596,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada[cite: 31]
                             </span>
                             <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -578,7 +613,6 @@
                                 <p class="text-[5.2px] text-cyan-300 font-bold uppercase truncate">PPM</p>
                                 <p id="kpiTv03MediaPPM" class="kpi-big-value text-cyan-400 font-num">--</p>
                             </div>
-                            <!-- Card DESEM em Vermelho -->
                             <div class="bg-rose-950/50 p-0.5 rounded border border-rose-500/60">
                                 <p class="text-[5.2px] text-rose-300 font-bold uppercase truncate">DESEM.</p>
                                 <p id="kpiTv03SomaDesem" class="kpi-big-value text-rose-400 font-num">--</p>
@@ -594,7 +628,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-cyan-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado[cite: 31]
                             </span>
                             <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -635,7 +669,7 @@
                             <div class="w-7 h-7 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 text-sm mb-1">
                                 📦
                             </div>
-                            <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto</h4>
+                            <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto[cite: 31]</h4>
                             <p class="text-[7.2px] text-slate-400 font-bold mt-1 leading-tight max-w-[210px]">
                                 Envie os prints da base para configurarmos as docas e horários.
                             </p>
@@ -651,11 +685,11 @@
                     <div class="flex flex-col h-[65%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-cyan-300 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📈</span> Evolução Diária: Recebimento x Expedição
+                                <span>📈</span> Evolução Diária: Recebimento x Expedição[cite: 31]
                             </span>
                             <div class="flex items-center gap-3 text-[7.5px] font-bold">
-                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento</span>
-                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição</span>
+                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento[cite: 31]</span>
+                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição[cite: 31]</span>
                             </div>
                         </div>
 
@@ -946,6 +980,51 @@
             track.innerHTML = bloco + bloco;
         }
 
+        // --- ATUALIZAÇÃO DO TICKER SUPERIOR DA TV 03 (DIA: QUANTIDADES & %) ---
+        function atualizarTickerTV03Dia() {
+            const track = document.getElementById('tv03TopTickerTrack');
+            if (!track) return;
+
+            const exp = currentData.expedicaoResumo || { totalPecas: 0, concluidos: 0, totalCargas: 0 };
+            const rec = currentData.recebimentoResumo || { totalPecas: 0, finalizados: 0, totalCargas: 0 };
+
+            const pecasExp = Number(exp.totalPecas) || 0;
+            const pecasRec = Number(rec.totalPecas) || 0;
+            const somaPecasDia = pecasExp + pecasRec;
+
+            const pctExpTotal = somaPecasDia > 0 ? ((pecasExp / somaPecasDia) * 100).toFixed(1) + "%" : "0.0%";
+            const pctRecTotal = somaPecasDia > 0 ? ((pecasRec / somaPecasDia) * 100).toFixed(1) + "%" : "0.0%";
+
+            const pctConclExp = exp.totalCargas > 0 ? ((exp.concluidos / exp.totalCargas) * 100).toFixed(1) + "%" : "0.0%";
+            const pctConclRec = rec.totalCargas > 0 ? ((rec.finalizados / rec.totalCargas) * 100).toFixed(1) + "%" : "0.0%";
+
+            const htmlConteudo = `
+                <div class="inline-flex items-center gap-2 shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <span class="text-emerald-400 font-black">EXPEDIÇÃO HOJE:</span>
+                    <span class="text-white font-num font-black">${formatarMilhar(pecasExp)} un</span>
+                    <span class="text-emerald-300 font-num">(${pctExpTotal} do volume)</span>
+                    <span class="text-slate-400 font-num">[Concluído: <strong class="text-emerald-400">${pctConclExp}</strong>]</span>
+                </div>
+                <span class="text-slate-600 font-bold">|</span>
+                <div class="inline-flex items-center gap-2 shrink-0">
+                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+                    <span class="text-cyan-400 font-black">RECEBIMENTO HOJE:</span>
+                    <span class="text-white font-num font-black">${formatarMilhar(pecasRec)} un</span>
+                    <span class="text-cyan-300 font-num">(${pctRecTotal} do volume)</span>
+                    <span class="text-slate-400 font-num">[Finalizado: <strong class="text-cyan-400">${pctConclRec}</strong>]</span>
+                </div>
+                <span class="text-slate-600 font-bold">|</span>
+                <div class="inline-flex items-center gap-1.5 shrink-0 text-slate-300">
+                    <span>TOTAL OPERADO NO DIA:</span>
+                    <strong class="text-amber-400 font-num font-black">${formatarMilhar(somaPecasDia)} un</strong>
+                </div>
+            `;
+
+            const bloco = `<div class="inline-flex items-center gap-6 px-4">${htmlConteudo}</div>`;
+            track.innerHTML = bloco + bloco;
+        }
+
         function atualizarTickerResumo() {
             const track = document.getElementById('tickerSummaryTrack');
             if (!track) return;
@@ -975,6 +1054,9 @@
 
             const conteudo = `<span class="inline-flex items-center gap-4 px-3">${blocoExpedicao} <span class="text-slate-600">|</span> ${blocoRecebimento}</span>`;
             track.innerHTML = conteudo + conteudo;
+
+            // Mantém sincronizada a barra do dia da TV 03
+            atualizarTickerTV03Dia();
         }
 
         function renderizarGraficoRuas(ruas) {
@@ -1290,263 +1372,4 @@
 
                 if (data.kpisMes) {
                     const km = data.kpisMes;
-                    document.getElementById('kpiTv03TotalPecas').innerText = formatarMilhar(km.totalPecas);
-                    document.getElementById('kpiTv03MediaTMP').innerText = km.mediaTMP || '--:--';
-                    document.getElementById('kpiTv03MediaPPM').innerText = km.mediaPPM || '--';
-                    document.getElementById('kpiTv03SomaDesem').innerText = formatarMilhar(km.somaDesem);
-                    document.getElementById('kpiTv03MinCarreg').innerText = (km.mediaMinutosCarreg ? km.mediaMinutosCarreg + "m" : '--');
-                    document.getElementById('tv03ExpTotalTransp').innerText = `${km.totalTransportes || 0} Transp.`;
-                }
-
-                renderizarPerfisGenerico('tv03PerfisContainer', data.perfis, '#10b981');
-                renderizarGraficoEvolucao();
-            }
-        };
-
-        function sincronizarTV03Exp() {
-            if (!GOOGLE_SCRIPT_EXPEDICAO_URL) return;
-            const antigo = document.getElementById('script-jsonp-tv03');
-            if (antigo) antigo.remove();
-
-            const scriptTag = document.createElement('script');
-            scriptTag.id = 'script-jsonp-tv03';
-            const divisor = GOOGLE_SCRIPT_EXPEDICAO_URL.includes('?') ? '&' : '?';
-            scriptTag.src = GOOGLE_SCRIPT_EXPEDICAO_URL + divisor + 'tipo=kpi_mes&callback=receberDadosTV03&_t=' + Date.now();
-            document.body.appendChild(scriptTag);
-        }
-
-        // --- RETORNO TV 03 (RECEBIMENTO MÊS) ---
-        window.receberDadosTV03Rec = function(data) {
-            if (!data) return;
-            if (data.status === "success" || data.kpisMes) {
-                currentData.tv03RecKpis = data;
-
-                if (data.kpisMes) {
-                    const km = data.kpisMes;
-                    document.getElementById('kpiRecMesTotalPecas').innerText = formatarMilhar(km.totalPecas);
-                    document.getElementById('kpiRecMesTempoDesc').innerText = km.mediaTempoDesc || '--:--';
-                    document.getElementById('kpiRecMesPPM').innerText = km.mediaPPM || '--';
-                    document.getElementById('kpiRecMesAvariada').innerText = formatarMilhar(km.totalAvariada);
-                    document.getElementById('kpiRecMesMinDesc').innerText = (km.mediaMinDesc ? km.mediaMinDesc + "m" : '--');
-                    document.getElementById('tv03RecTotalTransp').innerText = `${km.totalTransportes || 0} Transp.`;
-                }
-
-                renderizarPerfisGenerico('tv03RecPerfisContainer', data.perfis, '#06b6d4');
-                renderizarGraficoEvolucao();
-            }
-        };
-
-        function sincronizarTV03Rec() {
-            if (!GOOGLE_SCRIPT_RECEBIMENTO_URL) return;
-            const antigo = document.getElementById('script-jsonp-tv03-rec');
-            if (antigo) antigo.remove();
-
-            const scriptTag = document.createElement('script');
-            scriptTag.id = 'script-jsonp-tv03-rec';
-            const divisor = GOOGLE_SCRIPT_RECEBIMENTO_URL.includes('?') ? '&' : '?';
-            scriptTag.src = GOOGLE_SCRIPT_RECEBIMENTO_URL + divisor + 'tipo=kpi_mes_rec&callback=receberDadosTV03Rec&_t=' + Date.now();
-            document.body.appendChild(scriptTag);
-        }
-
-        function renderizarPerfisGenerico(containerId, perfis, corHex) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            if (!perfis || perfis.length === 0) {
-                container.innerHTML = `<p class="text-center text-slate-500 text-[7px] py-1">Sem registros.</p>`;
-                return;
-            }
-
-            let maxQtd = 1;
-            perfis.forEach(p => { if (p.quantidade > maxQtd) maxQtd = p.quantidade; });
-
-            container.innerHTML = '';
-            perfis.slice(0, 4).forEach(p => {
-                const pct = Math.max(Math.round((p.quantidade / maxQtd) * 100), 5);
-                const item = document.createElement('div');
-                item.className = "flex items-center gap-1 py-[1.5px] border-b border-slate-900/60 last:border-0";
-                item.innerHTML = `
-                    <span class="w-[30px] font-black text-[7.5px] text-slate-200 font-num shrink-0 truncate">${p.perfil}</span>
-                    <div class="flex-1 bg-slate-900 rounded-full h-1.5 overflow-hidden flex items-center p-[0.5px] border border-slate-800">
-                        <div class="h-full rounded-full transition-all duration-500" style="width: ${pct}%; background-color: ${corHex};"></div>
-                    </div>
-                    <span class="w-[24px] text-right font-black text-[7px] text-white font-num shrink-0">${formatarMilhar(p.quantidade)}</span>
-                    <span class="w-[26px] text-right font-bold text-[6.5px] text-slate-400 font-num shrink-0">${p.percentual}</span>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        // --- GERADOR DO GRÁFICO SVG COM EVOLUÇÃO DIÁRIA ---
-        function renderizarGraficoEvolucao() {
-            const container = document.getElementById('tv03GraficoEvolucaoContainer');
-            if (!container) return;
-
-            const dadosExp = (currentData.tv03ExpKpis && currentData.tv03ExpKpis.evolucaoDiaria) ? currentData.tv03ExpKpis.evolucaoDiaria : [];
-            const dadosRec = (currentData.tv03RecKpis && currentData.tv03RecKpis.evolucaoDiaria) ? currentData.tv03RecKpis.evolucaoDiaria : [];
-
-            let diasSet = new Set();
-            dadosExp.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
-            dadosRec.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
-            let diasOrdenados = Array.from(diasSet).sort();
-
-            if (diasOrdenados.length === 0) {
-                container.innerHTML = `<p class="text-slate-500 text-[8px] py-3 text-center">Aguardando dados das planilhas...</p>`;
-                return;
-            }
-
-            const mapaExp = {}; dadosExp.forEach(d => { mapaExp[String(d.dia).padStart(2, '0')] = d.pecas; });
-            const mapaRec = {}; dadosRec.forEach(d => { mapaRec[String(d.dia).padStart(2, '0')] = d.pecas; });
-
-            let listaDiasPlot = [...diasOrdenados];
-            let incluiInicio = false;
-            if (listaDiasPlot.length <= 2 && !listaDiasPlot.includes("01")) {
-                listaDiasPlot.unshift("01");
-                incluiInicio = true;
-            }
-
-            let maxVal = 1;
-            listaDiasPlot.forEach(d => {
-                const ve = mapaExp[d] || 0;
-                const vr = mapaRec[d] || 0;
-                if (ve > maxVal) maxVal = ve;
-                if (vr > maxVal) maxVal = vr;
-            });
-
-            const W = 520;
-            const H = 140;
-            const padL = 22;
-            const padR = 22;
-            const padT = 14;
-            const padB = 22;
-            const plotW = W - padL - padR;
-            const plotH = H - padT - padB;
-
-            const n = listaDiasPlot.length;
-            const stepX = n > 1 ? plotW / (n - 1) : plotW;
-
-            const ptsRec = [];
-            const ptsExp = [];
-
-            listaDiasPlot.forEach((dia, i) => {
-                const x = padL + (i * stepX);
-                const vr = (incluiInicio && i === 0) ? 0 : (mapaRec[dia] || 0);
-                const ve = (incluiInicio && i === 0) ? 0 : (mapaExp[dia] || 0);
-
-                const yRec = padT + plotH - ((vr / maxVal) * (plotH - 6));
-                const yExp = padT + plotH - ((ve / maxVal) * (plotH - 6));
-
-                ptsRec.push({ x: x, y: yRec, val: vr, dia: dia, fake: (incluiInicio && i === 0) });
-                ptsExp.push({ x: x, y: yExp, val: ve, dia: dia, fake: (incluiInicio && i === 0) });
-            });
-
-            function gerarCurvaSuave(points) {
-                if (points.length === 0) return "";
-                if (points.length === 1) return `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
-                let d = `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
-                for (let i = 0; i < points.length - 1; i++) {
-                    const p0 = points[i === 0 ? 0 : i - 1];
-                    const p1 = points[i];
-                    const p2 = points[i + 1];
-                    const p3 = points[i + 2] ? points[i + 2] : p2;
-
-                    const cp1x = p1.x + (p2.x - p0.x) / 6;
-                    const cp1y = p1.y + (p2.y - p0.y) / 6;
-                    const cp2x = p2.x - (p3.x - p1.x) / 6;
-                    const cp2y = p2.y - (p3.y - p1.y) / 6;
-
-                    d += ` C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
-                }
-                return d;
-            }
-
-            const pathLinhaRec = gerarCurvaSuave(ptsRec);
-            const pathAreaRec = `${pathLinhaRec} L ${ptsRec[ptsRec.length-1].x.toFixed(1)},${(padT + plotH).toFixed(1)} L ${ptsRec[0].x.toFixed(1)},${(padT + plotH).toFixed(1)} Z`;
-
-            const pathLinhaExp = gerarCurvaSuave(ptsExp);
-            const pathAreaExp = `${pathLinhaExp} L ${ptsExp[ptsExp.length-1].x.toFixed(1)},${(padT + plotH).toFixed(1)} L ${ptsExp[0].x.toFixed(1)},${(padT + plotH).toFixed(1)} Z`;
-
-            let pontosHtml = '';
-            ptsRec.forEach(p => {
-                if (!p.fake) {
-                    pontosHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#10b981" stroke="#04121b" stroke-width="1.2" />`;
-                }
-            });
-            ptsExp.forEach(p => {
-                if (!p.fake) {
-                    pontosHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#06b6d4" stroke="#04121b" stroke-width="1.2" />`;
-                }
-            });
-
-            let labelsXHtml = '';
-            listaDiasPlot.forEach((dia, idx) => {
-                const x = padL + (idx * stepX);
-                labelsXHtml += `<text x="${x.toFixed(1)}" y="${H - 6}" fill="#64748b" font-size="7.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="middle">${dia}</text>`;
-            });
-
-            const svgHtml = `
-                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full overflow-visible" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="gradExpedicaoEvol" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45"/>
-                            <stop offset="60%" stop-color="#06b6d4" stop-opacity="0.12"/>
-                            <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.0"/>
-                        </linearGradient>
-
-                        <linearGradient id="gradRecebimentoEvol" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#10b981" stop-opacity="0.40"/>
-                            <stop offset="60%" stop-color="#10b981" stop-opacity="0.10"/>
-                            <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
-                        </linearGradient>
-                    </defs>
-
-                    <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#1e293b" stroke-width="0.8" />
-
-                    <path d="${pathAreaRec}" fill="url(#gradRecebimentoEvol)" />
-                    <path d="${pathAreaExp}" fill="url(#gradExpedicaoEvol)" />
-
-                    <path d="${pathLinhaRec}" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="${pathLinhaExp}" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-
-                    ${pontosHtml}
-                    ${labelsXHtml}
-                </svg>
-            `;
-
-            container.innerHTML = svgHtml;
-        }
-
-        function atualizarBadgeTimestamp(ts) {
-            const badge = document.getElementById('badgeSync');
-            if (badge && ts) {
-                badge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Atualizado às ${ts}`;
-            }
-        }
-
-        function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => alert("Erro: " + err.message));
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen();
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            carregarConfiguracaoSalva();
-            carregarConfiguracaoTV03();
-            sincronizarOtimizacao();
-            sincronizarExpedicao();
-            sincronizarRecebimento();
-            sincronizarTV03Exp();
-            sincronizarTV03Rec();
-            setInterval(() => {
-                sincronizarOtimizacao();
-                sincronizarExpedicao();
-                sincronizarRecebimento();
-                sincronizarTV03Exp();
-                sincronizarTV03Rec();
-            }, 15000);
-        });
-    </script>
-</body>
-</html>
+                    document.getElementById('kpiTv03TotalPecas').innerText = formatarMilhar(km.totalP
