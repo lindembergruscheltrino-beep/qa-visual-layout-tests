@@ -123,7 +123,6 @@
             animation-play-state: paused;
         }
 
-        /* Ticker Superior de Famílias */
         .top-family-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -445,7 +444,7 @@
             </div>
         </div>
 
-        <!-- ==================== TV 03: INDICADORES MENSAIS + EVOLUÇÃO DIÁRIA + NEXT DAY ==================== -->
+        <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL ==================== -->
         <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
                 <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
@@ -457,10 +456,10 @@
                 </div>
             </div>
 
-            <!-- GRELHA DIVIDIDA: ESQUERDA (KPIS + PERFIS COMPACTOS) / DIREITA (GRÁFICO AMPLO + NEXT DAY) -->
+            <!-- GRELHA DIVIDIDA: ESQUERDA (KPIS + PERFIS) / DIREITA (GRÁFICO TEMPO REAL + NEXT DAY) -->
             <div class="grid grid-cols-12 gap-1 flex-1 overflow-hidden min-h-0">
                 
-                <!-- LADO ESQUERDO: 5 COLUNAS (KPIS DE EXPEDIÇÃO, RECEBIMENTO E CHIPS DE PERFIS) -->
+                <!-- LADO ESQUERDO: 5 COLUNAS (KPIS CONSOLIDADOS + PERFIS) -->
                 <div class="col-span-5 flex flex-col overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800 gap-1">
                     
                     <!-- KPIs Expedição Mês -->
@@ -527,23 +526,20 @@
                         </div>
                     </div>
 
-                    <!-- AGRUPAMENTO DOS PERFIS DE VEÍCULOS (COMPACTO) -->
+                    <!-- Perfis Compactados -->
                     <div class="flex-1 flex flex-col overflow-hidden min-h-0 bg-[#02050e] p-1 rounded border border-slate-800/80 gap-1">
                         <div class="flex justify-between items-center px-1">
                             <span class="text-[7px] text-slate-300 font-black uppercase tracking-wider">Distribuição por Perfil</span>
                             <span class="text-[6.8px] text-slate-500 font-bold">Mês Vigente</span>
                         </div>
 
-                        <!-- Grade dividida de Perfis: Expedição (Esq) vs Recebimento (Dir) -->
                         <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden">
-                            <!-- Perfis Expedição -->
                             <div class="flex flex-col overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
                                 <span class="text-[6.8px] font-black text-emerald-400 mb-0.5">Expedição</span>
                                 <div id="tv03PerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
                                     <p class="text-center text-slate-500 text-[7px]">Carregando...</p>
                                 </div>
                             </div>
-                            <!-- Perfis Recebimento -->
                             <div class="flex flex-col overflow-hidden bg-[#050a17] p-1 rounded border border-slate-900">
                                 <span class="text-[6.8px] font-black text-cyan-400 mb-0.5">Recebimento</span>
                                 <div id="tv03RecPerfisContainer" class="flex-1 flex flex-col justify-around overflow-hidden">
@@ -555,10 +551,10 @@
 
                 </div>
 
-                <!-- LADO DIREITO: 7 COLUNAS (GRÁFICO AMPLIADO + NEXT DAY COMPACTADO) -->
+                <!-- LADO DIREITO: 7 COLUNAS (GRÁFICO TEMPO REAL + NEXT DAY) -->
                 <div class="col-span-7 flex flex-col overflow-hidden min-h-0 gap-1">
                     
-                    <!-- 1. GRÁFICO AMPLO: EVOLUÇÃO DIÁRIA (RECEBIMENTO X EXPEDIÇÃO) -->
+                    <!-- GRÁFICO EVOLUÇÃO DIÁRIA PURO TEMPO REAL -->
                     <div class="flex flex-col h-[70%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-cyan-300 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
@@ -570,13 +566,12 @@
                             </div>
                         </div>
 
-                        <!-- Container do Gráfico SVG -->
                         <div id="tv03GraficoEvolucaoContainer" class="flex-1 w-full bg-[#02050e] rounded border border-slate-800/80 p-0.5 flex items-center justify-center overflow-hidden">
-                            <p class="text-slate-500 text-[8px]">Carregando gráfico de evolução...</p>
+                            <p class="text-slate-500 text-[8px]">Carregando dados diários em tempo real...</p>
                         </div>
                     </div>
 
-                    <!-- 2. MÓDULO NEXT DAY (ESPAÇO RESERVADO INTEGRADO) -->
+                    <!-- MÓDULO NEXT DAY -->
                     <div class="flex flex-col flex-1 overflow-hidden min-h-0 bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-purple-400 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
@@ -592,7 +587,7 @@
                             <div class="overflow-hidden">
                                 <h4 class="text-[8.5px] font-black text-slate-300 uppercase leading-none">Módulo Next Day Pronto</h4>
                                 <p class="text-[7.2px] text-slate-400 font-bold mt-0.5 leading-tight truncate">
-                                    Envie os prints para ativarmos a agenda do dia seguinte.
+                                    Envie os prints da base para configurarmos as docas e horários.
                                 </p>
                             </div>
                         </div>
@@ -1071,6 +1066,10 @@
                     totalPecas: totalPecas,
                     finalizados: finalizados,
                     descarregando: descarregando,
+                    recebendo: 0,
+                    emDoca: 0,
+                    patio: 0,
+                    naoChegou: 0,
                     pendentes: pendentes
                 };
 
@@ -1195,7 +1194,6 @@
             document.body.appendChild(scriptTag);
         }
 
-        // Renderizador de Perfis Compactos
         function renderizarPerfisGenerico(containerId, perfis, corHex) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1226,7 +1224,7 @@
         }
 
         // =====================================================================
-        // --- GERADOR DO GRÁFICO SVG COM ESCALA MENSAL COMPLETA (EXEMPLO REAL) ---
+        // --- GERADOR DO GRÁFICO SVG COM EVOLUÇÃO REAL DAS BASES ---
         // =====================================================================
         function renderizarGraficoEvolucao() {
             const container = document.getElementById('tv03GraficoEvolucaoContainer');
@@ -1235,57 +1233,68 @@
             const dadosExp = (currentData.tv03ExpKpis && currentData.tv03ExpKpis.evolucaoDiaria) ? currentData.tv03ExpKpis.evolucaoDiaria : [];
             const dadosRec = (currentData.tv03RecKpis && currentData.tv03RecKpis.evolucaoDiaria) ? currentData.tv03RecKpis.evolucaoDiaria : [];
 
+            // Identifica todos os dias que realmente existem nas planilhas
+            let diasSet = new Set();
+            dadosExp.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
+            dadosRec.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
+            let diasOrdenados = Array.from(diasSet).sort();
+
+            if (diasOrdenados.length === 0) {
+                container.innerHTML = `<p class="text-slate-500 text-[8px] py-3 text-center">Aguardando dados das planilhas...</p>`;
+                return;
+            }
+
             const mapaExp = {}; dadosExp.forEach(d => { mapaExp[String(d.dia).padStart(2, '0')] = d.pecas; });
             const mapaRec = {}; dadosRec.forEach(d => { mapaRec[String(d.dia).padStart(2, '0')] = d.pecas; });
 
-            // Escala contínua do mês (01 até 25, exatamente como na imagem de referência)
-            const diasMes = ["01", "02", "05", "06", "07", "08", "09", "10", "13", "14", "15", "16", "17", "19", "20", "21", "22", "23", "24", "25"];
-
-            // Dados oficiais de referência calibrados com os dados reais dos dias disponíveis
-            const baseExpPadrao = { "01": 210, "02": 130, "05": 190, "06": 120, "07": 150, "08": 890, "09": 340, "10": 160, "13": 710, "14": 420, "15": 320, "16": 380, "17": 190, "19": 540, "20": 410, "21": 430, "22": 310, "23": 360, "24": 220, "25": 110 };
-            const baseRecPadrao = { "01": 240, "02": 310, "05": 380, "06": 180, "07": 220, "08": 110, "09": 190, "10": 330, "13": 420, "14": 430, "15": 410, "16": 410, "17": 580, "19": 390, "20": 680, "21": 710, "22": 340, "23": 380, "24": 440, "25": 230 };
-
-            // Se existirem dados reais no mês (ex: dias 03, 04), incorpora e substitui dinamicamente
-            Object.keys(mapaExp).forEach(dia => { if (mapaExp[dia] > 0) baseExpPadrao[dia] = mapaExp[dia]; });
-            Object.keys(mapaRec).forEach(dia => { if (mapaRec[dia] > 0) baseRecPadrao[dia] = mapaRec[dia]; });
+            // Se tiver apenas 1 ou 2 dias no início do mês, inclui o início '01' com valor base para que o gráfico desenhe uma curva suave
+            let listaDiasPlot = [...diasOrdenados];
+            let incluiInicio = false;
+            if (listaDiasPlot.length <= 2 && !listaDiasPlot.includes("01")) {
+                listaDiasPlot.unshift("01");
+                incluiInicio = true;
+            }
 
             let maxVal = 1;
-            diasMes.forEach(d => {
-                const ve = baseExpPadrao[d] || 0;
-                const vr = baseRecPadrao[d] || 0;
+            listaDiasPlot.forEach(d => {
+                const ve = mapaExp[d] || 0;
+                const vr = mapaRec[d] || 0;
                 if (ve > maxVal) maxVal = ve;
                 if (vr > maxVal) maxVal = vr;
             });
 
-            // Dimensões SVG
             const W = 520;
             const H = 140;
-            const padL = 16;
-            const padR = 16;
+            const padL = 22;
+            const padR = 22;
             const padT = 16;
             const padB = 24;
             const plotW = W - padL - padR;
             const plotH = H - padT - padB;
-            const stepX = plotW / (diasMes.length - 1);
+
+            const n = listaDiasPlot.length;
+            const stepX = n > 1 ? plotW / (n - 1) : plotW;
 
             const ptsRec = [];
             const ptsExp = [];
 
-            diasMes.forEach((dia, i) => {
+            listaDiasPlot.forEach((dia, i) => {
                 const x = padL + (i * stepX);
-                const vr = baseRecPadrao[dia] || 0;
-                const ve = baseExpPadrao[dia] || 0;
+                // Se o dia '01' foi adicionado como âncora inicial, inicia do zero para criar elevação suave
+                const vr = (incluiInicio && i === 0) ? 0 : (mapaRec[dia] || 0);
+                const ve = (incluiInicio && i === 0) ? 0 : (mapaExp[dia] || 0);
 
-                const yRec = padT + plotH - ((vr / maxVal) * (plotH - 8));
-                const yExp = padT + plotH - ((ve / maxVal) * (plotH - 8));
+                const yRec = padT + plotH - ((vr / maxVal) * (plotH - 6));
+                const yExp = padT + plotH - ((ve / maxVal) * (plotH - 6));
 
-                ptsRec.push({ x: x, y: yRec, val: vr, dia: dia });
-                ptsExp.push({ x: x, y: yExp, val: ve, dia: dia });
+                ptsRec.push({ x: x, y: yRec, val: vr, dia: dia, fake: (incluiInicio && i === 0) });
+                ptsExp.push({ x: x, y: yExp, val: ve, dia: dia, fake: (incluiInicio && i === 0) });
             });
 
-            // Gerador de curva cúbica suave (Spline)
+            // Curva suave Bézier
             function gerarCurvaSuave(points) {
                 if (points.length === 0) return "";
+                if (points.length === 1) return `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
                 let d = `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
                 for (let i = 0; i < points.length - 1; i++) {
                     const p0 = points[i === 0 ? 0 : i - 1];
@@ -1309,18 +1318,20 @@
             const pathLinhaExp = gerarCurvaSuave(ptsExp);
             const pathAreaExp = `${pathLinhaExp} L ${ptsExp[ptsExp.length-1].x.toFixed(1)},${(padT + plotH).toFixed(1)} L ${ptsExp[0].x.toFixed(1)},${(padT + plotH).toFixed(1)} Z`;
 
-            // Círculos com efeito halo da imagem de referência
             let pontosHtml = '';
             ptsRec.forEach(p => {
-                pontosHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.8" fill="#10b981" stroke="#04121b" stroke-width="1" />`;
+                if (!p.fake) {
+                    pontosHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#10b981" stroke="#04121b" stroke-width="1.2" />`;
+                }
             });
             ptsExp.forEach(p => {
-                pontosHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="2.8" fill="#06b6d4" stroke="#04121b" stroke-width="1" />`;
+                if (!p.fake) {
+                    pontosHtml += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3" fill="#06b6d4" stroke="#04121b" stroke-width="1.2" />`;
+                }
             });
 
-            // Rótulos do eixo X (dias 01, 02, 05, etc.)
             let labelsXHtml = '';
-            diasMes.forEach((dia, idx) => {
+            listaDiasPlot.forEach((dia, idx) => {
                 const x = padL + (idx * stepX);
                 labelsXHtml += `<text x="${x.toFixed(1)}" y="${H - 6}" fill="#64748b" font-size="7.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="middle">${dia}</text>`;
             });
@@ -1328,14 +1339,12 @@
             const svgHtml = `
                 <svg viewBox="0 0 ${W} ${H}" class="w-full h-full overflow-visible" preserveAspectRatio="none">
                     <defs>
-                        <!-- Gradiente Suave Expedição (Ciano/Azul) -->
                         <linearGradient id="gradExpedicaoEvol" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45"/>
                             <stop offset="60%" stop-color="#06b6d4" stop-opacity="0.12"/>
                             <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.0"/>
                         </linearGradient>
 
-                        <!-- Gradiente Suave Recebimento (Verde Esmeralda) -->
                         <linearGradient id="gradRecebimentoEvol" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#10b981" stop-opacity="0.40"/>
                             <stop offset="60%" stop-color="#10b981" stop-opacity="0.10"/>
@@ -1343,21 +1352,15 @@
                         </linearGradient>
                     </defs>
 
-                    <!-- Linha de Base Sutil -->
                     <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#1e293b" stroke-width="0.8" />
 
-                    <!-- Áreas Preenchidas em Degradê -->
                     <path d="${pathAreaRec}" fill="url(#gradRecebimentoEvol)" />
                     <path d="${pathAreaExp}" fill="url(#gradExpedicaoEvol)" />
 
-                    <!-- Traços das Curvas (Espessura 2px) -->
                     <path d="${pathLinhaRec}" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     <path d="${pathLinhaExp}" fill="none" stroke="#06b6d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
 
-                    <!-- Pontos Destacados -->
                     ${pontosHtml}
-
-                    <!-- Eixo dos Dias -->
                     ${labelsXHtml}
                 </svg>
             `;
