@@ -24,6 +24,12 @@
             --grid-gap: 8px;
             --row-height-factor: 14;
             --font-scale-factor: 1.0;
+
+            /* Variáveis Exclusivas para Calibração da TV 03 */
+            --tv03-pad-top: 4px;
+            --tv03-pad-bottom: 4px;
+            --tv03-pad-sides: 4px;
+            --tv03-gap: 4px;
         }
 
         * {
@@ -68,6 +74,15 @@
             border-radius: 6px;
             border: 1px solid #1e293b;
             background-color: #050914;
+        }
+
+        /* Estilo Isolado da TV 03 */
+        #tv03CardRoot {
+            padding-top: var(--tv03-pad-top);
+            padding-bottom: var(--tv03-pad-bottom);
+            padding-left: var(--tv03-pad-sides);
+            padding-right: var(--tv03-pad-sides);
+            gap: var(--tv03-gap);
         }
 
         .table-operational {
@@ -153,6 +168,7 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* Painel Geral */
         #painelCalibracao {
             position: fixed;
             top: 36px;
@@ -164,6 +180,22 @@
             border-radius: 8px;
             padding: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            z-index: 9999;
+            display: none;
+        }
+
+        /* Painel Exclusivo TV 03 */
+        #painelCalibracaoTV03 {
+            position: fixed;
+            bottom: 30px;
+            left: 20px;
+            width: 290px;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(8px);
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
             z-index: 9999;
             display: none;
         }
@@ -201,11 +233,11 @@
         </div>
     </header>
 
-    <!-- PAINEL FLUTUANTE DE AJUSTE -->
+    <!-- PAINEL GERAL DE AJUSTE (VIDEOWALL COMPLETO) -->
     <div id="painelCalibracao">
         <div class="flex justify-between items-center border-b border-slate-700 pb-1 mb-2">
             <h3 class="text-xs font-black text-white flex items-center gap-1.5">
-                <span>📐</span> Ajuste de Margens e Bordas
+                <span>📐</span> Ajuste Geral das Bordas
             </h3>
             <button onclick="togglePainelCalibracao()" class="text-slate-400 hover:text-white text-xs font-bold">✕</button>
         </div>
@@ -218,7 +250,6 @@
                 </div>
                 <input id="rngTop" type="range" min="0" max="30" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('top', this.value)">
             </div>
-
             <div>
                 <div class="flex justify-between text-slate-300 font-bold mb-0.5">
                     <span>Margem Inferior (Fundo)</span>
@@ -226,7 +257,6 @@
                 </div>
                 <input id="rngBottom" type="range" min="0" max="30" value="8" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('bottom', this.value)">
             </div>
-
             <div>
                 <div class="flex justify-between text-slate-300 font-bold mb-0.5">
                     <span>Margens Laterais</span>
@@ -234,15 +264,13 @@
                 </div>
                 <input id="rngSides" type="range" min="0" max="30" value="8" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('sides', this.value)">
             </div>
-
             <div>
                 <div class="flex justify-between text-slate-300 font-bold mb-0.5">
-                    <span>Espaçamento entre TVs (Moldura)</span>
+                    <span>Espaçamento entre TVs</span>
                     <span id="lblGap" class="font-mono text-cyan-400">8px</span>
                 </div>
                 <input id="rngGap" type="range" min="0" max="25" value="8" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('gap', this.value)">
             </div>
-
             <div>
                 <div class="flex justify-between text-slate-300 font-bold mb-0.5">
                     <span>Divisão de Linhas da Tabela</span>
@@ -250,7 +278,6 @@
                 </div>
                 <input id="rngRows" type="range" min="11" max="17" value="14" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarMargem('rows', this.value)">
             </div>
-
             <div>
                 <div class="flex justify-between text-slate-300 font-bold mb-0.5">
                     <span>Tamanho da Fonte (Zoom)</span>
@@ -265,6 +292,56 @@
                 💾 Salvar na TV
             </button>
             <button onclick="resetarConfiguracao()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-1 px-2 rounded text-[9.5px]">
+                ↺ Redefinir
+            </button>
+        </div>
+    </div>
+
+    <!-- PAINEL EXCLUSIVO: CALIBRAÇÃO APENAS DA TV 03 -->
+    <div id="painelCalibracaoTV03">
+        <div class="flex justify-between items-center border-b border-amber-500/40 pb-1 mb-2">
+            <h3 class="text-xs font-black text-amber-400 flex items-center gap-1.5">
+                <span>🎛️</span> Calibração Exclusiva TV 03
+            </h3>
+            <button onclick="togglePainelCalibracaoTV03()" class="text-slate-400 hover:text-white text-xs font-bold">✕</button>
+        </div>
+
+        <div class="space-y-2 text-[10px]">
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Espaçamento Interno Topo</span>
+                    <span id="lblTV03Top" class="font-mono text-amber-400">4px</span>
+                </div>
+                <input id="rngTV03Top" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('top', this.value)">
+            </div>
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Espaçamento Interno Fundo</span>
+                    <span id="lblTV03Bottom" class="font-mono text-amber-400">4px</span>
+                </div>
+                <input id="rngTV03Bottom" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('bottom', this.value)">
+            </div>
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Espaçamento Lateral (Esq/Dir)</span>
+                    <span id="lblTV03Sides" class="font-mono text-amber-400">4px</span>
+                </div>
+                <input id="rngTV03Sides" type="range" min="0" max="25" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('sides', this.value)">
+            </div>
+            <div>
+                <div class="flex justify-between text-slate-300 font-bold mb-0.5">
+                    <span>Separação entre Blocos da TV 03</span>
+                    <span id="lblTV03Gap" class="font-mono text-amber-400">4px</span>
+                </div>
+                <input id="rngTV03Gap" type="range" min="0" max="20" value="4" class="w-full h-1 bg-slate-700 rounded-lg cursor-pointer" oninput="ajustarBordaTV03('gap', this.value)">
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 mt-3 pt-2 border-t border-slate-700">
+            <button onclick="salvarConfiguracaoTV03()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-1 px-2 rounded text-[9.5px]">
+                💾 Salvar TV 03
+            </button>
+            <button onclick="resetarConfiguracaoTV03()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold py-1 px-2 rounded text-[9.5px]">
                 ↺ Redefinir
             </button>
         </div>
@@ -445,11 +522,17 @@
         </div>
 
         <!-- ==================== TV 03: OPERACIONAL CONSOLIDADO & EVOLUÇÃO TEMPO REAL ==================== -->
-        <div class="tv-card flex flex-col overflow-hidden h-full p-1 gap-1">
+        <div id="tv03CardRoot" class="tv-card flex flex-col overflow-hidden h-full">
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1">
-                <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
-                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
-                </h2>
+                <div class="flex items-center gap-1.5">
+                    <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
+                    </h2>
+                    <!-- BOTÃO EXCLUSIVO PARA AJUSTAR BORDAS DA TV 03 -->
+                    <button onclick="togglePainelCalibracaoTV03()" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 px-1.5 py-[1px] rounded text-[7.2px] font-black cursor-pointer transition">
+                        ⚙️ Bordas TV 03
+                    </button>
+                </div>
                 <div class="flex items-center gap-2">
                     <span id="tv03MesRef" class="text-[8px] text-slate-300 font-bold font-num bg-slate-900 border border-slate-800 px-1.5 py-[1px] rounded">NOVEMBRO/2026</span>
                     <span id="tv03StatusTop" class="text-[7.5px] text-slate-400 font-mono font-bold">ONLINE</span>
@@ -468,7 +551,7 @@
                             <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada
                             </span>
-                            <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- cargas</span>
+                            <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
                         <div class="grid grid-cols-5 gap-0.5 text-center">
                             <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
@@ -483,9 +566,10 @@
                                 <p class="text-[5.2px] text-cyan-300 font-bold uppercase truncate">PPM</p>
                                 <p id="kpiTv03MediaPPM" class="kpi-big-value text-cyan-400 font-num">--</p>
                             </div>
-                            <div class="bg-[#0f172a] p-0.5 rounded border border-emerald-500/40">
-                                <p class="text-[5.2px] text-emerald-300 font-bold uppercase truncate">DESEM.</p>
-                                <p id="kpiTv03SomaDesem" class="kpi-big-value text-emerald-400 font-num">--</p>
+                            <!-- CARD SOMA DESEMPENHO EM VERMELHO -->
+                            <div class="bg-rose-950/40 p-0.5 rounded border border-rose-500/50">
+                                <p class="text-[5.2px] text-rose-300 font-bold uppercase truncate">DESEM.</p>
+                                <p id="kpiTv03SomaDesem" class="kpi-big-value text-rose-400 font-num">--</p>
                             </div>
                             <div class="bg-[#0f172a] p-0.5 rounded border border-purple-500/40">
                                 <p class="text-[5.2px] text-purple-300 font-bold uppercase truncate">MIN. CARREG.</p>
@@ -500,7 +584,7 @@
                             <span class="text-cyan-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
                                 <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado
                             </span>
-                            <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- cargas</span>
+                            <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
                         <div class="grid grid-cols-5 gap-0.5 text-center">
                             <div class="bg-[#0f172a] p-0.5 rounded border border-slate-700/60">
@@ -627,6 +711,7 @@
             tv03RecKpis: null
         };
 
+        // --- CALIBRAÇÃO GERAL ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -670,7 +755,7 @@
                 font: document.getElementById('rngFont').value
             };
             localStorage.setItem('cfg_videowall_margens', JSON.stringify(cfg));
-            alert('Configuração salva com sucesso nesta TV!');
+            alert('Configuração geral salva!');
             togglePainelCalibracao();
         }
 
@@ -697,7 +782,64 @@
             document.getElementById('rngGap').value = 8; ajustarMargem('gap', 8);
             document.getElementById('rngRows').value = 14; ajustarMargem('rows', 14);
             document.getElementById('rngFont').value = 100; ajustarMargem('font', 100);
-            alert('Margens redefinidas para o padrão.');
+            alert('Margens gerais redefinidas.');
+        }
+
+        // --- CALIBRAÇÃO EXCLUSIVA TV 03 ---
+        function togglePainelCalibracaoTV03() {
+            const p = document.getElementById('painelCalibracaoTV03');
+            p.style.display = (p.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function ajustarBordaTV03(tipo, valor) {
+            const root = document.documentElement;
+            if (tipo === 'top') {
+                root.style.setProperty('--tv03-pad-top', valor + 'px');
+                document.getElementById('lblTV03Top').innerText = valor + 'px';
+            } else if (tipo === 'bottom') {
+                root.style.setProperty('--tv03-pad-bottom', valor + 'px');
+                document.getElementById('lblTV03Bottom').innerText = valor + 'px';
+            } else if (tipo === 'sides') {
+                root.style.setProperty('--tv03-pad-sides', valor + 'px');
+                document.getElementById('lblTV03Sides').innerText = valor + 'px';
+            } else if (tipo === 'gap') {
+                root.style.setProperty('--tv03-gap', valor + 'px');
+                document.getElementById('lblTV03Gap').innerText = valor + 'px';
+            }
+        }
+
+        function salvarConfiguracaoTV03() {
+            const cfgTV03 = {
+                top: document.getElementById('rngTV03Top').value,
+                bottom: document.getElementById('rngTV03Bottom').value,
+                sides: document.getElementById('rngTV03Sides').value,
+                gap: document.getElementById('rngTV03Gap').value
+            };
+            localStorage.setItem('cfg_tv03_margens', JSON.stringify(cfgTV03));
+            alert('Bordas da TV 03 salvas com sucesso!');
+            togglePainelCalibracaoTV03();
+        }
+
+        function carregarConfiguracaoTV03() {
+            const salva = localStorage.getItem('cfg_tv03_margens');
+            if (salva) {
+                try {
+                    const cfg = JSON.parse(salva);
+                    if (cfg.top) { document.getElementById('rngTV03Top').value = cfg.top; ajustarBordaTV03('top', cfg.top); }
+                    if (cfg.bottom) { document.getElementById('rngTV03Bottom').value = cfg.bottom; ajustarBordaTV03('bottom', cfg.bottom); }
+                    if (cfg.sides) { document.getElementById('rngTV03Sides').value = cfg.sides; ajustarBordaTV03('sides', cfg.sides); }
+                    if (cfg.gap) { document.getElementById('rngTV03Gap').value = cfg.gap; ajustarBordaTV03('gap', cfg.gap); }
+                } catch(e) {}
+            }
+        }
+
+        function resetarConfiguracaoTV03() {
+            localStorage.removeItem('cfg_tv03_margens');
+            document.getElementById('rngTV03Top').value = 4; ajustarBordaTV03('top', 4);
+            document.getElementById('rngTV03Bottom').value = 4; ajustarBordaTV03('bottom', 4);
+            document.getElementById('rngTV03Sides').value = 4; ajustarBordaTV03('sides', 4);
+            document.getElementById('rngTV03Gap').value = 4; ajustarBordaTV03('gap', 4);
+            alert('Bordas da TV 03 redefinidas para o padrão.');
         }
 
         function formatarTempoCurto(valor) {
@@ -1141,7 +1283,7 @@
                     document.getElementById('kpiTv03MediaPPM').innerText = km.mediaPPM || '--';
                     document.getElementById('kpiTv03SomaDesem').innerText = formatarMilhar(km.somaDesem);
                     document.getElementById('kpiTv03MinCarreg').innerText = (km.mediaMinutosCarreg ? km.mediaMinutosCarreg + "m" : '--');
-                    document.getElementById('tv03ExpTotalTransp').innerText = `${km.totalTransportes || 0} cargas`;
+                    document.getElementById('tv03ExpTotalTransp').innerText = `${km.totalTransportes || 0} Transp.`;
                 }
 
                 renderizarPerfisGenerico('tv03PerfisContainer', data.perfis, '#10b981');
@@ -1174,7 +1316,7 @@
                     document.getElementById('kpiRecMesPPM').innerText = km.mediaPPM || '--';
                     document.getElementById('kpiRecMesAvariada').innerText = formatarMilhar(km.totalAvariada);
                     document.getElementById('kpiRecMesMinDesc').innerText = (km.mediaMinDesc ? km.mediaMinDesc + "m" : '--');
-                    document.getElementById('tv03RecTotalTransp').innerText = `${km.totalTransportes || 0} cargas`;
+                    document.getElementById('tv03RecTotalTransp').innerText = `${km.totalTransportes || 0} Transp.`;
                 }
 
                 renderizarPerfisGenerico('tv03RecPerfisContainer', data.perfis, '#06b6d4');
@@ -1224,7 +1366,7 @@
         }
 
         // =====================================================================
-        // --- GERADOR DO GRÁFICO SVG COM EVOLUÇÃO REAL DAS BASES ---
+        // --- GERADOR DO GRÁFICO SVG: PURO TEMPO REAL (SEM DADOS FICTÍCIOS) ---
         // =====================================================================
         function renderizarGraficoEvolucao() {
             const container = document.getElementById('tv03GraficoEvolucaoContainer');
@@ -1233,7 +1375,7 @@
             const dadosExp = (currentData.tv03ExpKpis && currentData.tv03ExpKpis.evolucaoDiaria) ? currentData.tv03ExpKpis.evolucaoDiaria : [];
             const dadosRec = (currentData.tv03RecKpis && currentData.tv03RecKpis.evolucaoDiaria) ? currentData.tv03RecKpis.evolucaoDiaria : [];
 
-            // Identifica todos os dias que realmente existem nas planilhas
+            // Identifica exclusivamente os dias presentes nas planilhas
             let diasSet = new Set();
             dadosExp.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
             dadosRec.forEach(d => { if (d.dia) diasSet.add(String(d.dia).padStart(2, '0')); });
@@ -1247,7 +1389,7 @@
             const mapaExp = {}; dadosExp.forEach(d => { mapaExp[String(d.dia).padStart(2, '0')] = d.pecas; });
             const mapaRec = {}; dadosRec.forEach(d => { mapaRec[String(d.dia).padStart(2, '0')] = d.pecas; });
 
-            // Se tiver apenas 1 ou 2 dias no início do mês, inclui o início '01' com valor base para que o gráfico desenhe uma curva suave
+            // Se tiver apenas 1 ou 2 dias no início do mês, inclui suavemente a âncora '01' do zero
             let listaDiasPlot = [...diasOrdenados];
             let incluiInicio = false;
             if (listaDiasPlot.length <= 2 && !listaDiasPlot.includes("01")) {
@@ -1280,7 +1422,6 @@
 
             listaDiasPlot.forEach((dia, i) => {
                 const x = padL + (i * stepX);
-                // Se o dia '01' foi adicionado como âncora inicial, inicia do zero para criar elevação suave
                 const vr = (incluiInicio && i === 0) ? 0 : (mapaRec[dia] || 0);
                 const ve = (incluiInicio && i === 0) ? 0 : (mapaExp[dia] || 0);
 
@@ -1291,7 +1432,6 @@
                 ptsExp.push({ x: x, y: yExp, val: ve, dia: dia, fake: (incluiInicio && i === 0) });
             });
 
-            // Curva suave Bézier
             function gerarCurvaSuave(points) {
                 if (points.length === 0) return "";
                 if (points.length === 1) return `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
@@ -1385,6 +1525,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             carregarConfiguracaoSalva();
+            carregarConfiguracaoTV03();
             sincronizarOtimizacao();
             sincronizarExpedicao();
             sincronizarRecebimento();
