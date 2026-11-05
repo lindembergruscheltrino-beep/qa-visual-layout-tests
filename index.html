@@ -209,7 +209,6 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Estilos com contraste aprimorado */
         .nd-card-glow-blue {
             background: linear-gradient(135deg, rgba(6, 182, 212, 0.16) 0%, rgba(3, 105, 161, 0.08) 100%);
             border: 1px solid rgba(6, 182, 212, 0.75);
@@ -680,10 +679,10 @@
                         </div>
                     </div>
 
-                    <!-- MÓDULO NEXT DAY: DESIGN PREMIUM ULTRA LEGÍVEL -->
+                    <!-- MÓDULO NEXT DAY: DESIGN PREMIUM COM CAMPOS CENTRALIZADOS E LIMPOS -->
                     <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded-lg border border-purple-500/40 gap-1 shadow-2xl">
                         
-                        <!-- Cabeçalho do Módulo Next Day -->
+                        <!-- Cabeçalho do Módulo Next Day (Badge PAG horizontal e proporcional) -->
                         <div class="flex justify-between items-center shrink-0 px-1 py-0.5">
                             <div class="flex items-center gap-1.5">
                                 <div class="w-4 h-4 rounded-md bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-[10px] shadow-sm">
@@ -695,20 +694,21 @@
                                 </div>
                             </div>
                             <div class="flex items-center gap-1.5">
-                                <span id="lblNextDayPagina" class="text-[7.5px] font-black text-purple-200 bg-purple-900/90 border border-purple-400/80 px-2 py-[1.5px] rounded-full shadow-sm font-num">
+                                <!-- Badge de Página retangular horizontal elegante -->
+                                <span id="lblNextDayPagina" class="text-[7.5px] font-black text-purple-200 bg-purple-900/90 border border-purple-400/80 px-2 py-[2px] rounded-md shadow-sm font-num tracking-wide">
                                     PAG 1/3
                                 </span>
-                                <div class="flex items-center gap-1 bg-slate-900 border border-slate-700/80 rounded-full px-1 py-[1px]">
-                                    <span class="text-[7px] text-slate-300 px-1 font-num font-bold">Ago./26</span>
-                                    <span class="text-[7px] text-slate-300 px-1 font-num font-bold">Set./26</span>
-                                    <span class="text-[7px] text-purple-200 bg-purple-600 px-1.5 py-[0.5px] rounded-full font-num font-black shadow">Out./26</span>
+                                <div class="flex items-center gap-1 bg-slate-900 border border-slate-700/80 rounded-md px-1.5 py-[2px]">
+                                    <span class="text-[7px] text-slate-300 px-0.5 font-num font-bold">Ago./26</span>
+                                    <span class="text-[7px] text-slate-300 px-0.5 font-num font-bold">Set./26</span>
+                                    <span class="text-[7px] text-purple-200 bg-purple-600 px-1.5 py-[0.5px] rounded font-num font-black shadow">Out./26</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Grade 2x2 com os 4 Cards de Indicadores -->
                         <div id="nextDayCardsGrid" class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden transition-all duration-500">
-                            <!-- Os 4 cards serão injetados dinamicamente via JS com contraste alto e fontes nítidas -->
+                            <!-- Os 4 cards serão injetados dinamicamente via JS com Donuts SVG, 100% arredondado e colunas de Meta, Ago, Set centralizadas -->
                         </div>
 
                         <!-- Barra Inferior de Destaque Reestruturada (Totalmente Legível) -->
@@ -723,7 +723,7 @@
                             <div class="flex items-center gap-2.5 shrink-0 pl-2 border-l border-slate-700">
                                 <span id="ndHlMeta" class="text-pink-300 text-[7.5px] font-black font-num">Meta: 92%</span>
                                 <span id="ndHlBadge" class="bg-gradient-to-r from-emerald-500/40 to-cyan-500/40 border border-emerald-400 text-emerald-200 text-[8px] font-black px-2 py-[1.5px] rounded-full font-num flex items-center gap-1 shadow">
-                                    <span>✓</span> <span id="ndHlValor">100,00%</span>
+                                    <span>✓</span> <span id="ndHlValor">100%</span>
                                 </span>
                             </div>
                         </div>
@@ -811,20 +811,30 @@
             tv03NextDay: null
         };
 
-        // Dados oficiais calibrados com textos nítidos e visual sem undefined
+        // Função para arredondar valores que sejam exatamente 100,00% para 100%
+        function formatarPercentual(str) {
+            if (!str || str === "-") return "-";
+            const limpo = String(str).trim();
+            if (limpo === "100,00%" || limpo === "100.00%" || limpo === "100,0%" || limpo === "100.0%") {
+                return "100%";
+            }
+            return limpo;
+        }
+
+        // Base oficial da planilha Next Day 1.0 (Ago./26 vs Set./26)
         const NEXT_DAY_DATABASE_PADRAO = [
-            { id: "NE", nome: "NE - Nível de Entrega", subtitulo: "Entregas no prazo", ago: "100,00%", set: "96,94%", meta: "98%", valNum: 96.94, metaNum: 98, icone: "🚚", cor: "blue" },
-            { id: "NI", nome: "NI - Nível de Informação", subtitulo: "Informações corretas", ago: "100,00%", set: "96,94%", meta: "98%", valNum: 96.94, metaNum: 98, icone: "ℹ️", cor: "green" },
-            { id: "ND", nome: "ND - Nível de Devolução", subtitulo: "Devoluções no prazo", ago: "100,00%", set: "100,00%", meta: "97%", valNum: 100.00, metaNum: 97, icone: "🔄", cor: "amber" },
-            { id: "NID", nome: "NID - Info Devolução", subtitulo: "Informações de devolução", ago: "100,00%", set: "100,00%", meta: "97%", valNum: 100.00, metaNum: 97, icone: "📦", cor: "purple" },
-            { id: "NA", nome: "NA - Aceite Carregamentos", subtitulo: "Aceite na janela", ago: "100,00%", set: "100,00%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "📋", cor: "blue" },
-            { id: "WTC", nome: "WTC - Monitoramento App", subtitulo: "Monitoramento ativo app", ago: "100,00%", set: "100,00%", meta: "92%", valNum: 100.00, metaNum: 92, icone: "📱", cor: "green" },
+            { id: "NE", nome: "NE - Nível de Entrega", subtitulo: "Entregas no prazo", ago: "100%", set: "96,94%", meta: "98%", valNum: 96.94, metaNum: 98, icone: "🚚", cor: "blue" },
+            { id: "NI", nome: "NI - Nível de Informação", subtitulo: "Informações corretas", ago: "100%", set: "96,94%", meta: "98%", valNum: 96.94, metaNum: 98, icone: "ℹ️", cor: "green" },
+            { id: "ND", nome: "ND - Nível de Devolução", subtitulo: "Devoluções no prazo", ago: "100%", set: "100%", meta: "97%", valNum: 100.00, metaNum: 97, icone: "🔄", cor: "amber" },
+            { id: "NID", nome: "NID - Info Devolução", subtitulo: "Informações de devolução", ago: "100%", set: "100%", meta: "97%", valNum: 100.00, metaNum: 97, icone: "📦", cor: "purple" },
+            { id: "NA", nome: "NA - Aceite Carregamentos", subtitulo: "Aceite na janela", ago: "100%", set: "100%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "📋", cor: "blue" },
+            { id: "WTC", nome: "WTC - Monitoramento App", subtitulo: "Monitoramento ativo app", ago: "100%", set: "100%", meta: "92%", valNum: 100.00, metaNum: 92, icone: "📱", cor: "green" },
             { id: "5 STARS", nome: "5 Stars - Avaliação Dlieve", subtitulo: "Avaliação da entrega", ago: "4,83%", set: "4,81%", meta: "4,75%", valNum: 4.81, metaNum: 4.75, icone: "⭐", cor: "amber" },
-            { id: "NSP/NPCA", nome: "NSP - Serviço Pagamento", subtitulo: "Pré-cálculo aberto", ago: "100,00%", set: "100,00%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "💳", cor: "purple" },
-            { id: "EXT", nome: "EXT - Extravio", subtitulo: "Controle de sinistros", ago: "100,00%", set: "100,00%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "🛡️", cor: "blue" },
-            { id: "NPS", nome: "NPS - Net Promoter Score", subtitulo: "Satisfação do cliente", ago: "100,00%", set: "100,00%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "🏆", cor: "green" },
-            { id: "TREINAMENTO", nome: "Treinamento Operacional", subtitulo: "Capacitação da equipe", ago: "100,00%", set: "100,00%", meta: "100%", valNum: 100.00, metaNum: 100, icone: "🎓", cor: "amber" },
-            { id: "NPCT", nome: "NPCT - Performance Contratual", subtitulo: "Performance transportador", ago: "100,00%", set: "99,11%", meta: "99,11%", valNum: 99.11, metaNum: 99.11, icone: "📈", cor: "purple" }
+            { id: "NSP/NPCA", nome: "NSP - Serviço Pagamento", subtitulo: "Pré-cálculo aberto", ago: "100%", set: "100%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "💳", cor: "purple" },
+            { id: "EXT", nome: "EXT - Extravio", subtitulo: "Controle de sinistros", ago: "100%", set: "100%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "🛡️", cor: "blue" },
+            { id: "NPS", nome: "NPS - Net Promoter Score", subtitulo: "Satisfação do cliente", ago: "100%", set: "100%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "🏆", cor: "green" },
+            { id: "TREINAMENTO", nome: "Treinamento Operacional", subtitulo: "Capacitação da equipe", ago: "100%", set: "100%", meta: "100%", valNum: 100.00, metaNum: 100, icone: "🎓", cor: "amber" },
+            { id: "NPCT", nome: "NPCT - Performance Contratual", subtitulo: "Performance transportador", ago: "100%", set: "99,11%", meta: "99,11%", valNum: 99.11, metaNum: 99.11, icone: "📈", cor: "purple" }
         ];
 
         let nextDayPaginaAtual = 0;
@@ -871,7 +881,7 @@
             track.innerHTML = itemHtml + '<span class="text-slate-700 px-3">|</span>' + itemHtml;
         }
 
-        // --- RENDERIZADOR COM DONUTS SVG E LEGIBILIDADE MÁXIMA ---
+        // --- RENDERIZADOR COM DONUTS SVG E INFORMAÇÕES CENTRALIZADAS ---
         function renderizarPaginaNextDay() {
             const grid = document.getElementById('nextDayCardsGrid');
             const lblPag = document.getElementById('lblNextDayPagina');
@@ -901,9 +911,9 @@
                 const corKey = k.cor || coresArray[idx % 4];
                 const c = coresMap[corKey] || coresMap.blue;
 
-                const valSetTexto = (k.set && k.set !== "-") ? k.set : (k.realizado || "98,00%");
-                const valAgoTexto = (k.ago && k.ago !== "-") ? k.ago : "100,00%";
-                const metaTexto = (k.meta && k.meta !== "undefined") ? k.meta : "98%";
+                const valSetTexto = formatarPercentual((k.set && k.set !== "-") ? k.set : (k.realizado || "98%"));
+                const valAgoTexto = formatarPercentual((k.ago && k.ago !== "-") ? k.ago : "100%");
+                const metaTexto = formatarPercentual((k.meta && k.meta !== "undefined") ? k.meta : "98%");
 
                 const numMatch = String(valSetTexto).match(/(\d+[,\.]?\d*)/);
                 const perc = numMatch ? Math.min(parseFloat(numMatch[1].replace(',', '.')), 100) : 98;
@@ -915,7 +925,7 @@
                 cardsHtml += `
                     <div class="${c.border} rounded-xl p-1.5 flex items-center justify-between gap-2 overflow-hidden transition-all duration-500 relative">
                         
-                        <!-- Donut Circular SVG com Porcentagem Nítida -->
+                        <!-- Donut Circular SVG com Porcentagem Nítida e Arredondada (100%) -->
                         <div class="relative w-13 h-13 shrink-0 flex items-center justify-center">
                             <svg class="w-full h-full -rotate-90" viewBox="0 0 46 46">
                                 <circle cx="23" cy="23" r="${raio}" stroke="#0f172a" stroke-width="4" fill="none" />
@@ -928,12 +938,12 @@
                             </div>
                         </div>
 
-                        <!-- Detalhes do Indicador com Fontes Maiores -->
+                        <!-- Detalhes do Indicador -->
                         <div class="flex-1 flex flex-col justify-between min-w-0 h-full py-0.5">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-1 min-w-0">
                                     <span class="text-[9px] shrink-0">${k.icone || '🚚'}</span>
-                                    <div class="flex flex-col leading-tight truncate">
+                                    <div class="flex flex-col leading-tight min-w-0">
                                         <span class="text-[8px] font-black text-white truncate">${k.nome}</span>
                                         <span class="text-[6.2px] text-slate-300 truncate font-semibold">${k.subtitulo || 'Performance e meta'}</span>
                                     </div>
@@ -948,12 +958,19 @@
                                 <div class="h-full rounded-full transition-all duration-700 shadow-sm" style="width: ${perc}%; background-color: ${c.stroke};"></div>
                             </div>
 
-                            <!-- Metas e Comparativo Ago / Set (Legível à distância) -->
-                            <div class="flex items-center justify-between text-[6.8px] font-bold text-slate-300">
-                                <span>Meta: <strong class="text-white font-num font-black">${metaTexto}</strong></span>
-                                <div class="flex items-center gap-2 font-num">
-                                    <span>Ago.: <strong class="text-slate-200 font-bold">${valAgoTexto}</strong></span>
-                                    <span>Set.: <strong class="${c.text} font-black text-[7.5px]">${valSetTexto}</strong></span>
+                            <!-- Metas e Comparativo Ago / Set (Centralizados por Coluna) -->
+                            <div class="grid grid-cols-3 gap-1 text-center pt-0.5 border-t border-slate-800/80">
+                                <div class="flex flex-col leading-none">
+                                    <span class="text-[5.8px] text-slate-400 font-bold uppercase">Meta</span>
+                                    <span class="text-[7.5px] text-white font-num font-black mt-0.5">${metaTexto}</span>
+                                </div>
+                                <div class="flex flex-col leading-none border-x border-slate-800">
+                                    <span class="text-[5.8px] text-slate-400 font-bold uppercase">Ago.</span>
+                                    <span class="text-[7.5px] text-slate-200 font-num font-bold mt-0.5">${valAgoTexto}</span>
+                                </div>
+                                <div class="flex flex-col leading-none">
+                                    <span class="text-[5.8px] text-slate-400 font-bold uppercase">Set.</span>
+                                    <span class="text-[7.5px] ${c.text} font-num font-black mt-0.5">${valSetTexto}</span>
                                 </div>
                             </div>
                         </div>
@@ -964,15 +981,15 @@
 
             grid.innerHTML = cardsHtml;
 
-            // Atualiza a Barra Inferior de Destaque com Nomenclatura "Meta"
+            // Atualiza a Barra Inferior de Destaque
             const itemDestaque = base[(nextDayPaginaAtual + 4) % base.length] || base[5];
             const hlTit = document.getElementById('ndHlTitulo');
             const hlMeta = document.getElementById('ndHlMeta');
             const hlVal = document.getElementById('ndHlValor');
 
             if (hlTit) hlTit.innerText = itemDestaque.nome;
-            if (hlMeta) hlMeta.innerText = `Meta: ${itemDestaque.meta || '92%'}`;
-            if (hlVal) hlVal.innerText = `${itemDestaque.set || itemDestaque.realizado || '100,00%'} (Set./26)`;
+            if (hlMeta) hlMeta.innerText = `Meta: ${formatarPercentual(itemDestaque.meta || '92%')}`;
+            if (hlVal) hlVal.innerText = `${formatarPercentual(itemDestaque.set || itemDestaque.realizado || '100%')} (Set./26)`;
         }
 
         window.receberDadosNextDay = function(data) {
@@ -1810,11 +1827,10 @@
             sincronizarTV03Exp();
             sincronizarTV03Rec();
             
-            // Inicia com renderização imediata do novo padrão visual
+            // Renderização com os novos ajustes de formatação
             renderizarPaginaNextDay();
             sincronizarNextDay();
 
-            // Rotação automática suave a cada 5 segundos
             if (!nextDayIntervalId) {
                 nextDayIntervalId = setInterval(() => {
                     nextDayPaginaAtual = (nextDayPaginaAtual + 1) % 3;
