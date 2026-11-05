@@ -46,8 +46,9 @@
 
         * {
             box-sizing: border-box;
-            text-rendering: optimizeSpeed !important;
-            -webkit-font-smoothing: subpixel-antialiased !important;
+            text-rendering: optimizeLegibility !important;
+            -webkit-font-smoothing: antialiased !important;
+            -moz-osx-font-smoothing: grayscale !important;
         }
 
         html, body {
@@ -58,11 +59,11 @@
             overflow: hidden !important;
             background-color: #000000;
             color: #ffffff;
-            font-family: 'Segoe UI', -apple-system, system-ui, Arial, sans-serif !important;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif !important;
         }
 
         .font-num {
-            font-family: 'Consolas', 'Lucida Console', monospace !important;
+            font-family: 'Consolas', 'Courier New', monospace !important;
             letter-spacing: -0.2px;
             font-weight: 700 !important;
         }
@@ -223,24 +224,24 @@
 
         /* Estilos Neon e Glassmorphism */
         .nd-card-glow-blue {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.16) 0%, rgba(3, 105, 161, 0.08) 100%);
-            border: 1px solid rgba(6, 182, 212, 0.75);
-            box-shadow: 0 0 14px rgba(6, 182, 212, 0.3);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.18) 0%, rgba(3, 105, 161, 0.08) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.8);
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
         }
         .nd-card-glow-green {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(4, 120, 87, 0.08) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.75);
-            box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, rgba(4, 120, 87, 0.08) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.8);
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);
         }
         .nd-card-glow-amber {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 100%);
-            border: 1px solid rgba(245, 158, 11, 0.75);
-            box-shadow: 0 0 14px rgba(245, 158, 11, 0.3);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.18) 0%, rgba(180, 83, 9, 0.08) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.8);
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.25);
         }
         .nd-card-glow-purple {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(107, 33, 168, 0.08) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.75);
-            box-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(107, 33, 168, 0.08) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.8);
+            box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
         }
 
         #painelCalibracao {
@@ -848,159 +849,147 @@
             <!-- Divisão da TV 04: Metade Esquerda (Qualidade) | Metade Direita (Segurança) -->
             <div class="grid grid-cols-2 gap-1 flex-1 overflow-hidden min-h-0">
                 
-                <!-- METADE ESQUERDA: REOPERAÇÕES – QUALIDADE OPERACIONAL (Layout Idêntico ao Modelo) -->
-                <div class="flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded-lg border border-purple-500/30 gap-1 shadow-2xl">
+                <!-- METADE ESQUERDA: REOPERAÇÕES – QUALIDADE OPERACIONAL (Layout Amplo e Nítido) -->
+                <div class="flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-2 rounded-lg border border-purple-500/30 gap-1.5 shadow-2xl">
                     
                     <!-- Cabeçalho do Bloco de Qualidade -->
-                    <div class="flex items-center gap-1.5 shrink-0 px-0.5">
-                        <div class="w-4 h-4 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-[9px] shadow-sm">
+                    <div class="flex items-center gap-2 shrink-0 px-0.5">
+                        <div class="w-4.5 h-4.5 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-[10px] shadow-sm">
                             ⚙️
                         </div>
-                        <div class="flex flex-col leading-none">
-                            <span class="text-white text-[8.8px] font-black uppercase tracking-wider">REOPERAÇÕES – QUALIDADE OPERACIONAL</span>
-                            <span class="text-slate-300 text-[6.5px] font-bold">Acompanhamento de peças reoperadas e erros operacionais</span>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-white text-[9.5px] font-black uppercase tracking-wider">REOPERAÇÕES – QUALIDADE OPERACIONAL</span>
+                            <span class="text-slate-300 text-[7px] font-bold tracking-tight">Acompanhamento de peças reoperadas e erros operacionais</span>
                         </div>
                     </div>
 
-                    <!-- 4 Cards Superiores com Donuts e Barras Glow -->
-                    <div class="grid grid-cols-4 gap-1 shrink-0">
+                    <!-- 4 Cards Superiores com Tipografia Ampliada e Nítida -->
+                    <div class="grid grid-cols-4 gap-1.5 shrink-0">
                         <!-- Card 1: Total Reoperado (Azul) -->
-                        <div class="nd-card-glow-blue rounded-lg p-1 flex items-center gap-1.5">
-                            <div class="relative w-9 h-9 shrink-0 flex items-center justify-center">
+                        <div class="nd-card-glow-blue rounded-xl p-1.5 flex items-center gap-2">
+                            <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                                 <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3" fill="none" />
-                                    <circle cx="18" cy="18" r="14" stroke="#06b6d4" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="15" />
+                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
+                                    <circle cx="18" cy="18" r="14" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="15" />
                                 </svg>
-                                <span id="kpiQualidadeTotalGeral" class="absolute inset-0 flex items-center justify-center text-[8px] font-black text-white font-num">2.127</span>
+                                <span id="kpiQualidadeTotalGeral" class="absolute inset-0 flex items-center justify-center text-[9px] font-black text-white font-num">2.127</span>
                             </div>
-                            <div class="flex flex-col leading-none min-w-0">
-                                <span class="text-[6.5px] font-black text-white uppercase truncate">TOTAL REOPERADO</span>
+                            <div class="flex flex-col leading-tight min-w-0">
+                                <span class="text-[7px] font-black text-cyan-200 uppercase truncate">TOTAL REOPERADO</span>
                                 <div class="w-full bg-slate-900 rounded-full h-1 my-0.5 overflow-hidden border border-slate-800">
                                     <div class="h-full bg-cyan-400 rounded-full w-full"></div>
                                 </div>
-                                <span class="text-[5.5px] text-slate-400 font-bold truncate">Peças | Jan-Out/26</span>
+                                <span class="text-[6px] text-slate-300 font-bold truncate">Jan-Out/26</span>
                             </div>
                         </div>
 
                         <!-- Card 2: Não Conformidades (Âmbar) -->
-                        <div class="nd-card-glow-amber rounded-lg p-1 flex items-center gap-1.5">
-                            <div class="relative w-9 h-9 shrink-0 flex items-center justify-center">
+                        <div class="nd-card-glow-amber rounded-xl p-1.5 flex items-center gap-2">
+                            <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                                 <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3" fill="none" />
-                                    <circle cx="18" cy="18" r="14" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="70" />
+                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
+                                    <circle cx="18" cy="18" r="14" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="70" />
                                 </svg>
-                                <span id="kpiQualidadeTotalNC" class="absolute inset-0 flex items-center justify-center text-[9px] font-black text-white font-num">4</span>
+                                <span id="kpiQualidadeTotalNC" class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white font-num">4</span>
                             </div>
-                            <div class="flex flex-col leading-none min-w-0">
-                                <span class="text-[6.5px] font-black text-white uppercase truncate">NÃO CONFORMIDADES</span>
+                            <div class="flex flex-col leading-tight min-w-0">
+                                <span class="text-[7px] font-black text-amber-200 uppercase truncate">NÃO CONF.</span>
                                 <div class="w-full bg-slate-900 rounded-full h-1 my-0.5 overflow-hidden border border-slate-800">
                                     <div class="h-full bg-amber-400 rounded-full w-2/5"></div>
                                 </div>
-                                <span class="text-[5.5px] text-slate-400 font-bold truncate">Ocorrências no período</span>
+                                <span class="text-[6px] text-slate-300 font-bold truncate">No período</span>
                             </div>
                         </div>
 
                         <!-- Card 3: Erro Operacional (Verde) -->
-                        <div class="nd-card-glow-green rounded-lg p-1 flex items-center gap-1.5">
-                            <div class="relative w-9 h-9 shrink-0 flex items-center justify-center">
+                        <div class="nd-card-glow-green rounded-xl p-1.5 flex items-center gap-2">
+                            <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                                 <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3" fill="none" />
-                                    <circle cx="18" cy="18" r="14" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="5" />
+                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
+                                    <circle cx="18" cy="18" r="14" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="5" />
                                 </svg>
-                                <span id="kpiQualidadeErroGeral" class="absolute inset-0 flex items-center justify-center text-[7.5px] font-black text-white font-num">0,19%</span>
+                                <span id="kpiQualidadeErroGeral" class="absolute inset-0 flex items-center justify-center text-[8.5px] font-black text-white font-num">0,19%</span>
                             </div>
-                            <div class="flex flex-col leading-none min-w-0">
-                                <span class="text-[6.5px] font-black text-white uppercase truncate">ERRO OPERACIONAL</span>
+                            <div class="flex flex-col leading-tight min-w-0">
+                                <span class="text-[7px] font-black text-emerald-200 uppercase truncate">ERRO OPER.</span>
                                 <div class="w-full bg-slate-900 rounded-full h-1 my-0.5 overflow-hidden border border-slate-800">
                                     <div class="h-full bg-emerald-400 rounded-full w-full"></div>
                                 </div>
-                                <span class="text-[5.5px] text-slate-400 font-bold truncate">Acumulado Jan-Out/26</span>
+                                <span class="text-[6px] text-slate-300 font-bold truncate">Acumulado</span>
                             </div>
                         </div>
 
                         <!-- Card 4: Resultado Outubro (Roxo) -->
-                        <div class="nd-card-glow-purple rounded-lg p-1 flex items-center gap-1.5">
-                            <div class="relative w-9 h-9 shrink-0 flex items-center justify-center">
+                        <div class="nd-card-glow-purple rounded-xl p-1.5 flex items-center gap-2">
+                            <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                                 <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
-                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3" fill="none" />
-                                    <circle cx="18" cy="18" r="14" stroke="#a855f7" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="10" />
+                                    <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
+                                    <circle cx="18" cy="18" r="14" stroke="#a855f7" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="10" />
                                 </svg>
-                                <span id="kpiQualidadeMesPecas" class="absolute inset-0 flex items-center justify-center text-[8.5px] font-black text-white font-num">209</span>
+                                <span id="kpiQualidadeMesPecas" class="absolute inset-0 flex items-center justify-center text-[9.5px] font-black text-white font-num">209</span>
                             </div>
-                            <div class="flex flex-col leading-none min-w-0">
-                                <span id="lblQualidadeMesNome" class="text-[6.5px] font-black text-white uppercase truncate">RESULTADO OUTUBRO</span>
+                            <div class="flex flex-col leading-tight min-w-0">
+                                <span id="lblQualidadeMesNome" class="text-[7px] font-black text-purple-200 uppercase truncate">OUTUBRO</span>
                                 <div class="w-full bg-slate-900 rounded-full h-1 my-0.5 overflow-hidden border border-slate-800">
                                     <div class="h-full bg-purple-400 rounded-full w-full"></div>
                                 </div>
-                                <span id="lblQualidadeMesDetalhe" class="text-[5.5px] text-slate-400 font-bold truncate">Peças | 0 não conformes</span>
+                                <span id="lblQualidadeMesDetalhe" class="text-[6px] text-slate-300 font-bold truncate">0 não conf.</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Meio: Gráfico de Barras Mensais (Esq) + Tabela de Não Conformidades (Dir) -->
-                    <div class="grid grid-cols-12 gap-1 flex-1 overflow-hidden min-h-0">
-                        <!-- Gráfico de Evolução Mensal (7 Colunas) -->
-                        <div class="col-span-8 flex flex-col justify-between overflow-hidden bg-[#050916] p-1 rounded-lg border border-slate-800/80">
-                            <div class="flex items-center gap-1 mb-0.5 px-0.5">
-                                <span class="text-purple-400 text-[8px]">📊</span>
-                                <span class="text-slate-200 text-[7.5px] font-black uppercase tracking-wider">EVOLUÇÃO MENSAL – PEÇAS REOPERADAS</span>
+                    <!-- Meio Expandido: Gráfico de Barras Mensais (Esq) + Tabela de Não Conformidades (Dir) -->
+                    <div class="grid grid-cols-12 gap-1.5 flex-1 overflow-hidden min-h-0">
+                        <!-- Gráfico de Evolução Mensal em Formato Panorâmico Nítido -->
+                        <div class="col-span-8 flex flex-col justify-between overflow-hidden bg-[#050916] p-1.5 rounded-lg border border-slate-800">
+                            <div class="flex items-center gap-1.5 mb-1 px-1">
+                                <span class="text-purple-400 text-[9px]">📊</span>
+                                <span class="text-white text-[8px] font-black uppercase tracking-wider">EVOLUÇÃO MENSAL – PEÇAS REOPERADAS</span>
                             </div>
-                            <div id="qualidadeGraficoBarrasContainer" class="flex-1 w-full bg-[#02050e] rounded border border-slate-800/80 p-0.5 flex items-center justify-center overflow-hidden">
-                                <!-- Barras SVG geradas dinamicamente -->
+                            <div id="qualidadeGraficoBarrasContainer" class="flex-1 w-full bg-[#02050e] rounded-md border border-slate-800/80 p-1 flex items-center justify-center overflow-hidden">
+                                <!-- Gráfico SVG renderizado com alta nitidez geométrica -->
                             </div>
                         </div>
 
-                        <!-- Tabela Resumo Não Conformidades (4 Colunas) -->
-                        <div class="col-span-4 flex flex-col justify-between overflow-hidden bg-[#050916] p-1 rounded-lg border border-slate-800/80">
-                            <div class="flex items-center gap-1 mb-0.5 px-0.5">
-                                <span class="text-purple-400 text-[8px]">📋</span>
-                                <span class="text-slate-200 text-[7.5px] font-black uppercase tracking-wider">QUALIDADE OPERACIONAL</span>
+                        <!-- Tabela Resumo Não Conformidades (Duas Colunas Espaçadas) -->
+                        <div class="col-span-4 flex flex-col justify-between overflow-hidden bg-[#050916] p-1.5 rounded-lg border border-slate-800">
+                            <div class="flex items-center gap-1.5 mb-1 px-1">
+                                <span class="text-purple-400 text-[9px]">📋</span>
+                                <span class="text-white text-[8px] font-black uppercase tracking-wider">NÃO CONFORMIDADES</span>
                             </div>
-                            <div id="qualidadeTabelaNcContainer" class="flex-1 flex flex-col justify-around bg-[#02050e] rounded border border-slate-800/80 p-1 text-[6.5px] font-num">
-                                <!-- Duas colunas com Jan-Mai e Jun-Out -->
+                            <div id="qualidadeTabelaNcContainer" class="flex-1 flex flex-col justify-around bg-[#02050e] rounded-md border border-slate-800/80 p-1.5 font-num">
+                                <!-- Tabela renderizada via JS -->
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Rodapé da Qualidade: Responsável e Status do Mês -->
-                    <div class="h-[22px] bg-[#070b1b] border border-cyan-400/50 rounded-lg px-2 flex items-center justify-between shrink-0 shadow-lg">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-3.5 h-3.5 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-[7.5px] text-cyan-300">👤</span>
-                            <span class="text-white text-[7.5px] font-black uppercase tracking-wider">RESPONSÁVEL: <strong id="lblQualidadeResponsavel" class="text-cyan-300">EVALDO</strong></span>
-                        </div>
-                        <div class="flex items-center gap-1 border-l border-slate-700/80 pl-2">
-                            <span class="w-3.5 h-3.5 rounded-full bg-emerald-500/30 border border-emerald-400 flex items-center justify-center text-[7.5px] text-emerald-300 font-black">✓</span>
-                            <span id="lblQualidadeStatusBanner" class="text-emerald-300 text-[7.5px] font-black uppercase tracking-wider">SEM NÃO CONFORMIDADES EM OUT/26</span>
                         </div>
                     </div>
 
                 </div>
 
                 <!-- METADE DIREITA: RESERVADO PARA SEGURANÇA DO TRABALHO -->
-                <div class="flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-2 rounded-lg border border-slate-800/80 gap-2 shadow-2xl">
-                    <div class="flex items-center gap-1.5 shrink-0 px-0.5 border-b border-slate-800 pb-1">
-                        <div class="w-4 h-4 rounded-full bg-emerald-600/30 border border-emerald-400 flex items-center justify-center text-[9px]">
+                <div class="flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-2.5 rounded-lg border border-slate-800/80 gap-2 shadow-2xl">
+                    <div class="flex items-center gap-2 shrink-0 px-0.5 border-b border-slate-800 pb-1.5">
+                        <div class="w-4.5 h-4.5 rounded-full bg-emerald-600/30 border border-emerald-400 flex items-center justify-center text-[10px]">
                             🛡️
                         </div>
-                        <div class="flex flex-col leading-none">
-                            <span class="text-white text-[8.8px] font-black uppercase tracking-wider">SEGURANÇA DO TRABALHO – SESMT</span>
-                            <span class="text-slate-400 text-[6.5px] font-bold">Monitoramento de acidentes, dias sem acidentes e conformidade</span>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-white text-[9.5px] font-black uppercase tracking-wider">SEGURANÇA DO TRABALHO – SESMT</span>
+                            <span class="text-slate-300 text-[7px] font-bold">Monitoramento de acidentes, dias sem acidentes e conformidade</span>
                         </div>
                     </div>
 
                     <div class="flex-1 flex flex-col items-center justify-center text-center p-4">
-                        <div class="w-12 h-12 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-center justify-center text-xl mb-2 text-emerald-300 animate-pulse">
+                        <div class="w-13 h-13 rounded-2xl bg-emerald-950/40 border border-emerald-500/40 flex items-center justify-center text-2xl mb-2 text-emerald-300 animate-pulse">
                             ⛑️
                         </div>
-                        <h4 class="text-[9.5px] font-black text-white uppercase tracking-wider">Módulo SESMT / Segurança</h4>
-                        <p class="text-[7.5px] text-slate-400 max-w-[240px] mt-1 leading-relaxed">
+                        <h4 class="text-[10px] font-black text-white uppercase tracking-wider">Módulo SESMT / Segurança</h4>
+                        <p class="text-[8px] text-slate-300 max-w-[260px] mt-1 leading-relaxed font-medium">
                             Aguardando a base de segurança (dias sem acidentes, quase-acidentes e treinamentos) para renderização do painel.
                         </p>
                     </div>
 
-                    <div class="h-[22px] bg-[#070b1b] border border-emerald-500/40 rounded-lg px-2 flex items-center justify-between shrink-0 shadow-lg">
-                        <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider">SEGURANÇA EM PRIMEIRO LUGAR</span>
-                        <span class="text-slate-400 text-[6.5px] font-num">CD ALHANDRA PB</span>
+                    <div class="h-[24px] bg-[#070b1b] border border-emerald-500/40 rounded-lg px-2 flex items-center justify-between shrink-0 shadow-lg">
+                        <span class="text-emerald-400 text-[7.5px] font-black uppercase tracking-wider">SEGURANÇA EM PRIMEIRO LUGAR</span>
+                        <span class="text-slate-400 text-[7px] font-num font-bold">CD ALHANDRA PB</span>
                     </div>
                 </div>
 
@@ -1015,8 +1004,6 @@
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
         const GOOGLE_SCRIPT_OTIMIZACAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzhnJtM1tJP2sWfZP72rPsnc8SSweWcWbC8aci7MpPMCG2gsT2SBfm_lrtK9G6O7pU0/exec";
         const GOOGLE_SCRIPT_NEXTDAY_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzYWV7ksR0SXgfT_ystlCXCfP8kJK1rOEEpbTyWl8J-qpjgrm-pfhQT1KbS5yxl_5rf3A/exec";
-        
-        // URL DA NOVA API DE QUALIDADE (TV 04)
         const GOOGLE_SCRIPT_QUALIDADE_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbyW9FTt4vqf5eNYIWivJLeGVtzUgtgYB1m2SiiBJbQnJphWzQO_iPfoNr5QS0u1hacJjA/exec";
 
         let currentData = {
@@ -1040,7 +1027,6 @@
             return limpo;
         }
 
-        // Base padrão de contingência para Qualidade Operacional
         const QUALIDADE_DATABASE_PADRAO = {
             historico: [
                 { mes: "janeiro/2026", totalPecas: "217", naoConforme: "0", erroPerc: "0,00%" },
@@ -1053,23 +1039,14 @@
                 { mes: "agosto/2026", totalPecas: "249", naoConforme: "0", erroPerc: "0,00%" },
                 { mes: "setembro/2026", totalPecas: "266", naoConforme: "0", erroPerc: "0,00%" },
                 { mes: "outubro/2026", totalPecas: "209", naoConforme: "0", erroPerc: "0,00%" }
-            ],
-            resumo: {
-                totalGeral: 2127,
-                totalNC: 4,
-                erroGeral: "0,19%",
-                mesAtualPecas: 209,
-                mesAtualNC: 0,
-                responsavel: "EVALDO"
-            }
+            ]
         };
 
-        // --- RENDERIZADOR DA QUALIDADE OPERACIONAL (TV 04) ---
+        // --- RENDERIZAÇÃO DA QUALIDADE OPERACIONAL (TV 04) ---
         function renderizarQualidadeOperacional() {
             const data = currentData.tv04Qualidade || QUALIDADE_DATABASE_PADRAO;
             const hist = data.historico || QUALIDADE_DATABASE_PADRAO.historico;
 
-            // Calcula totais acumulados
             let somaPecas = 0;
             let somaNC = 0;
             hist.forEach(h => {
@@ -1080,30 +1057,16 @@
             const erroPercGeral = somaPecas > 0 ? ((somaNC / somaPecas) * 100).toFixed(2).replace('.', ',') + '%' : '0,00%';
             const mesAtual = hist[hist.length - 1] || { mes: "outubro/2026", totalPecas: "209", naoConforme: "0" };
 
-            // Preenche os 4 cards superiores
             document.getElementById('kpiQualidadeTotalGeral').innerText = somaPecas.toLocaleString('pt-BR');
             document.getElementById('kpiQualidadeTotalNC').innerText = somaNC;
             document.getElementById('kpiQualidadeErroGeral').innerText = erroPercGeral;
             document.getElementById('kpiQualidadeMesPecas').innerText = mesAtual.totalPecas;
 
             const nomeMesLimpo = mesAtual.mes.split('/')[0].toUpperCase();
-            document.getElementById('lblQualidadeMesNome').innerText = `RESULTADO ${nomeMesLimpo}`;
-            document.getElementById('lblQualidadeMesDetalhe').innerText = `Peças | ${mesAtual.naoConforme} não conformes`;
+            document.getElementById('lblQualidadeMesNome').innerText = nomeMesLimpo;
+            document.getElementById('lblQualidadeMesDetalhe').innerText = `${mesAtual.naoConforme} não conf.`;
 
-            // Atualiza Rodapé
-            const statusBanner = document.getElementById('lblQualidadeStatusBanner');
-            if (parseInt(mesAtual.naoConforme, 10) === 0) {
-                statusBanner.innerText = `SEM NÃO CONFORMIDADES EM ${nomeMesLimpo.slice(0, 3)}/26`;
-                statusBanner.className = "text-emerald-300 text-[7.5px] font-black uppercase tracking-wider";
-            } else {
-                statusBanner.innerText = `${mesAtual.naoConforme} NÃO CONFORMIDADE(S) EM ${nomeMesLimpo.slice(0, 3)}/26`;
-                statusBanner.className = "text-rose-300 text-[7.5px] font-black uppercase tracking-wider";
-            }
-
-            // Renderiza Gráfico de Barras SVG
             renderizarBarrasQualidade(hist);
-
-            // Renderiza Tabela de Não Conformidades (2 Colunas)
             renderizarTabelaNC(hist);
         }
 
@@ -1117,45 +1080,55 @@
                 if (val > maxVal) maxVal = val;
             });
 
-            const W = 320;
-            const H = 100;
-            const padL = 20;
-            const padR = 10;
-            const padT = 16;
-            const padB = 18;
+            const W = 460;
+            const H = 160;
+            const padL = 16;
+            const padR = 16;
+            const padT = 24;
+            const padB = 26;
             const plotW = W - padL - padR;
             const plotH = H - padT - padB;
 
             const n = hist.length;
-            const colWidth = (plotW / n) * 0.65;
             const gap = plotW / n;
+            const colWidth = gap * 0.62;
 
             let barrasSvg = '';
             let labelsX = '';
 
             hist.forEach((h, i) => {
                 const val = parseInt(String(h.totalPecas).replace(/\D/g, ''), 10) || 0;
-                const barH = (val / maxVal) * (plotH - 6);
+                const barH = (val / maxVal) * (plotH - 8);
                 const x = padL + (i * gap) + ((gap - colWidth) / 2);
                 const y = padT + plotH - barH;
 
                 const isLast = (i === n - 1);
-                const corBarra = isLast ? "#06b6d4" : "#0284c7";
+                const corBarra = isLast ? "url(#gradBarraDestaque)" : "url(#gradBarraPadrao)";
                 const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
 
                 barrasSvg += `
-                    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${colWidth.toFixed(1)}" height="${barH.toFixed(1)}" rx="2" fill="${corBarra}" />
-                    <text x="${(x + colWidth / 2).toFixed(1)}" y="${(y - 3).toFixed(1)}" fill="#ffffff" font-size="6.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="middle">${val}</text>
+                    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${colWidth.toFixed(1)}" height="${barH.toFixed(1)}" rx="3" fill="${corBarra}" filter="drop-shadow(0px 2px 4px rgba(0,0,0,0.5))" />
+                    <text x="${(x + colWidth / 2).toFixed(1)}" y="${(y - 5).toFixed(1)}" fill="#ffffff" font-size="8.5" font-family="Consolas, monospace" font-weight="900" text-anchor="middle">${val}</text>
                 `;
 
                 labelsX += `
-                    <text x="${(x + colWidth / 2).toFixed(1)}" y="${H - 4}" fill="${isLast ? '#06b6d4' : '#64748b'}" font-size="6.5" font-family="Consolas, monospace" font-weight="${isLast ? 'bold' : 'normal'}" text-anchor="middle">${mesAbrev}</text>
+                    <text x="${(x + colWidth / 2).toFixed(1)}" y="${H - 8}" fill="${isLast ? '#38bdf8' : '#94a3b8'}" font-size="8" font-family="'Segoe UI', sans-serif" font-weight="${isLast ? '900' : '700'}" text-anchor="middle">${mesAbrev}</text>
                 `;
             });
 
             container.innerHTML = `
-                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full overflow-visible" preserveAspectRatio="none">
-                    <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#1e293b" stroke-width="0.8" />
+                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full" style="shape-rendering: geometricPrecision;" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="gradBarraPadrao" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#38bdf8" />
+                            <stop offset="100%" stop-color="#0284c7" />
+                        </linearGradient>
+                        <linearGradient id="gradBarraDestaque" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#22d3ee" />
+                            <stop offset="100%" stop-color="#0891b2" />
+                        </linearGradient>
+                    </defs>
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#334155" stroke-width="1.2" />
                     ${barrasSvg}
                     ${labelsX}
                 </svg>
@@ -1170,42 +1143,38 @@
             const col1 = hist.slice(0, metades);
             const col2 = hist.slice(metades);
 
-            let htmlCol1 = '';
-            col1.forEach(h => {
-                const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
-                htmlCol1 += `
-                    <div class="flex justify-between items-center py-[1px] border-b border-slate-900/60 last:border-0">
-                        <span class="text-slate-400">${mesAbrev}</span>
-                        <strong class="text-white">${h.naoConforme}</strong>
-                    </div>
-                `;
-            });
+            function gerarLinhas(arr) {
+                let html = '';
+                arr.forEach(h => {
+                    const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
+                    const qtd = parseInt(String(h.naoConforme).replace(/\D/g, ''), 10) || 0;
+                    const isZero = (qtd === 0);
+                    const badgeClass = isZero ? "text-slate-300 font-bold" : "text-amber-300 font-black px-1.5 py-[0.5px] rounded bg-amber-950/80 border border-amber-600";
+                    const isOut = mesAbrev.toLowerCase().includes("out");
 
-            let htmlCol2 = '';
-            col2.forEach(h => {
-                const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
-                const isOut = mesAbrev.toLowerCase().includes("out");
-                htmlCol2 += `
-                    <div class="flex justify-between items-center py-[1px] border-b border-slate-900/60 last:border-0">
-                        <span class="${isOut ? 'text-purple-300 font-bold' : 'text-slate-400'}">${mesAbrev}</span>
-                        <strong class="${isOut ? 'text-emerald-400 font-black' : 'text-white'}">${h.naoConforme}</strong>
-                    </div>
-                `;
-            });
+                    html += `
+                        <div class="flex justify-between items-center py-1 border-b border-slate-800/80 last:border-0 px-1">
+                            <span class="${isOut ? 'text-cyan-300 font-black' : 'text-slate-200 font-semibold'} text-[7.5px]">${mesAbrev}</span>
+                            <span class="${badgeClass} text-[8px]">${qtd}</span>
+                        </div>
+                    `;
+                });
+                return html;
+            }
 
             container.innerHTML = `
                 <div class="grid grid-cols-2 gap-2 h-full">
-                    <div class="flex flex-col justify-between border-r border-slate-800 pr-1.5">
-                        <div class="flex justify-between text-slate-500 font-bold border-b border-slate-800 pb-0.5 mb-0.5">
-                            <span>Mês</span><span>NC</span>
+                    <div class="flex flex-col justify-between border-r border-slate-800 pr-2">
+                        <div class="flex justify-between text-slate-400 font-black text-[7px] border-b border-slate-700 pb-1 mb-1 px-1">
+                            <span>MÊS</span><span>NC</span>
                         </div>
-                        ${htmlCol1}
+                        ${gerarLinhas(col1)}
                     </div>
-                    <div class="flex flex-col justify-between pl-0.5">
-                        <div class="flex justify-between text-slate-500 font-bold border-b border-slate-800 pb-0.5 mb-0.5">
-                            <span>Mês</span><span>NC</span>
+                    <div class="flex flex-col justify-between pl-1">
+                        <div class="flex justify-between text-slate-400 font-black text-[7px] border-b border-slate-700 pb-1 mb-1 px-1">
+                            <span>MÊS</span><span>NC</span>
                         </div>
-                        ${htmlCol2}
+                        ${gerarLinhas(col2)}
                     </div>
                 </div>
             `;
@@ -1473,7 +1442,7 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- CALIBRAÇÃO GERAL E TV 03 ---
+        // --- SISTEMA DE CALIBRAÇÃO GERAL E TV 03 ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -2293,7 +2262,6 @@
             sincronizarNextDay();
             sincronizarQualidade();
 
-            // Renderização inicial
             renderizarPaginaNextDay();
             renderizarQualidadeOperacional();
 
