@@ -25,7 +25,7 @@
             --row-height-factor: 14;
             --font-scale-factor: 1.0;
 
-            /* Variáveis Exclusivas para Calibração e Expansão da TV 03 */
+            /* Variáveis de Calibração e Expansão da TV 03 */
             --tv03-pad-top: 2px;
             --tv03-pad-bottom: 2px;
             --tv03-pad-sides: 3px;
@@ -79,7 +79,6 @@
             background-color: #050914;
         }
 
-        /* Estilo Isolado de Expansão da TV 03 */
         #tv03CardRoot {
             padding-top: var(--tv03-pad-top);
             padding-bottom: var(--tv03-pad-bottom);
@@ -148,7 +147,6 @@
             animation-play-state: paused;
         }
 
-        /* Ticker Superior de Famílias */
         .top-family-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -169,7 +167,6 @@
             animation-play-state: paused;
         }
 
-        /* Tickers da TV 03 */
         .tv03-daily-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -212,26 +209,26 @@
             100% { transform: translateX(-50%); }
         }
 
-        /* Classes de Estilo Premium para o Layout Next Day */
+        /* Estilos com contraste aprimorado */
         .nd-card-glow-blue {
-            background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(3, 105, 161, 0.05) 100%);
-            border: 1px solid rgba(6, 182, 212, 0.65);
-            box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.16) 0%, rgba(3, 105, 161, 0.08) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.75);
+            box-shadow: 0 0 14px rgba(6, 182, 212, 0.3);
         }
         .nd-card-glow-green {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(4, 120, 87, 0.05) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.65);
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.16) 0%, rgba(4, 120, 87, 0.08) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.75);
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.3);
         }
         .nd-card-glow-amber {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(180, 83, 9, 0.05) 100%);
-            border: 1px solid rgba(245, 158, 11, 0.65);
-            box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.75);
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.3);
         }
         .nd-card-glow-purple {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.14) 0%, rgba(107, 33, 168, 0.05) 100%);
-            border: 1px solid rgba(168, 85, 247, 0.65);
-            box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(107, 33, 168, 0.08) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.75);
+            box-shadow: 0 0 14px rgba(168, 85, 247, 0.3);
         }
 
         #painelCalibracao {
@@ -683,50 +680,50 @@
                         </div>
                     </div>
 
-                    <!-- MÓDULO NEXT DAY: DESIGN PREMIUM CONFORME A IMAGEM SOLICITADA -->
-                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded-lg border border-purple-500/30 gap-1 shadow-2xl">
+                    <!-- MÓDULO NEXT DAY: DESIGN PREMIUM ULTRA LEGÍVEL -->
+                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded-lg border border-purple-500/40 gap-1 shadow-2xl">
                         
                         <!-- Cabeçalho do Módulo Next Day -->
                         <div class="flex justify-between items-center shrink-0 px-1 py-0.5">
                             <div class="flex items-center gap-1.5">
-                                <div class="w-4 h-4 rounded-md bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-[9px] shadow-sm">
+                                <div class="w-4 h-4 rounded-md bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-[10px] shadow-sm">
                                     📊
                                 </div>
                                 <div class="flex flex-col leading-none">
-                                    <span class="text-white text-[8px] font-black uppercase tracking-wider">KPIS – NEXT DAY[cite: 14]</span>
-                                    <span class="text-slate-400 text-[6px] font-bold">Performance e Níveis de Serviço[cite: 14]</span>
+                                    <span class="text-white text-[9px] font-black uppercase tracking-wider">KPIS – NEXT DAY</span>
+                                    <span class="text-slate-300 text-[6.5px] font-bold">Performance e Níveis de Serviço</span>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-1">
-                                <span id="lblNextDayPagina" class="text-[6.5px] font-black text-purple-200 bg-purple-900/90 border border-purple-500/60 px-1.5 py-[1px] rounded-full shadow-sm">
+                            <div class="flex items-center gap-1.5">
+                                <span id="lblNextDayPagina" class="text-[7.5px] font-black text-purple-200 bg-purple-900/90 border border-purple-400/80 px-2 py-[1.5px] rounded-full shadow-sm font-num">
                                     PAG 1/3
                                 </span>
-                                <div class="flex items-center gap-0.5 bg-slate-900/90 border border-slate-800 rounded-full p-[1px]">
-                                    <span class="text-[6px] text-slate-400 px-1 font-num">Ago./26[cite: 14]</span>
-                                    <span class="text-[6px] text-slate-400 px-1 font-num">Set./26[cite: 14]</span>
-                                    <span class="text-[6px] text-purple-300 bg-purple-600/80 px-1.5 py-[0.5px] rounded-full font-num font-black shadow">Out./26[cite: 14]</span>
+                                <div class="flex items-center gap-1 bg-slate-900 border border-slate-700/80 rounded-full px-1 py-[1px]">
+                                    <span class="text-[7px] text-slate-300 px-1 font-num font-bold">Ago./26</span>
+                                    <span class="text-[7px] text-slate-300 px-1 font-num font-bold">Set./26</span>
+                                    <span class="text-[7px] text-purple-200 bg-purple-600 px-1.5 py-[0.5px] rounded-full font-num font-black shadow">Out./26</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Grade 2x2 com os 4 Cards com Donuts e Barras Glow -->
+                        <!-- Grade 2x2 com os 4 Cards de Indicadores -->
                         <div id="nextDayCardsGrid" class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden transition-all duration-500">
-                            <!-- Os 4 cards serão injetados dinamicamente via JS com Donuts SVG e estilos neon -->
+                            <!-- Os 4 cards serão injetados dinamicamente via JS com contraste alto e fontes nítidas -->
                         </div>
 
-                        <!-- Barra Inferior de Destaque -->
-                        <div id="nextDayHighlightBar" class="h-[22px] bg-[#070b19] border border-cyan-500/40 rounded-lg px-2 flex items-center justify-between shrink-0 shadow-inner">
-                            <div class="flex items-center gap-1.5 min-w-0">
-                                <span class="w-3.5 h-3.5 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-[7.5px] text-cyan-300">✓[cite: 14]</span>
-                                <div class="flex flex-col leading-none min-w-0">
-                                    <span id="ndHlTitulo" class="text-slate-200 text-[7px] font-black truncate">WTC – Nível de Monitoramento Aplicativo[cite: 14]</span>
-                                    <span class="text-slate-400 text-[5.8px]">Monitoramento ativo e dentro do mínimo[cite: 14]</span>
+                        <!-- Barra Inferior de Destaque Reestruturada (Totalmente Legível) -->
+                        <div id="nextDayHighlightBar" class="h-[24px] bg-[#070b1b] border border-cyan-400/60 rounded-lg px-2 flex items-center justify-between shrink-0 shadow-lg">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="w-4 h-4 rounded-full bg-cyan-500/30 border border-cyan-300 flex items-center justify-center text-[8.5px] text-cyan-200 font-black shrink-0">✓</span>
+                                <div class="flex flex-col leading-tight min-w-0">
+                                    <span id="ndHlTitulo" class="text-white text-[8px] font-black truncate">WTC – Nível de Monitoramento Aplicativo</span>
+                                    <span class="text-slate-300 text-[6.2px] font-bold truncate">Monitoramento ativo e dentro da meta</span>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-2 shrink-0">
-                                <span id="ndHlMeta" class="text-pink-400 text-[6.8px] font-bold font-num border-l border-slate-700/80 pl-2">Mínimo: 92%[cite: 14]</span>
-                                <span id="ndHlBadge" class="bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 border border-emerald-400 text-emerald-300 text-[7px] font-black px-1.5 py-[1px] rounded-full font-num flex items-center gap-1 shadow">
-                                    <span>✓[cite: 14]</span> <span id="ndHlValor">96,00%[cite: 14]</span>
+                            <div class="flex items-center gap-2.5 shrink-0 pl-2 border-l border-slate-700">
+                                <span id="ndHlMeta" class="text-pink-300 text-[7.5px] font-black font-num">Meta: 92%</span>
+                                <span id="ndHlBadge" class="bg-gradient-to-r from-emerald-500/40 to-cyan-500/40 border border-emerald-400 text-emerald-200 text-[8px] font-black px-2 py-[1.5px] rounded-full font-num flex items-center gap-1 shadow">
+                                    <span>✓</span> <span id="ndHlValor">100,00%</span>
                                 </span>
                             </div>
                         </div>
@@ -801,8 +798,6 @@
         const GOOGLE_SCRIPT_EXPEDICAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzENwdne1UBhEi54kwL-hq2WuAGvtwMiRFZ6Vc2LoF74MCl1aj_m64jgVvWDylB8g9O/exec";
         const GOOGLE_SCRIPT_RECEBIMENTO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzZdL-oNkwRjLX-LiX4ZywB_TpSXyYkbI2hnpQf4mN0vpiMq75HzSI9NPwIR8jutPfHOQ/exec";
         const GOOGLE_SCRIPT_OTIMIZACAO_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzhnJtM1tJP2sWfZP72rPsnc8SSweWcWbC8aci7MpPMCG2gsT2SBfm_lrtK9G6O7pU0/exec";
-        
-        // URL DA NOVA API NEXT DAY 1.0 ATUALIZADA
         const GOOGLE_SCRIPT_NEXTDAY_URL = "https://script.google.com/a/macros/whirlpool.com/s/AKfycbzYWV7ksR0SXgfT_ystlCXCfP8kJK1rOEEpbTyWl8J-qpjgrm-pfhQT1KbS5yxl_5rf3A/exec";
 
         let currentData = {
@@ -816,16 +811,16 @@
             tv03NextDay: null
         };
 
-        // Base de dados calibrada da nova planilha Next Day 1.0 (Ago./26 vs Set./26)
+        // Dados oficiais calibrados com textos nítidos e visual sem undefined
         const NEXT_DAY_DATABASE_PADRAO = [
             { id: "NE", nome: "NE - Nível de Entrega", subtitulo: "Entregas no prazo", ago: "100,00%", set: "96,94%", meta: "98%", valNum: 96.94, metaNum: 98, icone: "🚚", cor: "blue" },
             { id: "NI", nome: "NI - Nível de Informação", subtitulo: "Informações corretas", ago: "100,00%", set: "96,94%", meta: "98%", valNum: 96.94, metaNum: 98, icone: "ℹ️", cor: "green" },
             { id: "ND", nome: "ND - Nível de Devolução", subtitulo: "Devoluções no prazo", ago: "100,00%", set: "100,00%", meta: "97%", valNum: 100.00, metaNum: 97, icone: "🔄", cor: "amber" },
             { id: "NID", nome: "NID - Info Devolução", subtitulo: "Informações de devolução", ago: "100,00%", set: "100,00%", meta: "97%", valNum: 100.00, metaNum: 97, icone: "📦", cor: "purple" },
-            { id: "NA", nome: "NA - Aceite Carregamentos", subtitulo: "Aceite dentro da janela", ago: "100,00%", set: "100,00%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "📋", cor: "blue" },
+            { id: "NA", nome: "NA - Aceite Carregamentos", subtitulo: "Aceite na janela", ago: "100,00%", set: "100,00%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "📋", cor: "blue" },
             { id: "WTC", nome: "WTC - Monitoramento App", subtitulo: "Monitoramento ativo app", ago: "100,00%", set: "100,00%", meta: "92%", valNum: 100.00, metaNum: 92, icone: "📱", cor: "green" },
             { id: "5 STARS", nome: "5 Stars - Avaliação Dlieve", subtitulo: "Avaliação da entrega", ago: "4,83%", set: "4,81%", meta: "4,75%", valNum: 4.81, metaNum: 4.75, icone: "⭐", cor: "amber" },
-            { id: "NSP/NPCA", nome: "NSP - Serviço Pagamento", subtitulo: "Nível de pré-cálculo aberto", ago: "100,00%", set: "100,00%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "💳", cor: "purple" },
+            { id: "NSP/NPCA", nome: "NSP - Serviço Pagamento", subtitulo: "Pré-cálculo aberto", ago: "100,00%", set: "100,00%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "💳", cor: "purple" },
             { id: "EXT", nome: "EXT - Extravio", subtitulo: "Controle de sinistros", ago: "100,00%", set: "100,00%", meta: "98%", valNum: 100.00, metaNum: 98, icone: "🛡️", cor: "blue" },
             { id: "NPS", nome: "NPS - Net Promoter Score", subtitulo: "Satisfação do cliente", ago: "100,00%", set: "100,00%", meta: "95%", valNum: 100.00, metaNum: 95, icone: "🏆", cor: "green" },
             { id: "TREINAMENTO", nome: "Treinamento Operacional", subtitulo: "Capacitação da equipe", ago: "100,00%", set: "100,00%", meta: "100%", valNum: 100.00, metaNum: 100, icone: "🎓", cor: "amber" },
@@ -876,7 +871,7 @@
             track.innerHTML = itemHtml + '<span class="text-slate-700 px-3">|</span>' + itemHtml;
         }
 
-        // --- RENDERIZADOR COM DONUTS SVG E BARRAS NEON ---
+        // --- RENDERIZADOR COM DONUTS SVG E LEGIBILIDADE MÁXIMA ---
         function renderizarPaginaNextDay() {
             const grid = document.getElementById('nextDayCardsGrid');
             const lblPag = document.getElementById('lblNextDayPagina');
@@ -893,10 +888,10 @@
             const bloco = base.slice(inicio, inicio + 4);
 
             const coresMap = {
-                blue:   { border: "nd-card-glow-blue",   stroke: "#06b6d4", text: "text-cyan-400",    badge: "text-cyan-300 bg-cyan-950/80 border-cyan-500/60" },
-                green:  { border: "nd-card-glow-green",  stroke: "#10b981", text: "text-emerald-400", badge: "text-emerald-300 bg-emerald-950/80 border-emerald-500/60" },
-                amber:  { border: "nd-card-glow-amber",  stroke: "#f59e0b", text: "text-amber-400",   badge: "text-amber-300 bg-amber-950/80 border-amber-500/60" },
-                purple: { border: "nd-card-glow-purple", stroke: "#c084fc", text: "text-purple-400",  badge: "text-purple-300 bg-purple-950/80 border-purple-500/60" }
+                blue:   { border: "nd-card-glow-blue",   stroke: "#06b6d4", text: "text-cyan-300",    badge: "text-cyan-200 bg-cyan-950/90 border-cyan-400" },
+                green:  { border: "nd-card-glow-green",  stroke: "#10b981", text: "text-emerald-300", badge: "text-emerald-200 bg-emerald-950/90 border-emerald-400" },
+                amber:  { border: "nd-card-glow-amber",  stroke: "#f59e0b", text: "text-amber-300",   badge: "text-amber-200 bg-amber-950/90 border-amber-400" },
+                purple: { border: "nd-card-glow-purple", stroke: "#c084fc", text: "text-purple-300",  badge: "text-purple-200 bg-purple-950/90 border-purple-400" }
             };
 
             const coresArray = ["blue", "green", "amber", "purple"];
@@ -906,9 +901,9 @@
                 const corKey = k.cor || coresArray[idx % 4];
                 const c = coresMap[corKey] || coresMap.blue;
 
-                const valSetTexto = k.set || k.realizado || "100,00%";
-                const valAgoTexto = k.ago || "100,00%";
-                const metaTexto = k.meta || "98%";
+                const valSetTexto = (k.set && k.set !== "-") ? k.set : (k.realizado || "98,00%");
+                const valAgoTexto = (k.ago && k.ago !== "-") ? k.ago : "100,00%";
+                const metaTexto = (k.meta && k.meta !== "undefined") ? k.meta : "98%";
 
                 const numMatch = String(valSetTexto).match(/(\d+[,\.]?\d*)/);
                 const perc = numMatch ? Math.min(parseFloat(numMatch[1].replace(',', '.')), 100) : 98;
@@ -920,45 +915,45 @@
                 cardsHtml += `
                     <div class="${c.border} rounded-xl p-1.5 flex items-center justify-between gap-2 overflow-hidden transition-all duration-500 relative">
                         
-                        <!-- Donut Circular SVG com Porcentagem -->
-                        <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                        <!-- Donut Circular SVG com Porcentagem Nítida -->
+                        <div class="relative w-13 h-13 shrink-0 flex items-center justify-center">
                             <svg class="w-full h-full -rotate-90" viewBox="0 0 46 46">
-                                <circle cx="23" cy="23" r="${raio}" stroke="#0f172a" stroke-width="3.5" fill="none" />
-                                <circle cx="23" cy="23" r="${raio}" stroke="${c.stroke}" stroke-width="3.5" stroke-linecap="round" fill="none"
+                                <circle cx="23" cy="23" r="${raio}" stroke="#0f172a" stroke-width="4" fill="none" />
+                                <circle cx="23" cy="23" r="${raio}" stroke="${c.stroke}" stroke-width="4" stroke-linecap="round" fill="none"
                                         stroke-dasharray="${circunferencia}" stroke-dashoffset="${dashoffset}" style="transition: stroke-dashoffset 1s ease;" />
                             </svg>
                             <div class="absolute inset-0 flex flex-col items-center justify-center leading-none text-center">
-                                <span class="text-[9px] font-black text-white font-num">${valSetTexto}</span>
-                                <span class="text-[5.5px] text-slate-400 font-bold mt-0.5">Nível[cite: 14]</span>
+                                <span class="text-[9.5px] font-black text-white font-num">${valSetTexto}</span>
+                                <span class="text-[6px] text-slate-300 font-bold mt-0.5">Nível</span>
                             </div>
                         </div>
 
-                        <!-- Detalhes do Indicador -->
+                        <!-- Detalhes do Indicador com Fontes Maiores -->
                         <div class="flex-1 flex flex-col justify-between min-w-0 h-full py-0.5">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-1 min-w-0">
-                                    <span class="text-[8px] shrink-0">${k.icone || '🚚'}</span>
-                                    <div class="flex flex-col leading-none truncate">
-                                        <span class="text-[7.5px] font-black text-white truncate">${k.nome}</span>
-                                        <span class="text-[5.5px] text-slate-400 truncate">${k.subtitulo || 'Performance e meta'}</span>
+                                    <span class="text-[9px] shrink-0">${k.icone || '🚚'}</span>
+                                    <div class="flex flex-col leading-tight truncate">
+                                        <span class="text-[8px] font-black text-white truncate">${k.nome}</span>
+                                        <span class="text-[6.2px] text-slate-300 truncate font-semibold">${k.subtitulo || 'Performance e meta'}</span>
                                     </div>
                                 </div>
-                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-[7px] text-emerald-300 font-bold shrink-0 ml-1">
+                                <span class="w-4 h-4 rounded-full bg-emerald-500/30 border border-emerald-400 flex items-center justify-center text-[8px] text-emerald-200 font-black shrink-0 ml-1">
                                     ✓
                                 </span>
                             </div>
 
                             <!-- Barra Horizontal Neon -->
-                            <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden p-[1px] my-1 border border-slate-800">
+                            <div class="w-full bg-slate-900 rounded-full h-2 overflow-hidden p-[1px] my-1 border border-slate-800">
                                 <div class="h-full rounded-full transition-all duration-700 shadow-sm" style="width: ${perc}%; background-color: ${c.stroke};"></div>
                             </div>
 
-                            <!-- Metas e Comparativo Ago / Set -->
-                            <div class="flex items-center justify-between text-[6.2px] font-bold text-slate-400">
-                                <span>Mínimo: <strong class="text-white font-num">${metaTexto}</strong></span>
-                                <div class="flex items-center gap-1.5 font-num">
-                                    <span>Ago.: <strong class="text-slate-300">${valAgoTexto}</strong></span>
-                                    <span>Set.: <strong class="${c.text} font-black">${valSetTexto}</strong></span>
+                            <!-- Metas e Comparativo Ago / Set (Legível à distância) -->
+                            <div class="flex items-center justify-between text-[6.8px] font-bold text-slate-300">
+                                <span>Meta: <strong class="text-white font-num font-black">${metaTexto}</strong></span>
+                                <div class="flex items-center gap-2 font-num">
+                                    <span>Ago.: <strong class="text-slate-200 font-bold">${valAgoTexto}</strong></span>
+                                    <span>Set.: <strong class="${c.text} font-black text-[7.5px]">${valSetTexto}</strong></span>
                                 </div>
                             </div>
                         </div>
@@ -969,14 +964,14 @@
 
             grid.innerHTML = cardsHtml;
 
-            // Atualiza a Barra Inferior de Destaque
+            // Atualiza a Barra Inferior de Destaque com Nomenclatura "Meta"
             const itemDestaque = base[(nextDayPaginaAtual + 4) % base.length] || base[5];
             const hlTit = document.getElementById('ndHlTitulo');
             const hlMeta = document.getElementById('ndHlMeta');
             const hlVal = document.getElementById('ndHlValor');
 
             if (hlTit) hlTit.innerText = itemDestaque.nome;
-            if (hlMeta) hlMeta.innerText = `Mínimo: ${itemDestaque.meta || '92%'}`;
+            if (hlMeta) hlMeta.innerText = `Meta: ${itemDestaque.meta || '92%'}`;
             if (hlVal) hlVal.innerText = `${itemDestaque.set || itemDestaque.realizado || '100,00%'} (Set./26)`;
         }
 
@@ -1815,11 +1810,11 @@
             sincronizarTV03Exp();
             sincronizarTV03Rec();
             
-            // Inicia imediatamente com a nova base do Next Day
+            // Inicia com renderização imediata do novo padrão visual
             renderizarPaginaNextDay();
             sincronizarNextDay();
 
-            // Rotação suave a cada 5 segundos
+            // Rotação automática suave a cada 5 segundos
             if (!nextDayIntervalId) {
                 nextDayIntervalId = setInterval(() => {
                     nextDayPaginaAtual = (nextDayPaginaAtual + 1) % 3;
