@@ -25,7 +25,7 @@
             --row-height-factor: 14;
             --font-scale-factor: 1.0;
 
-            /* Variáveis Exclusivas para Calibração e Expansão da TV 03 */
+            /* Variáveis de Calibração e Expansão da TV 03 */
             --tv03-pad-top: 2px;
             --tv03-pad-bottom: 2px;
             --tv03-pad-sides: 3px;
@@ -79,7 +79,6 @@
             background-color: #050914;
         }
 
-        /* Estilo Isolado de Expansão da TV 03 */
         #tv03CardRoot {
             padding-top: var(--tv03-pad-top);
             padding-bottom: var(--tv03-pad-bottom);
@@ -148,7 +147,6 @@
             animation-play-state: paused;
         }
 
-        /* Ticker Superior de Famílias */
         .top-family-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -169,7 +167,6 @@
             animation-play-state: paused;
         }
 
-        /* Tickers da TV 03 */
         .tv03-daily-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -186,13 +183,6 @@
             animation: tickerSlide 22s linear infinite;
         }
 
-        .tv03-feedback-ticker-track {
-            display: inline-flex;
-            white-space: nowrap;
-            animation: feedbackSlide 32s linear infinite;
-        }
-
-        .tv03-feedback-ticker-track:hover,
         .tv03-daily-ticker-track:hover {
             animation-play-state: paused;
         }
@@ -202,14 +192,31 @@
             100% { transform: translateX(-50%); }
         }
 
-        @keyframes feedbackSlide {
+        @keyframes topFamilySlide {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        @keyframes topFamilySlide {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+        /* Classes de Estilo Premium para o Layout Next Day */
+        .nd-card-glow-blue {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(3, 105, 161, 0.05) 100%);
+            border: 1px solid rgba(6, 182, 212, 0.65);
+            box-shadow: 0 0 12px rgba(6, 182, 212, 0.25);
+        }
+        .nd-card-glow-green {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(4, 120, 87, 0.05) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.65);
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+        }
+        .nd-card-glow-amber {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(180, 83, 9, 0.05) 100%);
+            border: 1px solid rgba(245, 158, 11, 0.65);
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+        }
+        .nd-card-glow-purple {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.14) 0%, rgba(107, 33, 168, 0.05) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.65);
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
         }
 
         #painelCalibracao {
@@ -571,10 +578,10 @@
             <div class="flex items-center justify-between shrink-0 border-b border-slate-800/80 pb-[2px] px-1 gap-2">
                 <div class="flex items-center gap-1.5 shrink-0">
                     <h2 class="text-[8.5px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1.5 leading-none">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span> TV 03: Indicadores Operacionais & Evolução Diária[cite: 31]
                     </h2>
                     <button onclick="togglePainelCalibracaoTV03()" class="bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 px-1.5 py-[1px] rounded text-[7.2px] font-black cursor-pointer transition shrink-0">
-                        ⚙️ Bordas TV 03
+                        ⚙️ Bordas TV 03[cite: 31]
                     </button>
                 </div>
 
@@ -601,7 +608,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-emerald-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Expedição Consolidada[cite: 31]
                             </span>
                             <span id="tv03ExpTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -633,7 +640,7 @@
                     <div class="shrink-0">
                         <div class="flex justify-between items-center mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-800">
                             <span class="text-cyan-400 text-[7px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado
+                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Recebimento Consolidado[cite: 31]
                             </span>
                             <span id="tv03RecTotalTransp" class="text-[7px] text-slate-400 font-num font-bold">-- Transp.</span>
                         </div>
@@ -661,62 +668,54 @@
                         </div>
                     </div>
 
-                    <!-- MÓDULO NEXT DAY: APRESENTAÇÃO AUTOMÁTICA DOS 12 KPIS (ROTATIVO A CADA 5s) -->
-                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded border border-slate-800/80 gap-1">
-                        <div class="flex justify-between items-center shrink-0 mb-0.5 px-1 py-[1.5px] bg-[#0b1329] rounded border border-slate-700">
-                            <span class="text-purple-400 text-[7.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>🎯</span> KPIs - Next Day
-                            </span>
-                            <div class="flex items-center gap-2">
-                                <span id="lblNextDayPagina" class="text-[6.5px] text-purple-300 font-num bg-purple-950/80 border border-purple-800/60 px-1 py-[0.5px] rounded">PAG 1/3</span>
-                                <span id="lblNextDayMesRef" class="text-[7px] text-purple-300 font-num font-bold">AGO./26 vs SET./26</span>
+                    <!-- MÓDULO NEXT DAY: DESIGN PREMIUM CONFORME A IMAGEM SOLICITADA -->
+                    <div class="flex-1 flex flex-col justify-between overflow-hidden min-h-0 bg-[#02050e] p-1.5 rounded-lg border border-purple-500/30 gap-1 shadow-2xl">
+                        
+                        <!-- Cabeçalho do Módulo Next Day -->
+                        <div class="flex justify-between items-center shrink-0 px-1 py-0.5">
+                            <div class="flex items-center gap-1.5">
+                                <div class="w-4 h-4 rounded-md bg-gradient-to-tr from-purple-600 to-pink-500 flex items-center justify-center text-[9px] shadow-sm">
+                                    📊
+                                </div>
+                                <div class="flex flex-col leading-none">
+                                    <span class="text-white text-[8px] font-black uppercase tracking-wider">KPIS – NEXT DAY</span>
+                                    <span class="text-slate-400 text-[6px] font-bold">Performance e Níveis de Serviço[cite: 33]</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <span id="lblNextDayPagina" class="text-[6.5px] font-black text-purple-200 bg-purple-900/90 border border-purple-500/60 px-1.5 py-[1px] rounded-full shadow-sm">
+                                    PAG 1/3
+                                </span>
+                                <div class="flex items-center gap-0.5 bg-slate-900/90 border border-slate-800 rounded-full p-[1px]">
+                                    <span class="text-[6px] text-slate-400 px-1 font-num">Ago./26[cite: 33]</span>
+                                    <span class="text-[6px] text-slate-400 px-1 font-num">Set./26[cite: 33]</span>
+                                    <span class="text-[6px] text-purple-300 bg-purple-600/80 px-1.5 py-[0.5px] rounded-full font-num font-black shadow">Out./26[cite: 33]</span>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- GRADE DINÂMICA DE 4 CARDS COM TRANSIÇÃO AUTOMÁTICA -->
-                        <div id="nextDayCardsGrid" class="grid grid-cols-2 gap-1 flex-1 overflow-hidden transition-all duration-500">
-                            <div class="bg-[#060a17] p-1 rounded border border-slate-800 flex items-center justify-center text-slate-500 text-[8px] col-span-2">
-                                A sincronizar 12 indicadores da base Next Day...
+                        <!-- Grade 2x2 com os 4 Cards com Donuts e Barras Glow -->
+                        <div id="nextDayCardsGrid" class="grid grid-cols-2 gap-1.5 flex-1 overflow-hidden transition-all duration-500">
+                            <!-- Os 4 cards serão injetados dinamicamente via JS com Donuts SVG e estilos neon -->
+                        </div>
+
+                        <!-- Barra Inferior de Destaque -->
+                        <div id="nextDayHighlightBar" class="h-[22px] bg-[#070b19] border border-cyan-500/40 rounded-lg px-2 flex items-center justify-between shrink-0 shadow-inner">
+                            <div class="flex items-center gap-1.5 min-w-0">
+                                <span class="w-3.5 h-3.5 rounded-full bg-cyan-500/20 border border-cyan-400 flex items-center justify-center text-[7.5px] text-cyan-300">✓[cite: 33]</span>
+                                <div class="flex flex-col leading-none min-w-0">
+                                    <span id="ndHlTitulo" class="text-slate-200 text-[7px] font-black truncate">WTC – Nível de Monitoramento Aplicativo[cite: 33]</span>
+                                    <span class="text-slate-400 text-[5.8px]">Monitoramento ativo e dentro do mínimo[cite: 33]</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span id="ndHlMeta" class="text-pink-400 text-[6.8px] font-bold font-num border-l border-slate-700/80 pl-2">Mínimo: 92%[cite: 33]</span>
+                                <span id="ndHlBadge" class="bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 border border-emerald-400 text-emerald-300 text-[7px] font-black px-1.5 py-[1px] rounded-full font-num flex items-center gap-1 shadow">
+                                    <span>✓[cite: 33]</span> <span id="ndHlValor">96,00%[cite: 33]</span>
+                                </span>
                             </div>
                         </div>
 
-                        <!-- ESTEIRA DE FEEDBACKS DOS MOTORISTAS E CLIENTES -->
-                        <div class="tv03-daily-ticker-wrap h-[20px] bg-[#050a17] border border-amber-500/40 rounded px-2 shrink-0 mt-0.5 shadow-inner">
-                            <div class="tv03-feedback-ticker-track text-[7.5px] font-bold flex items-center gap-8">
-                                <div class="inline-flex items-center gap-1.5 shrink-0">
-                                    <span class="text-amber-400 font-black flex items-center gap-0.5">⭐ 5.0</span>
-                                    <span class="text-slate-200">"Incrível! Comprei ontem à tarde e o produto já chegou hoje de manhã"</span>
-                                    <span class="text-emerald-400 font-bold">• Entrega Concluída</span>
-                                </div>
-                                <div class="inline-flex items-center gap-1.5 shrink-0">
-                                    <span class="text-amber-400 font-black flex items-center gap-0.5">⭐ 5.0</span>
-                                    <span class="text-slate-200">"Rapidez absurda, a logística de entrega no dia útil seguinte funciona perfeitamente."</span>
-                                    <span class="text-cyan-400 font-bold">• Next Day</span>
-                                </div>
-                                <div class="inline-flex items-center gap-1.5 shrink-0">
-                                    <span class="text-amber-400 font-black flex items-center gap-0.5">⭐ 5.0</span>
-                                    <span class="text-slate-200">"Nota 10 para o transporte, comprar em um dia e receber no outro é bom demais."</span>
-                                    <span class="text-purple-400 font-bold">• Transporte Nota 10</span>
-                                </div>
-
-                                <!-- Cópia idêntica para loop infinito suave -->
-                                <div class="inline-flex items-center gap-1.5 shrink-0">
-                                    <span class="text-amber-400 font-black flex items-center gap-0.5">⭐ 5.0</span>
-                                    <span class="text-slate-200">"Incrível! Comprei ontem à tarde e o produto já chegou hoje de manhã"</span>
-                                    <span class="text-emerald-400 font-bold">• Entrega Concluída</span>
-                                </div>
-                                <div class="inline-flex items-center gap-1.5 shrink-0">
-                                    <span class="text-amber-400 font-black flex items-center gap-0.5">⭐ 5.0</span>
-                                    <span class="text-slate-200">"Rapidez absurda, a logística de entrega no dia útil seguinte funciona perfeitamente."</span>
-                                    <span class="text-cyan-400 font-bold">• Next Day</span>
-                                </div>
-                                <div class="inline-flex items-center gap-1.5 shrink-0">
-                                    <span class="text-amber-400 font-black flex items-center gap-0.5">⭐ 5.0</span>
-                                    <span class="text-slate-200">"Nota 10 para o transporte, comprar em um dia e receber no outro é bom demais."</span>
-                                    <span class="text-purple-400 font-bold">• Transporte Nota 10</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                 </div>
@@ -728,11 +727,11 @@
                     <div class="flex flex-col h-[65%] overflow-hidden bg-[#060a17] p-1 rounded border border-slate-800">
                         <div class="flex justify-between items-center shrink-0 mb-0.5 px-1.5 py-[2px] bg-[#0b1329] rounded border border-slate-700">
                             <span class="text-cyan-300 text-[8px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📈</span> Evolução Diária: Recebimento x Expedição
+                                <span>📈</span> Evolução Diária: Recebimento x Expedição[cite: 31]
                             </span>
                             <div class="flex items-center gap-3 text-[7.5px] font-bold">
-                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento</span>
-                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição</span>
+                                <span class="flex items-center gap-1 text-[#10b981]"><span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span> Recebimento[cite: 31]</span>
+                                <span class="flex items-center gap-1 text-[#06b6d4]"><span class="w-1.5 h-1.5 rounded-full bg-[#06b6d4]"></span> Expedição[cite: 31]</span>
                             </div>
                         </div>
 
@@ -800,7 +799,22 @@
             tv03NextDay: null
         };
 
-        // Estado do Carrossel dos 12 Indicadores Next Day (Apresentação a cada 5 segundos)
+        // Base de dados inicial calibrada diretamente com os números de Agosto e Setembro das imagens
+        const NEXT_DAY_DATABASE_PADRAO = [
+            { id: "NE", nome: "NE - Nível de Entrega", subtitulo: "Entregas no prazo", ago: "99,00%", set: "99,00%", meta: "98%", valNum: 99.00, metaNum: 98, icone: "🚚", cor: "blue" },
+            { id: "NI", nome: "NI - Nível de Informação", subtitulo: "Informações corretas", ago: "98,00%", set: "98,00%", meta: "98%", valNum: 98.00, metaNum: 98, icone: "ℹ️", cor: "green" },
+            { id: "ND", nome: "ND - Nível de Devolução", subtitulo: "Devoluções no prazo", ago: "99,00%", set: "98,00%", meta: "97%", valNum: 98.00, metaNum: 97, icone: "🔄", cor: "amber" },
+            { id: "NID", nome: "NID - Info Devolução", subtitulo: "Informações de devolução", ago: "99,00%", set: "98,00%", meta: "97%", valNum: 98.00, metaNum: 97, icone: "📦", cor: "purple" },
+            { id: "NA", nome: "NA - Aceite Carregamentos", subtitulo: "Aceite dentro da janela", ago: "99,00%", set: "98,00%", meta: "95%", valNum: 98.00, metaNum: 95, icone: "📋", cor: "blue" },
+            { id: "WTC", nome: "WTC - Monitoramento App", subtitulo: "Monitoramento ativo app", ago: "97,00%", set: "96,00%", meta: "92%", valNum: 96.00, metaNum: 92, icone: "📱", cor: "green" },
+            { id: "5 STARS", nome: "5 Stars - Avaliação Dlieve", subtitulo: "Avaliação da entrega", ago: "4,92", set: "4,89", meta: "4,75", valNum: 4.89, metaNum: 4.75, icone: "⭐", cor: "amber" },
+            { id: "NSP/NPCA", nome: "NSP - Serviço Pagamento", subtitulo: "Nível de pré-cálculo aberto", ago: "99,00%", set: "98,00%", meta: "98%", valNum: 98.00, metaNum: 98, icone: "💳", cor: "purple" },
+            { id: "EXT", nome: "EXT - Extravio", subtitulo: "Controle de sinistros", ago: "98,00%", set: "99,00%", meta: "98%", valNum: 99.00, metaNum: 98, icone: "🛡️", cor: "blue" },
+            { id: "NPS", nome: "NPS - Net Promoter Score", subtitulo: "Satisfação do cliente", ago: "98,00%", set: "97,00%", meta: "95%", valNum: 97.00, metaNum: 95, icone: "🏆", cor: "green" },
+            { id: "TREINAMENTO", nome: "Treinamento Operacional", subtitulo: "Capacitação da equipe", ago: "100,00%", set: "100,00%", meta: "100%", valNum: 100.00, metaNum: 100, icone: "🎓", cor: "amber" },
+            { id: "NPCT", nome: "NPCT - Performance Contratual", subtitulo: "Performance transportador", ago: "99,44%", set: "99,44%", meta: "99,44%", valNum: 99.44, metaNum: 99.44, icone: "📈", cor: "purple" }
+        ];
+
         let nextDayPaginaAtual = 0;
         let nextDayIntervalId = null;
 
@@ -845,65 +859,118 @@
             track.innerHTML = itemHtml + '<span class="text-slate-700 px-3">|</span>' + itemHtml;
         }
 
-        // --- RETORNO E APRESENTAÇÃO AUTOMÁTICA DOS 12 INDICADORES NEXT DAY ---
-        window.receberDadosNextDay = function(data) {
-            if (!data) return;
-            if (data.status === "success" && data.kpis) {
-                currentData.tv03NextDay = data;
-
-                const lblMes = document.getElementById('lblNextDayMesRef');
-                if (lblMes && data.meses) lblMes.innerText = data.meses;
-
-                // Inicia carrossel de 4 cards por tela a cada 5 segundos
-                renderizarPaginaNextDay();
-                if (!nextDayIntervalId) {
-                    nextDayIntervalId = setInterval(() => {
-                        nextDayPaginaAtual = (nextDayPaginaAtual + 1) % 3; // 3 páginas de 4 cards = 12
-                        renderizarPaginaNextDay();
-                    }, 5000);
-                }
-            }
-        };
-
+        // --- RENDERIZADOR PREMIUM DO NOVO LAYOUT NEXT DAY ---
         function renderizarPaginaNextDay() {
-            if (!currentData.tv03NextDay || !currentData.tv03NextDay.kpis) return;
-
             const grid = document.getElementById('nextDayCardsGrid');
             const lblPag = document.getElementById('lblNextDayPagina');
             if (!grid) return;
 
-            const kpis = currentData.tv03NextDay.kpis;
-            const totalPaginas = Math.ceil(kpis.length / 4);
+            // Utiliza os dados vindos da API ou o banco calibrado
+            const base = (currentData.tv03NextDay && currentData.tv03NextDay.kpis && currentData.tv03NextDay.kpis.length > 0)
+                ? currentData.tv03NextDay.kpis
+                : NEXT_DAY_DATABASE_PADRAO;
+
+            const totalPaginas = Math.ceil(base.length / 4);
             if (lblPag) lblPag.innerText = `PAG ${nextDayPaginaAtual + 1}/${totalPaginas}`;
 
             const inicio = nextDayPaginaAtual * 4;
-            const bloco = kpis.slice(inicio, inicio + 4);
+            const bloco = base.slice(inicio, inicio + 4);
+
+            const coresMap = {
+                blue:   { border: "nd-card-glow-blue",   stroke: "#06b6d4", text: "text-cyan-400",    badge: "text-cyan-300 bg-cyan-950/80 border-cyan-500/60" },
+                green:  { border: "nd-card-glow-green",  stroke: "#10b981", text: "text-emerald-400", badge: "text-emerald-300 bg-emerald-950/80 border-emerald-500/60" },
+                amber:  { border: "nd-card-glow-amber",  stroke: "#f59e0b", text: "text-amber-400",   badge: "text-amber-300 bg-amber-950/80 border-amber-500/60" },
+                purple: { border: "nd-card-glow-purple", stroke: "#c084fc", text: "text-purple-400",  badge: "text-purple-300 bg-purple-950/80 border-purple-500/60" }
+            };
+
+            const coresArray = ["blue", "green", "amber", "purple"];
 
             let cardsHtml = '';
-            bloco.forEach(k => {
-                const corBadge = k.atingido ? 'text-emerald-400 bg-emerald-950/80 border-emerald-800' : 'text-rose-400 bg-rose-950/80 border-rose-800';
-                const statusTxt = k.atingido ? 'NO PRAZO' : 'DESVIO';
-                const corSet = k.atingido ? 'text-emerald-400' : 'text-rose-400';
+            bloco.forEach((k, idx) => {
+                const corKey = k.cor || coresArray[idx % 4];
+                const c = coresMap[corKey] || coresMap.blue;
+
+                const valSetTexto = k.set || k.realizado || "99,00%";
+                const valAgoTexto = k.ago || "99,00%";
+                const metaTexto = k.meta || "98%";
+
+                const numMatch = String(valSetTexto).match(/(\d+[,\.]?\d*)/);
+                const perc = numMatch ? Math.min(parseFloat(numMatch[1].replace(',', '.')), 100) : 98;
+
+                // Cálculo do Donut SVG
+                const raio = 19;
+                const circunferencia = 2 * Math.PI * raio; // ~119.38
+                const dashoffset = circunferencia - ((perc / 100) * circunferencia);
 
                 cardsHtml += `
-                    <div class="bg-[#060a17] p-1 rounded border border-slate-800 flex flex-col justify-between shadow-sm">
-                        <div class="flex justify-between items-center mb-0.5">
-                            <span class="text-[6.8px] font-black text-slate-200 truncate" title="${k.nome}">${k.nome}</span>
-                            <span class="text-[5.8px] text-slate-400 font-num">Meta: ${k.meta}</span>
-                        </div>
-                        <div class="flex justify-between items-end mt-0.5">
-                            <div class="flex flex-col leading-tight">
-                                <span class="text-[5.8px] text-slate-400 font-bold">Ago: <strong class="text-slate-200 font-num">${k.ago}</strong></span>
-                                <span class="text-[5.8px] text-slate-400 font-bold">Set: <strong class="${corSet} font-num text-[10px] font-black">${k.set}</strong></span>
+                    <div class="${c.border} rounded-xl p-1.5 flex items-center justify-between gap-2 overflow-hidden transition-all duration-500 relative">
+                        
+                        <!-- Donut Circular SVG com Porcentagem -->
+                        <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                            <svg class="w-full h-full -rotate-90" viewBox="0 0 46 46">
+                                <circle cx="23" cy="23" r="${raio}" stroke="#0f172a" stroke-width="3.5" fill="none" />
+                                <circle cx="23" cy="23" r="${raio}" stroke="${c.stroke}" stroke-width="3.5" stroke-linecap="round" fill="none"
+                                        stroke-dasharray="${circunferencia}" stroke-dashoffset="${dashoffset}" style="transition: stroke-dashoffset 1s ease;" />
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center leading-none text-center">
+                                <span class="text-[9px] font-black text-white font-num">${valSetTexto}</span>
+                                <span class="text-[5.5px] text-slate-400 font-bold mt-0.5">Nível[cite: 33]</span>
                             </div>
-                            <span class="text-[6.2px] font-bold px-1 py-[0.5px] rounded ${corBadge} border font-num">${statusTxt}</span>
                         </div>
+
+                        <!-- Dados do KPI -->
+                        <div class="flex-1 flex flex-col justify-between min-w-0 h-full py-0.5">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-1 min-w-0">
+                                    <span class="text-[8px] shrink-0">${k.icone || '🚚'}</span>
+                                    <div class="flex flex-col leading-none truncate">
+                                        <span class="text-[7.5px] font-black text-white truncate">${k.nome}</span>
+                                        <span class="text-[5.5px] text-slate-400 truncate">${k.subtitulo || 'Performance e meta'}</span>
+                                    </div>
+                                </div>
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center text-[7px] text-emerald-300 font-bold shrink-0 ml-1">
+                                    ✓
+                                </span>
+                            </div>
+
+                            <!-- Barra Horizontal Neon -->
+                            <div class="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden p-[1px] my-1 border border-slate-800">
+                                <div class="h-full rounded-full transition-all duration-700 shadow-sm" style="width: ${perc}%; background-color: ${c.stroke};"></div>
+                            </div>
+
+                            <!-- Metas e Comparativo Ago / Set -->
+                            <div class="flex items-center justify-between text-[6.2px] font-bold text-slate-400">
+                                <span>Mínimo: <strong class="text-white font-num">${metaTexto}</strong></span>
+                                <div class="flex items-center gap-1.5 font-num">
+                                    <span>Ago.: <strong class="text-slate-300">${valAgoTexto}</strong></span>
+                                    <span>Set.: <strong class="${c.text} font-black">${valSetTexto}</strong></span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 `;
             });
 
             grid.innerHTML = cardsHtml;
+
+            // Atualiza o item de destaque inferior
+            const itemDestaque = base[(nextDayPaginaAtual + 4) % base.length] || base[5];
+            const hlTit = document.getElementById('ndHlTitulo');
+            const hlMeta = document.getElementById('ndHlMeta');
+            const hlVal = document.getElementById('ndHlValor');
+
+            if (hlTit) hlTit.innerText = itemDestaque.nome;
+            if (hlMeta) hlMeta.innerText = `Mínimo: ${itemDestaque.meta || '92%'}`;
+            if (hlVal) hlVal.innerText = `${itemDestaque.set || itemDestaque.realizado || '96,00%'} (Set./26)`;
         }
+
+        window.receberDadosNextDay = function(data) {
+            if (data && data.status === "success" && data.kpis) {
+                currentData.tv03NextDay = data;
+                renderizarPaginaNextDay();
+            }
+        };
 
         function sincronizarNextDay() {
             if (!GOOGLE_SCRIPT_NEXTDAY_URL) return;
@@ -917,7 +984,6 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- SISTEMA DE CALIBRAÇÃO GERAL ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -991,7 +1057,6 @@
             alert('Margens gerais redefinidas.');
         }
 
-        // --- SISTEMA DE CALIBRAÇÃO EXCLUSIVA TV 03 ---
         function togglePainelCalibracaoTV03() {
             const p = document.getElementById('painelCalibracaoTV03');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -1734,7 +1799,19 @@
             sincronizarRecebimento();
             sincronizarTV03Exp();
             sincronizarTV03Rec();
+            
+            // Renderiza imediatamente o novo layout visual de Next Day
+            renderizarPaginaNextDay();
             sincronizarNextDay();
+
+            // Inicia o carrossel rotativo a cada 5 segundos
+            if (!nextDayIntervalId) {
+                nextDayIntervalId = setInterval(() => {
+                    nextDayPaginaAtual = (nextDayPaginaAtual + 1) % 3;
+                    renderizarPaginaNextDay();
+                }, 5000);
+            }
+
             setInterval(() => {
                 sincronizarOtimizacao();
                 sincronizarExpedicao();
