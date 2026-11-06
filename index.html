@@ -243,6 +243,11 @@
             border: 1px solid rgba(168, 85, 247, 0.8);
             box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
         }
+        .nd-card-glow-rose {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.2) 0%, rgba(159, 18, 57, 0.08) 100%);
+            border: 1px solid rgba(244, 63, 94, 0.85);
+            box-shadow: 0 0 14px rgba(244, 63, 94, 0.3);
+        }
 
         #painelCalibracao {
             position: fixed;
@@ -827,7 +832,7 @@
             </div>
         </div>
 
-        <!-- ==================== TV 04: QUALIDADE OPERACIONAL (LAYOUT IDÊNTICO AO MODELO) ==================== -->
+        <!-- ==================== TV 04: QUALIDADE OPERACIONAL (COM 5 CARDS SUPERIORES) ==================== -->
         <div id="tv04CardRoot" class="tv-card flex flex-col overflow-hidden p-2 gap-1.5 bg-[#02050e] border border-purple-500/40 shadow-2xl">
             
             <!-- 1. Cabeçalho Widescreen Idêntico ao Modelo -->
@@ -849,106 +854,118 @@
                 </div>
             </div>
 
-            <!-- 2. 4 Cards Superiores com Espaçamento Amplo (Sem Cortes) -->
-            <div class="grid grid-cols-4 gap-2 shrink-0">
+            <!-- 2. 5 Cards Superiores (Incluindo o Novo Card do IQP) -->
+            <div class="grid grid-cols-5 gap-1.5 shrink-0">
                 <!-- Card 1: Total Reoperado (Azul) -->
-                <div class="nd-card-glow-blue rounded-xl p-2 flex items-center gap-2.5">
-                    <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                <div class="nd-card-glow-blue rounded-xl p-1.5 flex items-center gap-2">
+                    <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                         <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
                             <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
                             <circle cx="18" cy="18" r="14" stroke="#06b6d4" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="15" />
                         </svg>
-                        <span id="kpiQualidadeTotalGeral" class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white font-num">2.127</span>
+                        <span id="kpiQualidadeTotalGeral" class="absolute inset-0 flex items-center justify-center text-[9px] font-black text-white font-num">2.127</span>
                     </div>
                     <div class="flex flex-col leading-tight min-w-0">
-                        <span class="text-[8px] font-black text-cyan-200 uppercase leading-none">TOTAL<br>REOPERADO</span>
-                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-1 overflow-hidden border border-slate-800">
+                        <span class="text-[7px] font-black text-cyan-200 uppercase leading-none">TOTAL<br>REOPERADO</span>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-0.5 overflow-hidden border border-slate-800">
                             <div class="h-full bg-cyan-400 rounded-full w-full"></div>
                         </div>
-                        <span class="text-[6.5px] text-slate-300 font-bold">Peças | Jan-Out/26</span>
+                        <span class="text-[6px] text-slate-300 font-bold truncate">Jan-Out/26</span>
                     </div>
                 </div>
 
                 <!-- Card 2: Não Conformidades (Âmbar) -->
-                <div class="nd-card-glow-amber rounded-xl p-2 flex items-center gap-2.5">
-                    <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                <div class="nd-card-glow-amber rounded-xl p-1.5 flex items-center gap-2">
+                    <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                         <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
                             <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
                             <circle cx="18" cy="18" r="14" stroke="#f59e0b" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="70" />
                         </svg>
-                        <span id="kpiQualidadeTotalNC" class="absolute inset-0 flex items-center justify-center text-[11px] font-black text-white font-num">4</span>
+                        <span id="kpiQualidadeTotalNC" class="absolute inset-0 flex items-center justify-center text-[10px] font-black text-white font-num">4</span>
                     </div>
                     <div class="flex flex-col leading-tight min-w-0">
-                        <span class="text-[8px] font-black text-amber-200 uppercase leading-none">NÃO<br>CONFORMIDADES</span>
-                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-1 overflow-hidden border border-slate-800">
+                        <span class="text-[7px] font-black text-amber-200 uppercase leading-none">NÃO<br>CONFORMIDADES</span>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-0.5 overflow-hidden border border-slate-800">
                             <div class="h-full bg-amber-400 rounded-full w-2/5"></div>
                         </div>
-                        <span class="text-[6.5px] text-slate-300 font-bold">Ocorrências no período</span>
+                        <span class="text-[6px] text-slate-300 font-bold truncate">No período</span>
                     </div>
                 </div>
 
                 <!-- Card 3: Erro Operacional (Verde) -->
-                <div class="nd-card-glow-green rounded-xl p-2 flex items-center gap-2.5">
-                    <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                <div class="nd-card-glow-green rounded-xl p-1.5 flex items-center gap-2">
+                    <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                         <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
                             <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
                             <circle cx="18" cy="18" r="14" stroke="#10b981" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="5" />
                         </svg>
-                        <span id="kpiQualidadeErroGeral" class="absolute inset-0 flex items-center justify-center text-[9.5px] font-black text-white font-num">0,19%</span>
+                        <span id="kpiQualidadeErroGeral" class="absolute inset-0 flex items-center justify-center text-[8.5px] font-black text-white font-num">0,19%</span>
                     </div>
                     <div class="flex flex-col leading-tight min-w-0">
-                        <span class="text-[8px] font-black text-emerald-200 uppercase leading-none">ERRO<br>OPERACIONAL</span>
-                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-1 overflow-hidden border border-slate-800">
+                        <span class="text-[7px] font-black text-emerald-200 uppercase leading-none">ERRO<br>OPERACIONAL</span>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-0.5 overflow-hidden border border-slate-800">
                             <div class="h-full bg-emerald-400 rounded-full w-full"></div>
                         </div>
-                        <span class="text-[6.5px] text-slate-300 font-bold">Acumulado Jan-Out/26</span>
+                        <span class="text-[6px] text-slate-300 font-bold truncate">Acumulado</span>
                     </div>
                 </div>
 
                 <!-- Card 4: Resultado Outubro (Roxo) -->
-                <div class="nd-card-glow-purple rounded-xl p-2 flex items-center gap-2.5">
-                    <div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+                <div class="nd-card-glow-purple rounded-xl p-1.5 flex items-center gap-2">
+                    <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                         <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
                             <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
                             <circle cx="18" cy="18" r="14" stroke="#a855f7" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="10" />
                         </svg>
-                        <span id="kpiQualidadeMesPecas" class="absolute inset-0 flex items-center justify-center text-[10.5px] font-black text-white font-num">209</span>
+                        <span id="kpiQualidadeMesPecas" class="absolute inset-0 flex items-center justify-center text-[9.5px] font-black text-white font-num">209</span>
                     </div>
                     <div class="flex flex-col leading-tight min-w-0">
-                        <span id="lblQualidadeMesNome" class="text-[8px] font-black text-purple-200 uppercase leading-none">RESULTADO<br>OUTUBRO</span>
-                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-1 overflow-hidden border border-slate-800">
+                        <span id="lblQualidadeMesNome" class="text-[7px] font-black text-purple-200 uppercase leading-none">RESULTADO<br>OUTUBRO</span>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-0.5 overflow-hidden border border-slate-800">
                             <div class="h-full bg-purple-400 rounded-full w-full"></div>
                         </div>
-                        <span id="lblQualidadeMesDetalhe" class="text-[6.5px] text-slate-300 font-bold">Peças reoperadas | 0 não conf.</span>
+                        <span id="lblQualidadeMesDetalhe" class="text-[6px] text-slate-300 font-bold truncate">0 não conf.</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 (NOVO): IQP - Índice de Qualidade do Produto (Rosa / Néon) -->
+                <div class="nd-card-glow-rose rounded-xl p-1.5 flex items-center gap-2">
+                    <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
+                        <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                            <circle cx="18" cy="18" r="14" stroke="#0f172a" stroke-width="3.5" fill="none" />
+                            <circle cx="18" cy="18" r="14" stroke="#f43f5e" stroke-width="3.5" stroke-linecap="round" fill="none" stroke-dasharray="88" stroke-dashoffset="6" />
+                        </svg>
+                        <span id="kpiQualidadeIqpNota" class="absolute inset-0 flex items-center justify-center text-[8.5px] font-black text-white font-num">96,97</span>
+                    </div>
+                    <div class="flex flex-col leading-tight min-w-0">
+                        <span class="text-[7px] font-black text-rose-200 uppercase leading-none">NOTA<br>IQP</span>
+                        <div class="w-full bg-slate-900 rounded-full h-1.5 my-0.5 overflow-hidden border border-slate-800">
+                            <div class="h-full bg-rose-500 rounded-full w-full"></div>
+                        </div>
+                        <span id="lblQualidadeIqpMeta" class="text-[6px] text-rose-300 font-bold truncate">Meta: 96% | out./26</span>
                     </div>
                 </div>
             </div>
 
             <!-- 3. Meio: Gráfico de Barras Widescreen (Esq) + Tabela Qualidade (Dir) -->
             <div class="grid grid-cols-12 gap-2 flex-1 overflow-hidden min-h-0">
-                
-                <!-- Gráfico de Evolução Mensal com Escala Y e Linhas de Grade -->
                 <div class="col-span-8 flex flex-col justify-between overflow-hidden bg-[#050916] p-2 rounded-xl border border-slate-800">
                     <div class="flex items-center gap-2 mb-1 px-1">
                         <span class="text-purple-400 text-[10px]">📊</span>
                         <span class="text-white text-[9px] font-black uppercase tracking-wider">EVOLUÇÃO MENSAL – PEÇAS REOPERADAS</span>
                     </div>
                     <div id="qualidadeGraficoBarrasContainer" class="flex-1 w-full bg-[#02050e] rounded-lg border border-slate-800/80 p-1 flex items-center justify-center overflow-hidden">
-                        <!-- Gráfico SVG idêntico ao modelo com gridlines -->
                     </div>
                 </div>
 
-                <!-- Tabela "Qualidade Operacional" com Colunas Duplas de Meses -->
                 <div class="col-span-4 flex flex-col justify-between overflow-hidden bg-[#050916] p-2 rounded-xl border border-slate-800">
                     <div class="flex items-center gap-2 mb-1 px-1">
                         <span class="text-purple-400 text-[10px]">📋</span>
                         <span class="text-white text-[9px] font-black uppercase tracking-wider">QUALIDADE OPERACIONAL</span>
                     </div>
                     <div id="qualidadeTabelaNcContainer" class="flex-1 flex flex-col justify-around bg-[#02050e] rounded-lg border border-slate-800/80 p-2 font-num">
-                        <!-- Tabela Mês / Não Conformidades -->
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -996,10 +1013,15 @@
                 { mes: "agosto/2026", totalPecas: "249", naoConforme: "0", erroPerc: "0,00%" },
                 { mes: "setembro/2026", totalPecas: "266", naoConforme: "0", erroPerc: "0,00%" },
                 { mes: "outubro/2026", totalPecas: "209", naoConforme: "0", erroPerc: "0,00%" }
-            ]
+            ],
+            iqp: {
+                mes: "out./26",
+                nota: "96,97",
+                meta: "96%"
+            }
         };
 
-        // --- RENDERIZAÇÃO DA QUALIDADE OPERACIONAL (IDÊNTICO AO MODELO) ---
+        // --- RENDERIZAÇÃO DA QUALIDADE OPERACIONAL COM O 5º CARD DO IQP ---
         function renderizarQualidadeOperacional() {
             const data = currentData.tv04Qualidade || QUALIDADE_DATABASE_PADRAO;
             const hist = data.historico || QUALIDADE_DATABASE_PADRAO.historico;
@@ -1021,13 +1043,19 @@
 
             const nomeMesLimpo = mesAtual.mes.split('/')[0].toUpperCase();
             document.getElementById('lblQualidadeMesNome').innerHTML = `RESULTADO<br>${nomeMesLimpo}`;
-            document.getElementById('lblQualidadeMesDetalhe').innerText = `Peças reoperadas | ${mesAtual.naoConforme} não conformes`;
+            document.getElementById('lblQualidadeMesDetalhe').innerText = `${mesAtual.naoConforme} não conf.`;
+
+            // Dados do IQP (5º Card)
+            const iqpObj = data.iqp || QUALIDADE_DATABASE_PADRAO.iqp;
+            const elIqpNota = document.getElementById('kpiQualidadeIqpNota');
+            const elIqpMeta = document.getElementById('lblQualidadeIqpMeta');
+            if (elIqpNota && iqpObj) elIqpNota.innerText = iqpObj.nota || "96,97";
+            if (elIqpMeta && iqpObj) elIqpMeta.innerText = `Meta: ${iqpObj.meta || '96%'} | ${iqpObj.mes || 'out./26'}`;
 
             renderizarBarrasQualidade(hist);
             renderizarTabelaNC(hist);
         }
 
-        // Gráfico com Escala Y (0 a 300) e Linhas de Grade Horizontais
         function renderizarBarrasQualidade(hist) {
             const container = document.getElementById('qualidadeGraficoBarrasContainer');
             if (!container) return;
@@ -1044,7 +1072,6 @@
             const plotW = W - padL - padR;
             const plotH = H - padT - padB;
 
-            // Linhas de Grade Horizontais e Rótulos do Eixo Y
             let gridLinesSvg = '';
             niveisY.forEach(nivel => {
                 const y = padT + plotH - ((nivel / maxEscalaY) * plotH);
@@ -1108,7 +1135,6 @@
             `;
         }
 
-        // Tabela Exata do Modelo (Mês | Não Conformidades em duas colunas)
         function renderizarTabelaNC(hist) {
             const container = document.getElementById('qualidadeTabelaNcContainer');
             if (!container) return;
@@ -1423,7 +1449,7 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- CALIBRAÇÃO GERAL E TV 03 ---
+        // --- SISTEMA DE CALIBRAÇÃO GERAL E TV 03 ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -2243,7 +2269,6 @@
             sincronizarNextDay();
             sincronizarQualidade();
 
-            // Renderização inicial idêntica ao modelo
             renderizarPaginaNextDay();
             renderizarQualidadeOperacional();
 
