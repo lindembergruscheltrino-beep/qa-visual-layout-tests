@@ -212,6 +212,27 @@
             animation-play-state: paused;
         }
 
+        /* Estilos dos tickers da TV 04 (Qualidade e SESMT) */
+        .tv04-header-ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15px, black calc(100% - 15px), transparent);
+        }
+
+        .tv04-header-ticker-track {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: tickerSlide 26s linear infinite;
+        }
+
+        .tv04-header-ticker-track:hover {
+            animation-play-state: paused;
+        }
+
         @keyframes tickerSlide {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -837,7 +858,7 @@
             </div>
         </div>
 
-        <!-- ==================== TV 04: CARROSSEL ROTATIVO (15 SEGUNDOS) ==================== -->
+        <!-- ==================== TV 04: CARROSSEL ROTATIVO COM FITAS DESLIZANTES ==================== -->
         <div id="tv04CardRoot" class="tv-card flex flex-col overflow-hidden relative bg-[#02050e] border border-purple-500/40 shadow-2xl">
             
             <!-- CONTROLE SUPERIOR DE SLIDES DA TV 04 -->
@@ -850,14 +871,22 @@
                 <button onclick="togglePainelCalibracaoTV04()" class="text-slate-400 hover:text-white text-[8px] font-bold ml-1 cursor-pointer">⚙️</button>
             </div>
 
-            <!-- SLIDE 1: QUALIDADE OPERACIONAL (WIDESCREEN) -->
+            <!-- SLIDE 1: QUALIDADE OPERACIONAL COM FITA DESLIZANTE -->
             <div id="slideTv04Qualidade" class="flex flex-col h-full w-full p-2 gap-1.5 transition-opacity duration-700">
-                <div class="flex items-center justify-between shrink-0 px-1.5 py-1 bg-[#070b1b] rounded-lg border border-purple-500/30">
-                    <div class="flex flex-col leading-tight">
+                <div class="flex items-center justify-between shrink-0 px-2 py-1 bg-[#070b1b] rounded-lg border border-purple-500/30 gap-3 overflow-hidden">
+                    <div class="flex flex-col leading-tight shrink-0">
                         <span class="text-white text-[12px] font-black uppercase tracking-wider">QUALIDADE OPERACIONAL</span>
-                        <span class="text-slate-300 text-[7.8px] font-bold">Acompanhamento de peças reoperadas e erros operacionais</span>
+                        <span class="text-slate-300 text-[7.5px] font-bold">Acompanhamento de peças reoperadas e erros operacionais</span>
                     </div>
-                    <span id="tv04QualidadeStatus" class="text-[8px] text-slate-300 font-mono font-bold mr-28">ONLINE</span>
+
+                    <!-- FITA/BARRA DESLIZANTE DA QUALIDADE (Área Vermelha Solicitada) -->
+                    <div class="tv04-header-ticker-wrap flex-1 h-[22px] bg-[#020611] border border-purple-500/40 rounded-lg px-2">
+                        <div id="tv04QualidadeTickerTrack" class="tv04-header-ticker-track text-[8.5px] font-bold font-num flex items-center gap-8 text-cyan-300">
+                            <span>Carregando resumo de peças da qualidade...</span>
+                        </div>
+                    </div>
+
+                    <span id="tv04QualidadeStatus" class="text-[8px] text-slate-300 font-mono font-bold shrink-0 mr-28">ONLINE</span>
                 </div>
 
                 <div class="grid grid-cols-5 gap-1.5 shrink-0">
@@ -966,24 +995,31 @@
                 </div>
             </div>
 
-            <!-- SLIDE 2: SESMT 2026 (REVISADO E OTIMIZADO) -->
+            <!-- SLIDE 2: SESMT 2026 COM FITA AUTOMÁTICA DE DIAS SEM ACIDENTES -->
             <div id="slideTv04Sesmt" class="flex flex-col h-full w-full p-2 gap-1.5 transition-opacity duration-700 hidden">
-                <!-- Cabeçalho SESMT 2026 (Sem "Whirlpool" e com subtítulo direto) -->
-                <div class="flex items-center justify-between shrink-0 px-2 py-1 bg-[#060b1e] rounded-lg border border-cyan-500/30">
-                    <div class="flex flex-col leading-tight">
+                <div class="flex items-center justify-between shrink-0 px-2 py-1 bg-[#060b1e] rounded-lg border border-cyan-500/30 gap-3 overflow-hidden">
+                    <div class="flex flex-col leading-tight shrink-0">
                         <h3 class="text-white text-[13px] font-black tracking-wide flex items-center gap-2">
                             <span>SESMT 2026</span>
-                            <span class="text-[7.8px] font-bold text-slate-200 bg-slate-900 px-2 py-0.5 rounded border border-slate-700">Período: Jan – Dez/2026</span>
+                            <span class="text-[7.8px] font-bold text-slate-200 bg-slate-900 px-2 py-0.5 rounded border border-slate-700">Jan – Dez/2026</span>
                         </h3>
                         <span class="text-slate-200 text-[8px] font-bold">Gestão de Segurança, Saúde e Prevenção de Riscos</span>
                     </div>
-                    <div class="flex items-center gap-2 mr-28 text-[7.5px] text-slate-200 font-num font-bold">
+
+                    <!-- FITA/BARRA DESLIZANTE DO SESMT COM INCREMENTO DIÁRIO AUTOMÁTICO -->
+                    <div class="tv04-header-ticker-wrap flex-1 h-[22px] bg-[#020611] border border-emerald-500/50 rounded-lg px-2">
+                        <div id="tv04SesmtTickerTrack" class="tv04-header-ticker-track text-[9px] font-bold font-num flex items-center gap-8 text-emerald-300">
+                            <!-- Calculado e renderizado via JS -->
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 shrink-0 mr-28 text-[7.5px] text-slate-200 font-num font-bold">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span id="lblSesmtSyncTime">ONLINE</span>
                     </div>
                 </div>
 
-                <!-- 6 Cards Superiores Neon do SESMT com Fontes Ampliadas -->
+                <!-- 6 Cards Superiores Neon do SESMT -->
                 <div class="grid grid-cols-6 gap-1.5 shrink-0">
                     <div class="nd-card-glow-blue rounded-xl p-1.5 flex flex-col justify-between">
                         <div class="flex items-center justify-between">
@@ -1040,7 +1076,7 @@
                     </div>
                 </div>
 
-                <!-- Linha Central: Evolução Mensal (Sem ícone e sem linhas) + Distribuição por Categoria -->
+                <!-- Linha Central: Evolução Mensal + Distribuição por Categoria -->
                 <div class="grid grid-cols-12 gap-1.5 h-[42%] min-h-0">
                     <div class="col-span-8 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <div class="flex items-center justify-between px-1.5">
@@ -1096,7 +1132,6 @@
 
                 <!-- Linha Inferior: Gestão dos Planos de Ação, Plano de ação e Principais Insights -->
                 <div class="grid grid-cols-12 gap-1.5 flex-1 min-h-0">
-                    <!-- Bloco 1: Gestão dos Planos de Ação (Sem 📋) -->
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5">
                             Gestão dos Planos de Ação
@@ -1121,7 +1156,6 @@
                         </div>
                     </div>
 
-                    <!-- Bloco 2: Plano de ação (Sem 📊) -->
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5">
                             Plano de ação
@@ -1130,7 +1164,6 @@
                         </div>
                     </div>
 
-                    <!-- Bloco 3: Principais Insights -->
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5">
                             Principais Insights
@@ -1181,7 +1214,6 @@
 
         // --- CONTROLE DO CARROSSEL DA TV 04 (15 SEGUNDOS) ---
         let tv04SlideAtual = 1;
-        const TV04_TOTAL_SLIDES = 2; // Passará a 3 com a Black Friday
 
         function alternarSlideTV04() {
             const slideQualidade = document.getElementById('slideTv04Qualidade');
@@ -1214,6 +1246,62 @@
                 return "100%";
             }
             return limpo;
+        }
+
+        // --- ATUALIZAÇÃO DA FITA/BARRA DA QUALIDADE ---
+        function atualizarTickerQualidade(hist) {
+            const track = document.getElementById('tv04QualidadeTickerTrack');
+            if (!track || !hist || hist.length === 0) return;
+
+            let itensHtml = '';
+            hist.forEach(h => {
+                const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
+                const pecas = h.totalPecas || '0';
+                const nc = h.naoConforme || '0';
+                const corNc = parseInt(nc, 10) > 0 ? 'text-amber-400' : 'text-emerald-400';
+
+                itensHtml += `
+                    <div class="inline-flex items-center gap-1.5 shrink-0">
+                        <span class="text-white font-black">${mesAbrev}:</span>
+                        <span class="text-cyan-300 font-num font-black">${pecas} pc</span>
+                        <span class="text-slate-500">•</span>
+                        <span class="${corNc} font-num font-bold">(${nc} NC)</span>
+                    </div>
+                `;
+            });
+
+            const bloco = `<div class="inline-flex items-center gap-8 px-4">${itensHtml}</div>`;
+            track.innerHTML = bloco + bloco;
+        }
+
+        // --- ATUALIZAÇÃO DA FITA DO SESMT COM INCREMENTO AUTOMÁTICO DIÁRIO ---
+        function atualizarTickerSesmtAutomatico() {
+            const track = document.getElementById('tv04SesmtTickerTrack');
+            if (!track) return;
+
+            // Data Base: 06 de Novembro de 2026 com 1.908 dias
+            const dataBase = new Date(2026, 10, 6); // Mês 10 = Novembro
+            const hoje = new Date();
+            
+            // Zera horas para contar estritamente os dias de calendário
+            const msPorDia = 1000 * 60 * 60 * 24;
+            const diffDias = Math.floor((new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()) - dataBase) / msPorDia);
+            const diasDecorridos = Math.max(diffDias, 0);
+
+            const diasTotais = 1908 + diasDecorridos;
+            const diasFormatados = diasTotais.toLocaleString('pt-BR');
+
+            const mensagemHtml = `
+                <div class="inline-flex items-center gap-2 shrink-0">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <strong class="text-emerald-300 font-black font-num text-[9.5px]">${diasFormatados} Dias Sem Acidente</strong>
+                    <span class="text-slate-500 font-black">•</span>
+                    <span class="text-slate-100 font-medium">A segurança é o fio invisível que nos conecta a quem mais amamos.</span>
+                </div>
+            `;
+
+            const bloco = `<div class="inline-flex items-center gap-10 px-4">${mensagemHtml}</div>`;
+            track.innerHTML = bloco + bloco;
         }
 
         // --- QUALIDADE OPERACIONAL ---
@@ -1268,6 +1356,7 @@
 
             renderizarBarrasQualidade(hist);
             renderizarTabelaNC(hist);
+            atualizarTickerQualidade(hist);
         }
 
         function renderizarBarrasQualidade(hist) {
@@ -1483,9 +1572,9 @@
 
             renderizarGraficoEvolucaoSesmt(data.mesesOcorrencias || SESMT_DATABASE_PADRAO.mesesOcorrencias);
             renderizarGraficoPlanosSesmt(data.planosAcao || SESMT_DATABASE_PADRAO.planosAcao);
+            atualizarTickerSesmtAutomatico();
         }
 
-        // Gráfico SEM linhas de grade e com fontes perfeitamente legíveis
         function renderizarGraficoEvolucaoSesmt(meses) {
             const container = document.getElementById('sesmtGraficoEvolucaoContainer');
             if (!container) return;
@@ -1510,7 +1599,6 @@
             meses.forEach((m, idx) => {
                 const centerX = padL + (idx * stepX) + (stepX / 2);
                 
-                // Plota Atos (Roxo) e Condições (Laranja)
                 if (m.atos > 0) {
                     const hAtos = (m.atos / maxEscalaY) * plotH;
                     const yAtos = padT + plotH - hAtos;
@@ -1542,7 +1630,6 @@
             `;
         }
 
-        // Gráfico de Barras dos Planos de Ação
         function renderizarGraficoPlanosSesmt(planos) {
             const container = document.getElementById('sesmtGraficoPlanosContainer');
             if (!container) return;
