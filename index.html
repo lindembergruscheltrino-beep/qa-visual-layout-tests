@@ -212,7 +212,6 @@
             animation-play-state: paused;
         }
 
-        /* Estilos dos tickers da TV 04 (Qualidade e SESMT) */
         .tv04-header-ticker-wrap {
             overflow: hidden;
             white-space: nowrap;
@@ -858,15 +857,16 @@
             </div>
         </div>
 
-        <!-- ==================== TV 04: CARROSSEL ROTATIVO COM FITAS DESLIZANTES ==================== -->
+        <!-- ==================== TV 04: CARROSSEL ROTATIVO ENTRE 3 TELAS (15 SEGUNDOS) ==================== -->
         <div id="tv04CardRoot" class="tv-card flex flex-col overflow-hidden relative bg-[#02050e] border border-purple-500/40 shadow-2xl">
             
-            <!-- CONTROLE SUPERIOR DE SLIDES DA TV 04 -->
+            <!-- CONTROLE SUPERIOR DE SLIDES DA TV 04 (3 TELAS) -->
             <div class="absolute top-1.5 right-2 z-20 flex items-center gap-2 bg-slate-950/80 border border-slate-800 px-2.5 py-0.5 rounded-full backdrop-blur-md">
-                <span id="lblTv04SlideAtual" class="text-[7.5px] text-purple-300 font-black font-num uppercase tracking-wider">TELA 1/2: QUALIDADE</span>
+                <span id="lblTv04SlideAtual" class="text-[7.5px] text-purple-300 font-black font-num uppercase tracking-wider">TELA 1/3: QUALIDADE</span>
                 <div class="flex items-center gap-1.5">
                     <span id="dotSlide1" class="w-2 h-2 rounded-full bg-purple-500 transition-all"></span>
                     <span id="dotSlide2" class="w-1.5 h-1.5 rounded-full bg-slate-700 transition-all"></span>
+                    <span id="dotSlide3" class="w-1.5 h-1.5 rounded-full bg-slate-700 transition-all"></span>
                 </div>
                 <button onclick="togglePainelCalibracaoTV04()" class="text-slate-400 hover:text-white text-[8px] font-bold ml-1 cursor-pointer">⚙️</button>
             </div>
@@ -879,14 +879,13 @@
                         <span class="text-slate-300 text-[7.5px] font-bold">Acompanhamento de peças reoperadas e erros operacionais</span>
                     </div>
 
-                    <!-- FITA/BARRA DESLIZANTE DA QUALIDADE (Área Vermelha Solicitada) -->
                     <div class="tv04-header-ticker-wrap flex-1 h-[22px] bg-[#020611] border border-purple-500/40 rounded-lg px-2">
                         <div id="tv04QualidadeTickerTrack" class="tv04-header-ticker-track text-[8.5px] font-bold font-num flex items-center gap-8 text-cyan-300">
                             <span>Carregando resumo de peças da qualidade...</span>
                         </div>
                     </div>
 
-                    <span id="tv04QualidadeStatus" class="text-[8px] text-slate-300 font-mono font-bold shrink-0 mr-28">ONLINE</span>
+                    <span id="tv04QualidadeStatus" class="text-[8px] text-slate-300 font-mono font-bold shrink-0 mr-32">ONLINE</span>
                 </div>
 
                 <div class="grid grid-cols-5 gap-1.5 shrink-0">
@@ -1006,20 +1005,17 @@
                         <span class="text-slate-200 text-[8px] font-bold">Gestão de Segurança, Saúde e Prevenção de Riscos</span>
                     </div>
 
-                    <!-- FITA/BARRA DESLIZANTE DO SESMT COM INCREMENTO DIÁRIO AUTOMÁTICO -->
                     <div class="tv04-header-ticker-wrap flex-1 h-[22px] bg-[#020611] border border-emerald-500/50 rounded-lg px-2">
                         <div id="tv04SesmtTickerTrack" class="tv04-header-ticker-track text-[9px] font-bold font-num flex items-center gap-8 text-emerald-300">
-                            <!-- Calculado e renderizado via JS -->
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-2 shrink-0 mr-28 text-[7.5px] text-slate-200 font-num font-bold">
+                    <div class="flex items-center gap-2 shrink-0 mr-32 text-[7.5px] text-slate-200 font-num font-bold">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span id="lblSesmtSyncTime">ONLINE</span>
                     </div>
                 </div>
 
-                <!-- 6 Cards Superiores Neon do SESMT -->
                 <div class="grid grid-cols-6 gap-1.5 shrink-0">
                     <div class="nd-card-glow-blue rounded-xl p-1.5 flex flex-col justify-between">
                         <div class="flex items-center justify-between">
@@ -1076,7 +1072,6 @@
                     </div>
                 </div>
 
-                <!-- Linha Central: Evolução Mensal + Distribuição por Categoria -->
                 <div class="grid grid-cols-12 gap-1.5 h-[42%] min-h-0">
                     <div class="col-span-8 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <div class="flex items-center justify-between px-1.5">
@@ -1130,7 +1125,6 @@
                     </div>
                 </div>
 
-                <!-- Linha Inferior: Gestão dos Planos de Ação, Plano de ação e Principais Insights -->
                 <div class="grid grid-cols-12 gap-1.5 flex-1 min-h-0">
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5">
@@ -1186,6 +1180,227 @@
                 </div>
             </div>
 
+            <!-- SLIDE 3: BLACK FRIDAY 2026 (IDÊNTICO AO MODELO ENVIADO) -->
+            <div id="slideTv04BlackFriday" class="flex flex-col h-full w-full p-2 gap-1.5 transition-opacity duration-700 hidden">
+                <!-- Cabeçalho Black Friday 2026 -->
+                <div class="flex items-center justify-between shrink-0 px-2 py-1 bg-[#050915] rounded-lg border border-cyan-500/30">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-cyan-600/20 border border-cyan-400 flex items-center justify-center text-lg shadow-sm">
+                            🛒
+                        </div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-white text-[14px] font-black tracking-wide">Black Friday 2026</span>
+                            <span class="text-slate-300 text-[7.5px] font-bold">Meta de Expedição | Acompanhe o avanço da nossa campanha</span>
+                        </div>
+                    </div>
+
+                    <!-- Badge Central Black Friday -->
+                    <div class="bg-gradient-to-r from-slate-900 to-black border border-amber-500/70 px-3 py-1 rounded-md shadow-md flex items-center gap-1.5">
+                        <span class="text-[9.5px] font-black text-amber-400 tracking-wider">BLACK FRIDAY</span>
+                    </div>
+
+                    <!-- Período e Status -->
+                    <div class="flex items-center gap-4 mr-32">
+                        <div class="flex flex-col items-end leading-tight">
+                            <span class="text-[6.8px] text-slate-400 font-bold uppercase">Período da Campanha</span>
+                            <span class="text-[8px] text-cyan-300 font-black font-num">🗓️ 23/11 a 05/12/2026</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 text-[7px] text-slate-300 font-num font-bold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                            <span>CAMPANHA ATIVA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4 Cards Superiores da Black Friday -->
+                <div class="grid grid-cols-4 gap-2 shrink-0">
+                    <!-- Meta Total (Azul) -->
+                    <div class="nd-card-glow-blue rounded-xl p-2 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-600/30 border border-cyan-400 flex items-center justify-center text-lg shrink-0">
+                            🎯
+                        </div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-[7.5px] text-slate-300 font-bold uppercase">Meta</span>
+                            <span id="bfKpiMeta" class="text-xl font-black text-white font-num">32.436</span>
+                            <span class="text-[6.5px] text-cyan-300 font-bold">peças</span>
+                        </div>
+                    </div>
+
+                    <!-- Expedido Atual (Verde) -->
+                    <div class="nd-card-glow-green rounded-xl p-2 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600/30 border border-emerald-400 flex items-center justify-center text-lg shrink-0">
+                            📦
+                        </div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-[7.5px] text-slate-300 font-bold uppercase">Expedido (Atual)</span>
+                            <span id="bfKpiExpedido" class="text-xl font-black text-emerald-300 font-num">4.705</span>
+                            <span class="text-[6.5px] text-emerald-400 font-bold">peças</span>
+                        </div>
+                    </div>
+
+                    <!-- Percentual Atingido (Roxo/Rosa) -->
+                    <div class="nd-card-glow-purple rounded-xl p-2 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-600/30 border border-purple-400 flex items-center justify-center text-lg shrink-0">
+                            📊
+                        </div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-[7.5px] text-slate-300 font-bold uppercase">Percentual Atingido</span>
+                            <span id="bfKpiPercentual" class="text-xl font-black text-purple-300 font-num">14,5%</span>
+                            <span class="text-[6.5px] text-purple-400 font-bold">da meta concluída</span>
+                        </div>
+                    </div>
+
+                    <!-- Faltam Expedir (Laranja/Âmbar) -->
+                    <div class="nd-card-glow-amber rounded-xl p-2 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-amber-600/30 border border-amber-400 flex items-center justify-center text-lg shrink-0">
+                            ⏳
+                        </div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="text-[7.5px] text-slate-300 font-bold uppercase">Faltam Expedir</span>
+                            <span id="bfKpiRestante" class="text-xl font-black text-amber-300 font-num">27.731</span>
+                            <span class="text-[6.5px] text-amber-400 font-bold">peças</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linha Central: Evolução da Campanha (Esq) + Resumo da Campanha com Velocímetro (Dir) -->
+                <div class="grid grid-cols-12 gap-1.5 h-[42%] min-h-0">
+                    <!-- Evolução da Campanha -->
+                    <div class="col-span-8 flex flex-col justify-between bg-[#050916] p-2 rounded-xl border border-slate-800">
+                        <div class="flex items-center justify-between px-1">
+                            <span class="text-white text-[9px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                                <span>📈</span> Evolução da Campanha
+                            </span>
+                            <div class="flex items-center gap-3 text-[7px] font-bold">
+                                <span class="flex items-center gap-1 text-cyan-300"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Expedido</span>
+                                <span class="flex items-center gap-1 text-amber-300"><span class="w-3 h-0.5 bg-amber-400 border-dashed"></span> Meta (32.436)</span>
+                            </div>
+                        </div>
+                        <div id="bfGraficoEvolucaoContainer" class="flex-1 w-full bg-[#02050e] rounded-lg border border-slate-800/80 p-1 flex items-center justify-center overflow-hidden">
+                        </div>
+                    </div>
+
+                    <!-- Resumo da Campanha com Velocímetro / Gauge Neon -->
+                    <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-2 rounded-xl border border-slate-800">
+                        <span class="text-white text-[9px] font-black uppercase px-1 flex items-center gap-1.5">
+                            <span>🏆</span> Resumo da Campanha
+                        </span>
+                        
+                        <!-- Velocímetro Semicircular SVG -->
+                        <div class="flex flex-col items-center justify-center flex-1 relative">
+                            <div class="relative w-44 h-24 overflow-hidden flex items-end justify-center">
+                                <svg viewBox="0 0 100 50" class="w-full h-full">
+                                    <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#0f172a" stroke-width="8" stroke-linecap="round" />
+                                    <!-- Arco Colorido (Progresso da Meta) -->
+                                    <path id="bfGaugeArc" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="url(#gradBfGauge)" stroke-width="8" stroke-linecap="round"
+                                          stroke-dasharray="125.6" stroke-dashoffset="107" style="transition: stroke-dashoffset 1s ease;" />
+                                    <defs>
+                                        <linearGradient id="gradBfGauge" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stop-color="#f59e0b" />
+                                            <stop offset="50%" stop-color="#38bdf8" />
+                                            <stop offset="100%" stop-color="#10b981" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute bottom-1 flex flex-col items-center leading-none text-center">
+                                    <span id="bfGaugeTexto" class="text-xl font-black text-white font-num">14,5%</span>
+                                    <span class="text-[6.5px] text-slate-300 font-bold mt-0.5">da meta atingida</span>
+                                </div>
+                            </div>
+
+                            <!-- 3 Métricas Rápidas abaixo do velocímetro -->
+                            <div class="grid grid-cols-3 gap-2 w-full pt-1 border-t border-slate-800 mt-1 text-center font-num">
+                                <div>
+                                    <span class="text-[6px] text-slate-400 block font-bold">EXPEDIDAS</span>
+                                    <strong id="bfResumoExpedidas" class="text-[8px] text-cyan-300 font-black">4.705</strong>
+                                </div>
+                                <div class="border-x border-slate-800">
+                                    <span class="text-[6px] text-slate-400 block font-bold">META</span>
+                                    <strong class="text-[8px] text-amber-300 font-black">32.436</strong>
+                                </div>
+                                <div>
+                                    <span class="text-[6px] text-slate-400 block font-bold">RESTANTES</span>
+                                    <strong id="bfResumoRestantes" class="text-[8px] text-rose-300 font-black">27.731</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Linha Inferior: Desempenho por Semana, Metas e Projeção, Insights e Ações -->
+                <div class="grid grid-cols-12 gap-1.5 flex-1 min-h-0">
+                    <!-- Desempenho por Semana -->
+                    <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
+                        <span class="text-white text-[8.5px] font-black uppercase px-0.5 flex items-center gap-1">
+                            <span>📅</span> Desempenho por Semana
+                        </span>
+                        <div class="grid grid-cols-4 gap-1 flex-1 items-center text-center font-num pt-1">
+                            <div class="bg-[#0a1226] p-1 rounded border border-cyan-500/30">
+                                <span class="text-[6px] text-slate-400 block">S1 (23-28/11)</span>
+                                <strong id="bfSemana1Pecas" class="text-[9px] text-cyan-300 font-black">4.705</strong>
+                                <span id="bfSemana1Pct" class="text-[5.5px] text-emerald-400 block font-bold">14,5% meta</span>
+                            </div>
+                            <div class="bg-[#0a1226] p-1 rounded border border-slate-800">
+                                <span class="text-[6px] text-slate-400 block">S2 (30/11-05/12)</span>
+                                <strong class="text-[9px] text-slate-400 font-black">0</strong>
+                                <span class="text-[5.5px] text-slate-500 block">0,0% meta</span>
+                            </div>
+                            <div class="bg-[#0a1226] p-1 rounded border border-slate-800">
+                                <span class="text-[6px] text-slate-400 block">S3 (Reserva)</span>
+                                <strong class="text-[9px] text-slate-400 font-black">0</strong>
+                                <span class="text-[5.5px] text-slate-500 block">0,0% meta</span>
+                            </div>
+                            <div class="bg-[#0a1226] p-1 rounded border border-slate-800">
+                                <span class="text-[6px] text-slate-400 block">S4 (Reserva)</span>
+                                <strong class="text-[9px] text-slate-400 font-black">0</strong>
+                                <span class="text-[5.5px] text-slate-500 block">0,0% meta</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metas e Projeção -->
+                    <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
+                        <span class="text-white text-[8.5px] font-black uppercase px-0.5 flex items-center gap-1">
+                            <span>🎯</span> Metas e Projeção
+                        </span>
+                        <div class="flex items-center justify-around flex-1 px-2 font-num">
+                            <div class="flex flex-col items-center">
+                                <span class="text-[6.8px] text-slate-400 font-bold">META TOTAL</span>
+                                <strong class="text-base font-black text-white">32.436</strong>
+                                <span class="text-[6px] text-cyan-300 font-bold">peças</span>
+                            </div>
+                            <div class="h-8 border-r border-slate-800"></div>
+                            <div class="flex flex-col items-center">
+                                <span class="text-[6.8px] text-slate-400 font-bold">PROJEÇÃO FINAL</span>
+                                <strong id="bfProjecaoTexto" class="text-base font-black text-amber-300">100%</strong>
+                                <span class="text-[6px] text-slate-400 font-bold">ritmo operacional</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insights e Ações -->
+                    <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
+                        <span class="text-white text-[8.5px] font-black uppercase px-0.5 flex items-center gap-1">
+                            <span>💡</span> Insights e Ações
+                        </span>
+                        <div class="flex flex-col justify-around flex-1 gap-1 text-[7px] leading-tight font-bold">
+                            <div class="flex items-center gap-1.5 bg-[#0a1226] p-1 rounded border border-amber-500/30">
+                                <span class="text-amber-400 font-black text-[9.5px]">⚠️</span>
+                                <span class="text-slate-100">Campanha em andamento com meta prioritária de 32.436 peças.</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 bg-[#0a1226] p-1 rounded border border-cyan-500/30">
+                                <span class="text-cyan-400 font-black text-[9.5px]">ℹ️</span>
+                                <span class="text-slate-100">Monitorar janelas das docas e ritmo contínuo das transportadoras.</span>
+                            </div>
+                            <div class="flex items-center gap-1.5 bg-[#0a1226] p-1 rounded border border-emerald-500/30">
+                                <span class="text-emerald-400 font-black text-[9.5px]">✓</span>
+                                <span class="text-slate-100">Juntos, vamos superar essa meta com máxima segurança e agilidade!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </main>
@@ -1212,29 +1427,47 @@
             tv04Sesmt: null
         };
 
-        // --- CONTROLE DO CARROSSEL DA TV 04 (15 SEGUNDOS) ---
+        // --- CONTROLE DO CARROSSEL DA TV 04 (3 TELAS - 15 SEGUNDOS) ---
         let tv04SlideAtual = 1;
+        const TV04_TOTAL_SLIDES = 3;
 
         function alternarSlideTV04() {
             const slideQualidade = document.getElementById('slideTv04Qualidade');
             const slideSesmt = document.getElementById('slideTv04Sesmt');
+            const slideBf = document.getElementById('slideTv04BlackFriday');
+            
             const lblSlide = document.getElementById('lblTv04SlideAtual');
             const dot1 = document.getElementById('dotSlide1');
             const dot2 = document.getElementById('dotSlide2');
+            const dot3 = document.getElementById('dotSlide3');
+
+            // Oculta todos os slides
+            slideQualidade.classList.add('hidden');
+            slideSesmt.classList.add('hidden');
+            slideBf.classList.add('hidden');
+
+            // Reseta dots
+            dot1.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all";
+            dot2.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all";
+            dot3.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all";
 
             if (tv04SlideAtual === 1) {
-                slideQualidade.classList.add('hidden');
+                // Vai para o Slide 2: SESMT
                 slideSesmt.classList.remove('hidden');
-                if (lblSlide) lblSlide.innerText = "TELA 2/2: SESMT";
-                if (dot1) { dot1.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all"; }
-                if (dot2) { dot2.className = "w-2 h-2 rounded-full bg-cyan-400 transition-all"; }
+                if (lblSlide) lblSlide.innerText = "TELA 2/3: SESMT";
+                dot2.className = "w-2 h-2 rounded-full bg-cyan-400 transition-all";
                 tv04SlideAtual = 2;
+            } else if (tv04SlideAtual === 2) {
+                // Vai para o Slide 3: Black Friday
+                slideBf.classList.remove('hidden');
+                if (lblSlide) lblSlide.innerText = "TELA 3/3: BLACK FRIDAY";
+                dot3.className = "w-2 h-2 rounded-full bg-amber-400 transition-all";
+                tv04SlideAtual = 3;
             } else {
-                slideSesmt.classList.add('hidden');
+                // Volta para o Slide 1: Qualidade
                 slideQualidade.classList.remove('hidden');
-                if (lblSlide) lblSlide.innerText = "TELA 1/2: QUALIDADE";
-                if (dot1) { dot1.className = "w-2 h-2 rounded-full bg-purple-500 transition-all"; }
-                if (dot2) { dot2.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all"; }
+                if (lblSlide) lblSlide.innerText = "TELA 1/3: QUALIDADE";
+                dot1.className = "w-2 h-2 rounded-full bg-purple-500 transition-all";
                 tv04SlideAtual = 1;
             }
         }
@@ -1246,6 +1479,127 @@
                 return "100%";
             }
             return limpo;
+        }
+
+        // --- RENDERIZADOR DO SLIDE BLACK FRIDAY 2026 ---
+        function renderizarBlackFriday() {
+            const META_BF = 32436;
+
+            // Puxa as peças expedidas dinamicamente da TV 03 (aba expedição consolidada)
+            let pecasExpedidas = 4705; // Base atual informada
+            if (currentData.tv03ExpKpis && currentData.tv03ExpKpis.kpisMes && currentData.tv03ExpKpis.kpisMes.totalPecas) {
+                const num = parseInt(String(currentData.tv03ExpKpis.kpisMes.totalPecas).replace(/\D/g, ''), 10);
+                if (!isNaN(num) && num > 0) pecasExpedidas = num;
+            }
+
+            const restantes = Math.max(META_BF - pecasExpedidas, 0);
+            const percAtingido = ((pecasExpedidas / META_BF) * 100).toFixed(1).replace('.', ',') + '%';
+            const percNum = Math.min((pecasExpedidas / META_BF) * 100, 100);
+
+            // Preenche os 4 cards do topo
+            document.getElementById('bfKpiMeta').innerText = META_BF.toLocaleString('pt-BR');
+            document.getElementById('bfKpiExpedido').innerText = pecasExpedidas.toLocaleString('pt-BR');
+            document.getElementById('bfKpiPercentual').innerText = percAtingido;
+            document.getElementById('bfKpiRestante').innerText = restantes.toLocaleString('pt-BR');
+
+            // Atualiza Resumo e Velocímetro
+            document.getElementById('bfGaugeTexto').innerText = percAtingido;
+            document.getElementById('bfResumoExpedidas').innerText = pecasExpedidas.toLocaleString('pt-BR');
+            document.getElementById('bfResumoRestantes').innerText = restantes.toLocaleString('pt-BR');
+            document.getElementById('bfSemana1Pecas').innerText = pecasExpedidas.toLocaleString('pt-BR');
+            document.getElementById('bfSemana1Pct').innerText = `${percAtingido} meta`;
+
+            // Animação do Arco do Velocímetro Semicircular (Circunferência = ~125.6)
+            const arcGauge = document.getElementById('bfGaugeArc');
+            if (arcGauge) {
+                const totalComp = 125.6;
+                const dashoffset = totalComp - ((percNum / 100) * totalComp);
+                arcGauge.style.strokeDashoffset = dashoffset;
+            }
+
+            // Renderiza Gráfico de Barras com a Linha de Meta Tracejada
+            renderizarGraficoEvolucaoBf(pecasExpedidas, META_BF);
+        }
+
+        function renderizarGraficoEvolucaoBf(expedido, meta) {
+            const container = document.getElementById('bfGraficoEvolucaoContainer');
+            if (!container) return;
+
+            const W = 520;
+            const H = 140;
+            const padL = 36;
+            const padR = 20;
+            const padT = 20;
+            const padB = 22;
+            const plotW = W - padL - padR;
+            const plotH = H - padT - padB;
+
+            const maxEscalaY = 35000;
+            const niveisY = [0, 5000, 10000, 15000, 20000, 25000, 30000, 35000];
+
+            let gridSvg = '';
+            niveisY.forEach(lvl => {
+                const y = padT + plotH - ((lvl / maxEscalaY) * plotH);
+                const rotulo = lvl === 0 ? '0' : `${lvl / 1000} mil`;
+                gridSvg += `
+                    <line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#1e293b" stroke-width="0.7" />
+                    <text x="${(padL - 4).toFixed(1)}" y="${(y + 2.5).toFixed(1)}" fill="#64748b" font-size="6.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="end">${rotulo}</text>
+                `;
+            });
+
+            // Linha Tracejada Amarela da Meta (32.436 peças)
+            const yMeta = padT + plotH - ((meta / maxEscalaY) * plotH);
+            const linhaMetaSvg = `
+                <line x1="${padL}" y1="${yMeta.toFixed(1)}" x2="${W - padR - 35}" y2="${yMeta.toFixed(1)}" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4,4" />
+                <rect x="${(W - padR - 34).toFixed(1)}" y="${(yMeta - 7).toFixed(1)}" width="32" height="14" rx="3" fill="#f59e0b" />
+                <text x="${(W - padR - 18).toFixed(1)}" y="${(yMeta + 2.5).toFixed(1)}" fill="#000000" font-size="6.8" font-family="Consolas" font-weight="900" text-anchor="middle">32.436</text>
+            `;
+
+            // Semanas da Campanha
+            const semanas = [
+                { nome: "S1 (23-28/11)", valor: expedido },
+                { nome: "S2 (30/11-05/12)", valor: 0 },
+                { nome: "S3 (Reserva)", valor: 0 },
+                { nome: "S4 (Reserva)", valor: 0 }
+            ];
+
+            const n = semanas.length;
+            const gap = plotW / n;
+            const barW = 28;
+
+            let barsSvg = '';
+            let labelsX = '';
+
+            semanas.forEach((s, idx) => {
+                const centerX = padL + (idx * gap) + (gap / 2);
+                if (s.valor > 0) {
+                    const barH = (s.valor / maxEscalaY) * plotH;
+                    const yBar = padT + plotH - barH;
+                    barsSvg += `
+                        <rect x="${(centerX - barW / 2).toFixed(1)}" y="${yBar.toFixed(1)}" width="${barW}" height="${barH.toFixed(1)}" rx="3" fill="url(#gradBarraBf)" />
+                        <text x="${centerX.toFixed(1)}" y="${(yBar - 3).toFixed(1)}" fill="#ffffff" font-size="8" font-family="Consolas" font-weight="900" text-anchor="middle">${s.valor.toLocaleString('pt-BR')}</text>
+                    `;
+                } else {
+                    barsSvg += `<line x1="${(centerX - 8).toFixed(1)}" y1="${(padT + plotH).toFixed(1)}" x2="${(centerX + 8).toFixed(1)}" y2="${(padT + plotH).toFixed(1)}" stroke="#475569" stroke-width="2" />`;
+                }
+                labelsX += `<text x="${centerX.toFixed(1)}" y="${H - 5}" fill="#cbd5e1" font-size="7.5" font-family="'Segoe UI', sans-serif" font-weight="bold" text-anchor="middle">${s.nome}</text>`;
+            });
+
+            container.innerHTML = `
+                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full" style="shape-rendering: geometricPrecision;" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="gradBarraBf" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#38bdf8" />
+                            <stop offset="100%" stop-color="#0284c7" />
+                        </linearGradient>
+                    </defs>
+                    ${gridSvg}
+                    ${linhaMetaSvg}
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#334155" stroke-width="1.2" />
+                    ${barsSvg}
+                    ${labelsX}
+                </svg>
+            `;
         }
 
         // --- ATUALIZAÇÃO DA FITA/BARRA DA QUALIDADE ---
@@ -1279,11 +1633,9 @@
             const track = document.getElementById('tv04SesmtTickerTrack');
             if (!track) return;
 
-            // Data Base: 06 de Novembro de 2026 com 1.908 dias
-            const dataBase = new Date(2026, 10, 6); // Mês 10 = Novembro
+            const dataBase = new Date(2026, 10, 6);
             const hoje = new Date();
             
-            // Zera horas para contar estritamente os dias de calendário
             const msPorDia = 1000 * 60 * 60 * 24;
             const diffDias = Math.floor((new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()) - dataBase) / msPorDia);
             const diasDecorridos = Math.max(diffDias, 0);
@@ -1938,7 +2290,7 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- CALIBRAÇÃO GERAL E TV 03 ---
+        // --- SISTEMA DE CALIBRAÇÃO GERAL E TV 03 ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -2365,6 +2717,7 @@
                 renderizarExpedicao();
                 atualizarTickerResumo();
                 atualizarTickerDiarioTV03();
+                renderizarBlackFriday();
             }
         };
 
@@ -2517,6 +2870,7 @@
 
                 renderizarPerfisGenerico('tv03PerfisContainer', data.perfis, '#10b981');
                 renderizarGraficoEvolucao();
+                renderizarBlackFriday();
             }
         };
 
@@ -2762,6 +3116,7 @@
             renderizarPaginaNextDay();
             renderizarQualidadeOperacional();
             renderizarSesmt();
+            renderizarBlackFriday();
 
             // Rotação da TV 03 (Next Day - 5s)
             if (!nextDayIntervalId) {
@@ -2771,7 +3126,7 @@
                 }, 5000);
             }
 
-            // Rotação Automática da TV 04 (Qualidade vs SESMT - 15 SEGUNDOS)
+            // Rotação Automática da TV 04 (3 TELAS - 15 SEGUNDOS CADA)
             setInterval(() => {
                 alternarSlideTV04();
             }, 15000);
