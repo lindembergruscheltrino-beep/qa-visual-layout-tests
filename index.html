@@ -832,19 +832,14 @@
             </div>
         </div>
 
-        <!-- ==================== TV 04: QUALIDADE OPERACIONAL (COM 5 CARDS SUPERIORES) ==================== -->
+        <!-- ==================== TV 04: QUALIDADE OPERACIONAL (AJUSTADA CONFORME SOLICITADO) ==================== -->
         <div id="tv04CardRoot" class="tv-card flex flex-col overflow-hidden p-2 gap-1.5 bg-[#02050e] border border-purple-500/40 shadow-2xl">
             
-            <!-- 1. Cabeçalho Widescreen Idêntico ao Modelo -->
+            <!-- 1. Cabeçalho: Título limpo "QUALIDADE OPERACIONAL" (Sem ⚙️ e sem Reoperações) -->
             <div class="flex items-center justify-between shrink-0 px-1 py-0.5 bg-[#070b1b] rounded-lg border border-purple-500/30">
-                <div class="flex items-center gap-2">
-                    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-purple-700 to-pink-500 border border-purple-400 flex items-center justify-center text-[12px] shadow-md">
-                        ⚙️
-                    </div>
-                    <div class="flex flex-col leading-tight">
-                        <span class="text-white text-[11px] font-black uppercase tracking-wider">REOPERAÇÕES – QUALIDADE OPERACIONAL</span>
-                        <span class="text-slate-300 text-[7.5px] font-bold">Acompanhamento de peças reoperadas e erros operacionais</span>
-                    </div>
+                <div class="flex flex-col leading-tight">
+                    <span class="text-white text-[12px] font-black uppercase tracking-wider">QUALIDADE OPERACIONAL</span>
+                    <span class="text-slate-300 text-[7.5px] font-bold">Acompanhamento de peças reoperadas e erros operacionais</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="togglePainelCalibracaoTV04()" class="bg-purple-600/30 hover:bg-purple-600/50 border border-purple-400 text-purple-200 px-2 py-0.5 rounded text-[8px] font-black cursor-pointer transition">
@@ -854,7 +849,7 @@
                 </div>
             </div>
 
-            <!-- 2. 5 Cards Superiores (Incluindo o Novo Card do IQP) -->
+            <!-- 2. 5 Cards Superiores (Com o Novo Card do IQP) -->
             <div class="grid grid-cols-5 gap-1.5 shrink-0">
                 <!-- Card 1: Total Reoperado (Azul) -->
                 <div class="nd-card-glow-blue rounded-xl p-1.5 flex items-center gap-2">
@@ -928,7 +923,7 @@
                     </div>
                 </div>
 
-                <!-- Card 5 (NOVO): IQP - Índice de Qualidade do Produto (Rosa / Néon) -->
+                <!-- Card 5: IQP (Rosa Néon) -->
                 <div class="nd-card-glow-rose rounded-xl p-1.5 flex items-center gap-2">
                     <div class="relative w-11 h-11 shrink-0 flex items-center justify-center">
                         <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
@@ -947,25 +942,29 @@
                 </div>
             </div>
 
-            <!-- 3. Meio: Gráfico de Barras Widescreen (Esq) + Tabela Qualidade (Dir) -->
+            <!-- 3. Meio: Gráfico Sem 📊 e Novo Painel "QUALIDADE OPERACIONAL" Conforme a Imagem Anexada -->
             <div class="grid grid-cols-12 gap-2 flex-1 overflow-hidden min-h-0">
-                <div class="col-span-8 flex flex-col justify-between overflow-hidden bg-[#050916] p-2 rounded-xl border border-slate-800">
+                
+                <!-- Gráfico de Evolução Mensal (Sem ícone 📊 e sem linhas de grade) -->
+                <div class="col-span-6 flex flex-col justify-between overflow-hidden bg-[#050916] p-2 rounded-xl border border-slate-800">
                     <div class="flex items-center gap-2 mb-1 px-1">
-                        <span class="text-purple-400 text-[10px]">📊</span>
                         <span class="text-white text-[9px] font-black uppercase tracking-wider">EVOLUÇÃO MENSAL – PEÇAS REOPERADAS</span>
                     </div>
                     <div id="qualidadeGraficoBarrasContainer" class="flex-1 w-full bg-[#02050e] rounded-lg border border-slate-800/80 p-1 flex items-center justify-center overflow-hidden">
+                        <!-- Gráfico de barras limpo sem linhas de grade -->
                     </div>
                 </div>
 
-                <div class="col-span-4 flex flex-col justify-between overflow-hidden bg-[#050916] p-2 rounded-xl border border-slate-800">
+                <!-- Novo Gráfico/Tabela Qualidade Operacional com Badges de Status (Idêntico ao Modelo Anexo) -->
+                <div class="col-span-6 flex flex-col justify-between overflow-hidden bg-[#050916] p-2 rounded-xl border border-slate-800">
                     <div class="flex items-center gap-2 mb-1 px-1">
-                        <span class="text-purple-400 text-[10px]">📋</span>
                         <span class="text-white text-[9px] font-black uppercase tracking-wider">QUALIDADE OPERACIONAL</span>
                     </div>
-                    <div id="qualidadeTabelaNcContainer" class="flex-1 flex flex-col justify-around bg-[#02050e] rounded-lg border border-slate-800/80 p-2 font-num">
+                    <div id="qualidadeTabelaNcContainer" class="flex-1 flex flex-col justify-around bg-[#02050e] rounded-lg border border-cyan-900/50 p-2 font-num">
+                        <!-- Preenchido dinamicamente com Mês, Ocorrências e Badges de Status -->
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -1021,7 +1020,6 @@
             }
         };
 
-        // --- RENDERIZAÇÃO DA QUALIDADE OPERACIONAL COM O 5º CARD DO IQP ---
         function renderizarQualidadeOperacional() {
             const data = currentData.tv04Qualidade || QUALIDADE_DATABASE_PADRAO;
             const hist = data.historico || QUALIDADE_DATABASE_PADRAO.historico;
@@ -1045,7 +1043,6 @@
             document.getElementById('lblQualidadeMesNome').innerHTML = `RESULTADO<br>${nomeMesLimpo}`;
             document.getElementById('lblQualidadeMesDetalhe').innerText = `${mesAtual.naoConforme} não conf.`;
 
-            // Dados do IQP (5º Card)
             const iqpObj = data.iqp || QUALIDADE_DATABASE_PADRAO.iqp;
             const elIqpNota = document.getElementById('kpiQualidadeIqpNota');
             const elIqpMeta = document.getElementById('lblQualidadeIqpMeta');
@@ -1056,30 +1053,25 @@
             renderizarTabelaNC(hist);
         }
 
+        // Gráfico de Barras sem linhas de grade e sem ícone 📊
         function renderizarBarrasQualidade(hist) {
             const container = document.getElementById('qualidadeGraficoBarrasContainer');
             if (!container) return;
 
-            const maxEscalaY = 300;
-            const niveisY = [0, 50, 100, 150, 200, 250, 300];
+            let maxVal = 1;
+            hist.forEach(h => {
+                const val = parseInt(String(h.totalPecas).replace(/\D/g, ''), 10) || 0;
+                if (val > maxVal) maxVal = val;
+            });
 
-            const W = 520;
-            const H = 210;
-            const padL = 36;
+            const W = 460;
+            const H = 200;
+            const padL = 20;
             const padR = 20;
-            const padT = 24;
-            const padB = 30;
+            const padT = 20;
+            const padB = 26;
             const plotW = W - padL - padR;
             const plotH = H - padT - padB;
-
-            let gridLinesSvg = '';
-            niveisY.forEach(nivel => {
-                const y = padT + plotH - ((nivel / maxEscalaY) * plotH);
-                gridLinesSvg += `
-                    <line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#1e293b" stroke-width="0.8" />
-                    <text x="${(padL - 6).toFixed(1)}" y="${(y + 3).toFixed(1)}" fill="#64748b" font-size="7.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="end">${nivel}</text>
-                `;
-            });
 
             const n = hist.length;
             const gap = plotW / n;
@@ -1090,7 +1082,7 @@
 
             hist.forEach((h, i) => {
                 const val = parseInt(String(h.totalPecas).replace(/\D/g, ''), 10) || 0;
-                const barH = (val / maxEscalaY) * plotH;
+                const barH = (val / maxVal) * (plotH - 8);
                 const x = padL + (i * gap) + ((gap - colWidth) / 2);
                 const y = padT + plotH - barH;
 
@@ -1099,18 +1091,18 @@
                 const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
 
                 barrasSvg += `
-                    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${colWidth.toFixed(1)}" height="${barH.toFixed(1)}" rx="2" fill="${corBarra}" />
-                    <text x="${(x + colWidth / 2).toFixed(1)}" y="${(y - 4).toFixed(1)}" fill="#ffffff" font-size="8.5" font-family="Consolas, monospace" font-weight="900" text-anchor="middle">${val}</text>
+                    <rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${colWidth.toFixed(1)}" height="${barH.toFixed(1)}" rx="3" fill="${corBarra}" />
+                    <text x="${(x + colWidth / 2).toFixed(1)}" y="${(y - 5).toFixed(1)}" fill="#ffffff" font-size="8.5" font-family="Consolas, monospace" font-weight="900" text-anchor="middle">${val}</text>
                 `;
 
                 if (isLast) {
                     labelsX += `
-                        <rect x="${(x + colWidth / 2 - 14).toFixed(1)}" y="${(H - 22).toFixed(1)}" width="28" height="15" rx="7.5" fill="#0284c7" />
-                        <text x="${(x + colWidth / 2).toFixed(1)}" y="${(H - 12).toFixed(1)}" fill="#ffffff" font-size="8" font-family="'Segoe UI', sans-serif" font-weight="900" text-anchor="middle">${mesAbrev}</text>
+                        <rect x="${(x + colWidth / 2 - 14).toFixed(1)}" y="${(H - 20).toFixed(1)}" width="28" height="15" rx="7.5" fill="#0284c7" />
+                        <text x="${(x + colWidth / 2).toFixed(1)}" y="${(H - 10).toFixed(1)}" fill="#ffffff" font-size="8" font-family="'Segoe UI', sans-serif" font-weight="900" text-anchor="middle">${mesAbrev}</text>
                     `;
                 } else {
                     labelsX += `
-                        <text x="${(x + colWidth / 2).toFixed(1)}" y="${(H - 12).toFixed(1)}" fill="#94a3b8" font-size="8" font-family="'Segoe UI', sans-serif" font-weight="700" text-anchor="middle">${mesAbrev}</text>
+                        <text x="${(x + colWidth / 2).toFixed(1)}" y="${(H - 10).toFixed(1)}" fill="#94a3b8" font-size="8" font-family="'Segoe UI', sans-serif" font-weight="700" text-anchor="middle">${mesAbrev}</text>
                     `;
                 }
             });
@@ -1120,14 +1112,13 @@
                     <defs>
                         <linearGradient id="gradBarraPadrao" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#38bdf8" />
-                            <stop offset="100%" stop-color="#0369a1" />
+                            <stop offset="100%" stop-color="#0284c7" />
                         </linearGradient>
                         <linearGradient id="gradBarraDestaque" x1="0%" y1="0%" x2="0%" y2="100%">
                             <stop offset="0%" stop-color="#22d3ee" />
-                            <stop offset="100%" stop-color="#0284c7" />
+                            <stop offset="100%" stop-color="#0891b2" />
                         </linearGradient>
                     </defs>
-                    ${gridLinesSvg}
                     <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#334155" stroke-width="1.2" />
                     ${barrasSvg}
                     ${labelsX}
@@ -1135,6 +1126,7 @@
             `;
         }
 
+        // Tabela Exata Conforme a Imagem Anexada (Mês, Ocorrências, Status Semafórico)
         function renderizarTabelaNC(hist) {
             const container = document.getElementById('qualidadeTabelaNcContainer');
             if (!container) return;
@@ -1143,45 +1135,70 @@
             const col1 = hist.slice(0, metades);
             const col2 = hist.slice(metades);
 
-            function gerarLinhas(arr, ehSegundaColuna) {
+            function gerarLinhas(arr) {
                 let html = '';
                 arr.forEach(h => {
                     const mesAbrev = h.mes.slice(0, 3).charAt(0).toUpperCase() + h.mes.slice(1, 3);
                     const qtd = parseInt(String(h.naoConforme).replace(/\D/g, ''), 10) || 0;
+                    const isZero = (qtd === 0);
                     const isOut = mesAbrev.toLowerCase().includes("out");
 
-                    if (isOut) {
-                        html += `
-                            <div class="flex justify-between items-center py-1.5 px-2 bg-purple-950/40 rounded border border-purple-500/50">
-                                <span class="text-purple-300 font-black text-[8px]">${mesAbrev}</span>
-                                <span class="text-white font-black text-[8.5px]">${qtd}</span>
+                    // Status Badge exato do modelo (Sem Ocorrências vs Atenção)
+                    const statusBadge = isZero
+                        ? `<span class="inline-flex items-center gap-1 px-1.5 py-[2px] rounded-full bg-emerald-950/80 border border-emerald-500/70 text-emerald-300 text-[6.8px] font-bold">
+                             <span class="w-3 h-3 rounded-full bg-emerald-500 flex items-center justify-center text-[7px] text-black font-black">✓</span> Sem Ocorrências
+                           </span>`
+                        : `<span class="inline-flex items-center gap-1 px-2 py-[2px] rounded-full bg-rose-950/90 border border-rose-500/80 text-rose-300 text-[6.8px] font-black">
+                             <span class="text-rose-400 text-[8px]">⚠️</span> Atenção
+                           </span>`;
+
+                    // Linha com destaque roxo para Outubro
+                    const linhaStyle = isOut
+                        ? `border border-purple-500/80 bg-purple-950/30 rounded-lg p-1`
+                        : `border-b border-slate-800/80 py-1 px-1`;
+
+                    html += `
+                        <div class="grid grid-cols-12 items-center ${linhaStyle}">
+                            <div class="col-span-4 flex items-center gap-1">
+                                <span class="text-cyan-400 text-[8.5px]">🗓️</span>
+                                <span class="text-white font-bold text-[7.8px]">${mesAbrev}</span>
                             </div>
-                        `;
-                    } else {
-                        html += `
-                            <div class="flex justify-between items-center py-1.5 px-2 border-b border-slate-800/80 last:border-0">
-                                <span class="text-slate-300 font-semibold text-[8px]">${mesAbrev}</span>
-                                <span class="text-white font-bold text-[8.5px]">${qtd}</span>
+                            <div class="col-span-3 text-center">
+                                <span class="text-white font-black text-[9px] font-num">${qtd}</span>
                             </div>
-                        `;
-                    }
+                            <div class="col-span-5 text-right flex justify-end">
+                                ${statusBadge}
+                            </div>
+                        </div>
+                    `;
                 });
                 return html;
             }
 
             container.innerHTML = `
                 <div class="grid grid-cols-2 gap-3 h-full">
-                    <div class="flex flex-col justify-between border-r border-slate-800 pr-2">
-                        <div class="flex justify-between text-slate-400 font-black text-[7.5px] border-b border-slate-700 pb-1 mb-1 px-1 uppercase">
-                            <span>Mês</span><span>Não Conformidades</span>
+                    <!-- Bloco 1 (Jan - Mai) -->
+                    <div class="flex flex-col justify-between border-r border-slate-800/80 pr-2">
+                        <div class="grid grid-cols-12 text-slate-400 font-black text-[7px] border-b border-slate-700/80 pb-1 mb-1 px-1 uppercase">
+                            <span class="col-span-4 text-left">Mês</span>
+                            <span class="col-span-3 text-center">Ocorrências</span>
+                            <span class="col-span-5 text-right">Status</span>
                         </div>
-                        ${gerarLinhas(col1, false)}
+                        <div class="flex flex-col justify-around flex-1">
+                            ${gerarLinhas(col1)}
+                        </div>
                     </div>
+
+                    <!-- Bloco 2 (Jun - Out) -->
                     <div class="flex flex-col justify-between pl-1">
-                        <div class="flex justify-between text-slate-400 font-black text-[7.5px] border-b border-slate-700 pb-1 mb-1 px-1 uppercase">
-                            <span>Mês</span><span>Não Conformidades</span>
+                        <div class="grid grid-cols-12 text-slate-400 font-black text-[7px] border-b border-slate-700/80 pb-1 mb-1 px-1 uppercase">
+                            <span class="col-span-4 text-left">Mês</span>
+                            <span class="col-span-3 text-center">Ocorrências</span>
+                            <span class="col-span-5 text-right">Status</span>
                         </div>
-                        ${gerarLinhas(col2, true)}
+                        <div class="flex flex-col justify-around flex-1">
+                            ${gerarLinhas(col2)}
+                        </div>
                     </div>
                 </div>
             `;
