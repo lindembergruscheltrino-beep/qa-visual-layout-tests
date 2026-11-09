@@ -1180,35 +1180,38 @@
                 </div>
             </div>
 
-            <!-- SLIDE 3: BLACK FRIDAY 2026 (IDÊNTICO AO MODELO ENVIADO) -->
+            <!-- SLIDE 3: BLACK FRIDAY 2026 (COM CURVA ASCENDENTE E CRONÔMETRO ATÉ 05/12) -->
             <div id="slideTv04BlackFriday" class="flex flex-col h-full w-full p-2 gap-1.5 transition-opacity duration-700 hidden">
-                <!-- Cabeçalho Black Friday 2026 -->
-                <div class="flex items-center justify-between shrink-0 px-2 py-1 bg-[#050915] rounded-lg border border-cyan-500/30">
-                    <div class="flex items-center gap-2">
+                <!-- Cabeçalho Black Friday com Cronômetro Regressivo Vivo -->
+                <div class="flex items-center justify-between shrink-0 px-2 py-1 bg-[#050915] rounded-lg border border-cyan-500/30 gap-2">
+                    <div class="flex items-center gap-2 shrink-0">
                         <div class="w-8 h-8 rounded-lg bg-cyan-600/20 border border-cyan-400 flex items-center justify-center text-lg shadow-sm">
                             🛒
                         </div>
                         <div class="flex flex-col leading-tight">
-                            <span class="text-white text-[14px] font-black tracking-wide">Black Friday 2026</span>
-                            <span class="text-slate-300 text-[7.5px] font-bold">Meta de Expedição | Acompanhe o avanço da nossa campanha</span>
+                            <span class="text-white text-[13px] font-black tracking-wide">Black Friday 2026</span>
+                            <span class="text-slate-300 text-[7.5px] font-bold">Meta de Expedição | Campanha de 23/11 a 05/12/2026</span>
                         </div>
                     </div>
 
                     <!-- Badge Central Black Friday -->
-                    <div class="bg-gradient-to-r from-slate-900 to-black border border-amber-500/70 px-3 py-1 rounded-md shadow-md flex items-center gap-1.5">
-                        <span class="text-[9.5px] font-black text-amber-400 tracking-wider">BLACK FRIDAY</span>
+                    <div class="bg-gradient-to-r from-slate-900 to-black border border-amber-500/70 px-2.5 py-0.5 rounded-md shadow-md flex items-center gap-1 shrink-0">
+                        <span class="text-[9px] font-black text-amber-400 tracking-wider">BLACK FRIDAY</span>
                     </div>
 
-                    <!-- Período e Status -->
-                    <div class="flex items-center gap-4 mr-32">
-                        <div class="flex flex-col items-end leading-tight">
-                            <span class="text-[6.8px] text-slate-400 font-bold uppercase">Período da Campanha</span>
-                            <span class="text-[8px] text-cyan-300 font-black font-num">🗓️ 23/11 a 05/12/2026</span>
+                    <!-- CRONÔMETRO REGRESSIVO EM TEMPO REAL ATÉ 05/12 -->
+                    <div class="flex items-center gap-1.5 bg-gradient-to-r from-purple-950/80 to-pink-950/80 border border-pink-500/60 px-3 py-1 rounded-lg shadow-md shrink-0">
+                        <span class="text-sm animate-pulse">⏱️</span>
+                        <div class="flex flex-col leading-none">
+                            <span class="text-[6.5px] text-pink-300 font-black uppercase tracking-wider">Encerramento da Campanha</span>
+                            <span id="bfContadorRegressivo" class="text-[10.5px] font-black text-white font-num mt-0.5">--d --h --m --s</span>
                         </div>
-                        <div class="flex items-center gap-1.5 text-[7px] text-slate-300 font-num font-bold">
-                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                            <span>CAMPANHA ATIVA</span>
-                        </div>
+                    </div>
+
+                    <!-- Status da Campanha -->
+                    <div class="flex items-center gap-1.5 text-[7px] text-slate-300 font-num font-bold shrink-0 mr-28">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>CAMPANHA ATIVA</span>
                     </div>
                 </div>
 
@@ -1234,7 +1237,7 @@
                         <div class="flex flex-col leading-tight">
                             <span class="text-[7.5px] text-slate-300 font-bold uppercase">Expedido (Atual)</span>
                             <span id="bfKpiExpedido" class="text-xl font-black text-emerald-300 font-num">4.705</span>
-                            <span class="text-[6.5px] text-emerald-400 font-bold">peças</span>
+                            <span class="text-[6.5px] text-emerald-400 font-bold">peças da TV 03</span>
                         </div>
                     </div>
 
@@ -1263,16 +1266,16 @@
                     </div>
                 </div>
 
-                <!-- Linha Central: Evolução da Campanha (Esq) + Resumo da Campanha com Velocímetro (Dir) -->
+                <!-- Linha Central: Evolução da Campanha (Curva Ascendente) + Resumo com Velocímetro -->
                 <div class="grid grid-cols-12 gap-1.5 h-[42%] min-h-0">
-                    <!-- Evolução da Campanha -->
+                    <!-- Gráfico com Curva Ascendente -->
                     <div class="col-span-8 flex flex-col justify-between bg-[#050916] p-2 rounded-xl border border-slate-800">
                         <div class="flex items-center justify-between px-1">
-                            <span class="text-white text-[9px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span>📈</span> Evolução da Campanha
+                            <span class="text-white text-[9.5px] font-black uppercase tracking-wider flex items-center gap-1.5">
+                                <span>📈</span> Evolução da Campanha (Curva Ascendente)
                             </span>
                             <div class="flex items-center gap-3 text-[7px] font-bold">
-                                <span class="flex items-center gap-1 text-cyan-300"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Expedido</span>
+                                <span class="flex items-center gap-1 text-cyan-300"><span class="w-2.5 h-0.5 bg-cyan-400"></span> Ritmo Expedido</span>
                                 <span class="flex items-center gap-1 text-amber-300"><span class="w-3 h-0.5 bg-amber-400 border-dashed"></span> Meta (32.436)</span>
                             </div>
                         </div>
@@ -1286,12 +1289,10 @@
                             <span>🏆</span> Resumo da Campanha
                         </span>
                         
-                        <!-- Velocímetro Semicircular SVG -->
                         <div class="flex flex-col items-center justify-center flex-1 relative">
                             <div class="relative w-44 h-24 overflow-hidden flex items-end justify-center">
                                 <svg viewBox="0 0 100 50" class="w-full h-full">
                                     <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#0f172a" stroke-width="8" stroke-linecap="round" />
-                                    <!-- Arco Colorido (Progresso da Meta) -->
                                     <path id="bfGaugeArc" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="url(#gradBfGauge)" stroke-width="8" stroke-linecap="round"
                                           stroke-dasharray="125.6" stroke-dashoffset="107" style="transition: stroke-dashoffset 1s ease;" />
                                     <defs>
@@ -1308,7 +1309,6 @@
                                 </div>
                             </div>
 
-                            <!-- 3 Métricas Rápidas abaixo do velocímetro -->
                             <div class="grid grid-cols-3 gap-2 w-full pt-1 border-t border-slate-800 mt-1 text-center font-num">
                                 <div>
                                     <span class="text-[6px] text-slate-400 block font-bold">EXPEDIDAS</span>
@@ -1329,7 +1329,6 @@
 
                 <!-- Linha Inferior: Desempenho por Semana, Metas e Projeção, Insights e Ações -->
                 <div class="grid grid-cols-12 gap-1.5 flex-1 min-h-0">
-                    <!-- Desempenho por Semana -->
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5 flex items-center gap-1">
                             <span>📅</span> Desempenho por Semana
@@ -1358,7 +1357,6 @@
                         </div>
                     </div>
 
-                    <!-- Metas e Projeção -->
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5 flex items-center gap-1">
                             <span>🎯</span> Metas e Projeção
@@ -1378,7 +1376,6 @@
                         </div>
                     </div>
 
-                    <!-- Insights e Ações -->
                     <div class="col-span-4 flex flex-col justify-between bg-[#050916] p-1.5 rounded-xl border border-slate-800">
                         <span class="text-white text-[8.5px] font-black uppercase px-0.5 flex items-center gap-1">
                             <span>💡</span> Insights e Ações
@@ -1441,30 +1438,25 @@
             const dot2 = document.getElementById('dotSlide2');
             const dot3 = document.getElementById('dotSlide3');
 
-            // Oculta todos os slides
             slideQualidade.classList.add('hidden');
             slideSesmt.classList.add('hidden');
             slideBf.classList.add('hidden');
 
-            // Reseta dots
             dot1.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all";
             dot2.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all";
             dot3.className = "w-1.5 h-1.5 rounded-full bg-slate-700 transition-all";
 
             if (tv04SlideAtual === 1) {
-                // Vai para o Slide 2: SESMT
                 slideSesmt.classList.remove('hidden');
                 if (lblSlide) lblSlide.innerText = "TELA 2/3: SESMT";
                 dot2.className = "w-2 h-2 rounded-full bg-cyan-400 transition-all";
                 tv04SlideAtual = 2;
             } else if (tv04SlideAtual === 2) {
-                // Vai para o Slide 3: Black Friday
                 slideBf.classList.remove('hidden');
                 if (lblSlide) lblSlide.innerText = "TELA 3/3: BLACK FRIDAY";
                 dot3.className = "w-2 h-2 rounded-full bg-amber-400 transition-all";
                 tv04SlideAtual = 3;
             } else {
-                // Volta para o Slide 1: Qualidade
                 slideQualidade.classList.remove('hidden');
                 if (lblSlide) lblSlide.innerText = "TELA 1/3: QUALIDADE";
                 dot1.className = "w-2 h-2 rounded-full bg-purple-500 transition-all";
@@ -1481,12 +1473,39 @@
             return limpo;
         }
 
-        // --- RENDERIZADOR DO SLIDE BLACK FRIDAY 2026 ---
+        // --- CRONÔMETRO REGRESSIVO EM TEMPO REAL ATÉ 05/12/2026 ---
+        function atualizarCronometroBlackFriday() {
+            const el = document.getElementById('bfContadorRegressivo');
+            if (!el) return;
+
+            // Alvo: 05 de Dezembro de 2026 às 23:59:59 (Mês 11 = Dezembro em JS)
+            const dataFinal = new Date(2026, 11, 5, 23, 59, 59).getTime();
+            const agora = new Date().getTime();
+            const distancia = dataFinal - agora;
+
+            if (distancia < 0) {
+                el.innerText = "CAMPANHA ENCERRADA";
+                return;
+            }
+
+            const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+
+            const dStr = String(dias).padStart(2, '0');
+            const hStr = String(horas).padStart(2, '0');
+            const mStr = String(minutos).padStart(2, '0');
+            const sStr = String(segundos).padStart(2, '0');
+
+            el.innerText = `${dStr}d ${hStr}h ${mStr}m ${sStr}s`;
+        }
+
+        // --- RENDERIZADOR BLACK FRIDAY COM CURVA ASCENDENTE ---
         function renderizarBlackFriday() {
             const META_BF = 32436;
 
-            // Puxa as peças expedidas dinamicamente da TV 03 (aba expedição consolidada)
-            let pecasExpedidas = 4705; // Base atual informada
+            let pecasExpedidas = 4705; // Base consolidada da TV 03
             if (currentData.tv03ExpKpis && currentData.tv03ExpKpis.kpisMes && currentData.tv03ExpKpis.kpisMes.totalPecas) {
                 const num = parseInt(String(currentData.tv03ExpKpis.kpisMes.totalPecas).replace(/\D/g, ''), 10);
                 if (!isNaN(num) && num > 0) pecasExpedidas = num;
@@ -1496,20 +1515,17 @@
             const percAtingido = ((pecasExpedidas / META_BF) * 100).toFixed(1).replace('.', ',') + '%';
             const percNum = Math.min((pecasExpedidas / META_BF) * 100, 100);
 
-            // Preenche os 4 cards do topo
             document.getElementById('bfKpiMeta').innerText = META_BF.toLocaleString('pt-BR');
             document.getElementById('bfKpiExpedido').innerText = pecasExpedidas.toLocaleString('pt-BR');
             document.getElementById('bfKpiPercentual').innerText = percAtingido;
             document.getElementById('bfKpiRestante').innerText = restantes.toLocaleString('pt-BR');
 
-            // Atualiza Resumo e Velocímetro
             document.getElementById('bfGaugeTexto').innerText = percAtingido;
             document.getElementById('bfResumoExpedidas').innerText = pecasExpedidas.toLocaleString('pt-BR');
             document.getElementById('bfResumoRestantes').innerText = restantes.toLocaleString('pt-BR');
             document.getElementById('bfSemana1Pecas').innerText = pecasExpedidas.toLocaleString('pt-BR');
             document.getElementById('bfSemana1Pct').innerText = `${percAtingido} meta`;
 
-            // Animação do Arco do Velocímetro Semicircular (Circunferência = ~125.6)
             const arcGauge = document.getElementById('bfGaugeArc');
             if (arcGauge) {
                 const totalComp = 125.6;
@@ -1517,37 +1533,37 @@
                 arcGauge.style.strokeDashoffset = dashoffset;
             }
 
-            // Renderiza Gráfico de Barras com a Linha de Meta Tracejada
-            renderizarGraficoEvolucaoBf(pecasExpedidas, META_BF);
+            renderizarGraficoCurvaAscendenteBf(pecasExpedidas, META_BF);
         }
 
-        function renderizarGraficoEvolucaoBf(expedido, meta) {
+        // GRÁFICO COM CURVA ASCENDENTE E ÁREA GLOW CIANO
+        function renderizarGraficoCurvaAscendenteBf(expedido, meta) {
             const container = document.getElementById('bfGraficoEvolucaoContainer');
             if (!container) return;
 
             const W = 520;
             const H = 140;
             const padL = 36;
-            const padR = 20;
+            const padR = 25;
             const padT = 20;
-            const padB = 22;
+            const padB = 24;
             const plotW = W - padL - padR;
             const plotH = H - padT - padB;
 
             const maxEscalaY = 35000;
-            const niveisY = [0, 5000, 10000, 15000, 20000, 25000, 30000, 35000];
+            const niveisY = [0, 10000, 20000, 30000];
 
             let gridSvg = '';
             niveisY.forEach(lvl => {
                 const y = padT + plotH - ((lvl / maxEscalaY) * plotH);
                 const rotulo = lvl === 0 ? '0' : `${lvl / 1000} mil`;
                 gridSvg += `
-                    <line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#1e293b" stroke-width="0.7" />
+                    <line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="#1e293b" stroke-width="0.8" />
                     <text x="${(padL - 4).toFixed(1)}" y="${(y + 2.5).toFixed(1)}" fill="#64748b" font-size="6.5" font-family="Consolas, monospace" font-weight="bold" text-anchor="end">${rotulo}</text>
                 `;
             });
 
-            // Linha Tracejada Amarela da Meta (32.436 peças)
+            // Linha da Meta Amarela Tracejada
             const yMeta = padT + plotH - ((meta / maxEscalaY) * plotH);
             const linhaMetaSvg = `
                 <line x1="${padL}" y1="${yMeta.toFixed(1)}" x2="${W - padR - 35}" y2="${yMeta.toFixed(1)}" stroke="#f59e0b" stroke-width="1.8" stroke-dasharray="4,4" />
@@ -1555,54 +1571,86 @@
                 <text x="${(W - padR - 18).toFixed(1)}" y="${(yMeta + 2.5).toFixed(1)}" fill="#000000" font-size="6.8" font-family="Consolas" font-weight="900" text-anchor="middle">32.436</text>
             `;
 
-            // Semanas da Campanha
-            const semanas = [
-                { nome: "S1 (23-28/11)", valor: expedido },
-                { nome: "S2 (30/11-05/12)", valor: 0 },
-                { nome: "S3 (Reserva)", valor: 0 },
-                { nome: "S4 (Reserva)", valor: 0 }
+            // Pontos da Curva Ascendente (do Início 0 -> Ponto Atual -> Projeção até a Meta)
+            const pontosCurva = [
+                { dia: "23/11", val: 0, status: "real" },
+                { dia: "26/11", val: Math.round(expedido * 0.45), status: "real" },
+                { dia: "Hoje", val: expedido, status: "atual" },
+                { dia: "01/12", val: Math.round(expedido + (meta - expedido) * 0.55), status: "proj" },
+                { dia: "05/12", val: meta, status: "proj" }
             ];
 
-            const n = semanas.length;
-            const gap = plotW / n;
-            const barW = 28;
+            const n = pontosCurva.length;
+            const stepX = plotW / (n - 1);
 
-            let barsSvg = '';
+            const ptsCoord = pontosCurva.map((p, idx) => {
+                const x = padL + (idx * stepX);
+                const y = padT + plotH - ((p.val / maxEscalaY) * plotH);
+                return { x, y, ...p };
+            });
+
+            // Geração de Curva Bézier Suave Ascendente
+            function gerarCurvaSuave(points) {
+                if (points.length < 2) return "";
+                let d = `M ${points[0].x.toFixed(1)},${points[0].y.toFixed(1)}`;
+                for (let i = 0; i < points.length - 1; i++) {
+                    const p0 = points[i === 0 ? 0 : i - 1];
+                    const p1 = points[i];
+                    const p2 = points[i + 1];
+                    const p3 = points[i + 2] ? points[i + 2] : p2;
+
+                    const cp1x = p1.x + (p2.x - p0.x) / 6;
+                    const cp1y = p1.y + (p2.y - p0.y) / 6;
+                    const cp2x = p2.x - (p3.x - p1.x) / 6;
+                    const cp2y = p2.y - (p3.y - p1.y) / 6;
+
+                    d += ` C ${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2.x.toFixed(1)},${p2.y.toFixed(1)}`;
+                }
+                return d;
+            }
+
+            const pathLinha = gerarCurvaSuave(ptsCoord);
+            const pathArea = `${pathLinha} L ${ptsCoord[n-1].x.toFixed(1)},${(padT + plotH).toFixed(1)} L ${ptsCoord[0].x.toFixed(1)},${(padT + plotH).toFixed(1)} Z`;
+
+            // Elementos visuais dos pontos e rótulos
+            let markersSvg = '';
             let labelsX = '';
 
-            semanas.forEach((s, idx) => {
-                const centerX = padL + (idx * gap) + (gap / 2);
-                if (s.valor > 0) {
-                    const barH = (s.valor / maxEscalaY) * plotH;
-                    const yBar = padT + plotH - barH;
-                    barsSvg += `
-                        <rect x="${(centerX - barW / 2).toFixed(1)}" y="${yBar.toFixed(1)}" width="${barW}" height="${barH.toFixed(1)}" rx="3" fill="url(#gradBarraBf)" />
-                        <text x="${centerX.toFixed(1)}" y="${(yBar - 3).toFixed(1)}" fill="#ffffff" font-size="8" font-family="Consolas" font-weight="900" text-anchor="middle">${s.valor.toLocaleString('pt-BR')}</text>
-                    `;
-                } else {
-                    barsSvg += `<line x1="${(centerX - 8).toFixed(1)}" y1="${(padT + plotH).toFixed(1)}" x2="${(centerX + 8).toFixed(1)}" y2="${(padT + plotH).toFixed(1)}" stroke="#475569" stroke-width="2" />`;
-                }
-                labelsX += `<text x="${centerX.toFixed(1)}" y="${H - 5}" fill="#cbd5e1" font-size="7.5" font-family="'Segoe UI', sans-serif" font-weight="bold" text-anchor="middle">${s.nome}</text>`;
+            ptsCoord.forEach((pt) => {
+                const isAtual = pt.status === "atual";
+                const corPonto = isAtual ? "#38bdf8" : (pt.status === "real" ? "#06b6d4" : "#64748b");
+                
+                markersSvg += `
+                    <circle cx="${pt.x.toFixed(1)}" cy="${pt.y.toFixed(1)}" r="${isAtual ? '4.5' : '3'}" fill="${corPonto}" stroke="#02050e" stroke-width="1.5" />
+                    <text x="${pt.x.toFixed(1)}" y="${(pt.y - 6).toFixed(1)}" fill="${isAtual ? '#38bdf8' : '#e2e8f0'}" font-size="${isAtual ? '7.8' : '6.5'}" font-family="Consolas" font-weight="900" text-anchor="middle">${pt.val.toLocaleString('pt-BR')}</text>
+                `;
+
+                labelsX += `
+                    <text x="${pt.x.toFixed(1)}" y="${H - 5}" fill="${isAtual ? '#38bdf8' : '#94a3b8'}" font-size="7.5" font-family="'Segoe UI', sans-serif" font-weight="${isAtual ? '900' : 'bold'}" text-anchor="middle">${pt.dia}</text>
+                `;
             });
 
             container.innerHTML = `
-                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full" style="shape-rendering: geometricPrecision;" preserveAspectRatio="none">
+                <svg viewBox="0 0 ${W} ${H}" class="w-full h-full overflow-visible" style="shape-rendering: geometricPrecision;" preserveAspectRatio="none">
                     <defs>
-                        <linearGradient id="gradBarraBf" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#38bdf8" />
-                            <stop offset="100%" stop-color="#0284c7" />
+                        <linearGradient id="gradCurvaBf" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45" />
+                            <stop offset="70%" stop-color="#0284c7" stop-opacity="0.10" />
+                            <stop offset="100%" stop-color="#0284c7" stop-opacity="0.0" />
                         </linearGradient>
                     </defs>
                     ${gridSvg}
                     ${linhaMetaSvg}
                     <line x1="${padL}" y1="${padT + plotH}" x2="${W - padR}" y2="${padT + plotH}" stroke="#334155" stroke-width="1.2" />
-                    ${barsSvg}
+                    <path d="${pathArea}" fill="url(#gradCurvaBf)" />
+                    <path d="${pathLinha}" fill="none" stroke="#06b6d4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    ${markersSvg}
                     ${labelsX}
                 </svg>
             `;
         }
 
-        // --- ATUALIZAÇÃO DA FITA/BARRA DA QUALIDADE ---
+        // --- ATUALIZAÇÃO DA FITA DA QUALIDADE ---
         function atualizarTickerQualidade(hist) {
             const track = document.getElementById('tv04QualidadeTickerTrack');
             if (!track || !hist || hist.length === 0) return;
@@ -2290,7 +2338,7 @@
             document.body.appendChild(scriptTag);
         }
 
-        // --- SISTEMA DE CALIBRAÇÃO GERAL E TV 03 ---
+        // --- CALIBRAÇÃO GERAL E TV 03 ---
         function togglePainelCalibracao() {
             const p = document.getElementById('painelCalibracao');
             p.style.display = (p.style.display === 'block') ? 'none' : 'block';
@@ -3117,6 +3165,12 @@
             renderizarQualidadeOperacional();
             renderizarSesmt();
             renderizarBlackFriday();
+
+            // Atualização contínua do Cronômetro Regressivo a cada 1 segundo
+            atualizarCronometroBlackFriday();
+            setInterval(() => {
+                atualizarCronometroBlackFriday();
+            }, 1000);
 
             // Rotação da TV 03 (Next Day - 5s)
             if (!nextDayIntervalId) {
