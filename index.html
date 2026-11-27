@@ -1510,14 +1510,14 @@
             el.innerText = `${dStr}d ${hStr}h ${mStr}m ${sStr}s`;
         }
 
-        // --- RENDERIZADOR BLACK FRIDAY COM ACUMULADO REAL DE 09/11 A 05/12 ---
+        // --- RENDERIZADOR BLACK FRIDAY (PUXANDO EXPEDIÇÃO CONSOLIDADA DA TV 03 E SEM DATAS FUTURAS NO EIXO X) ---
         function renderizarBlackFriday() {
             const META_BF = 32436;
             const hoje = new Date();
             const diaHoje = hoje.getDate();
             const mesHoje = hoje.getMonth() + 1;
 
-            // Lista completa dos 27 dias da campanha (09/11 a 05/12)
+            // Lista dos 27 dias da campanha para manter a proporção da escala até 05/12
             const diasCampanha = [];
             for (let d = 9; d <= 30; d++) {
                 diasCampanha.push({
@@ -1536,7 +1536,14 @@
                 });
             }
 
-            // Mapeia os dados diários vindos da planilha da TV 03
+            // 1. Puxa o valor exato do card "Expedição Consolidada" da TV 03
+            let totalExpedicaoTV03 = 23431;
+            if (currentData.tv03ExpKpis && currentData.tv03ExpKpis.kpisMes && currentData.tv03ExpKpis.kpisMes.totalPecas) {
+                const num = parseInt(String(currentData.tv03ExpKpis.kpisMes.totalPecas).replace(/\D/g, ''), 10);
+                if (!isNaN(num) && num > 0) totalExpedicaoTV03 = num;
+            }
+
+            // 2. Mapeia os dados diários vindos da planilha da TV 03 para desenhar a curva
             const dadosExp = (currentData.tv03ExpKpis && currentData.tv03ExpKpis.evolucaoDiaria)
                 ? currentData.tv03ExpKpis.evolucaoDiaria
                 : [];
@@ -1548,7 +1555,6 @@
                 }
             });
 
-            // Soma o volume de hoje da agenda operacional caso ainda não esteja consolidado na aba mensal
             const pecasHojeAgenda = Number(currentData.expedicaoResumo.totalPecas) || 0;
             if (pecasHojeAgenda > 0 && (!mapaDiario[diaHoje] || mapaDiario[diaHoje] === 0)) {
                 mapaDiario[diaHoje] = pecasHojeAgenda;
@@ -1560,7 +1566,7 @@
                 indiceHoje = (mesHoje === 12 && diaHoje > 5) ? diasCampanha.length - 1 : 18;
             }
 
-            // Calcula o acumulado dia a dia de 09/11 até Hoje
+            // Calcula a curva acumulada de 09/11 até Hoje
             let acumulado = 0;
             const serieAteHoje = [];
             for (let i = 0; i <= indiceHoje; i++) {
@@ -1575,30 +1581,24 @@
                 });
             }
 
-            // Fallback caso os dados da planilha ainda estejam sincronizando
-            if (acumulado === 0 && currentData.tv03ExpKpis && currentData.tv03ExpKpis.kpisMes && currentData.tv03ExpKpis.kpisMes.totalPecas) {
-                const totalMes = parseInt(String(currentData.tv03ExpKpis.kpisMes.totalPecas).replace(/\D/g, ''), 10) || 0;
-                if (totalMes > 0) {
-                    acumulado = totalMes;
-                    if (serieAteHoje.length > 0) {
-                        serieAteHoje[serieAteHoje.length - 1].acumulado = totalMes;
-                    }
-                }
+            // Garante que o valor final (Hoje) na curva bata com o card Expedição Consolidada da TV 03
+            if (serieAteHoje.length > 0 && totalExpedicaoTV03 > 0) {
+                serieAteHoje[serieAteHoje.length - 1].acumulado = totalExpedicaoTV03;
             }
 
-            const restantes = Math.max(META_BF - acumulado, 0);
-            const percAtingido = ((acumulado / META_BF) * 100).toFixed(1).replace('.', ',') + '%';
-            const percNum = Math.min((acumulado / META_BF) * 100, 100);
+            const restantes = Math.max(META_BF - totalExpedicaoTV03, 0);
+            const percAtingido = ((totalExpedicaoTV03 / META_BF) * 100).toFixed(1).replace('.', ',') + '%';
+            const percNum = Math.min((totalExpedicaoTV03 / META_BF) * 100, 100);
 
             document.getElementById('bfKpiMeta').innerText = META_BF.toLocaleString('pt-BR');
-            document.getElementById('bfKpiExpedido').innerText = acumulado.toLocaleString('pt-BR');
+            document.getElementById('bfKpiExpedido').innerText = totalExpedicaoTV03.toLocaleString('pt-BR');
             document.getElementById('bfKpiPercentual').innerText = percAtingido;
             document.getElementById('bfKpiRestante').innerText = restantes.toLocaleString('pt-BR');
 
             document.getElementById('bfGaugeTexto').innerText = percAtingido;
-            document.getElementById('bfResumoExpedidas').innerText = acumulado.toLocaleString('pt-BR');
+            document.getElementById('bfResumoExpedidas').innerText = totalExpedicaoTV03.toLocaleString('pt-BR');
             document.getElementById('bfResumoRestantes').innerText = restantes.toLocaleString('pt-BR');
-            document.getElementById('bfSemana1Pecas').innerText = acumulado.toLocaleString('pt-BR');
+            document.getElementById('bfSemana1Pecas').innerText = totalExpedicaoTV03.toLocaleString('pt-BR');
             document.getElementById('bfSemana1Pct').innerText = `${percAtingido} meta`;
 
             const arcGauge = document.getElementById('bfGaugeArc');
@@ -1608,10 +1608,10 @@
                 arcGauge.style.strokeDashoffset = dashoffset;
             }
 
-            renderizarGraficoCurvaAscendenteBf(diasCampanha, serieAteHoje, META_BF);
+            renderizarGraficoCurvaAscendenteBf(diasCampanha, serieAteHoje, META_BF, indiceHoje);
         }
 
-        function renderizarGraficoCurvaAscendenteBf(diasCampanha, serieAteHoje, meta) {
+        function renderizarGraficoCurvaAscendenteBf(diasCampanha, serieAteHoje, meta, indiceHoje) {
             const container = document.getElementById('bfGraficoEvolucaoContainer');
             if (!container) return;
 
@@ -1627,7 +1627,7 @@
             const maxValAtual = serieAteHoje.length > 0 ? serieAteHoje[serieAteHoje.length - 1].acumulado : 0;
             const maxEscalaY = Math.max(meta * 1.08, maxValAtual * 1.15);
 
-            // Linha pontilhada da Meta (32.436) com etiqueta posicionada à esquerda para não colidir com a curva
+            // Linha pontilhada da Meta (32.436)
             const yMeta = padT + plotH - ((meta / maxEscalaY) * plotH);
             const linhaMetaSvg = `
                 <line x1="${padL}" y1="${yMeta.toFixed(1)}" x2="${W - padR}" y2="${yMeta.toFixed(1)}" stroke="#f59e0b" stroke-width="1.6" stroke-dasharray="4,4" />
@@ -1635,10 +1635,9 @@
                 <text x="${(padL + 24).toFixed(1)}" y="${(yMeta - 6.5).toFixed(1)}" fill="#000000" font-size="6.8" font-family="Consolas" font-weight="900" text-anchor="middle">META ${meta.toLocaleString('pt-BR')}</text>
             `;
 
-            const totalDias = diasCampanha.length; // 27 dias (09/11 a 05/12)
+            const totalDias = diasCampanha.length;
             const stepX = plotW / (totalDias - 1);
 
-            // Coordenadas apenas dos dias realizados até Hoje (após Hoje permanece vazio)
             const ptsCoord = serieAteHoje.map((p, idx) => {
                 const x = padL + (idx * stepX);
                 const y = padT + plotH - ((p.acumulado / maxEscalaY) * plotH);
@@ -1696,22 +1695,24 @@
                 }
             });
 
-            // Rótulos do eixo X completo: 09/11 até 05/12
+            // Rótulos do eixo X SOMENTE até Hoje (datas futuras ficam totalmente em branco)
             let labelsX = '';
             diasCampanha.forEach((dc, idx) => {
+                if (idx > indiceHoje) return;
+
                 const x = padL + (idx * stepX);
-                const isHoje = lastPt && dc.dia === lastPt.dia && dc.mes === lastPt.mes;
-                const isExtremo = (idx === 0 || idx === totalDias - 1 || dc.dia === 1);
+                const isHoje = (idx === indiceHoje);
+                const isInicio = (idx === 0 || dc.dia === 1);
 
                 if (isHoje) {
                     labelsX += `
                         <rect x="${(x - 14).toFixed(1)}" y="${H - 16}" width="28" height="13" rx="6.5" fill="#0284c7" />
                         <text x="${x.toFixed(1)}" y="${H - 7}" fill="#ffffff" font-size="6.8" font-family="'Segoe UI', sans-serif" font-weight="900" text-anchor="middle">${dc.label}</text>
                     `;
-                } else if (isExtremo || idx % 2 === 0) {
-                    const textoData = isExtremo ? dc.label : dc.curto;
+                } else if (isInicio || idx % 2 === 0) {
+                    const textoData = isInicio ? dc.label : dc.curto;
                     labelsX += `
-                        <text x="${x.toFixed(1)}" y="${H - 6}" fill="${isExtremo ? '#e2e8f0' : '#64748b'}" font-size="6.5" font-family="Consolas, monospace" font-weight="${isExtremo ? '900' : 'bold'}" text-anchor="middle">${textoData}</text>
+                        <text x="${x.toFixed(1)}" y="${H - 6}" fill="${isInicio ? '#e2e8f0' : '#64748b'}" font-size="6.5" font-family="Consolas, monospace" font-weight="${isInicio ? '900' : 'bold'}" text-anchor="middle">${textoData}</text>
                     `;
                 }
             });
